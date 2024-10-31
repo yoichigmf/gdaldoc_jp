@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gdalwarp &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -79,6 +81,7 @@
 <li class="toctree-l3"><a class="reference internal" href="gdalbuildvrt.html">gdalbuildvrt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalcompare.html">gdalcompare</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdaldem.html">gdaldem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalenhance.html">gdalenhance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalinfo.html">gdalinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdallocationinfo.html">gdallocationinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalmanage.html">gdalmanage</a></li>
@@ -89,6 +92,8 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">gdalwarp</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#synopsis">概要</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#description">説明</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#writing-to-an-existing-file">Writing to an existing file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nodata-source-validity-mask-handling">ノーデータ / ソース有効マスクの処理</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#approximate-transformation">近似変換</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#vertical-transformation">垂直変換</a></li>
@@ -96,7 +101,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#compressed-output">圧縮された出力</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">例</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#c-api">C API</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#see-also">関連項目</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="nearblack.html">nearblack</a></li>
@@ -121,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -384,7 +389,10 @@ gdalwarp<span class="w"> </span>in_blue.tif<span class="w"> </span>out_rgb.tif<s
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdalwarp-et">
 <span class="sig-name descname"><span class="pre">-et</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;err_threshold&gt;</span></span><a class="headerlink" href="#cmdoption-gdalwarp-et" title="Link to this definition"></a></dt>
-<dd><p>変換近似のエラー閾値 (ピクセル単位 - デフォルトは 0.125 ですが, GDAL 2.1 以降, RPC_DEM 変換器オプションが指定されている場合は, 正確な変換器, つまり err_threshold=0 が使用されます).</p>
+<dd><p>Error threshold for transformation approximation, expressed as a number of
+source pixels. Defaults to 0.125 pixels unless the <code class="docutils literal notranslate"><span class="pre">RPC_DEM</span></code> transformer
+option is specified, in which case an exact transformer, i.e.
+<code class="docutils literal notranslate"><span class="pre">err_threshold=0</span></code>, will be used.</p>
 </dd></dl>
 
 <dl class="std option">
@@ -469,7 +477,15 @@ gdalwarp<span class="w"> </span>in_blue.tif<span class="w"> </span>out_rgb.tif<s
 <p><code class="docutils literal notranslate"><span class="pre">sum</span></code>: すべての非NODATAの寄与ピクセルの加重和を計算します (GDAL 3.1 以降)</p>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>ダウンサンプリングが実行される場合 (<a class="reference internal" href="#cmdoption-gdalwarp-tr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-tr</span></code></a> または <a class="reference internal" href="#cmdoption-gdalwarp-ts"><code class="xref std std-option docutils literal notranslate"><span class="pre">-ts</span></code></a> の使用), ソース画像の既存のオーバービュー (内部/暗黙的または外部のいずれか) は, 通常, 出力解像度に最も近いオーバービューを選択してデフォルトで使用されます. これらのオーバービューを作成するために使用されるリサンプリング方法は, 通常, <a class="reference internal" href="#cmdoption-gdalwarp-r"><code class="xref std std-option docutils literal notranslate"><span class="pre">-r</span></code></a> オプションを通じて指定する方法ではありません. JPEG2000 のような一部のフォーマットは, ウェーブレット圧縮の動作による重要な外れ値を含むことがあります. そのような状況では, 既存のオーバービューが使用されないようにするために, <a class="reference internal" href="#cmdoption-gdalwarp-ovr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-ovr</span></code></a> <code class="docutils literal notranslate"><span class="pre">NONE</span></code> オプションを使用すると便利です.</p>
+<p>When downsampling is performed (use of <a class="reference internal" href="#cmdoption-gdalwarp-tr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-tr</span></code></a> or <a class="reference internal" href="#cmdoption-gdalwarp-ts"><code class="xref std std-option docutils literal notranslate"><span class="pre">-ts</span></code></a>), existing
+overviews (either internal/implicit or external ones) on the source image
+will be used by default by selecting the closest overview to the desired output
+resolution.
+The resampling method used to create those overviews is generally not the one you
+specify through the <a class="reference internal" href="#cmdoption-gdalwarp-r"><code class="xref std std-option docutils literal notranslate"><span class="pre">-r</span></code></a> option. Some formats, like JPEG2000, can contain
+significant outliers due to how wavelet compression works. It might thus be useful in
+those situations to use the <a class="reference internal" href="#cmdoption-gdalwarp-ovr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-ovr</span></code></a> <code class="docutils literal notranslate"><span class="pre">NONE</span></code> option to prevent existing overviews to
+be used.</p>
 </div>
 </dd></dl>
 
@@ -512,7 +528,15 @@ gdalwarp<span class="w"> </span>in_blue.tif<span class="w"> </span>out_rgb.tif<s
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdalwarp-wm">
 <span class="sig-name descname"><span class="pre">-wm</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;memory_in_mb&gt;</span></span><a class="headerlink" href="#cmdoption-gdalwarp-wm" title="Link to this definition"></a></dt>
-<dd><p>ワープ API がキャッシュに使用するメモリ量を設定します. 値が 10000 未満の場合, メガバイト単位として解釈されます. 10000 以上の値の場合, バイトとして解釈されます.</p>
+<dd><p>Set the amount of memory that the
+warp API is allowed to use for caching.
+Defaults to 64 MB.
+Since GDAL 3.10, the value can be specified either as a fixed amount of
+memory (e.g., <code class="docutils literal notranslate"><span class="pre">-wm</span> <span class="pre">200MB</span></code>, <code class="docutils literal notranslate"><span class="pre">-wm</span> <span class="pre">1G</span></code>) or as a percentage of usable
+RAM (<code class="docutils literal notranslate"><span class="pre">-wm</span> <span class="pre">10%</span></code>).
+In earlier versions, or if a unit is not specified, the value is interpreted as being
+in megabytes if the value is less than 10000. For values &gt;=10000, it is
+interpreted as bytes.</p>
 <p>ワーパーは, 入力および出力画像配列と補助マスキング配列を保持するために必要なメモリを合計し, それらが許容される &quot;ワープメモリ&quot; よりも大きい場合, チャンクをより小さなチャンクに分割して再試行します.</p>
 <p>-wm 値が非常に小さい場合, 多くの小さなチャンクを処理するための追加のオーバーヘッドが発生するため, 大きく設定する方が良いですが, それは収穫逓減の問題です.</p>
 </dd></dl>
@@ -647,9 +671,54 @@ gdalwarp<span class="w"> </span>in_blue.tif<span class="w"> </span>out_rgb.tif<s
 <dd><p>宛先ファイル名.</p>
 </dd></dl>
 
-<p>既存の出力ファイルにモザイクを作成することがサポートされています. 既存のファイルの空間範囲は新しいデータに対応するために変更されませんので, その場合は削除するか, -overwrite オプションを使用する必要があります.</p>
-<p>ポリゴンカットラインは, ブレンドを含む, 更新できる宛先ファイルの領域を制限するためのマスクとして使用できます. カットラインフィーチャを含む OGR レイヤに明示的な SRS がない場合, カットラインフィーチャは宛先ファイルの SRS である必要があります. まだ存在しないターゲットデータセットに書き込む場合, -te または -crop_to_cutline が指定されていない限り, その範囲は元のラスタの範囲になります.</p>
-<p>GDAL 3.1 以降, CreateCopy 操作のみをサポートするドライバを出力フォーマットとして使用することが可能です. これは内部的に一時ファイルの作成を意味する場合があります.</p>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p><strong class="program">gdalwarp</strong> transforms images between different coordinate reference
+systems and spatial resolutions.</p>
+<p>First, <strong class="program">gdalwarp</strong> must determine the extent and resolution of the
+output, if these have not been specified using <a class="reference internal" href="#cmdoption-gdalwarp-te"><code class="xref std std-option docutils literal notranslate"><span class="pre">-te</span></code></a> and <a class="reference internal" href="#cmdoption-gdalwarp-tr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-tr</span></code></a>.
+These are determined by transforming a sample of points from the source CRS to
+the destination CRS. Details of the procedure can be found in the documentation
+for <a class="reference internal" href="../api/gdal_alg.html#_CPPv423GDALSuggestedWarpOutput12GDALDatasetH19GDALTransformerFuncPvPdPiPi" title="GDALSuggestedWarpOutput"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALSuggestedWarpOutput()</span></code></a>. If multiple inputs are provided to
+<strong class="program">gdalwarp</strong>, the output extent will be calculated to cover all of them,
+at a resolution consistent with the highest-resolution input.</p>
+<p>Once the dimensions of the output image have been determined,
+<strong class="program">gdalwarp</strong> divides the output image into chunks that can be processed
+independently within the amount of memory specified by <a class="reference internal" href="#cmdoption-gdalwarp-wm"><code class="xref std std-option docutils literal notranslate"><span class="pre">-wm</span></code></a>.
+<strong class="program">gdalwarp</strong> then iterates over scanlines in these chunks, and for each
+output pixel determines a rectangular region of source pixels that contribute
+to the value of the output pixel. The dimensions of this rectangular region
+are typically determined by estimating the relative scales of the source and
+destination raster, but can be manually specified (see documentation of the
+<code class="docutils literal notranslate"><span class="pre">XSCALE</span></code> parameter in <a class="reference internal" href="../api/gdalwarp_cpp.html#_CPPv4N15GDALWarpOptions16papszWarpOptionsE" title="GDALWarpOptions::papszWarpOptions"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">GDALWarpOptions::papszWarpOptions</span></code></a>).
+Because the source region is a simple rectangle, it is not possible for an
+output pixel to be associated with source pixels from both sides of the
+antimeridian or pole (when transforming from geographic coordinates).</p>
+<p>The rectangular region of source pixels is then provided to a function that
+performs the resampling algorithm selected with <a class="reference internal" href="#cmdoption-gdalwarp-r"><code class="xref std std-option docutils literal notranslate"><span class="pre">-r</span></code></a>.  Depending on the
+resampling algorithm and relative scales of the source and destination rasters,
+source pixels may be weighted either according to the approximate fraction of
+the source pixel that is covered by the destination pixel (e.g., &quot;mean&quot; and
+&quot;sum&quot; resampling), or by horizontal and vertical Cartesian distances between
+the center of the source pixel and the center of the target pixel (e.g.,
+bilinear or cubic spline resampling). In the latter case, the relative weight
+of an individual source pixel is determined by the product of the weights
+determined for its row and column; the diagonal Cartesian distance is not
+calculated.</p>
+</section>
+<section id="writing-to-an-existing-file">
+<h2>Writing to an existing file<a class="headerlink" href="#writing-to-an-existing-file" title="Link to this heading"></a></h2>
+<p>Mosaicing into an existing output file is supported if the output file already
+exists. The spatial extent of the existing file will not be modified to
+accommodate new data, so you may have to remove it in that case, or use the
+<a class="reference internal" href="#cmdoption-gdalwarp-overwrite"><code class="xref std std-option docutils literal notranslate"><span class="pre">-overwrite</span></code></a> option.</p>
+<p>Polygon cutlines may be used as a mask to restrict the area of the destination
+file that may be updated, including blending.  If the OGR layer containing the
+cutline features has no explicit SRS, the cutline features are assumed to be in
+the SRS of the destination file. When writing to a not yet existing target
+dataset, its extent will be the one of the original raster unless <a class="reference internal" href="#cmdoption-gdalwarp-te"><code class="xref std std-option docutils literal notranslate"><span class="pre">-te</span></code></a>
+or <a class="reference internal" href="#cmdoption-gdalwarp-crop_to_cutline"><code class="xref std std-option docutils literal notranslate"><span class="pre">-crop_to_cutline</span></code></a> are specified.</p>
 </section>
 <section id="nodata-source-validity-mask-handling">
 <span id="gdalwarp-nodata"></span><h2>ノーデータ / ソース有効マスクの処理<a class="headerlink" href="#nodata-source-validity-mask-handling" title="Link to this heading"></a></h2>
@@ -676,15 +745,33 @@ gdalwarp<span class="w"> </span>black-nodata.tif<span class="w"> </span>grey-nod
 </section>
 <section id="approximate-transformation">
 <h2>近似変換<a class="headerlink" href="#approximate-transformation" title="Link to this heading"></a></h2>
-<p>デフォルトでは, <strong class="program">gdalwarp</strong> は許容誤差 0.125 ピクセルで変換に対して線形近似器を使用します. 近似器は基本的にスキャンライン上の 3 つの点を変換します: 開始, 終了, および中間. 次に, 真のものと比較して中心の線形近似をエンドポイントに基づいて行い, エラーをチェックします. エラーがエラー閾値未満の場合, 残りの点が近似されます (中心点を利用して 2 つのチャンクに分割されます). エラーが閾値を超えると, スキャンラインは 2 つのセクションに分割され, エラーが閾値未満になるか, すべての点が正確に計算されるまで, 近似器が再帰的に各セクションに適用されます.</p>
-<p>エラー閾値 (ピクセル単位) は gdalwarp <a class="reference internal" href="#cmdoption-gdalwarp-et"><code class="xref std std-option docutils literal notranslate"><span class="pre">-et</span></code></a> スイッチで制御できます. 真のピクセル単位の再投影を比較する場合は, <a class="reference internal" href="#cmdoption-gdalwarp-et"><code class="xref std std-option docutils literal notranslate"><span class="pre">-et</span> <span class="pre">0</span></code></a> を使用してこの近似器を完全に無効にします.</p>
+<p>By default <strong class="program">gdalwarp</strong> uses a linear approximator for the
+transformations with a permitted error of 0.125 pixels in the source dataset.
+The approximator precisely transforms three points per output scanline (the
+start, middle, and end) from a row and column in the output dataset to a
+row and column in the source dataset.
+It then compares a linear approximation of the center point coordinates to the
+precisely transformed value.
+If the sum of the horizontal and vertical errors is less than the error
+threshold then the remaining source points are approximated using linear
+interpolation between the start and middle point, and between the middle and
+end point.
+If the error exceeds the threshold, the scanline is split into two sections and
+the approximator is recursively applied to each section until the error is less
+than the threshold or all points have been exactly computed.</p>
+<p>The error threshold (in source dataset pixels) can be controlled with the gdalwarp
+<a class="reference internal" href="#cmdoption-gdalwarp-et"><code class="xref std std-option docutils literal notranslate"><span class="pre">-et</span></code></a> switch. If you want to compare a true pixel-by-pixel reprojection
+use <a class="reference internal" href="#cmdoption-gdalwarp-et"><code class="xref std std-option docutils literal notranslate"><span class="pre">-et</span> <span class="pre">0</span></code></a> which disables this approximator entirely.</p>
 </section>
 <section id="vertical-transformation">
 <h2>垂直変換<a class="headerlink" href="#vertical-transformation" title="Link to this heading"></a></h2>
-<p>gdalwarp は基本的に 2D 空間で座標変換を実行できますが, 垂直変換も実行できます. これは, 次の 2 つの条件が満たされると自動的に有効になります:</p>
+<p>While gdalwarp is most commonly used to perform coordinate transformations in the 2D
+space, it can also perform vertical transformations. Vertical transformations are
+automatically performed when the following two conditions are met:</p>
 <ul class="simple">
-<li><p>ソースまたはターゲットのいずれかに少なくとも 1 つの明示的な垂直 CRS (複合 CRS の一部) があるか, 3D (一般的に地理的) CRS である,</p></li>
-<li><p>およびラスタに単一バンドがある.</p></li>
+<li><p>at least one of the source or target CRS has an explicit vertical CRS
+(as part of a compound CRS) or is a 3D (generally geographic) CRS, and</p></li>
+<li><p>the raster has a single band</p></li>
 </ul>
 <p>このモードは, <a class="reference internal" href="#cmdoption-gdalwarp-vshift"><code class="xref std std-option docutils literal notranslate"><span class="pre">-vshift</span></code></a> を使用して強制することもできます (<a class="reference internal" href="#cmdoption-gdalwarp-ct"><code class="xref std std-option docutils literal notranslate"><span class="pre">-ct</span></code></a> で指定された変換パイプラインが明示的に 3D でない CRS が関係している場合に実質的に有用です), または <a class="reference internal" href="#cmdoption-gdalwarp-novshift"><code class="xref std std-option docutils literal notranslate"><span class="pre">-novshift</span></code></a> で無効にすることもできます.</p>
 <p>垂直変換が関係している場合, 通常, ジオイドグリッドから読み取ったシフト値が適用されます. これには, そのようなグリッドをインストールするか, PROJ ネットワーキング機能を有効にする必要があります. 詳細については <a class="reference external" href="https://proj.org">PROJ</a> のドキュメントを参照してください. シフトに加えて, ラスタ値は垂直単位の変更を考慮するために因子で乗算される場合があります. 優先的に, <a class="reference internal" href="../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand11GetUnitTypeEv" title="GDALRasterBand::GetUnitType"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetUnitType()</span></code></a> が返す値が使用されます. 現在認識されている値は次のとおりです: <code class="docutils literal notranslate"><span class="pre">m</span></code>, <code class="docutils literal notranslate"><span class="pre">metre</span></code>, <code class="docutils literal notranslate"><span class="pre">metre</span></code>, <code class="docutils literal notranslate"><span class="pre">ft</span></code>, <code class="docutils literal notranslate"><span class="pre">foot</span></code>, <code class="docutils literal notranslate"><span class="pre">US</span> <span class="pre">survey</span> <span class="pre">foot</span></code>. バンドレベルで定義された単位タイプがない場合, ソース CRS の垂直単位が使用されます. ターゲット CRS の垂直単位も, その変換係数を決定するために使用されます. 変換係数は,  <a class="reference internal" href="#cmdoption-gdalwarp-wo"><code class="xref std std-option docutils literal notranslate"><span class="pre">-wo</span></code></a> で <code class="docutils literal notranslate"><span class="pre">MULT_FACTOR_VERTICAL_SHIFT</span></code> ワーピングオプションを設定することで上書きできます. たとえば, 垂直単位の変更を無効にするには <code class="docutils literal notranslate"><span class="pre">-wo</span> <span class="pre">MULT_FACTOR_VERTICAL_SHIFT=1</span></code> のようにします.</p>
@@ -783,10 +870,6 @@ gdal_translate<span class="w"> </span>tempfile.vrt<span class="w"> </span>outfil
 <section id="c-api">
 <h2>C API<a class="headerlink" href="#c-api" title="Link to this heading"></a></h2>
 <p>このユーティリティは, <a class="reference internal" href="../api/gdal_utils.html#_CPPv48GDALWarpPKc12GDALDatasetHiP12GDALDatasetHPK18GDALWarpAppOptionsPi" title="GDALWarp"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALWarp()</span></code></a> で C からも呼び出すことができます.</p>
-</section>
-<section id="see-also">
-<h2>関連項目<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
-<p><a class="reference external" href="https://trac.osgeo.org/gdal/wiki/UserDocs/GdalWarp">gdalwarp のオプションと動作について説明する Wiki ページ</a></p>
 </section>
 </section>
 

@@ -387,9 +387,9 @@
      - **Yes**
      - libhdf5
    * - :ref:`HEIF <raster.heif>`
-     - ISO/IEC 23008-12:2017 High Efficiency Image File Format
+     - ISO/IEC 23008-12 High Efficiency Image File Format
      - No
-     - No
+     - **Yes**
      - No
      - libheif (>= 1.1), built against libde265
    * - :ref:`HF2 <raster.hf2>`
@@ -876,6 +876,12 @@
      - Scaled Integer Gridded DEM
      - No
      - **Yes**
+     - **Yes**
+     - Built-in by default
+   * - :ref:`SNAP_TIFF <raster.snap_tiff>`
+     - Sentinel Application Processing GeoTIFF
+     - No
+     - No
      - **Yes**
      - Built-in by default
    * - :ref:`SNODAS <raster.snodas>`

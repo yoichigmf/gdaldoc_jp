@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>設定オプション &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,11 +22,12 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="GDAL Python Utilities" href="gdal_python_utilities.html" />
+    <link rel="next" title="GDAL Python ユーティリティ" href="gdal_python_utilities.html" />
     <link rel="prev" title="座標元期のサポート" href="coordinate_epoch.html" /> 
 </head>
 
@@ -81,7 +83,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#list-of-configuration-options-and-where-they-are-documented">設定オプションの一覧とそのドキュメントの場所</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -92,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -148,7 +152,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="gdal_python_utilities.html" class="btn btn-neutral float-right" title="GDAL Python Utilities" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gdal_python_utilities.html" class="btn btn-neutral float-right" title="GDAL Python ユーティリティ" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="coordinate_epoch.html" class="btn btn-neutral float-left" title="座標元期のサポート" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -245,11 +249,11 @@
 <section id="logging">
 <h3>ログ<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p id="config-CPL_CURL_VERBOSE"><strong>CPL_CURL_VERBOSE=[YES/NO]: </strong>Set to &quot;YES&quot; to get the curl library to display a lot of verbose information
+<li><p id="config-CPL_CURL_VERBOSE"><strong>CPL_CURL_VERBOSE=[YES​/​NO]: </strong>Set to &quot;YES&quot; to get the curl library to display a lot of verbose information
 about its operations. Very useful for libcurl and/or protocol debugging and
 understanding.</p>
 </li>
-<li><p id="config-CPL_DEBUG"><strong>CPL_DEBUG=[ON/OFF/&lt;PREFIX&gt;]: </strong>This may be set to ON, OFF or specific prefixes. If it is ON, all debug
+<li><p id="config-CPL_DEBUG"><strong>CPL_DEBUG=[ON​/​OFF​/​&lt;PREFIX&gt;]: </strong>This may be set to ON, OFF or specific prefixes. If it is ON, all debug
 messages are reported to stdout. If it is OFF or unset no debug messages are
 reported. If it is set to a particular value, then only debug messages with
 that &quot;type&quot; value will be reported. For instance debug messages from the HFA
@@ -258,10 +262,10 @@ driver are normally reported with type &quot;HFA&quot; (seen in the message).<p>
 </li>
 <li><p id="config-CPL_LOG"><strong>CPL_LOG=&lt;path&gt;: </strong>This is used for setting the log file path.</p>
 </li>
-<li><p id="config-CPL_LOG_ERRORS"><strong>CPL_LOG_ERRORS=[ON/OFF]: </strong>Set to &quot;ON&quot; for printing error messages. Use together with &quot;CPL_LOG&quot; for
+<li><p id="config-CPL_LOG_ERRORS"><strong>CPL_LOG_ERRORS=[ON​/​OFF]: </strong>Set to &quot;ON&quot; for printing error messages. Use together with &quot;CPL_LOG&quot; for
 directing them into a file.</p>
 </li>
-<li><p id="config-CPL_TIMESTAMP"><strong>CPL_TIMESTAMP=[ON/OFF]: </strong>Set to &quot;ON&quot; to add timestamps to CPL debug messages (so assumes that
+<li><p id="config-CPL_TIMESTAMP"><strong>CPL_TIMESTAMP=[ON​/​OFF]: </strong>Set to &quot;ON&quot; to add timestamps to CPL debug messages (so assumes that
 <a class="reference internal" href="#config-CPL_DEBUG"><code class="docutils literal notranslate"><span class="pre">CPL_DEBUG</span></code></a> is enabled)</p>
 </li>
 <li><p id="config-CPL_MAX_ERROR_REPORTS"><strong>CPL_MAX_ERROR_REPORTS=value: </strong></p>
@@ -273,7 +277,7 @@ directing them into a file.</p>
 <section id="performance-and-caching">
 <h3>パフォーマンスとキャッシュ<a class="headerlink" href="#performance-and-caching" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p id="config-GDAL_NUM_THREADS"><strong>GDAL_NUM_THREADS=[ALL_CPUS/&lt;integer&gt;]: </strong>Sets the number of worker threads to be used by GDAL operations that support
+<li><p id="config-GDAL_NUM_THREADS"><strong>GDAL_NUM_THREADS=[ALL_CPUS​/​&lt;integer&gt;]: </strong>Sets the number of worker threads to be used by GDAL operations that support
 multithreading. The default value depends on the context in which it is used.</p>
 </li>
 <li><p id="config-GDAL_CACHEMAX"><strong>GDAL_CACHEMAX=&lt;size&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">5%</span></code>. Controls the default GDAL raster block cache size. When
@@ -287,7 +291,10 @@ input file which is processed in multiple rectangular chunks by
 <strong class="program">gdalwarp</strong>.
 If its value is small (less than 100000), it is assumed to be measured in megabytes,
 otherwise in bytes. Alternatively, the value can be set to &quot;X%&quot; to mean X%
-of the usable physical RAM. Note that this value is only consulted the first
+of the usable physical RAM.
+Since GDAL 3.11, the value of <a class="reference internal" href="#config-GDAL_CACHEMAX"><code class="docutils literal notranslate"><span class="pre">GDAL_CACHEMAX</span></code></a> may specify the
+units directly (e.g., &quot;500MB&quot;, &quot;2GB&quot;).
+Note that this value is only consulted the first
 time the cache size is requested.  To change this value programmatically
 during operation of the program it is better to use
 <a class="reference internal" href="../api/raster_c_api.html#_CPPv415GDALSetCacheMaxi" title="GDALSetCacheMax"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALSetCacheMax()</span></code></a> (always in bytes) or or
@@ -295,14 +302,14 @@ during operation of the program it is better to use
 between 2 and 4 GB. It is the responsibility of the user to set a consistent
 value.</p>
 </li>
-<li><p id="config-GDAL_FORCE_CACHING"><strong>GDAL_FORCE_CACHING=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. When set to YES, <a class="reference internal" href="../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset8RasterIOE10GDALRWFlagiiiiPvii12GDALDataTypeiPKi8GSpacing8GSpacing8GSpacingP20GDALRasterIOExtraArg" title="GDALDataset::RasterIO"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::RasterIO()</span></code></a> and <a class="reference internal" href="../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand8RasterIOE10GDALRWFlagiiiiPvii12GDALDataType8GSpacing8GSpacingP20GDALRasterIOExtraArg" title="GDALRasterBand::RasterIO"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::RasterIO()</span></code></a>
+<li><p id="config-GDAL_FORCE_CACHING"><strong>GDAL_FORCE_CACHING=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. When set to YES, <a class="reference internal" href="../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset8RasterIOE10GDALRWFlagiiiiPvii12GDALDataTypeiPKi8GSpacing8GSpacing8GSpacingP20GDALRasterIOExtraArg" title="GDALDataset::RasterIO"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::RasterIO()</span></code></a> and <a class="reference internal" href="../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand8RasterIOE10GDALRWFlagiiiiPvii12GDALDataType8GSpacing8GSpacingP20GDALRasterIOExtraArg" title="GDALRasterBand::RasterIO"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::RasterIO()</span></code></a>
 will use cached IO (access block by block through
 <a class="reference internal" href="../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand10IReadBlockEiiPv" title="GDALRasterBand::IReadBlock"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::IReadBlock()</span></code></a> API) instead of a potential driver-specific
 implementation of IRasterIO(). This will only have an effect on drivers that
 specialize IRasterIO() at the dataset or raster band level, for example
 JP2KAK, NITF, HFA, WCS, ECW, MrSID, and JPEG.</p>
 </li>
-<li><p id="config-GDAL_BAND_BLOCK_CACHE"><strong>GDAL_BAND_BLOCK_CACHE=[AUTO/ARRAY/HASHSET]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Controls whether the block cache should be backed by an array or a hashset.
+<li><p id="config-GDAL_BAND_BLOCK_CACHE"><strong>GDAL_BAND_BLOCK_CACHE=[AUTO​/​ARRAY​/​HASHSET]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Controls whether the block cache should be backed by an array or a hashset.
 By default (<code class="docutils literal notranslate"><span class="pre">AUTO</span></code>) the implementation will be selected based on the
 number of blocks in the dataset. See <a class="reference internal" href="../development/rfc/rfc26_blockcache.html#rfc-26"><span class="std std-ref">RFC 26: GDAL Block Cache Improvements</span></a> for more information.</p>
 </li>
@@ -315,7 +322,7 @@ number of blocks in the dataset. See <a class="reference internal" href="../deve
 <li><p id="config-GDAL_SWATH_SIZE"><strong>GDAL_SWATH_SIZE=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1/4</span></code> of the maximum block cache size (``GDAL_CACHEMAX``). Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/gcore/rasterio.cpp">rasterio.cpp</a><p>1つのデータセットから別のデータセットにラスタデータをコピーするときのスワスのサイズ (バイト単位) です. <a class="reference internal" href="#config-GDAL_CACHEMAX"><code class="docutils literal notranslate"><span class="pre">GDAL_CACHEMAX</span></code></a> より小さくしてはいけません.</p>
 </p>
 </li>
-<li><p id="config-GDAL_DISABLE_READDIR_ON_OPEN"><strong>GDAL_DISABLE_READDIR_ON_OPEN=[TRUE/FALSE/EMPTY_DIR]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. By default (FALSE), GDAL establishes a list of all the files in the
+<li><p id="config-GDAL_DISABLE_READDIR_ON_OPEN"><strong>GDAL_DISABLE_READDIR_ON_OPEN=[TRUE​/​FALSE​/​EMPTY_DIR]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. By default (FALSE), GDAL establishes a list of all the files in the
 directory of the file passed to <a class="reference internal" href="../api/raster_c_api.html#_CPPv48GDALOpenPKc10GDALAccess" title="GDALOpen"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpen()</span></code></a>. This can result in
 speed-ups in some use cases, but also to major slow downswhen the
 directory contains thousands of other files. When set to TRUE, GDAL will
@@ -326,7 +333,7 @@ also be limited by <a class="reference internal" href="#config-GDAL_READDIR_LIMI
 <li><p id="config-GDAL_READDIR_LIMIT_ON_OPEN"><strong>GDAL_READDIR_LIMIT_ON_OPEN=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1000</span></code>. Sets the maximum number of files to scan when searching for sidecar files
 in <a class="reference internal" href="../api/raster_c_api.html#_CPPv48GDALOpenPKc10GDALAccess" title="GDALOpen"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpen()</span></code></a>.</p>
 </li>
-<li><p id="config-VSI_CACHE"><strong>VSI_CACHE=[TRUE/FALSE]: </strong>When using the VSI interface files can be cached in
+<li><p id="config-VSI_CACHE"><strong>VSI_CACHE=[TRUE​/​FALSE]: </strong>When using the VSI interface files can be cached in
 RAM by setting the configuration option <code class="docutils literal notranslate"><span class="pre">VSI_CACHE</span></code> to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. The cache size
 defaults to 25 MB, but can be modified by setting the configuration option
 <a class="reference internal" href="#config-VSI_CACHE_SIZE"><code class="docutils literal notranslate"><span class="pre">VSI_CACHE_SIZE</span></code></a>. (in bytes).<p>有効にすると,このキャッシュはローカルファイルを含むGDALのほとんどのI/Oに使用されます.</p>
@@ -334,7 +341,9 @@ defaults to 25 MB, but can be modified by setting the configuration option
 </li>
 <li><p id="config-VSI_CACHE_SIZE"><strong>VSI_CACHE_SIZE=&lt;size in bytes&gt;: </strong>Set the size of the VSI cache. Be wary of large values for
 <code class="docutils literal notranslate"><span class="pre">VSI_CACHE_SIZE</span></code> when opening VRT datasources containing many source
-rasters, as this is a per-file cache.</p>
+rasters, as this is a per-file cache.
+Since GDAL 3.11, the value of <code class="docutils literal notranslate"><span class="pre">VSI_CACHE_SIZE</span></code> may be specified using
+memory units (e.g., &quot;25 MB&quot;).</p>
 </li>
 </ul>
 </section>
@@ -378,22 +387,22 @@ definition files, DXF header and footer files, ...).<p>このオプションは,
 Sometimes this is not optimal and it would be better to write temporary files
 on bigger or faster drives (SSD).</p>
 </li>
-<li><p id="config-GDAL_RASTERIO_RESAMPLING"><strong>GDAL_RASTERIO_RESAMPLING=[NEAR/BILINEAR/CUBIC/CUBICSPLINE/LANCZOS/AVERAGE/RMS/MODE/GAUSS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NEAR</span></code>. Sets the resampling algorithm to be used when reading from a raster
+<li><p id="config-GDAL_RASTERIO_RESAMPLING"><strong>GDAL_RASTERIO_RESAMPLING=[NEAR​/​BILINEAR​/​CUBIC​/​CUBICSPLINE​/​LANCZOS​/​AVERAGE​/​RMS​/​MODE​/​GAUSS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NEAR</span></code>. Sets the resampling algorithm to be used when reading from a raster
 into a buffer with different dimensions from the source region.</p>
 </li>
 <li><p id="config-CPL_VSIL_ZIP_ALLOWED_EXTENSIONS"><strong>CPL_VSIL_ZIP_ALLOWED_EXTENSIONS=&lt;comma-separated list&gt;: </strong>Add to zip FS handler default extensions array (zip, kmz, dwf, ods, xlsx)
 additional extensions listed in <a class="reference internal" href="#config-CPL_VSIL_ZIP_ALLOWED_EXTENSIONS"><code class="docutils literal notranslate"><span class="pre">CPL_VSIL_ZIP_ALLOWED_EXTENSIONS</span></code></a> config
 option.</p>
 </li>
-<li><p id="config-CPL_VSIL_DEFLATE_CHUNK_SIZE"><strong>CPL_VSIL_DEFLATE_CHUNK_SIZE=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code> M. </p>
+<li><p id="config-CPL_VSIL_DEFLATE_CHUNK_SIZE"><strong>CPL_VSIL_DEFLATE_CHUNK_SIZE=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1M</span></code>. </p>
 </li>
-<li><p id="config-GDAL_DISABLE_CPLLOCALEC"><strong>GDAL_DISABLE_CPLLOCALEC=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to YES (default is NO) this option will disable the normal behavior of
+<li><p id="config-GDAL_DISABLE_CPLLOCALEC"><strong>GDAL_DISABLE_CPLLOCALEC=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to YES (default is NO) this option will disable the normal behavior of
 the CPLLocaleC class which forces the numeric locale to &quot;C&quot; for selected chunks
 of code using the setlocale() call. Behavior of setlocale() in multi-threaded
 applications may be undependable but use of this option may result in problem
 formatting and interpreting numbers properly.</p>
 </li>
-<li><p id="config-GDAL_FILENAME_IS_UTF8"><strong>GDAL_FILENAME_IS_UTF8=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This option only has an effect on Windows systems (using
+<li><p id="config-GDAL_FILENAME_IS_UTF8"><strong>GDAL_FILENAME_IS_UTF8=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This option only has an effect on Windows systems (using
 cpl_vsil_win32.cpp). If set to &quot;NO&quot; then filenames passed
 to functions like <a class="reference internal" href="../api/cpl.html#_CPPv49VSIFOpenLPKcPKc" title="VSIFOpenL"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">VSIFOpenL()</span></code></a> will be passed on directly to CreateFile()
 instead of being converted from UTF-8 to wchar_t and passed to
@@ -403,7 +412,7 @@ treat filenames as being in the local encoding.</p>
 </li>
 <li><p id="config-GDAL_MAX_BAND_COUNT"><strong>GDAL_MAX_BAND_COUNT=&lt;integer&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">65536</span></code>. Defines the maximum number of bands to read from a single dataset.</p>
 </li>
-<li><p id="config-GDAL_XML_VALIDATION"><strong>GDAL_XML_VALIDATION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether XML content should be validated against an XSD, with
+<li><p id="config-GDAL_XML_VALIDATION"><strong>GDAL_XML_VALIDATION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether XML content should be validated against an XSD, with
 non-conformities reported as warnings.</p>
 </li>
 <li><p id="config-GDAL_GEOREF_SOURCES"><strong>GDAL_GEOREF_SOURCES=value: </strong>Determines the order in which potential georeferencing sources are
@@ -411,13 +420,13 @@ scanned.  Value should be a comma-separated list of sources in order of
 decreasing priority. The set of sources recognized by this option is
 driver-specific.</p>
 </li>
-<li><p id="config-GDAL_OVR_PROPAGATE_NODATA"><strong>GDAL_OVR_PROPAGATE_NODATA=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. When computing the value of an overview pixel, determines whether a
+<li><p id="config-GDAL_OVR_PROPAGATE_NODATA"><strong>GDAL_OVR_PROPAGATE_NODATA=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. When computing the value of an overview pixel, determines whether a
 single NODATA value should cause the overview pixel to be set to NODATA
 (<code class="docutils literal notranslate"><span class="pre">YES</span></code>), or whether the NODATA values should be simply ignored
 (<code class="docutils literal notranslate"><span class="pre">NO</span></code>).  This configuration option is not supported for all resampling
 algorithms/data types.</p>
 </li>
-<li><p id="config-USE_RRD"><strong>USE_RRD=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/gcore/gdaldefaultoverviews.cpp">gdaldefaultoverviews.cpp</a><p>概要フォーマットとしてErdas Imagine形式 (.aux) を使用するためにYESに設定できます.  <strong class="program">gdaladdo</strong> ドキュメントを参照してください.</p>
+<li><p id="config-USE_RRD"><strong>USE_RRD=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/gcore/gdaldefaultoverviews.cpp">gdaldefaultoverviews.cpp</a><p>概要フォーマットとしてErdas Imagine形式 (.aux) を使用するためにYESに設定できます.  <strong class="program">gdaladdo</strong> ドキュメントを参照してください.</p>
 </p>
 </li>
 <li><p id="config-PYTHONSO"><strong>PYTHONSO=value: </strong>Location of Python shared library file, e.g. <code class="docutils literal notranslate"><span class="pre">pythonX.Y[...].so/.dll</span></code>.</p>
@@ -435,9 +444,9 @@ algorithms/data types.</p>
 between adjacent points on the interpolated curve. Setting this option
 to 0 (the default) means no maximum distance applies.</p>
 </li>
-<li><p id="config-OGR_STROKE_CURVE"><strong>OGR_STROKE_CURVE=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Controls whether curved geometries should be approximated by linear geometries.</p>
+<li><p id="config-OGR_STROKE_CURVE"><strong>OGR_STROKE_CURVE=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Controls whether curved geometries should be approximated by linear geometries.</p>
 </li>
-<li><p id="config-OGR_ORGANIZE_POLYGONS"><strong>OGR_ORGANIZE_POLYGONS=[DEFAULT/SKIP/ONLY_CCW/CCW_INNER_JUST_AFTER_CW_OUTER]: </strong>Defines the method used to classify polygon rings as holes or shells.
+<li><p id="config-OGR_ORGANIZE_POLYGONS"><strong>OGR_ORGANIZE_POLYGONS=[DEFAULT​/​SKIP​/​ONLY_CCW​/​CCW_INNER_JUST_AFTER_CW_OUTER]: </strong>Defines the method used to classify polygon rings as holes or shells.
 Although one of the options is named <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code>, some drivers may default
 to a different method to reduce processing by taking advantage of a
 format's constraints. The following methods are available, in order of
@@ -449,14 +458,14 @@ decreasing expected runtime:<ul>
 </ul>
 </p>
 </li>
-<li><p id="config-OGR_SQL_LIKE_AS_ILIKE"><strong>OGR_SQL_LIKE_AS_ILIKE=[YES/NO]: </strong> (GDAL &gt;= 3.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, the LIKE operator in the OGR SQL dialect will be case-insensitive (ILIKE), as was the case for GDAL versions prior to 3.1.</p>
+<li><p id="config-OGR_SQL_LIKE_AS_ILIKE"><strong>OGR_SQL_LIKE_AS_ILIKE=[YES​/​NO]: </strong> (GDAL &gt;= 3.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, the LIKE operator in the OGR SQL dialect will be case-insensitive (ILIKE), as was the case for GDAL versions prior to 3.1.</p>
 </li>
-<li><p id="config-OGR_FORCE_ASCII"><strong>OGR_FORCE_ASCII=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Used by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRGetXML_UTF8_EscapedString()</span></code> function and by GPX, KML,
+<li><p id="config-OGR_FORCE_ASCII"><strong>OGR_FORCE_ASCII=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Used by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRGetXML_UTF8_EscapedString()</span></code> function and by GPX, KML,
 GeoRSS and GML drivers.<p>これらのXMLベースのドライバーはUTF8コンテンツを書き込む必要があります. UTF8でないコンテンツが提供された場合, OGR_FORCE_ASCII=YES の場合,各非ASCII文字が '?' に置き換えられます.</p>
 <p>コンテンツを保持するためにNOに設定しますが,生成されたXMLファイルは有効ではなく,XMLヘッダーのエンコーディングの手動編集が必要になります.</p>
 </p>
 </li>
-<li><p id="config-OGR_APPLY_GEOM_SET_PRECISION"><strong>OGR_APPLY_GEOM_SET_PRECISION=[YES/NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. By default, when a geometry coordinate precision is set on a geometry field
+<li><p id="config-OGR_APPLY_GEOM_SET_PRECISION"><strong>OGR_APPLY_GEOM_SET_PRECISION=[YES​/​NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. By default, when a geometry coordinate precision is set on a geometry field
 definition and a driver honors the GDAL_DCAP_HONOR_GEOM_COORDINATE_PRECISION
 capability, geometries passed to <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer13CreateFeatureEP10OGRFeature" title="OGRLayer::CreateFeature"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::CreateFeature()</span></code></a> and
 <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer10SetFeatureEP10OGRFeature" title="OGRLayer::SetFeature"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::SetFeature()</span></code></a> are assumed to be compatible of the
@@ -479,21 +488,33 @@ dramatically open experience, in case the server cannot return a file list.<p>�
 </p>
 </li>
 <li><p id="config-CPL_VSIL_CURL_CACHE_SIZE"><strong>CPL_VSIL_CURL_CACHE_SIZE=&lt;bytes&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code> MB. Size of global least-recently-used (LRU) cache shared among all downloaded
-content.</p>
+content. Value is assumed to represent bytes unless memory units are
+specified (since GDAL 3.11).</p>
 </li>
-<li><p id="config-CPL_VSIL_CURL_USE_HEAD"><strong>CPL_VSIL_CURL_USE_HEAD=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls whether to use a HEAD request when opening a remote URL.</p>
+<li><p id="config-CPL_VSIL_CURL_USE_HEAD"><strong>CPL_VSIL_CURL_USE_HEAD=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls whether to use a HEAD request when opening a remote URL.</p>
 </li>
-<li><p id="config-CPL_VSIL_CURL_USE_S3_REDIRECT"><strong>CPL_VSIL_CURL_USE_S3_REDIRECT=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Try to query quietly redirected URLs to Amazon S3 signed URLs during their
+<li><p id="config-CPL_VSIL_CURL_USE_S3_REDIRECT"><strong>CPL_VSIL_CURL_USE_S3_REDIRECT=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Try to query quietly redirected URLs to Amazon S3 signed URLs during their
 validity period, so as to minimize round-trips.</p>
 </li>
-<li><p id="config-CPL_VSIL_USE_TEMP_FILE_FOR_RANDOM_WRITE"><strong>CPL_VSIL_USE_TEMP_FILE_FOR_RANDOM_WRITE=[YES/NO]: </strong>Use a local temporary file to support random writes in certain virtual
+<li><p id="config-CPL_VSIL_CURL_AUTHORIZATION_HEADER_ALLOWED_IF_REDIRECT"><strong>CPL_VSIL_CURL_AUTHORIZATION_HEADER_ALLOWED_IF_REDIRECT=[YES​/​NO​/​IF_SAME_HOST]: </strong> (GDAL &gt;= 3.10)  Defaults to <code class="docutils literal notranslate"><span class="pre">IF_SAME_HOST</span></code>. Determines if the HTTP <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header must be forwarded when
+redirections are followed:<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">NO</span></code> to always disable forwarding of Authorization header</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">YES</span></code> to always enable forwarding of Authorization header (was the
+default value prior to GDAL 3.10)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IF_SAME_HOST</span></code> to enable forwarding of Authorization header only if
+the redirection is to the same host.</p></li>
+</ul>
+</p>
+</li>
+<li><p id="config-CPL_VSIL_USE_TEMP_FILE_FOR_RANDOM_WRITE"><strong>CPL_VSIL_USE_TEMP_FILE_FOR_RANDOM_WRITE=[YES​/​NO]: </strong>Use a local temporary file to support random writes in certain virtual
 file systems. The temporary file will be located in <a class="reference internal" href="#config-CPL_TMPDIR"><code class="docutils literal notranslate"><span class="pre">CPL_TMPDIR</span></code></a>.</p>
 </li>
 <li><p id="config-CURL_CA_BUNDLE"><strong>CURL_CA_BUNDLE=value: </strong>Set the path to the Certification Authority (CA) bundle file.</p>
 </li>
 <li><p id="config-SSL_CERT_FILE"><strong>SSL_CERT_FILE=value: </strong></p>
 </li>
-<li><p id="config-CPL_VSIL_CURL_CHUNK_SIZE"><strong>CPL_VSIL_CURL_CHUNK_SIZE=&lt;bytes&gt;: </strong></p>
+<li><p id="config-CPL_VSIL_CURL_CHUNK_SIZE"><strong>CPL_VSIL_CURL_CHUNK_SIZE=&lt;bytes&gt;: </strong>Value is assumed to represent bytes unless memory units are
+specified (since GDAL 3.11).</p>
 </li>
 <li><p id="config-GDAL_INGESTED_BYTES_AT_OPEN"><strong>GDAL_INGESTED_BYTES_AT_OPEN=value: </strong>Sets the number of bytes read in one GET call at file opening.</p>
 </li>
@@ -517,7 +538,7 @@ file is not cached, and thus it is read again before issuing each HTTP request.<
 </li>
 <li><p id="config-GDAL_HTTP_COOKIEJAR"><strong>GDAL_HTTP_COOKIEJAR=value: </strong>File to which cookies should be written. See <a class="reference external" href="https://curl.se/libcurl/c/CURLOPT_COOKIEJAR.html">https://curl.se/libcurl/c/CURLOPT_COOKIEJAR.html</a></p>
 </li>
-<li><p id="config-GDAL_HTTP_NETRC"><strong>GDAL_HTTP_NETRC=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls if an available <code class="docutils literal notranslate"><span class="pre">.netrc</span></code> file is used.</p>
+<li><p id="config-GDAL_HTTP_NETRC"><strong>GDAL_HTTP_NETRC=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls if an available <code class="docutils literal notranslate"><span class="pre">.netrc</span></code> file is used.</p>
 </li>
 <li><p id="config-GDAL_HTTP_NETRC_FILE"><strong>GDAL_HTTP_NETRC_FILE=&lt;filename&gt;: </strong> (GDAL &gt;= 3.7.0) Sets the location of a <code class="docutils literal notranslate"><span class="pre">.netrc</span></code> file.</p>
 </li>
@@ -525,9 +546,9 @@ file is not cached, and thus it is read again before issuing each HTTP request.<
 </li>
 <li><p id="config-GDAL_HTTP_LOW_SPEED_TIME"><strong>GDAL_HTTP_LOW_SPEED_TIME=&lt;seconds&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>. Sets the time window over which <a class="reference internal" href="#config-GDAL_HTTP_LOW_SPEED_LIMIT"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_LOW_SPEED_LIMIT</span></code></a> should be evaluated.</p>
 </li>
-<li><p id="config-GDAL_HTTP_SSL_VERIFYSTATUS"><strong>GDAL_HTTP_SSL_VERIFYSTATUS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to verify the status of SSL certificates. See <a class="reference external" href="https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYSTATUS.html">https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYSTATUS.html</a></p>
+<li><p id="config-GDAL_HTTP_SSL_VERIFYSTATUS"><strong>GDAL_HTTP_SSL_VERIFYSTATUS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to verify the status of SSL certificates. See <a class="reference external" href="https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYSTATUS.html">https://curl.se/libcurl/c/CURLOPT_SSL_VERIFYSTATUS.html</a></p>
 </li>
-<li><p id="config-GDAL_HTTP_USE_CAPI_STORE"><strong>GDAL_HTTP_USE_CAPI_STORE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (Windows only). Whether to use certificates from the Windows certificate store.</p>
+<li><p id="config-GDAL_HTTP_USE_CAPI_STORE"><strong>GDAL_HTTP_USE_CAPI_STORE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (Windows only). Whether to use certificates from the Windows certificate store.</p>
 </li>
 <li><p id="config-GDAL_HTTP_HEADERS"><strong>GDAL_HTTP_HEADERS=value: </strong> (GDAL &gt;= 3.6) Specifies headers as a comma separated list of key: value pairs. If a comma
 or a double-quote character is needed in the value, then the key: value pair
@@ -547,7 +568,7 @@ Valid values are <code class="docutils literal notranslate"><span class="pre">AL
 By default, 429, 500, 502, 503 or 504 HTTP errors are considered, as
 well as other situations with a particular HTTP or Curl error message.</p>
 </li>
-<li><p id="config-GDAL_HTTP_TCP_KEEPALIVE"><strong>GDAL_HTTP_TCP_KEEPALIVE=[YES/NO]: </strong> (GDAL &gt;= 3.6)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Sets whether to enable TCP keep-alive.</p>
+<li><p id="config-GDAL_HTTP_TCP_KEEPALIVE"><strong>GDAL_HTTP_TCP_KEEPALIVE=[YES​/​NO]: </strong> (GDAL &gt;= 3.6)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Sets whether to enable TCP keep-alive.</p>
 </li>
 <li><p id="config-GDAL_HTTP_TCP_KEEPIDLE"><strong>GDAL_HTTP_TCP_KEEPIDLE=&lt;seconds&gt;: </strong> (GDAL &gt;= 3.6)  Defaults to <code class="docutils literal notranslate"><span class="pre">60</span></code>. Keep-alive idle time. Only taken into account if
 <a class="reference internal" href="#config-GDAL_HTTP_TCP_KEEPALIVE"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_TCP_KEEPALIVE=YES</span></code></a>.</p>
@@ -557,7 +578,7 @@ well as other situations with a particular HTTP or Curl error message.</p>
 </li>
 <li><p id="config-GDAL_HTTP_SSLCERT"><strong>GDAL_HTTP_SSLCERT=&lt;filename&gt;: </strong> (GDAL &gt;= 3.7) Filename of the the SSL client certificate. See <a class="reference external" href="https://curl.se/libcurl/c/CURLOPT_SSLCERT.html">https://curl.se/libcurl/c/CURLOPT_SSLCERT.html</a></p>
 </li>
-<li><p id="config-GDAL_HTTP_SSLCERTTYPE"><strong>GDAL_HTTP_SSLCERTTYPE=[PEM/DER]: </strong> (GDAL &gt;= 3.7) Format of the SSL certificate. see
+<li><p id="config-GDAL_HTTP_SSLCERTTYPE"><strong>GDAL_HTTP_SSLCERTTYPE=[PEM​/​DER]: </strong> (GDAL &gt;= 3.7) Format of the SSL certificate. see
 <a class="reference external" href="https://curl.se/libcurl/c/CURLOPT_SSLCERTTYPE.html">https://curl.se/libcurl/c/CURLOPT_SSLCERTTYPE.html</a></p>
 </li>
 <li><p id="config-GDAL_HTTP_SSLKEY"><strong>GDAL_HTTP_SSLKEY=&lt;filename&gt;: </strong> (GDAL &gt;= 3.7) Private key file for TLS and SSL client certificate. see
@@ -565,7 +586,7 @@ well as other situations with a particular HTTP or Curl error message.</p>
 </li>
 <li><p id="config-GDAL_HTTP_KEYPASSWD"><strong>GDAL_HTTP_KEYPASSWD=value: </strong> (GDAL &gt;= 3.7) Passphrase to private key. See <a class="reference external" href="https://curl.se/libcurl/c/CURLOPT_KEYPASSWD.html">https://curl.se/libcurl/c/CURLOPT_KEYPASSWD.html</a></p>
 </li>
-<li><p id="config-GDAL_HTTP_VERSION"><strong>GDAL_HTTP_VERSION=[1.0/1.1/2/2TLS/2PRIOR_KNOWLEDGE]: </strong>Specifies which HTTP version to use. Will default to 1.1 generally (except on
+<li><p id="config-GDAL_HTTP_VERSION"><strong>GDAL_HTTP_VERSION=[1.0​/​1.1​/​2​/​2TLS​/​2PRIOR_KNOWLEDGE]: </strong>Specifies which HTTP version to use. Will default to 1.1 generally (except on
 some controlled environments, like Google Compute Engine VMs, where 2TLS will
 be the default). Support for HTTP/2 requires curl 7.33 or later, built
 against nghttp2. &quot;2TLS&quot; means that HTTP/2 will be attempted for HTTPS
@@ -574,22 +595,22 @@ HTTPS. &quot;2PRIOR_KNOWLEDGE&quot; means that the server will be assumed to sup
 HTTP/2. The interest of enabling HTTP/2 is the use of HTTP/2 multiplexing when
 reading GeoTIFFs stored on /vsicurl/ and related virtual file systems.</p>
 </li>
-<li><p id="config-GDAL_HTTP_MULTIPLEX"><strong>GDAL_HTTP_MULTIPLEX=[YES/NO]: </strong>Defaults to YES. Only applies on a HTTP/2 connection. If set to YES, HTTP/2
+<li><p id="config-GDAL_HTTP_MULTIPLEX"><strong>GDAL_HTTP_MULTIPLEX=[YES​/​NO]: </strong>Defaults to YES. Only applies on a HTTP/2 connection. If set to YES, HTTP/2
 multiplexing can be used to download multiple ranges in parallel, during
 ReadMultiRange() requests that can be emitted by the GeoTIFF driver.</p>
 </li>
-<li><p id="config-GDAL_HTTP_MULTIRANGE"><strong>GDAL_HTTP_MULTIRANGE=[SINGLE_GET/SERIAL/YES]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls how ReadMultiRange() requests emitted by the GeoTIFF driver are
+<li><p id="config-GDAL_HTTP_MULTIRANGE"><strong>GDAL_HTTP_MULTIRANGE=[SINGLE_GET​/​SERIAL​/​YES]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls how ReadMultiRange() requests emitted by the GeoTIFF driver are
 satisfied. SINGLE_GET means that several ranges will be expressed in the
 Range header of a single GET requests, which is not supported by a majority
 of servers (including AWS S3 or Google GCS). SERIAL means that each range
 will be requested sequentially. YES means that each range will be requested
 in parallel, using HTTP/2 multiplexing or several HTTP connections.</p>
 </li>
-<li><p id="config-GDAL_HTTP_MERGE_CONSECUTIVE_RANGES"><strong>GDAL_HTTP_MERGE_CONSECUTIVE_RANGES=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Only applies when <a class="reference internal" href="#config-GDAL_HTTP_MULTIRANGE"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_MULTIRANGE</span></code></a> is YES. Defines if ranges
+<li><p id="config-GDAL_HTTP_MERGE_CONSECUTIVE_RANGES"><strong>GDAL_HTTP_MERGE_CONSECUTIVE_RANGES=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Only applies when <a class="reference internal" href="#config-GDAL_HTTP_MULTIRANGE"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_MULTIRANGE</span></code></a> is YES. Defines if ranges
 of a single ReadMultiRange() request that are consecutive should be merged
 into a single request.</p>
 </li>
-<li><p id="config-GDAL_HTTP_AUTH"><strong>GDAL_HTTP_AUTH=[BASIC/NTLM/NEGOTIATE/ANY/ANYSAFE/BEARER]: </strong>Set value to tell libcurl which authentication method(s) you want it to
+<li><p id="config-GDAL_HTTP_AUTH"><strong>GDAL_HTTP_AUTH=[BASIC​/​NTLM​/​NEGOTIATE​/​ANY​/​ANYSAFE​/​BEARER]: </strong>Set value to tell libcurl which authentication method(s) you want it to
 use. See <a class="reference external" href="http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTHTTPAUTH">http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTHTTPAUTH</a>
 for more information.</p>
 </li>
@@ -598,7 +619,7 @@ for more information.</p>
 authentication method.<p>NTLMを使用する場合,ユーザー名の前にドメインを付けて,ドメインと名前をスラッシュ (/) またはバックスラッシュ () で区切ります. 次のように: &quot;domain/user:password&quot; または &quot;domainuser:password&quot;. 一部のHTTPサーバー (Windows) は,このスタイルをBasic認証に対してもサポートしています.</p>
 </p>
 </li>
-<li><p id="config-GDAL_GSSAPI_DELEGATION"><strong>GDAL_GSSAPI_DELEGATION=[NONE/POLICY/ALWAYS]: </strong> (GDAL &gt;= 3.3) Set allowed GSS-API delegation. Relevant only with
+<li><p id="config-GDAL_GSSAPI_DELEGATION"><strong>GDAL_GSSAPI_DELEGATION=[NONE​/​POLICY​/​ALWAYS]: </strong> (GDAL &gt;= 3.3) Set allowed GSS-API delegation. Relevant only with
 <a class="reference internal" href="#config-GDAL_HTTP_AUTH"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_AUTH=NEGOTIATE</span></code></a>.</p>
 </li>
 <li><p id="config-GDAL_HTTP_BEARER"><strong>GDAL_HTTP_BEARER=value: </strong> (GDAL &gt;= 3.9) Set HTTP OAuth 2.0 Bearer Access Token to use for the connection. Must be used
@@ -617,12 +638,12 @@ for proxies.<p>GDALは,http_proxy, ftp_proxy, all_proxy などの環境変数を
 <li><p id="config-GDAL_HTTP_PROXYUSERPWD"><strong>GDAL_HTTP_PROXYUSERPWD=value: </strong>The HTTP user and password to use for the connection to the HTTP proxy. Must be
 in the form of [user name]:[password].</p>
 </li>
-<li><p id="config-GDAL_PROXY_AUTH"><strong>GDAL_PROXY_AUTH=[BASIC/NTLM/NEGOTIATE/DIGEST/ANY/ANYSAFE]: </strong>Set value to  to tell libcurl which authentication method(s) you want it to use
+<li><p id="config-GDAL_PROXY_AUTH"><strong>GDAL_PROXY_AUTH=[BASIC​/​NTLM​/​NEGOTIATE​/​DIGEST​/​ANY​/​ANYSAFE]: </strong>Set value to  to tell libcurl which authentication method(s) you want it to use
 for your proxy authentication. See
 <a class="reference external" href="http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTPROXYAUTH">http://curl.haxx.se/libcurl/c/curl_easy_setopt.html#CURLOPTPROXYAUTH</a> for more
 information.</p>
 </li>
-<li><p id="config-CPL_CURL_GZIP"><strong>CPL_CURL_GZIP=[YES/NO]: </strong>Sets the contents of the Accept-Encoding header sent in a HTTP request to gzip,
+<li><p id="config-CPL_CURL_GZIP"><strong>CPL_CURL_GZIP=[YES​/​NO]: </strong>Sets the contents of the Accept-Encoding header sent in a HTTP request to gzip,
 and enables decoding of a response when a Content-Encoding: header</p>
 </li>
 <li><p id="config-GDAL_HTTP_TIMEOUT"><strong>GDAL_HTTP_TIMEOUT=value: </strong>Set HTTP timeout value, where value is in seconds</p>
@@ -631,7 +652,7 @@ and enables decoding of a response when a Content-Encoding: header</p>
 request sent to the remote server.
 Defaults to &quot;GDAL/x.y.z&quot; where x.y.z is the GDAL build version.</p>
 </li>
-<li><p id="config-GDAL_HTTP_UNSAFESSL"><strong>GDAL_HTTP_UNSAFESSL=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to &quot;YES&quot; to get the curl library to skip SSL host / certificate
+<li><p id="config-GDAL_HTTP_UNSAFESSL"><strong>GDAL_HTTP_UNSAFESSL=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to &quot;YES&quot; to get the curl library to skip SSL host / certificate
 verification.</p>
 </li>
 </ul>
@@ -639,7 +660,7 @@ verification.</p>
 <section id="persistent-auxiliary-metadata-pam-options">
 <h3>永続的補助メタデータ (PAM) オプション<a class="headerlink" href="#persistent-auxiliary-metadata-pam-options" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p id="config-GDAL_PAM_ENABLED"><strong>GDAL_PAM_ENABLED=[YES/NO]: </strong>PAM support can be enabled (resp. disabled) in GDAL by setting the
+<li><p id="config-GDAL_PAM_ENABLED"><strong>GDAL_PAM_ENABLED=[YES​/​NO]: </strong>PAM support can be enabled (resp. disabled) in GDAL by setting the
 <a class="reference internal" href="#config-GDAL_PAM_ENABLED"><code class="docutils literal notranslate"><span class="pre">GDAL_PAM_ENABLED</span></code></a> configuration option (via CPLSetConfigOption(), or the
 environment) to the value of YES (resp. NO). Note: The default value is build
 dependent and defaults to YES in Windows and Unix builds. See <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALPamDataset</span></code>
@@ -658,40 +679,56 @@ write permissions. Must be set before the first access to PAM.</p>
 <ul class="simple">
 <li><p id="config-CENTER_LONG"><strong>CENTER_LONG=value: </strong></p>
 </li>
-<li><p id="config-CHECK_WITH_INVERT_PROJ"><strong>CHECK_WITH_INVERT_PROJ=value: </strong>Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/ogr/ogrct.cpp">ogrct.cpp</a> and <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/apps/gdalwarp_lib.cpp">gdalwarp_lib.cpp</a>.<p>このオプションは,gdalwarpがグローバルデータセットを変形するときや,極座標投影から/へ変換するときに,座標の不連続性を引き起こす場合の動作を制御するために使用できます. <a class="reference external" href="http://trac.osgeo.org/gdal/ticket/2305">http://trac.osgeo.org/gdal/ticket/2305</a> を参照してください.</p>
-<p>背景は,PROJが,src_srs から dst_srs への変換,その後 dst_srs から src_srs への変換が初期座標になることを保証しないことです. これは,gdalwarpのターゲットバウンディングボックスの計算のエラーや,視覚的なアーティファクトを引き起こす可能性があります.</p>
-<p>CHECK_WITH_INVERT_PROJ オプションが設定されていない場合,gdalwarp は,ターゲット画像のエッジの計算された座標がターゲット投影の有効領域内にあるかどうかをチェックします. そうでない場合,それらを再計算するために <a class="reference internal" href="#config-CHECK_WITH_INVERT_PROJ"><code class="docutils literal notranslate"><span class="pre">CHECK_WITH_INVERT_PROJ=TRUE</span></code></a> を設定して,ogrct.cpp が逆投影との整合性をチェックするようにします.</p>
-<p>NOに設定すると,gdalwarp は逆投影を使用しようとしません.</p>
+<li><p id="config-CHECK_WITH_INVERT_PROJ"><strong>CHECK_WITH_INVERT_PROJ=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/ogr/ogrct.cpp">ogrct.cpp</a> and <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/apps/gdalwarp_lib.cpp">gdalwarp_lib.cpp</a>.<p>This option can be used to control the behavior of <strong class="program">gdalwarp</strong> when warping global
+datasets or when transforming from/to polar projections, which causes
+coordinate discontinuities. See <a class="reference external" href="http://trac.osgeo.org/gdal/ticket/2305">http://trac.osgeo.org/gdal/ticket/2305</a>.</p>
+<p>The background is that PROJ does not guarantee that converting from <code class="docutils literal notranslate"><span class="pre">src_srs</span></code> to
+<code class="docutils literal notranslate"><span class="pre">dst_srs</span></code> and then from <code class="docutils literal notranslate"><span class="pre">dst_srs</span></code> to <code class="docutils literal notranslate"><span class="pre">src_srs</span></code> will yield the initial coordinates.
+This can lead to errors in the computation of the target bounding box of
+<strong class="program">gdalwarp</strong>, or to visual artifacts.</p>
+<p>If <a class="reference internal" href="#config-CHECK_WITH_INVERT_PROJ"><code class="docutils literal notranslate"><span class="pre">CHECK_WITH_INVERT_PROJ</span></code></a> option is not set, <strong class="program">gdalwarp</strong> will check that the
+computed coordinates of the edges of the target image are in the validity area
+of the target projection. If they are not, it will retry computing them by
+setting <a class="reference internal" href="#config-CHECK_WITH_INVERT_PROJ"><code class="docutils literal notranslate"><span class="pre">CHECK_WITH_INVERT_PROJ=TRUE</span></code></a> that forces
+<a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/ogr/ogrct.cpp">ogrct.cpp</a> to check the consistency of each requested
+projection result with the inverse projection.</p>
+<p>If set to <code class="docutils literal notranslate"><span class="pre">NO</span></code>, <strong class="program">gdalwarp</strong> will not attempt to use the inverse projection.</p>
 </p>
 </li>
-<li><p id="config-THRESHOLD"><strong>THRESHOLD=value: </strong>Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/ogr/ogrct.cpp">ogrct.cpp</a>.<p><a class="reference internal" href="#config-CHECK_WITH_INVERT_PROJ"><code class="docutils literal notranslate"><span class="pre">CHECK_WITH_INVERT_PROJ=TRUE</span></code></a> と組み合わせて使用されます. src_srs から dst_srs への往復と dst_srs から srs_srs への往復が初期座標になるかどうかをチェックするために使用される許容しきい値を定義します. 値は,ソースSRSの単位で表される必要があります (地理SRSの場合は通常度,投影SRSの場合はメートル).</p>
+<li><p id="config-THRESHOLD"><strong>THRESHOLD=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">0.1</span></code> for geographic SRS, 10000 otherwise. Used by <a class="reference external" href="https://github.com/OSGeo/gdal/blob/master/ogr/ogrct.cpp">ogrct.cpp</a>.<p>Used in combination with <a class="reference internal" href="#config-CHECK_WITH_INVERT_PROJ"><code class="docutils literal notranslate"><span class="pre">CHECK_WITH_INVERT_PROJ=TRUE</span></code></a>. Defines
+the acceptable threshold used to check if the round-trip from <code class="docutils literal notranslate"><span class="pre">src_srs</span></code> to
+<code class="docutils literal notranslate"><span class="pre">dst_srs</span></code> and from <code class="docutils literal notranslate"><span class="pre">dst_srs</span></code> to <code class="docutils literal notranslate"><span class="pre">srs_srs</span></code> yields the initial coordinates.
+The round-trip transformation will be considered successful if the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+values are both within <a class="reference internal" href="#config-THRESHOLD"><code class="docutils literal notranslate"><span class="pre">THRESHOLD</span></code></a> of the original values.
+The value must be expressed in the units of the source SRS (typically degrees
+for a geographic SRS, meters for a projected SRS).</p>
 </p>
 </li>
-<li><p id="config-OGR_ENABLE_PARTIAL_REPROJECTION"><strong>OGR_ENABLE_PARTIAL_REPROJECTION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLineString::transform()</span></code>.<p>再投影できない点を削除するためにYESに設定できます. これにより,極に端点がある線を再投影するのに役立ちます. 再投影が極の座標をサポートしていない場合などです.</p>
+<li><p id="config-OGR_ENABLE_PARTIAL_REPROJECTION"><strong>OGR_ENABLE_PARTIAL_REPROJECTION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLineString::transform()</span></code>.<p>再投影できない点を削除するためにYESに設定できます. これにより,極に端点がある線を再投影するのに役立ちます. 再投影が極の座標をサポートしていない場合などです.</p>
 </p>
 </li>
-<li><p id="config-OGR_CT_USE_SRS_COORDINATE_EPOCH"><strong>OGR_CT_USE_SRS_COORDINATE_EPOCH=[YES/NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">NO</span></code>, disables the coordinate epoch associated with the target or
+<li><p id="config-OGR_CT_USE_SRS_COORDINATE_EPOCH"><strong>OGR_CT_USE_SRS_COORDINATE_EPOCH=[YES​/​NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">NO</span></code>, disables the coordinate epoch associated with the target or
 source CRS when transforming between a static and dynamic CRS.</p>
 </li>
-<li><p id="config-OSR_ADD_TOWGS84_ON_EXPORT_TO_WKT1"><strong>OSR_ADD_TOWGS84_ON_EXPORT_TO_WKT1=[YES/NO]: </strong> (GDAL &gt;= 3.0.3)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Determines whether a <code class="docutils literal notranslate"><span class="pre">TOWGS84</span></code> node should be automatically added when exporting
+<li><p id="config-OSR_ADD_TOWGS84_ON_EXPORT_TO_WKT1"><strong>OSR_ADD_TOWGS84_ON_EXPORT_TO_WKT1=[YES​/​NO]: </strong> (GDAL &gt;= 3.0.3)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Determines whether a <code class="docutils literal notranslate"><span class="pre">TOWGS84</span></code> node should be automatically added when exporting
 a CRS to the GDAL flavor of WKT1.</p>
 </li>
-<li><p id="config-OSR_ADD_TOWGS84_ON_EXPORT_TO_PROJ4"><strong>OSR_ADD_TOWGS84_ON_EXPORT_TO_PROJ4=[YES/NO]: </strong> (GDAL &gt;= 3.0.3)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether a <code class="docutils literal notranslate"><span class="pre">+towgs84</span></code> parameter should be automatically added when
+<li><p id="config-OSR_ADD_TOWGS84_ON_EXPORT_TO_PROJ4"><strong>OSR_ADD_TOWGS84_ON_EXPORT_TO_PROJ4=[YES​/​NO]: </strong> (GDAL &gt;= 3.0.3)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether a <code class="docutils literal notranslate"><span class="pre">+towgs84</span></code> parameter should be automatically added when
 exporting a CRS as a legacy PROJ.4 string.</p>
 </li>
-<li><p id="config-OSR_ADD_TOWGS84_ON_IMPORT_FROM_EPSG"><strong>OSR_ADD_TOWGS84_ON_IMPORT_FROM_EPSG=[YES/NO]: </strong> (GDAL &gt;= 3.0.3)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Determines whether to automatically add a 3-parameter or 7-parameter
+<li><p id="config-OSR_ADD_TOWGS84_ON_IMPORT_FROM_EPSG"><strong>OSR_ADD_TOWGS84_ON_IMPORT_FROM_EPSG=[YES​/​NO]: </strong> (GDAL &gt;= 3.0.3)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Determines whether to automatically add a 3-parameter or 7-parameter
 Helmert transformation to WGS84 when there is exactly one such method
 available for the CRS.</p>
 </li>
-<li><p id="config-OSR_DEFAULT_AXIS_MAPPING_STRATEGY"><strong>OSR_DEFAULT_AXIS_MAPPING_STRATEGY=[TRADITIONAL_GIS_ORDER/AUTHORITY_COMPLIANT]: </strong> (GDAL &gt;= 3.5)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTHORITY_COMPLIANT</span></code>. Determines whether to honor the declared axis mapping of a CRS or override it
+<li><p id="config-OSR_DEFAULT_AXIS_MAPPING_STRATEGY"><strong>OSR_DEFAULT_AXIS_MAPPING_STRATEGY=[TRADITIONAL_GIS_ORDER​/​AUTHORITY_COMPLIANT]: </strong> (GDAL &gt;= 3.5)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTHORITY_COMPLIANT</span></code>. Determines whether to honor the declared axis mapping of a CRS or override it
 with the traditional GIS ordering (x = longitude, y = latitude).</p>
 </li>
-<li><p id="config-OSR_STRIP_TOWGS84"><strong>OSR_STRIP_TOWGS84=[YES/NO]: </strong> (GDAL &gt;= 3.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether to remove TOWGS84 information if the CRS has a known
+<li><p id="config-OSR_STRIP_TOWGS84"><strong>OSR_STRIP_TOWGS84=[YES​/​NO]: </strong> (GDAL &gt;= 3.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether to remove TOWGS84 information if the CRS has a known
 horizontal datum.</p>
 </li>
-<li><p id="config-OSR_USE_NON_DEPRECATED"><strong>OSR_USE_NON_DEPRECATED=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether to substitute a replacement for deprecated EPSG codes.</p>
+<li><p id="config-OSR_USE_NON_DEPRECATED"><strong>OSR_USE_NON_DEPRECATED=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether to substitute a replacement for deprecated EPSG codes.</p>
 </li>
-<li><p id="config-OSR_WKT_FORMAT"><strong>OSR_WKT_FORMAT=[SFSQL/WKT1_SIMPLE/WKT1/WKT1_GDAL/WKT1_ESRI/WKT2_2015/WKT2_2018/WKT2/DEFAULT]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code>. Sets the format for writing a CRS to WKT.</p>
+<li><p id="config-OSR_WKT_FORMAT"><strong>OSR_WKT_FORMAT=[SFSQL​/​WKT1_SIMPLE​/​WKT1​/​WKT1_GDAL​/​WKT1_ESRI​/​WKT2_2015​/​WKT2_2018​/​WKT2​/​DEFAULT]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code>. Sets the format for writing a CRS to WKT.</p>
 </li>
 </ul>
 </section>
@@ -789,6 +826,11 @@ horizontal datum.</p>
 </ul>
 </p></li>
 <li><p><a class="reference internal" href="#config-CPL_VSIL_CURL_ALLOWED_EXTENSIONS"><code class="docutils literal notranslate"><span class="pre">CPL_VSIL_CURL_ALLOWED_EXTENSIONS</span></code></a>: <a class="reference internal" href="#">設定オプション</a></p></li>
+<li><p><a class="reference internal" href="#config-CPL_VSIL_CURL_AUTHORIZATION_HEADER_ALLOWED_IF_REDIRECT"><code class="docutils literal notranslate"><span class="pre">CPL_VSIL_CURL_AUTHORIZATION_HEADER_ALLOWED_IF_REDIRECT</span></code></a>: <ul>
+<li><p><a class="reference internal" href="#">設定オプション</a></p></li>
+<li><p><a class="reference internal" href="virtual_file_systems.html">GDAL仮想ファイルシステム(圧縮、ネットワークホスト、など...): /vsimem, /vsizip, /vsitar, /vsicurl, ...</a></p></li>
+</ul>
+</p></li>
 <li><p><a class="reference internal" href="#config-CPL_VSIL_CURL_CACHE_SIZE"><code class="docutils literal notranslate"><span class="pre">CPL_VSIL_CURL_CACHE_SIZE</span></code></a>: <ul>
 <li><p><a class="reference internal" href="#">設定オプション</a></p></li>
 <li><p><a class="reference internal" href="virtual_file_systems.html">GDAL仮想ファイルシステム(圧縮、ネットワークホスト、など...): /vsimem, /vsizip, /vsitar, /vsicurl, ...</a></p></li>
@@ -922,6 +964,8 @@ horizontal datum.</p>
 <li><p><a class="reference internal" href="../drivers/raster/daas.html#config-GDAL_DAAS_CLIENT_ID"><code class="docutils literal notranslate"><span class="pre">GDAL_DAAS_CLIENT_ID</span></code></a>: <a class="reference internal" href="../drivers/raster/daas.html">DAAS (Airbus DS Intelligence Data As A Service driver)</a></p></li>
 <li><p><a class="reference internal" href="../drivers/raster/daas.html#config-GDAL_DAAS_X_FORWARDED_USER"><code class="docutils literal notranslate"><span class="pre">GDAL_DAAS_X_FORWARDED_USER</span></code></a>: <a class="reference internal" href="../drivers/raster/daas.html">DAAS (Airbus DS Intelligence Data As A Service driver)</a></p></li>
 <li><p><a class="reference internal" href="#config-GDAL_DATA"><code class="docutils literal notranslate"><span class="pre">GDAL_DATA</span></code></a>: <ul>
+<li><p><a class="reference internal" href="../development/building_from_source.html">GDAL のソースからのビルド</a></p></li>
+<li><p><a class="reference internal" href="../development/rfc/rfc102_embedded_resources.html">RFC 102: Embedding resource files into libgdal</a></p></li>
 <li><p><a class="reference internal" href="../drivers/raster/grib.html">GRIB -- WMO General Regularly-distributed Information in Binary form</a></p></li>
 <li><p><a class="reference internal" href="../programs/raster_common_options.html">Common options for raster programs</a></p></li>
 <li><p><a class="reference internal" href="#">設定オプション</a></p></li>
@@ -1086,6 +1130,7 @@ horizontal datum.</p>
 <li><p><a class="reference internal" href="#">設定オプション</a></p></li>
 </ul>
 </p></li>
+<li><p><a class="reference internal" href="../drivers/raster/mem.html#config-GDAL_MEM_ENABLE_OPEN"><code class="docutils literal notranslate"><span class="pre">GDAL_MEM_ENABLE_OPEN</span></code></a>: <a class="reference internal" href="../drivers/raster/mem.html">MEM -- In Memory Raster</a></p></li>
 <li><p><a class="reference internal" href="../drivers/raster/netcdf.html#config-GDAL_NETCDF_ASSUME_LONGLAT"><code class="docutils literal notranslate"><span class="pre">GDAL_NETCDF_ASSUME_LONGLAT</span></code></a>: <a class="reference internal" href="../drivers/raster/netcdf.html">NetCDF: Network Common Data Form</a></p></li>
 <li><p><a class="reference internal" href="../drivers/raster/netcdf.html#config-GDAL_NETCDF_BOTTOMUP"><code class="docutils literal notranslate"><span class="pre">GDAL_NETCDF_BOTTOMUP</span></code></a>: <a class="reference internal" href="../drivers/raster/netcdf.html">NetCDF: Network Common Data Form</a></p></li>
 <li><p><a class="reference internal" href="../drivers/raster/netcdf.html#config-GDAL_NETCDF_IGNORE_XY_AXIS_NAME_CHECKS"><code class="docutils literal notranslate"><span class="pre">GDAL_NETCDF_IGNORE_XY_AXIS_NAME_CHECKS</span></code></a>: <a class="reference internal" href="../drivers/raster/netcdf.html">NetCDF: Network Common Data Form</a></p></li>
@@ -1144,6 +1189,7 @@ horizontal datum.</p>
 <li><p><a class="reference internal" href="../programs/raster_common_options.html">Common options for raster programs</a></p></li>
 <li><p><a class="reference internal" href="../programs/vector_common_options.html">Common options for vector programs</a></p></li>
 <li><p><a class="reference internal" href="#">設定オプション</a></p></li>
+<li><p><a class="reference internal" href="security.html">Security considerations</a></p></li>
 </ul>
 </p></li>
 <li><p><a class="reference internal" href="../drivers/raster/stacta.html#config-GDAL_STACTA_SKIP_MISSING_METATILE"><code class="docutils literal notranslate"><span class="pre">GDAL_STACTA_SKIP_MISSING_METATILE</span></code></a>: <a class="reference internal" href="../drivers/raster/stacta.html">STACTA - Spatio-Temporal Asset Catalog Tiled Assets</a></p></li>
@@ -1156,8 +1202,16 @@ horizontal datum.</p>
 <li><p><a class="reference internal" href="../drivers/raster/vicar.html">VICAR -- VICAR</a></p></li>
 </ul>
 </p></li>
-<li><p><a class="reference internal" href="../drivers/raster/vrt.html#config-GDAL_VRT_ENABLE_PYTHON"><code class="docutils literal notranslate"><span class="pre">GDAL_VRT_ENABLE_PYTHON</span></code></a>: <a class="reference internal" href="../drivers/raster/vrt.html">VRT -- GDAL 仮想形式</a></p></li>
-<li><p><a class="reference internal" href="../drivers/raster/vrt.html#config-GDAL_VRT_PYTHON_TRUSTED_MODULES"><code class="docutils literal notranslate"><span class="pre">GDAL_VRT_PYTHON_TRUSTED_MODULES</span></code></a>: <a class="reference internal" href="../drivers/raster/vrt.html">VRT -- GDAL 仮想形式</a></p></li>
+<li><p><a class="reference internal" href="../drivers/raster/vrt.html#config-GDAL_VRT_ENABLE_PYTHON"><code class="docutils literal notranslate"><span class="pre">GDAL_VRT_ENABLE_PYTHON</span></code></a>: <ul>
+<li><p><a class="reference internal" href="../drivers/raster/vrt.html">VRT -- GDAL 仮想形式</a></p></li>
+<li><p><a class="reference internal" href="security.html">Security considerations</a></p></li>
+</ul>
+</p></li>
+<li><p><a class="reference internal" href="../drivers/raster/vrt.html#config-GDAL_VRT_PYTHON_TRUSTED_MODULES"><code class="docutils literal notranslate"><span class="pre">GDAL_VRT_PYTHON_TRUSTED_MODULES</span></code></a>: <ul>
+<li><p><a class="reference internal" href="../drivers/raster/vrt.html">VRT -- GDAL 仮想形式</a></p></li>
+<li><p><a class="reference internal" href="security.html">Security considerations</a></p></li>
+</ul>
+</p></li>
 <li><p><a class="reference internal" href="#config-GDAL_XML_VALIDATION"><code class="docutils literal notranslate"><span class="pre">GDAL_XML_VALIDATION</span></code></a>: <ul>
 <li><p><a class="reference internal" href="../drivers/vector/vrt.html">VRT -- Virtual Format</a></p></li>
 <li><p><a class="reference internal" href="#">設定オプション</a></p></li>
@@ -1166,6 +1220,7 @@ horizontal datum.</p>
 <li><p><a class="reference internal" href="../drivers/vector/geojson.html#config-GEOMETRY_AS_COLLECTION"><code class="docutils literal notranslate"><span class="pre">GEOMETRY_AS_COLLECTION</span></code></a>: <a class="reference internal" href="../drivers/vector/geojson.html">GeoJSON</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/gml.html#config-GML_ATTRIBUTES_TO_OGR_FIELDS"><code class="docutils literal notranslate"><span class="pre">GML_ATTRIBUTES_TO_OGR_FIELDS</span></code></a>: <a class="reference internal" href="../drivers/vector/gml.html">GML - Geography Markup Language</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/gml.html#config-GML_CONSIDER_EPSG_AS_URN"><code class="docutils literal notranslate"><span class="pre">GML_CONSIDER_EPSG_AS_URN</span></code></a>: <a class="reference internal" href="../drivers/vector/gml.html">GML - Geography Markup Language</a></p></li>
+<li><p><a class="reference internal" href="../drivers/vector/gml.html#config-GML_DOWNLOAD_SCHEMA"><code class="docutils literal notranslate"><span class="pre">GML_DOWNLOAD_SCHEMA</span></code></a>: <a class="reference internal" href="../drivers/vector/gml.html">GML - Geography Markup Language</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/gml.html#config-GML_EXPOSE_FID"><code class="docutils literal notranslate"><span class="pre">GML_EXPOSE_FID</span></code></a>: <a class="reference internal" href="../drivers/vector/gml.html">GML - Geography Markup Language</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/gml.html#config-GML_EXPOSE_GML_ID"><code class="docutils literal notranslate"><span class="pre">GML_EXPOSE_GML_ID</span></code></a>: <a class="reference internal" href="../drivers/vector/gml.html">GML - Geography Markup Language</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/gml.html#config-GML_FACE_HOLE_NEGATIVE"><code class="docutils literal notranslate"><span class="pre">GML_FACE_HOLE_NEGATIVE</span></code></a>: <a class="reference internal" href="../drivers/vector/gml.html">GML - Geography Markup Language</a></p></li>
@@ -1244,6 +1299,7 @@ horizontal datum.</p>
 <li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_EXTRUDE_FIELD"><code class="docutils literal notranslate"><span class="pre">LIBKML_EXTRUDE_FIELD</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_HEADING_FIELD"><code class="docutils literal notranslate"><span class="pre">LIBKML_HEADING_FIELD</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_ICON_FIELD"><code class="docutils literal notranslate"><span class="pre">LIBKML_ICON_FIELD</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
+<li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_ID_FIELD"><code class="docutils literal notranslate"><span class="pre">LIBKML_ID_FIELD</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_IMAGEPYRAMID_GRIDORIGIN"><code class="docutils literal notranslate"><span class="pre">LIBKML_IMAGEPYRAMID_GRIDORIGIN</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_IMAGEPYRAMID_MAXHEIGHT"><code class="docutils literal notranslate"><span class="pre">LIBKML_IMAGEPYRAMID_MAXHEIGHT</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
 <li><p><a class="reference internal" href="../drivers/vector/libkml.html#config-LIBKML_IMAGEPYRAMID_MAXWIDTH"><code class="docutils literal notranslate"><span class="pre">LIBKML_IMAGEPYRAMID_MAXWIDTH</span></code></a>: <a class="reference internal" href="../drivers/vector/libkml.html">LIBKML Driver (.kml .kmz)</a></p></li>
@@ -1564,7 +1620,7 @@ horizontal datum.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="gdal_python_utilities.html" class="btn btn-neutral float-right" title="GDAL Python Utilities" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gdal_python_utilities.html" class="btn btn-neutral float-right" title="GDAL Python ユーティリティ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="coordinate_epoch.html" class="btn btn-neutral float-left" title="座標元期のサポート" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

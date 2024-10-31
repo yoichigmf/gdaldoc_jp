@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Google Earth Engine Data API &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -166,6 +169,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -273,6 +277,9 @@ The following open options are available:</p>
 <li><p id="drivers/vector/eeda-oo-COLLECTION"><strong>COLLECTION=value: </strong>To specify the collection if not specified
 in the connection string.</p>
 </li>
+<li><p id="drivers/vector/eeda-oo-VSI_PATH_FOR_AUTH"><strong>VSI_PATH_FOR_AUTH=value: </strong> (GDAL &gt;= 3.10) /vsigs/... path onto which a GOOGLE_APPLICATION_CREDENTIALS path specific
+option is set</p>
+</li>
 </ul>
 </section>
 <section id="authentication-methods">
@@ -282,7 +289,9 @@ in the connection string.</p>
 <li><p>Authentication Bearer header passed through the EEDA_BEARER or
 <a class="reference internal" href="../raster/eedai.html#config-EEDA_BEARER_FILE"><code class="docutils literal notranslate"><span class="pre">EEDA_BEARER_FILE</span></code></a> configuration options.</p></li>
 <li><p>Service account private key file, through the
-<a class="reference internal" href="../raster/eedai.html#config-GOOGLE_APPLICATION_CREDENTIALS"><code class="docutils literal notranslate"><span class="pre">GOOGLE_APPLICATION_CREDENTIALS</span></code></a> configuration option.</p></li>
+<a class="reference internal" href="../raster/eedai.html#config-GOOGLE_APPLICATION_CREDENTIALS"><code class="docutils literal notranslate"><span class="pre">GOOGLE_APPLICATION_CREDENTIALS</span></code></a> configuration option, or set
+as a path-specific option whose value is set in the VSI_PATH_FOR_AUTH
+open option.</p></li>
 <li><p>OAuth2 Service Account authentication through the
 <a class="reference internal" href="../raster/eedai.html#config-EEDA_PRIVATE_KEY"><code class="docutils literal notranslate"><span class="pre">EEDA_PRIVATE_KEY</span></code></a>/
 <a class="reference internal" href="../raster/eedai.html#config-EEDA_PRIVATE_KEY_FILE"><code class="docutils literal notranslate"><span class="pre">EEDA_PRIVATE_KEY_FILE</span></code></a> +

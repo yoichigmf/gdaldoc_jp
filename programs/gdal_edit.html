@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gdal_edit &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -84,6 +86,7 @@
 <li class="toctree-l3"><a class="reference internal" href="gdalbuildvrt.html">gdalbuildvrt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalcompare.html">gdalcompare</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdaldem.html">gdaldem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalenhance.html">gdalenhance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalinfo.html">gdalinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdallocationinfo.html">gdallocationinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalmanage.html">gdalmanage</a></li>
@@ -114,6 +117,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -194,7 +198,7 @@
         <span class="p">[</span><span class="o">-</span><span class="n">unsetstats</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">stats</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">approx_stats</span><span class="p">]</span>
         <span class="p">[</span><span class="o">-</span><span class="n">setstats</span> <span class="o">&lt;</span><span class="nb">min</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="nb">max</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">mean</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">stddev</span><span class="o">&gt;</span><span class="p">]</span>
         <span class="p">[</span><span class="o">-</span><span class="n">scale</span> <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">offset</span> <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">units</span> <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="p">]</span>
-        <span class="p">[</span><span class="o">-</span><span class="n">colorinterp_</span><span class="o">&lt;</span><span class="n">X</span><span class="o">&gt;</span> <span class="p">{</span><span class="n">red</span><span class="o">|</span><span class="n">green</span><span class="o">|</span><span class="n">blue</span><span class="o">|</span><span class="n">alpha</span><span class="o">|</span><span class="n">gray</span><span class="o">|</span><span class="n">undefined</span><span class="p">}]</span><span class="o">...</span>
+        <span class="p">[</span><span class="o">-</span><span class="n">colorinterp_</span><span class="o">&lt;</span><span class="n">X</span><span class="o">&gt;</span> <span class="p">{</span><span class="n">red</span><span class="o">|</span><span class="n">green</span><span class="o">|</span><span class="n">blue</span><span class="o">|</span><span class="n">alpha</span><span class="o">|</span><span class="n">gray</span><span class="o">|</span><span class="n">undefined</span><span class="o">|</span><span class="n">pan</span><span class="o">|</span><span class="n">coastal</span><span class="o">|</span><span class="n">rededge</span><span class="o">|</span><span class="n">nir</span><span class="o">|</span><span class="n">swir</span><span class="o">|</span><span class="n">mwir</span><span class="o">|</span><span class="n">lwir</span><span class="o">|...</span><span class="p">}]</span><span class="o">...</span>
         <span class="p">[</span><span class="o">-</span><span class="n">gcp</span> <span class="o">&lt;</span><span class="n">pixel</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">line</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">easting</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">northing</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">elevation</span><span class="o">&gt;</span><span class="p">]]</span><span class="o">...</span>
         <span class="p">[</span><span class="o">-</span><span class="n">unsetmd</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">oo</span> <span class="o">&lt;</span><span class="n">NAME</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="o">-</span><span class="n">mo</span> <span class="o">&lt;</span><span class="n">META</span><span class="o">-</span><span class="n">TAG</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span>
         <span class="o">&lt;</span><span class="n">datasetname</span><span class="o">&gt;</span>
@@ -375,7 +379,7 @@
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-colorinterp_-X">
-<span class="sig-name descname"><span class="pre">-colorinterp_&lt;X&gt;</span></span><span class="sig-prename descclassname"> <span class="pre">{red|green|blue|alpha|gray|undefined}</span></span><a class="headerlink" href="#cmdoption-colorinterp_-X" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">-colorinterp_&lt;X&gt;</span></span><span class="sig-prename descclassname"> <span class="pre">{red|green|blue|alpha|gray|undefined|pan|coastal|rededge|nir|swir|mwir|lwir|...}</span></span><a class="headerlink" href="#cmdoption-colorinterp_-X" title="Link to this definition"></a></dt>
 <dd><p>バンド X (X は 1 から始まる有効なバンド番号) の色の解釈を変更します.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 2.3.</span></p>

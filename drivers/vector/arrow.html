@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>(Geo)Arrow IPC File Format / Stream &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">(Geo)Arrow IPC File Format / Stream</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#driver-capabilities">Driver capabilities</a></li>
@@ -159,6 +162,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -293,15 +297,15 @@ recognize the passed filename.</p></li>
 <p>Layer creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-lco</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv422GDALDatasetCreateLayer12GDALDatasetHPKc20OGRSpatialReferenceH18OGRwkbGeometryType12CSLConstList" title="GDALDatasetCreateLayer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDatasetCreateLayer()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Dataset.CreateLayer" title="osgeo.gdal.Dataset.CreateLayer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dataset.CreateLayer</span></code></a> (Python).
 The following layer creation options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/arrow-lco-COMPRESSION"><strong>COMPRESSION=[NONE/ZSTD/LZ4]: </strong>Compression method.
+<li><p id="drivers/vector/arrow-lco-COMPRESSION"><strong>COMPRESSION=[NONE​/​ZSTD​/​LZ4]: </strong>Compression method.
 Available values depend on how the Arrow library was compiled.
 Defaults to LZ4 when available, otherwise NONE.</p>
 </li>
-<li><p id="drivers/vector/arrow-lco-FORMAT"><strong>FORMAT=[FILE/STREAM]: </strong>Variant of the file format. See introduction paragraph
+<li><p id="drivers/vector/arrow-lco-FORMAT"><strong>FORMAT=[FILE​/​STREAM]: </strong>Variant of the file format. See introduction paragraph
 for the difference between both. Defaults to FILE, unless the filename is
 &quot;/vsistdout/&quot; or its extension is &quot;.arrows&quot;, in which case STREAM is used.</p>
 </li>
-<li><p id="drivers/vector/arrow-lco-GEOMETRY_ENCODING"><strong>GEOMETRY_ENCODING=[GEOARROW/WKB/WKT/GEOARROW_INTERLEAVED]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GEOARROW</span></code>. Geometry encoding.
+<li><p id="drivers/vector/arrow-lco-GEOMETRY_ENCODING"><strong>GEOMETRY_ENCODING=[GEOARROW​/​WKB​/​WKT​/​GEOARROW_INTERLEAVED]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GEOARROW</span></code>. Geometry encoding.
 As of GDAL 3.9, GEOARROW uses the GeoArrow &quot;struct&quot; based
 encodings (where points are modeled as a struct field with a x and y subfield,
 lines are modeled as a list of such points, etc.).
@@ -365,9 +369,9 @@ function (cf <a class="reference external" href="https://arrow.apache.org/docs/c
 Note: if the Arrow driver is fully loaded, e.g. by querying
 GetGDALDriverManager()-&gt;GetDriverByName(&quot;ARROW&quot;)-&gt;GetMetadata(), the Arrow VSI
 file system will be also registered.</p></li>
-<li><p>Prefixing any GDAL file name with the <code class="docutils literal notranslate"><span class="pre">vsi://</span></code> URI scheme prefix. In addition
+<li><p>Prefixing any GDAL file name with the <code class="docutils literal notranslate"><span class="pre">gdalvsi://</span></code> URI scheme prefix. In addition
 to any potential vsi prefix in the GDAL file name. So the <code class="docutils literal notranslate"><span class="pre">/vsicurl/http://example.com</span></code>
-GDAL file name becomes the <code class="docutils literal notranslate"><span class="pre">vsi:///vsicurl/http://example.com</span></code> Arrow URI.</p></li>
+GDAL file name becomes the <code class="docutils literal notranslate"><span class="pre">gdalvsi:///vsicurl/http://example.com</span></code> Arrow URI.</p></li>
 </ul>
 </section>
 <section id="links">

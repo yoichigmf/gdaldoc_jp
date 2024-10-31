@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GDAL &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="_static/favicon.png"/>
@@ -23,6 +24,7 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/translations.js?v=91613774"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="_static/announcement.js?v=b6f31f9f"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="about.html" />
     <link rel="index" title="索引" href="genindex.html" />
@@ -64,6 +66,7 @@
 <li class="toctree-l1"><a class="reference internal" href="contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -128,7 +131,14 @@
              
   <section id="gdal">
 <h1>GDAL<a class="headerlink" href="#gdal" title="Link to this heading"></a></h1>
-<p>GDAL はラスターとベクターの空間データ形式をを変換するライブラリです。これは MIT スタイル <a class="reference internal" href="license.html#license"><span class="std std-ref">ライセンス</span></a> の オープンソースとして <a class="reference external" href="http://www.osgeo.org/">Open Source Geospatial Foundation</a> から公開されています. ライブラリとしてのGDALはすべてのサポートする形式をアプリケーションから単一のラスタ抽象データモデルか単一のベクター抽象モデルとして利用する機能を提供しています。またGDALではデータ変換やデータ加工をするための多彩で便利なコマンドラインユーティリティを提供しています。  <a class="reference external" href="https://github.com/OSGeo/gdal/blob/v3.9.2/NEWS.md">NEWS</a> ページには 2024年 8月の GDAL/OGR 3.9.2 リリースについての情報があります。</p>
+<p>GDAL is a translator library for raster and vector geospatial data formats that is released under an MIT style Open Source <a class="reference internal" href="license.html#license"><span class="std std-ref">ライセンス</span></a> by the <a class="reference external" href="http://www.osgeo.org/">Open Source Geospatial Foundation</a>. As a library, it presents a single raster abstract data model and single vector abstract data model to the calling application for all supported formats. It also comes with a variety of useful command line utilities for data translation and processing. The <a class="reference external" href="https://github.com/OSGeo/gdal/blob/v3.9.3/NEWS.md">NEWS</a> page describes the October 2024 GDAL/OGR 3.9.3 release.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>The GDAL project is currently soliciting feedback to help focus
+<a class="reference internal" href="development/rfc/rfc83_use_of_project_sponsorship.html#rfc-83"><span class="std std-ref">GDAL Sponsorship Program</span></a> activities.
+We would highly appreciate you fill in the <a class="reference external" href="https://docs.google.com/forms/d/e/1FAIpQLSdMXygtDb5M0Ov0KK0u2wKkev1rMqAjRdTlwMeCl7Z1TGJTLw/viewform">survey</a> that  will
+provide guidance about priorities for the program's resources (open until November 11th, 2024).</p>
+</div>
 <p>Documentation for the latest version of GDAL is available as a <a class="reference external" href="https://gdal.org/_/downloads/en/latest/pdf/">PDF</a> or a <a class="reference external" href="https://gdal.org/_/downloads/en/latest/htmlzip/">ZIP of individual HTML pages</a> for offline browsing.</p>
 <a class="reference external image-reference" href="http://www.osgeo.org/"><img alt="OSGeoプロジェクト" src="_images/OSGeo_project.png" /></a>
 <p>参照 <a class="reference internal" href="software_using_gdal.html#software-using-gdal"><span class="std std-ref">GDALを利用しているソフトウェア</span></a></p>
@@ -214,7 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="drivers/raster/heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers/raster/heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -295,6 +305,7 @@
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers/raster/snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/raster/srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -319,6 +330,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="drivers/vector/index.html">ベクタードライバー</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="drivers/vector/adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/vector/amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/vector/arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="drivers/vector/avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -418,6 +430,7 @@
 <li class="toctree-l2"><a class="reference internal" href="user/coordinate_epoch.html">座標元期のサポート</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user/configoptions.html">設定オプション</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user/gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/security.html">Security considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api/index.html">API</a><ul>
@@ -435,6 +448,8 @@
 <li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#vector">ベクター</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#geographic-network-model">ジオグラフィックネットワークモデル</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#projections-and-spatial-reference-systems-tutorial-osr-ogrspatialreference">投影と空間参照システムチュートリアル (OSR - OGRSpatialReference)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#workshops">Workshops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/index.html#external-tutorials">External tutorials</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="development/index.html">開発</a><ul>
@@ -478,6 +493,7 @@
 <li class="toctree-l2"><a class="reference internal" href="faq.html#i-have-a-question-that-s-not-answered-here-where-can-i-get-more-information">ここで回答がされていない質問があります。 そのような場合私はどこで情報を得ることができますか?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-add-support-for-a-new-format">新しいフォーマットのサポートを追加するにはどうすればよいですか？</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#is-gdal-thread-safe">GDALはスレッドセーフですか?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#does-gdal-provide-a-section-508-information">Does GDAL provide a Section 508 information?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-cite-gdal">GDALをどのように引用すればよいですか？</a></li>
 </ul>
 </li>
@@ -485,6 +501,7 @@
 <li class="toctree-l2"><a class="reference internal" href="license.html#id2">ライセンス</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="thanks.html">Thanks</a></li>
 </ul>
 </div>
 <section id="index">

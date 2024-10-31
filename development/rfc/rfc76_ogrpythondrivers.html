@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RFC 76: OGR Python drivers &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,12 +60,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">チュートリアル</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">開発</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../building_from_source.html">Building GDAL from source</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dev_environment.html">Setting up a development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dev_practices.html">Development practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../testing.html">Automated testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dev_documentation.html">Building documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cmake.html">Using GDAL in CMake projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building_from_source.html">GDAL のソースからのビルド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_environment.html">開発環境の設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_practices.html">開発プラクティス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">自動テスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_documentation.html">文書のビルド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake.html">Cmake プロジェクトでの GDAL の利用</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">RFC list</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="rfc1_pmc.html">RFC 1: Project Management Committee Guidelines</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc2_svn.html">RFC 2: Migration to OSGeo Subversion Repository</a></li>
@@ -98,7 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="rfc31_ogr_64.html">RFC 31: OGR 64bit Integer Fields and FIDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc32_gdallocationinfo.html">RFC 32: gdallocationinfo utility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc33_gtiff_pixelispoint.html">RFC 33: GTiff - Fixing PixelIsPoint Interpretation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="rfc34_license_policy.html">RFC 34: License Policy Enforcement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc34_license_policy.html">RFC 34: License Policy Enforcement (not implemented)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc35_deletereorderalterfielddefn.html">RFC 35: Delete, reorder and alter field definitions of OGR layers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc36_open_by_drivername.html">RFC 36: Allow specification of intended driver on GDALOpen (withdrawn)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc37_cplerror_userdata.html">RFC 37: User data callbacks in CPLError</a></li>
@@ -182,6 +184,8 @@
 <li class="toctree-l3"><a class="reference internal" href="rfc97_feature_and_fielddefn_sealing.html">RFC 97: OGRFeatureDefn, OGRFieldDefn and OGRGeomFieldDefn &quot;sealing&quot;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc98_build_requirements_gdal_3_9.html">RFC 98: Build requirements for GDAL 3.9</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rfc99_geometry_coordinate_precision.html">RFC 99: Geometry coordinate precision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc101_raster_dataset_threadsafety.html">RFC 101: Raster dataset read-only thread-safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc102_embedded_resources.html">RFC 102: Embedding resource files into libgdal</a></li>
 </ul>
 </li>
 </ul>
@@ -191,6 +195,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>

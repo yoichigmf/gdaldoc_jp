@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GML - Geography Markup Language &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -182,6 +185,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -301,38 +305,40 @@ drivers have their use cases.</p>
 <p><a class="reference internal" href="../../user/configoptions.html#configoptions"><span class="std std-ref">Configuration options</span></a> can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or using functions such as <a class="reference internal" href="../../api/cpl.html#_CPPv418CPLSetConfigOptionPKcPKc" title="CPLSetConfigOption"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">CPLSetConfigOption()</span></code></a> (C) or <code class="xref py py-func docutils literal notranslate"><span class="pre">gdal.config_options</span></code> (Python).
 The following configuration options are available:</p>
 <ul class="simple">
-<li><p id="config-GML_PARSER"><strong>GML_PARSER=[EXPAT/XERCES]: </strong>Select the XML parser. See <a class="reference internal" href="#parsers">Parsers</a>.</p>
+<li><p id="config-GML_PARSER"><strong>GML_PARSER=[EXPAT​/​XERCES]: </strong>Select the XML parser. See <a class="reference internal" href="#parsers">Parsers</a>.</p>
 </li>
-<li><p id="config-GML_INVERT_AXIS_ORDER_IF_LAT_LONG"><strong>GML_INVERT_AXIS_ORDER_IF_LAT_LONG=[YES/NO]: </strong>See <a class="reference internal" href="#crs-support">CRS support</a>. Equivalent of <a class="reference internal" href="gml.html#drivers/vector/gml-oo-INVERT_AXIS_ORDER_IF_LAT_LONG"><code class="docutils literal notranslate"><span class="pre">INVERT_AXIS_ORDER_IF_LAT_LONG</span></code></a> open option.</p>
+<li><p id="config-GML_INVERT_AXIS_ORDER_IF_LAT_LONG"><strong>GML_INVERT_AXIS_ORDER_IF_LAT_LONG=[YES​/​NO]: </strong>See <a class="reference internal" href="#crs-support">CRS support</a>. Equivalent of <a class="reference internal" href="gml.html#drivers/vector/gml-oo-INVERT_AXIS_ORDER_IF_LAT_LONG"><code class="docutils literal notranslate"><span class="pre">INVERT_AXIS_ORDER_IF_LAT_LONG</span></code></a> open option.</p>
 </li>
-<li><p id="config-GML_CONSIDER_EPSG_AS_URN"><strong>GML_CONSIDER_EPSG_AS_URN=[YES/NO]: </strong>See <a class="reference internal" href="#crs-support">CRS support</a>. Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-CONSIDER_EPSG_AS_URN"><code class="docutils literal notranslate"><span class="pre">CONSIDER_EPSG_AS_URN</span></code></a> open option.</p>
+<li><p id="config-GML_CONSIDER_EPSG_AS_URN"><strong>GML_CONSIDER_EPSG_AS_URN=[YES​/​NO]: </strong>See <a class="reference internal" href="#crs-support">CRS support</a>. Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-CONSIDER_EPSG_AS_URN"><code class="docutils literal notranslate"><span class="pre">CONSIDER_EPSG_AS_URN</span></code></a> open option.</p>
 </li>
-<li><p id="config-GML_SWAP_COORDINATES"><strong>GML_SWAP_COORDINATES=[AUTO/YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. See <a class="reference internal" href="#crs-support">CRS support</a>. Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-SWAP_COORDINATES"><code class="docutils literal notranslate"><span class="pre">SWAP_COORDINATES</span></code></a> open option.</p>
+<li><p id="config-GML_SWAP_COORDINATES"><strong>GML_SWAP_COORDINATES=[AUTO​/​YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. See <a class="reference internal" href="#crs-support">CRS support</a>. Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-SWAP_COORDINATES"><code class="docutils literal notranslate"><span class="pre">SWAP_COORDINATES</span></code></a> open option.</p>
 </li>
 <li><p id="config-GML_FIELDTYPES"><strong>GML_FIELDTYPES=ALWAYS_STRING: </strong>If set to <code class="docutils literal notranslate"><span class="pre">ALWAYS_STRING</span></code>, treat all fields as strings instead of
 scanning values to detect field types. See <a class="reference internal" href="#schema">Schema</a>.</p>
 </li>
-<li><p id="config-GML_ATTRIBUTES_TO_OGR_FIELDS"><strong>GML_ATTRIBUTES_TO_OGR_FIELDS=[YES/NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, create fields from attributes of GML elements.
+<li><p id="config-GML_ATTRIBUTES_TO_OGR_FIELDS"><strong>GML_ATTRIBUTES_TO_OGR_FIELDS=[YES​/​NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, create fields from attributes of GML elements.
 See <a class="reference internal" href="#schema">Schema</a>.</p>
 </li>
 <li><p id="config-GML_GFS_TEMPLATE"><strong>GML_GFS_TEMPLATE=&lt;filename&gt;: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-GFS_TEMPLATE"><code class="docutils literal notranslate"><span class="pre">GFS_TEMPLATE</span></code></a>. See <a class="reference internal" href="#schema">Schema</a>.</p>
 </li>
-<li><p id="config-GML_GET_SECONDARY_GEOM"><strong>GML_GET_SECONDARY_GEOM=[YES/NO]: </strong>Retrieve node elements of TopoCurve geometries instead of edges.
+<li><p id="config-GML_GET_SECONDARY_GEOM"><strong>GML_GET_SECONDARY_GEOM=[YES​/​NO]: </strong>Retrieve node elements of TopoCurve geometries instead of edges.
 See <a class="reference internal" href="#geometry-reading">Geometry reading</a>.</p>
 </li>
-<li><p id="config-GML_SKIP_RESOLVE_ELEMS"><strong>GML_SKIP_RESOLVE_ELEMS=[NONE/ALL/HUGE/&lt;list&gt;]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL</span></code>. Control the gml:xlink resolving. See <a class="reference internal" href="#gml-xlink-resolving">gml:xlink resolving</a>.</p>
+<li><p id="config-GML_SKIP_RESOLVE_ELEMS"><strong>GML_SKIP_RESOLVE_ELEMS=[NONE​/​ALL​/​HUGE​/​&lt;list&gt;]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL</span></code>. Control the gml:xlink resolving. See <a class="reference internal" href="#gml-xlink-resolving">gml:xlink resolving</a>.</p>
 </li>
-<li><p id="config-GML_SAVE_RESOLVED_TO"><strong>GML_SAVE_RESOLVED_TO=[SAME/&lt;filename&gt;]: </strong>Control where file resolved by gml:xlink is saved. See <a class="reference internal" href="#gml-xlink-resolving">gml:xlink resolving</a>.</p>
+<li><p id="config-GML_SAVE_RESOLVED_TO"><strong>GML_SAVE_RESOLVED_TO=[SAME​/​&lt;filename&gt;]: </strong>Control where file resolved by gml:xlink is saved. See <a class="reference internal" href="#gml-xlink-resolving">gml:xlink resolving</a>.</p>
 </li>
-<li><p id="config-GML_FACE_HOLE_NEGATIVE"><strong>GML_FACE_HOLE_NEGATIVE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Select interpretation rule for TopoSurfaces. See <a class="reference internal" href="#gml-toposurface-rules"><span class="std std-ref">TopoSurface interpretation rules [polygons and internal holes]</span></a>.</p>
+<li><p id="config-GML_FACE_HOLE_NEGATIVE"><strong>GML_FACE_HOLE_NEGATIVE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Select interpretation rule for TopoSurfaces. See <a class="reference internal" href="#gml-toposurface-rules"><span class="std std-ref">TopoSurface interpretation rules [polygons and internal holes]</span></a>.</p>
 </li>
-<li><p id="config-GML_EXPOSE_FID"><strong>GML_EXPOSE_FID=[YES/NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-EXPOSE_FID"><code class="docutils literal notranslate"><span class="pre">EXPOSE_FID</span></code></a>.</p>
+<li><p id="config-GML_EXPOSE_FID"><strong>GML_EXPOSE_FID=[YES​/​NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-EXPOSE_FID"><code class="docutils literal notranslate"><span class="pre">EXPOSE_FID</span></code></a>.</p>
 </li>
-<li><p id="config-GML_EXPOSE_GML_ID"><strong>GML_EXPOSE_GML_ID=[YES/NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-EXPOSE_GML_ID"><code class="docutils literal notranslate"><span class="pre">EXPOSE_GML_ID</span></code></a>.</p>
+<li><p id="config-GML_EXPOSE_GML_ID"><strong>GML_EXPOSE_GML_ID=[YES​/​NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-EXPOSE_GML_ID"><code class="docutils literal notranslate"><span class="pre">EXPOSE_GML_ID</span></code></a>.</p>
 </li>
-<li><p id="config-GML_READ_MODE"><strong>GML_READ_MODE=[AUTO/STANDARD/SEQUENTIAL_LAYERS/INTERLEAVED_LAYERS]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-READ_MODE"><code class="docutils literal notranslate"><span class="pre">READ_MODE</span></code></a>. See <a class="reference internal" href="#gml-performance"><span class="std std-ref">Performance issues with large multi-layer GML files.</span></a>.</p>
+<li><p id="config-GML_READ_MODE"><strong>GML_READ_MODE=[AUTO​/​STANDARD​/​SEQUENTIAL_LAYERS​/​INTERLEAVED_LAYERS]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-READ_MODE"><code class="docutils literal notranslate"><span class="pre">READ_MODE</span></code></a>. See <a class="reference internal" href="#gml-performance"><span class="std std-ref">Performance issues with large multi-layer GML files.</span></a>.</p>
 </li>
-<li><p id="config-GML_USE_SCHEMA_IMPORT"><strong>GML_USE_SCHEMA_IMPORT=[YES/NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-USE_SCHEMA_IMPORT"><code class="docutils literal notranslate"><span class="pre">USE_SCHEMA_IMPORT</span></code></a>.</p>
+<li><p id="config-GML_DOWNLOAD_SCHEMA"><strong>GML_DOWNLOAD_SCHEMA=[YES​/​NO]: </strong> (GDAL &gt;= 3.10) Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-DOWNLOAD_SCHEMA"><code class="docutils literal notranslate"><span class="pre">DOWNLOAD_SCHEMA</span></code></a>.</p>
+</li>
+<li><p id="config-GML_USE_SCHEMA_IMPORT"><strong>GML_USE_SCHEMA_IMPORT=[YES​/​NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/gml-oo-USE_SCHEMA_IMPORT"><code class="docutils literal notranslate"><span class="pre">USE_SCHEMA_IMPORT</span></code></a>.</p>
 </li>
 </ul>
 </section>
@@ -683,7 +689,7 @@ The following open options are supported:</p>
 <ul class="simple">
 <li><p id="drivers/vector/gml-oo-XSD"><strong>XSD=&lt;filename&gt;: </strong>to specify an explicit filename for the XSD application schema to use.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-WRITE_GFS"><strong>WRITE_GFS=[AUTO/YES/NO]: </strong> (GDAL &gt;= 3.1) whether to write a .gfs file.
+<li><p id="drivers/vector/gml-oo-WRITE_GFS"><strong>WRITE_GFS=[AUTO​/​YES​/​NO]: </strong> (GDAL &gt;= 3.1) whether to write a .gfs file.
 In AUTO mode, the .gfs file is only written if there is no recognized .xsd
 file, no existing .gfs file and for non-network file systems. This option
 can be set to YES for force .gfs file writing in situations where AUTO would
@@ -697,32 +703,32 @@ Please, pay attention not to use the <strong>-lco LAUNDER=yes</strong> setting
 when this option; this should break the correct
 recognition of attribute names between subsequent GML import runs.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-FORCE_SRS_DETECTION"><strong>FORCE_SRS_DETECTION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Force a full scan to
+<li><p id="drivers/vector/gml-oo-FORCE_SRS_DETECTION"><strong>FORCE_SRS_DETECTION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Force a full scan to
 detect the SRS of layers. This option may be needed in the case where
 the .gml file is accompanied with a .xsd. Normally in that situation,
 OGR would not detect the SRS, because this requires to do a full scan
 of the file.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-EMPTY_AS_NULL"><strong>EMPTY_AS_NULL=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If YES, fields with empty content will be reported as
+<li><p id="drivers/vector/gml-oo-EMPTY_AS_NULL"><strong>EMPTY_AS_NULL=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If YES, fields with empty content will be reported as
 being NULL, instead of being an empty string. This is the historic
 behavior. However this will prevent such fields to be declared as
 not-nullable if the application schema declared them as mandatory. So
 this option can be set to NO to have both empty strings being report
 as such, and mandatory fields being reported as not nullable.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-GML_ATTRIBUTES_TO_OGR_FIELDS"><strong>GML_ATTRIBUTES_TO_OGR_FIELDS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether GML
+<li><p id="drivers/vector/gml-oo-GML_ATTRIBUTES_TO_OGR_FIELDS"><strong>GML_ATTRIBUTES_TO_OGR_FIELDS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether GML
 attributes should be reported as OGR fields. Note that this option
 has only an effect the first time a GML file is opened (before the
 .gfs file is created), and if it has no valid associated .xsd.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-INVERT_AXIS_ORDER_IF_LAT_LONG"><strong>INVERT_AXIS_ORDER_IF_LAT_LONG=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to
+<li><p id="drivers/vector/gml-oo-INVERT_AXIS_ORDER_IF_LAT_LONG"><strong>INVERT_AXIS_ORDER_IF_LAT_LONG=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to
 present SRS and coordinate ordering in traditional GIS order.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-CONSIDER_EPSG_AS_URN"><strong>CONSIDER_EPSG_AS_URN=[YES/NO/AUTO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. <p>Whether to
+<li><p id="drivers/vector/gml-oo-CONSIDER_EPSG_AS_URN"><strong>CONSIDER_EPSG_AS_URN=[YES​/​NO​/​AUTO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. <p>Whether to
 consider srsName like EPSG:XXXX as respecting EPSG axis order.</p>
 </p>
 </li>
-<li><p id="drivers/vector/gml-oo-SWAP_COORDINATES"><strong>SWAP_COORDINATES=[AUTO/YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether the order
+<li><p id="drivers/vector/gml-oo-SWAP_COORDINATES"><strong>SWAP_COORDINATES=[AUTO​/​YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether the order
 of the x/y or long/lat coordinates should be swapped. In AUTO mode,
 the driver will determine if swapping must be done from the srsName
 and value of other options like <a class="reference internal" href="#drivers/vector/gml-oo-CONSIDER_EPSG_AS_URN"><code class="docutils literal notranslate"><span class="pre">CONSIDER_EPSG_AS_URN</span></code></a> and
@@ -730,21 +736,21 @@ and value of other options like <a class="reference internal" href="#drivers/vec
 coordinates will be always swapped regarding the order they appear in
 the GML, and when it set to NO, they will be kept in the same order.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-READ_MODE"><strong>READ_MODE=[AUTO/STANDARD/SEQUENTIAL_LAYERS/INTERLEAVED_LAYERS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Read mode.</p>
+<li><p id="drivers/vector/gml-oo-READ_MODE"><strong>READ_MODE=[AUTO​/​STANDARD​/​SEQUENTIAL_LAYERS​/​INTERLEAVED_LAYERS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Read mode.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-EXPOSE_GML_ID"><strong>EXPOSE_GML_ID=[YES/NO/AUTO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether to make feature gml:id as a gml_id attribute.</p>
+<li><p id="drivers/vector/gml-oo-EXPOSE_GML_ID"><strong>EXPOSE_GML_ID=[YES​/​NO​/​AUTO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether to make feature gml:id as a gml_id attribute.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-EXPOSE_FID"><strong>EXPOSE_FID=[YES/NO/AUTO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether to make feature fid as a fid attribute.</p>
+<li><p id="drivers/vector/gml-oo-EXPOSE_FID"><strong>EXPOSE_FID=[YES​/​NO​/​AUTO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether to make feature fid as a fid attribute.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-DOWNLOAD_SCHEMA"><strong>DOWNLOAD_SCHEMA=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to download the
-remote application schema if needed (only for WFS currently).</p>
+<li><p id="drivers/vector/gml-oo-DOWNLOAD_SCHEMA"><strong>DOWNLOAD_SCHEMA=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to download the remote application schema if needed
+(only if the document looks like a WFS response currently).</p>
 </li>
 <li><p id="drivers/vector/gml-oo-REGISTRY"><strong>REGISTRY=&lt;filename&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">{GDAL_DATA}/gml_registry.xml.</span></code>. Filename of the registry with application schemas.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-USE_BBOX"><strong>USE_BBOX=[YES/NO]: </strong> (GDAL &gt;= 3.7.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use gml:boundedBy at feature level as feature geometry,
+<li><p id="drivers/vector/gml-oo-USE_BBOX"><strong>USE_BBOX=[YES​/​NO]: </strong> (GDAL &gt;= 3.7.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use gml:boundedBy at feature level as feature geometry,
 if there are no other geometry.</p>
 </li>
-<li><p id="drivers/vector/gml-oo-USE_SCHEMA_IMPORT"><strong>USE_SCHEMA_IMPORT=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use schema imports in XSD files so that
+<li><p id="drivers/vector/gml-oo-USE_SCHEMA_IMPORT"><strong>USE_SCHEMA_IMPORT=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use schema imports in XSD files so that
 the feature types corresponding to imported schema can be detected.</p>
 </li>
 </ul>
@@ -772,7 +778,7 @@ schema location. Note that the schema file isn't actually accessed by
 OGR, so it is up to the user to ensure it will match the schema of
 the OGR produced GML data file.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-XSISCHEMA"><strong>XSISCHEMA=[EXTERNAL/INTERNAL/OFF]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">EXTERNAL</span></code>. If EXTERNAL. This writes a GML application schema file to a
+<li><p id="drivers/vector/gml-dsco-XSISCHEMA"><strong>XSISCHEMA=[EXTERNAL​/​INTERNAL​/​OFF]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">EXTERNAL</span></code>. If EXTERNAL. This writes a GML application schema file to a
 corresponding .xsd file (with the same basename). If INTERNAL is used
 the schema is written within the GML file, but this is experimental
 and almost certainly not valid XML. OFF disables schema generation
@@ -780,13 +786,13 @@ and almost certainly not valid XML. OFF disables schema generation
 </li>
 <li><p id="drivers/vector/gml-dsco-PREFIX"><strong>PREFIX=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ogr</span></code>. This is the prefix for the application target namespace.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-STRIP_PREFIX"><strong>STRIP_PREFIX=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Can be set to TRUE
+<li><p id="drivers/vector/gml-dsco-STRIP_PREFIX"><strong>STRIP_PREFIX=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Can be set to TRUE
 to avoid writing the prefix of the application target namespace in
 the GML file.</p>
 </li>
 <li><p id="drivers/vector/gml-dsco-TARGET_NAMESPACE"><strong>TARGET_NAMESPACE=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">http://ogr.maptools.org/</span></code>. This is the application target namespace.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-FORMAT"><strong>FORMAT=[GML2/GML3/GML3Deegree/GMl3.2]: </strong>Select from the following formats:<ul>
+<li><p id="drivers/vector/gml-dsco-FORMAT"><strong>FORMAT=[GML2​/​GML3​/​GML3Deegree​/​GMl3.2]: </strong>Select from the following formats:<ul>
 <li><p><em>GML2</em> in order to write GML files that follow GML 2.1.2 (Default before GDAL 3.4)</p></li>
 <li><p><em>GML3</em> in order to write GML files that follow GML 3.1.1 SF-0
 profile.</p></li>
@@ -806,7 +812,7 @@ IntegerList can be written. This will cause to advertise the SF-1
 profile in the .XSD schema (such types are not supported by SF-0).</p>
 </p>
 </li>
-<li><p id="drivers/vector/gml-dsco-GML_FEATURE_COLLECTION"><strong>GML_FEATURE_COLLECTION=[YES/NO]: </strong><p>Whether to use the
+<li><p id="drivers/vector/gml-dsco-GML_FEATURE_COLLECTION"><strong>GML_FEATURE_COLLECTION=[YES​/​NO]: </strong><p>Whether to use the
 gml:FeatureCollection, instead of creating a dedicated container
 element in the target namespace. Only valid for FORMAT=GML3/GML3.2.
 Note that gml:FeatureCollection has been deprecated in GML 3.2, and
@@ -816,7 +822,7 @@ Markup Language (GML) simple features profile (with Corrigendum)&quot;
 (for GML 3.2) specifications.</p>
 </p>
 </li>
-<li><p id="drivers/vector/gml-dsco-GML3_LONGSRS"><strong>GML3_LONGSRS=[YES/NO]: </strong>(only valid when
+<li><p id="drivers/vector/gml-dsco-GML3_LONGSRS"><strong>GML3_LONGSRS=[YES​/​NO]: </strong>(only valid when
 <a class="reference internal" href="#drivers/vector/gml-dsco-FORMAT"><code class="docutils literal notranslate"><span class="pre">FORMAT=GML3/GML3Degree/GML3.2</span></code></a>) Deprecated by <a class="reference internal" href="#drivers/vector/gml-dsco-SRSNAME_FORMAT"><code class="docutils literal notranslate"><span class="pre">SRSNAME_FORMAT</span></code></a> in GDAL
 2.2. Default to YES. If YES, SRS with EPSG authority will be written
 with the &quot;<a class="reference external" href="urn:ogc:def:crs:EPSG">urn:ogc:def:crs:EPSG</a>::&quot; prefix. In the case the SRS is a
@@ -826,7 +832,7 @@ northing/easting, then the function will take care of coordinate
 order swapping. If set to NO, SRS with EPSG authority will be written
 with the &quot;EPSG:&quot; prefix, even if they are in lat/long order.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-SRSNAME_FORMAT"><strong>SRSNAME_FORMAT=[SHORT/OGC_URN/OGC_URL]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">OGC_URN</span></code>. (Only valid for
+<li><p id="drivers/vector/gml-dsco-SRSNAME_FORMAT"><strong>SRSNAME_FORMAT=[SHORT​/​OGC_URN​/​OGC_URL]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">OGC_URN</span></code>. (Only valid for
 <a class="reference internal" href="#drivers/vector/gml-dsco-FORMAT"><code class="docutils literal notranslate"><span class="pre">FORMAT=GML3/GML3Degree/GML3.2</span></code></a>, GDAL &gt;= 2.2). If
 SHORT, then srsName will be in the form AUTHORITY_NAME:AUTHORITY_CODE
 If OGC_URN, then srsName will be in the form
@@ -838,17 +844,17 @@ AXIS order, but that the same SRS authority code imported with
 ImportFromEPSGA() should be treated as lat/long or northing/easting,
 then the function will take care of coordinate order swapping.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-SRSDIMENSION_LOC"><strong>SRSDIMENSION_LOC=[POSLIST/GEOMETRY/GEOMETRY,POSLIST]: </strong>(Only valid
+<li><p id="drivers/vector/gml-dsco-SRSDIMENSION_LOC"><strong>SRSDIMENSION_LOC=[POSLIST​/​GEOMETRY​/​GEOMETRY,POSLIST]: </strong>(Only valid
 for <a class="reference internal" href="#drivers/vector/gml-dsco-FORMAT"><code class="docutils literal notranslate"><span class="pre">FORMAT=GML3/GML3Degree/GML3.2</span></code></a>) Default to POSLIST.
 For 2.5D geometries, define the location where to attach the
 srsDimension attribute. There are diverging implementations. Some put
 in on the &lt;gml:posList&gt; element, other on the top geometry element.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-WRITE_FEATURE_BOUNDED_BY"><strong>WRITE_FEATURE_BOUNDED_BY=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (only valid when
+<li><p id="drivers/vector/gml-dsco-WRITE_FEATURE_BOUNDED_BY"><strong>WRITE_FEATURE_BOUNDED_BY=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (only valid when
 <a class="reference internal" href="#drivers/vector/gml-dsco-FORMAT"><code class="docutils literal notranslate"><span class="pre">FORMAT=GML3/GML3Degree/GML3.2</span></code></a>) If set to NO, the
 &lt;gml:boundedBy&gt; element will not be written for each feature.</p>
 </li>
-<li><p id="drivers/vector/gml-dsco-SPACE_INDENTATION"><strong>SPACE_INDENTATION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If YES, the output will be indented with spaces for more readability,
+<li><p id="drivers/vector/gml-dsco-SPACE_INDENTATION"><strong>SPACE_INDENTATION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If YES, the output will be indented with spaces for more readability,
 but at the expense of file size.</p>
 </li>
 <li><p id="drivers/vector/gml-dsco-GML_ID"><strong>GML_ID=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">aFeatureCollection</span></code>. (Only valid for GML 3.2) Value of

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SQLite / Spatialite RDBMS &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -146,6 +149,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration-options">Configuration options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#performance-hints">Performance hints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#secure-deletion">Secure deletion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#credits">Credits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
@@ -175,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -457,10 +462,10 @@ constraints.</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/sqlite-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[YES/NO]: </strong>This may be &quot;YES&quot; to force all tables,
+<li><p id="drivers/vector/sqlite-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[YES​/​NO]: </strong>This may be &quot;YES&quot; to force all tables,
 including non-spatial ones, to be listed.</p>
 </li>
-<li><p id="drivers/vector/sqlite-oo-LIST_VIRTUAL_OGR"><strong>LIST_VIRTUAL_OGR=[YES/NO]: </strong>This may be &quot;YES&quot; to force VirtualOGR
+<li><p id="drivers/vector/sqlite-oo-LIST_VIRTUAL_OGR"><strong>LIST_VIRTUAL_OGR=[YES​/​NO]: </strong>This may be &quot;YES&quot; to force VirtualOGR
 virtual tables to be listed. This should only be enabled on trusted
 datasources to avoid potential safety issues.</p>
 </li>
@@ -483,12 +488,12 @@ its geometry blobs are properly recognized (so typically not a GeoPackage one)</
 <p>Dataset creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-dsco</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALCreate11GDALDriverHPKciii12GDALDataType12CSLConstList" title="GDALCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreate()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Driver.Create" title="osgeo.gdal.Driver.Create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Driver.Create</span></code></a> (Python).
 The following dataset creation options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/sqlite-dsco-METADATA"><strong>METADATA=[YES/NO]: </strong>This can be used to avoid creating the
+<li><p id="drivers/vector/sqlite-dsco-METADATA"><strong>METADATA=[YES​/​NO]: </strong>This can be used to avoid creating the
 geometry_columns and spatial_ref_sys tables in a new database. By
 default these metadata tables are created when a new database is
 created.</p>
 </li>
-<li><p id="drivers/vector/sqlite-dsco-SPATIALITE"><strong>SPATIALITE=[YES/NO]: </strong>Create the
+<li><p id="drivers/vector/sqlite-dsco-SPATIALITE"><strong>SPATIALITE=[YES​/​NO]: </strong>Create the
 SpatiaLite flavor of the metadata tables, which are a bit differ
 from the metadata used by this OGR driver and from OGC
 specifications. Implies <a class="reference internal" href="#drivers/vector/sqlite-dsco-METADATA"><code class="docutils literal notranslate"><span class="pre">METADATA=YES</span></code></a>.<p>Please note: OGR must be linked against
@@ -504,7 +509,7 @@ because earlier versions of this library are simply able to support
 in order to support 2.5D [XYZ].</p>
 </p>
 </li>
-<li><p id="drivers/vector/sqlite-dsco-INIT_WITH_EPSG"><strong>INIT_WITH_EPSG=[YES/NO]: </strong>Insert the
+<li><p id="drivers/vector/sqlite-dsco-INIT_WITH_EPSG"><strong>INIT_WITH_EPSG=[YES​/​NO]: </strong>Insert the
 content of the EPSG CSV files into the spatial_ref_sys table.
 Defaults to NO for regular SQLite databases.
 Please note: if <a class="reference internal" href="#drivers/vector/sqlite-dsco-SPATIALITE"><code class="docutils literal notranslate"><span class="pre">SPATIALITE=YES</span></code></a> and the underlying
@@ -521,7 +526,7 @@ into the spatial_ref_sys table when creating a new DB
 <p>Layer creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-lco</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv422GDALDatasetCreateLayer12GDALDatasetHPKc20OGRSpatialReferenceH18OGRwkbGeometryType12CSLConstList" title="GDALDatasetCreateLayer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDatasetCreateLayer()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Dataset.CreateLayer" title="osgeo.gdal.Dataset.CreateLayer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dataset.CreateLayer</span></code></a> (Python).
 The following layer creation options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/sqlite-lco-FORMAT"><strong>FORMAT=[WKB/WKT/SPATIALITE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">WKB</span></code>. Controls the format used for the
+<li><p id="drivers/vector/sqlite-lco-FORMAT"><strong>FORMAT=[WKB​/​WKT​/​SPATIALITE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">WKB</span></code>. Controls the format used for the
 geometry column. By default WKB (Well Known Binary) is used. This is
 generally more space and processing efficient, but harder to inspect
 or use in simple applications than WKT (Well Known Text). SpatiaLite
@@ -535,17 +540,17 @@ new tables with the geometry column named GEOMETRY (or WKT_GEOMETRY
 if <a class="reference internal" href="#drivers/vector/sqlite-lco-FORMAT"><code class="docutils literal notranslate"><span class="pre">FORMAT=WKT</span></code></a>). If you wish to use a different name, it can be
 supplied with the <a class="reference internal" href="#drivers/vector/sqlite-lco-GEOMETRY_NAME"><code class="docutils literal notranslate"><span class="pre">GEOMETRY_NAME</span></code></a> layer creation option.</p>
 </li>
-<li><p id="drivers/vector/sqlite-lco-LAUNDER"><strong>LAUNDER=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls whether layer and field names will be
+<li><p id="drivers/vector/sqlite-lco-LAUNDER"><strong>LAUNDER=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Controls whether layer and field names will be
 laundered for easier use in SQLite. Laundered names will be converted
 to lower case and some special characters(' - #) will be changed to
 underscores.</p>
 </li>
-<li><p id="drivers/vector/sqlite-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If the database
+<li><p id="drivers/vector/sqlite-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If the database
 is of the SpatiaLite flavor, and if OGR is linked against
 libspatialite, this option can be used to control if a spatial index
 must be created.</p>
 </li>
-<li><p id="drivers/vector/sqlite-lco-COMPRESS_GEOM"><strong>COMPRESS_GEOM=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If the format of
+<li><p id="drivers/vector/sqlite-lco-COMPRESS_GEOM"><strong>COMPRESS_GEOM=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If the format of
 the geometry BLOB is of the SpatiaLite flavor, this option can be
 used to control if the compressed format for geometries (LINESTRINGs,
 POLYGONs) must be used. This format is understood by Spatialite v2.4
@@ -575,7 +580,7 @@ clause. Note: in table definition, such columns have the
 </li>
 <li><p id="drivers/vector/sqlite-lco-FID"><strong>FID=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">OGC_FID</span></code>. Name of the FID column to create.</p>
 </li>
-<li><p id="drivers/vector/sqlite-lco-STRICT"><strong>STRICT=[YES/NO]: </strong> (GDAL &gt;= 3.3.5)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (SQLite &gt;= 3.37)
+<li><p id="drivers/vector/sqlite-lco-STRICT"><strong>STRICT=[YES​/​NO]: </strong> (GDAL &gt;= 3.3.5)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (SQLite &gt;= 3.37)
 Whether the table should be created as a <a class="reference external" href="https://sqlite.org/stricttables.html">strict table</a>,
 that is strong column type checking. This normally has little influence when
 operating only through OGR, since it has typed columns, but can help to
@@ -594,13 +599,13 @@ strict mode.</p>
 <p><a class="reference internal" href="../../user/configoptions.html#configoptions"><span class="std std-ref">Configuration options</span></a> can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or using functions such as <a class="reference internal" href="../../api/cpl.html#_CPPv418CPLSetConfigOptionPKcPKc" title="CPLSetConfigOption"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">CPLSetConfigOption()</span></code></a> (C) or <code class="xref py py-func docutils literal notranslate"><span class="pre">gdal.config_options</span></code> (Python).
 The following configuration options are available:</p>
 <ul class="simple">
-<li><p id="config-SQLITE_LIST_ALL_TABLES"><strong>SQLITE_LIST_ALL_TABLES=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to &quot;YES&quot; to list
+<li><p id="config-SQLITE_LIST_ALL_TABLES"><strong>SQLITE_LIST_ALL_TABLES=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to &quot;YES&quot; to list
 all tables (not just the tables listed in the geometry_columns table). This
 can also be done using the <a class="reference internal" href="#drivers/vector/sqlite-oo-LIST_ALL_TABLES"><code class="docutils literal notranslate"><span class="pre">LIST_ALL_TABLES</span></code></a> open option.</p>
 </li>
-<li><p id="config-OGR_PROMOTE_TO_INTEGER64"><strong>OGR_PROMOTE_TO_INTEGER64=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to read fields with type <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code> as 64-bit integers.</p>
+<li><p id="config-OGR_PROMOTE_TO_INTEGER64"><strong>OGR_PROMOTE_TO_INTEGER64=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to read fields with type <code class="docutils literal notranslate"><span class="pre">INTEGER</span></code> as 64-bit integers.</p>
 </li>
-<li><p id="config-OGR_SQLITE_LIST_VIRTUAL_OGR"><strong>OGR_SQLITE_LIST_VIRTUAL_OGR=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to &quot;YES&quot; to
+<li><p id="config-OGR_SQLITE_LIST_VIRTUAL_OGR"><strong>OGR_SQLITE_LIST_VIRTUAL_OGR=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to &quot;YES&quot; to
 list VirtualOGR layers. Defaults to &quot;NO&quot; as there might be some security
 implications if a user is provided with a file and doesn't know that there
 are virtual OGR tables in it.</p>
@@ -612,7 +617,7 @@ are virtual OGR tables in it.</p>
 </li>
 <li><p id="config-OGR_SQLITE_SYNCHRONOUS"><strong>OGR_SQLITE_SYNCHRONOUS=value: </strong>see <a class="reference internal" href="#target-drivers-vector-sqlite-performance-hints"><span class="std std-ref">Performance hints</span></a>.</p>
 </li>
-<li><p id="config-OGR_SQLITE_LOAD_EXTENSIONS"><strong>OGR_SQLITE_LOAD_EXTENSIONS=[&lt;extension1,...,extensionN&gt;/ENABLE_SQL_LOAD_EXTENSION]: </strong> (GDAL &gt;= 3.5.0) Comma separated list of names of shared libraries containing
+<li><p id="config-OGR_SQLITE_LOAD_EXTENSIONS"><strong>OGR_SQLITE_LOAD_EXTENSIONS=[&lt;extension1,...,extensionN&gt;​/​ENABLE_SQL_LOAD_EXTENSION]: </strong> (GDAL &gt;= 3.5.0) Comma separated list of names of shared libraries containing
 extensions to load at database opening.
 If a file cannot be loaded directly, attempts are made to load with various
 operating-system specific extensions added. So
@@ -627,13 +632,13 @@ Loading extensions as a potential security impact if they are untrusted.</p>
 <a class="reference external" href="http://www.sqlite.org/pragma.html">pragma</a> can be specified. The syntax is
 <code class="docutils literal notranslate"><span class="pre">OGR_SQLITE_PRAGMA</span> <span class="pre">=</span> <span class="pre">&quot;pragma_name=pragma_value[,pragma_name2=pragma_value2]*&quot;</span></code>.</p>
 </li>
-<li><p id="config-SQLITE_USE_OGR_VFS"><strong>SQLITE_USE_OGR_VFS=[YES/NO]: </strong>YES enables extra buffering/caching
+<li><p id="config-SQLITE_USE_OGR_VFS"><strong>SQLITE_USE_OGR_VFS=[YES​/​NO]: </strong>YES enables extra buffering/caching
 by the GDAL/OGR I/O layer and can speed up I/O. More information
 <a class="reference internal" href="../../user/virtual_file_systems.html#vsicached"><span class="std std-ref">here</span></a>.
 Be aware that no file locking will occur if this option is activated, so
 concurrent edits may lead to database corruption.</p>
 </li>
-<li><p id="config-COMPRESS_GEOM"><strong>COMPRESS_GEOM=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Equivalent of <a class="reference internal" href="#drivers/vector/sqlite-lco-COMPRESS_GEOM"><code class="docutils literal notranslate"><span class="pre">COMPRESS_GEOM</span></code></a> layer creation option for use when
+<li><p id="config-COMPRESS_GEOM"><strong>COMPRESS_GEOM=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Equivalent of <a class="reference internal" href="#drivers/vector/sqlite-lco-COMPRESS_GEOM"><code class="docutils literal notranslate"><span class="pre">COMPRESS_GEOM</span></code></a> layer creation option for use when
 updating or appending to an existing layer.</p>
 </li>
 </ul>
@@ -683,6 +688,17 @@ and optimize it.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ogrinfo</span> <span class="n">db</span><span class="o">.</span><span class="n">sqlite</span> <span class="o">-</span><span class="n">sql</span> <span class="s2">&quot;VACUUM&quot;</span>
 </pre></div>
 </div>
+</section>
+<section id="secure-deletion">
+<h2>Secure deletion<a class="headerlink" href="#secure-deletion" title="Link to this heading"></a></h2>
+<p>Depending on how SQLite3 is built, <a class="reference external" href="https://www.sqlite.org/pragma.html#pragma_secure_delete">secure deletion</a>
+might or might not be enabled.
+Starting with GDAL 3.10, secure deletion is always enabled, unless
+<code class="docutils literal notranslate"><span class="pre">SECURE_DELETE</span></code> is specified through the <a class="reference internal" href="#config-OGR_SQLITE_PRAGMA"><code class="docutils literal notranslate"><span class="pre">OGR_SQLITE_PRAGMA</span></code></a>
+configuration option.
+Note that secure deletion does not recover potential lost space, so running
+a <a class="reference external" href="https://sqlite.org/lang_vacuum.html">VACUUM</a> query is recommended to fully
+optimized a database that has been subject to updates or deletions.</p>
 </section>
 <section id="example">
 <h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>

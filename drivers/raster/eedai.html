@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EEDAI - Google Earth Engine Data API Image &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -129,7 +132,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -210,6 +213,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -243,6 +247,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -354,10 +359,13 @@ connection string.</p>
 </li>
 <li><p id="drivers/raster/eedai-oo-BANDS"><strong>BANDS=value: </strong>Comma separated list of band names.</p>
 </li>
-<li><p id="drivers/raster/eedai-oo-PIXEL_ENCODING"><strong>PIXEL_ENCODING=[AUTO/PNG/JPEG/AUTO_JPEG_PNG/GEO_TIFF/NPY]: </strong>Format in which to request pixels.</p>
+<li><p id="drivers/raster/eedai-oo-PIXEL_ENCODING"><strong>PIXEL_ENCODING=[AUTO​/​PNG​/​JPEG​/​AUTO_JPEG_PNG​/​GEO_TIFF​/​NPY]: </strong>Format in which to request pixels.</p>
 </li>
 <li><p id="drivers/raster/eedai-oo-BLOCK_SIZE"><strong>BLOCK_SIZE=&lt;integer&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">256</span></code>. Size of a GDAL block, which is the minimum
 unit to query pixels.</p>
+</li>
+<li><p id="drivers/raster/eedai-oo-VSI_PATH_FOR_AUTH"><strong>VSI_PATH_FOR_AUTH=value: </strong> (GDAL &gt;= 3.10) /vsigs/... path onto which a GOOGLE_APPLICATION_CREDENTIALS path specific
+option is set</p>
 </li>
 </ul>
 </section>
@@ -368,7 +376,9 @@ unit to query pixels.</p>
 <li><p>Authentication Bearer header passed through the <a class="reference internal" href="#config-EEDA_BEARER"><code class="docutils literal notranslate"><span class="pre">EEDA_BEARER</span></code></a> or
 <a class="reference internal" href="#config-EEDA_BEARER_FILE"><code class="docutils literal notranslate"><span class="pre">EEDA_BEARER_FILE</span></code></a> configuration options.</p></li>
 <li><p>Service account private key file, through the
-<a class="reference internal" href="#config-GOOGLE_APPLICATION_CREDENTIALS"><code class="docutils literal notranslate"><span class="pre">GOOGLE_APPLICATION_CREDENTIALS</span></code></a> configuration option.</p></li>
+<a class="reference internal" href="#config-GOOGLE_APPLICATION_CREDENTIALS"><code class="docutils literal notranslate"><span class="pre">GOOGLE_APPLICATION_CREDENTIALS</span></code></a> configuration option, or set
+as a path-specific option whose value is set in the VSI_PATH_FOR_AUTH
+open option.</p></li>
 <li><p>OAuth2 Service Account authentication through the <a class="reference internal" href="#config-EEDA_PRIVATE_KEY"><code class="docutils literal notranslate"><span class="pre">EEDA_PRIVATE_KEY</span></code></a>/
 <a class="reference internal" href="#config-EEDA_PRIVATE_KEY_FILE"><code class="docutils literal notranslate"><span class="pre">EEDA_PRIVATE_KEY_FILE</span></code></a> + <a class="reference internal" href="#config-EEDA_CLIENT_EMAIL"><code class="docutils literal notranslate"><span class="pre">EEDA_CLIENT_EMAIL</span></code></a> configuration options.</p></li>
 <li><p>Finally if none of the above method succeeds, the code will check if
@@ -409,7 +419,7 @@ filename where the key should be read.</p>
 <a class="reference internal" href="#config-EEDA_PRIVATE_KEY"><code class="docutils literal notranslate"><span class="pre">EEDA_PRIVATE_KEY</span></code></a>/<a class="reference internal" href="#config-EEDA_PRIVATE_KEY_FILE"><code class="docutils literal notranslate"><span class="pre">EEDA_PRIVATE_KEY_FILE</span></code></a> to use OAuth2 Service Account
 authentication.</p>
 </li>
-<li><p id="config-CPL_MACHINE_IS_GCE"><strong>CPL_MACHINE_IS_GCE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, forces GDAL to consider the current machine to be a
+<li><p id="config-CPL_MACHINE_IS_GCE"><strong>CPL_MACHINE_IS_GCE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, forces GDAL to consider the current machine to be a
 a Google Compute Engine instance. May be needed for code running
 in a container with no access to the boot logs.</p>
 </li>

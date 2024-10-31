@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ESRI Personal GeoDatabase &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -165,6 +168,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -298,7 +302,7 @@ The following configuration options are available:</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/pgeo-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[YES/NO]: </strong> (GDAL &gt;= 3.4) This may be &quot;YES&quot; to force all tables,
+<li><p id="drivers/vector/pgeo-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[YES​/​NO]: </strong> (GDAL &gt;= 3.4) This may be &quot;YES&quot; to force all tables,
 including system and internal tables (such as the GDB_* tables) to be listed</p>
 </li>
 </ul>
@@ -328,8 +332,7 @@ including system and internal tables (such as the GDB_* tables) to be listed</p>
 <h2>How to use PGeo driver with unixODBC and MDB Tools (on Unix and Linux)<a class="headerlink" href="#how-to-use-pgeo-driver-with-unixodbc-and-mdb-tools-on-unix-and-linux" title="Link to this heading"></a></h2>
 <p>This article gives step-by-step explanation of how to use OGR with
 unixODBC package and how to access Personal Geodatabase with PGeo
-driver. See also <a class="reference external" href="http://trac.osgeo.org/gdal/wiki/mdbtools">GDAL wiki for other
-details</a></p>
+driver.</p>
 <section id="prerequisites">
 <h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
 <ol class="arabic simple">

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,12 +22,13 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="Common Portability Library C API" href="cpl.html" />
-    <link rel="prev" title="GDAL Python ユーティリティ" href="../user/gdal_python_utilities.html" /> 
+    <link rel="prev" title="Security considerations" href="../user/security.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -71,6 +73,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -128,7 +131,7 @@
         <a href="cpl.html" class="btn btn-neutral float-right" title="Common Portability Library C API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../user/gdal_python_utilities.html" class="btn btn-neutral float-left" title="GDAL Python ユーティリティ" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../user/security.html" class="btn btn-neutral float-left" title="Security considerations" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -215,13 +218,13 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="python_bindings.html">General information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python/osgeo.html">GDAL Python submodules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python/raster_api.html">Python Raster API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python/vector_api.html">Python Vector API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python/spatial_ref_api.html">Python Spatial Reference System API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python/mdim_api.html">Python Multi-dimensional array API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python/utilities.html">Python Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python/general.html">Python General API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="python/osgeo.html">Miscellaneous Python API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_gotchas.html">Python Gotchas in the GDAL and OGR Python Bindings</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_samples.html">Python Sample scripts</a></li>
 </ul>
@@ -246,7 +249,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/lukeroth/gdal">Go</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/JuliaGeo/GDAL.jl">Julia</a></li>
-<li class="toctree-l1"><a class="reference external" href="https://trac.osgeo.org/gdal/wiki/GdalOgrInLua">Lua</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/naturalatlas/node-gdal">Original Node.js bindings</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://www.npmjs.com/package/gdal-async">Node.js fork with full Promise-based async and TypeScript support</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://metacpan.org/release/Geo-GDAL-FFI">Perl</a></li>
@@ -257,10 +259,6 @@
 </ul>
 </div>
 </div></blockquote>
-<div class="admonition warning">
-<p class="admonition-title">警告</p>
-<p>For Perl, since GDAL 3.5 the link <a class="reference external" href="https://trac.osgeo.org/gdal/wiki/GdalOgrInPerl">Perl</a> is deprecated, use above link instead.</p>
-</div>
 <p>There are also more Pythonic ways of using the vector/OGR functions with</p>
 <blockquote>
 <div><div class="toctree-wrapper compound">
@@ -292,7 +290,7 @@
         <a href="cpl.html" class="btn btn-neutral float-right" title="Common Portability Library C API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../user/gdal_python_utilities.html" class="btn btn-neutral float-left" title="GDAL Python ユーティリティ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../user/security.html" class="btn btn-neutral float-left" title="Security considerations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

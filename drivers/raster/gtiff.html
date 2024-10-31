@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GTiff -- GeoTIFF File Format &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -152,7 +154,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -233,6 +235,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -266,6 +269,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -616,7 +620,7 @@ GTIFF_RAW:</p>
 <h2>Open options<a class="headerlink" href="#open-options" title="Link to this heading"></a></h2>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 This driver supports the following open options:</p>
-<p id="drivers/raster/gtiff-oo-NUM_THREADS"><strong>NUM_THREADS=[&lt;number_of_threads&gt;/ALL_CPUS]: </strong>Enable
+<p id="drivers/raster/gtiff-oo-NUM_THREADS"><strong>NUM_THREADS=[&lt;number_of_threads&gt;​/​ALL_CPUS]: </strong>Enable
 multi-threaded compression by specifying the number of worker
 threads. Worth it for slow compression algorithms such as DEFLATE or
 LZMA. Default is compression in the main thread.
@@ -627,21 +631,21 @@ be used as an alternative to setting the open option.</p>
 <p id="drivers/raster/gtiff-oo-GEOREF_SOURCES"><strong>GEOREF_SOURCES=comma-separated list with one or several of PAM, INTERNAL, TABFILE, WORLDFILE or XML (XML added in 3.7): </strong>Define which georeferencing
 sources are allowed and their priority order. See
 <a class="reference external" href="#georeferencing">Georeferencing</a> paragraph.</p>
-<p id="drivers/raster/gtiff-oo-SPARSE_OK"><strong>SPARSE_OK=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Should empty blocks be
+<p id="drivers/raster/gtiff-oo-SPARSE_OK"><strong>SPARSE_OK=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Should empty blocks be
 omitted on disk? When this option is set, any attempt of writing a
 block whose all pixels are 0 or the nodata value will cause it not to
 be written at all (unless there is a corresponding block already
 allocated in the file). Sparse files have 0 tile/strip offsets for
 blocks never written and save space; however, most non-GDAL packages
 cannot read such files.</p>
-<p id="drivers/raster/gtiff-oo-IGNORE_COG_LAYOUT_BREAK"><strong>IGNORE_COG_LAYOUT_BREAK=[YES/NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Updating a COG (Cloud Optimized GeoTIFF) file generally breaks part of the
+<p id="drivers/raster/gtiff-oo-IGNORE_COG_LAYOUT_BREAK"><strong>IGNORE_COG_LAYOUT_BREAK=[YES​/​NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Updating a COG (Cloud Optimized GeoTIFF) file generally breaks part of the
 optimizations, but still produces a valid GeoTIFF file.
 Starting with GDAL 3.8, to avoid undesired loss of the COG characteristics,
 opening such a file in update mode will be rejected, unless this option is
 also set to YES (default is NO).
 This option has only effect on COG files and when opening in update mode,
 and is ignored on regular (Geo)TIFF files.</p>
-<p id="drivers/raster/gtiff-oo-COLOR_TABLE_MULTIPLIER"><strong>COLOR_TABLE_MULTIPLIER=[AUTO/1/256/257]: </strong> (GDAL &gt;= 3.10.0) Specifies the value by which to multiply GDAL color table entry values, usually
+<p id="drivers/raster/gtiff-oo-COLOR_TABLE_MULTIPLIER"><strong>COLOR_TABLE_MULTIPLIER=[AUTO​/​1​/​256​/​257]: </strong> (GDAL &gt;= 3.10.0) Specifies the value by which to multiply GDAL color table entry values, usually
 in [0,255] range, to obtain a TIFF color map value, or on reading by which
 to divide TIFF color map values to get a GDAL color table entry. Since GDAL 2.3.0,
 GDAL consistently uses 257, but it might be necessary to use 256 for
@@ -664,27 +668,25 @@ tag.</p>
 <p>The TIFF format only supports R,G,B components for palettes / color
 tables. Thus on writing the alpha information will be silently
 discarded.</p>
-<p>You may want to read hints to <a class="reference external" href="https://trac.osgeo.org/gdal/wiki/CloudOptimizedGeoTIFF">generate and read cloud optimized GeoTIFF
-files</a></p>
 <section id="creation-options">
 <h3>Creation Options<a class="headerlink" href="#creation-options" title="Link to this heading"></a></h3>
 <p>Creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-co</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALCreate11GDALDriverHPKciii12GDALDataType12CSLConstList" title="GDALCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreate()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Driver.Create" title="osgeo.gdal.Driver.Create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Driver.Create</span></code></a> (Python).
 This driver supports the following creation options:</p>
 <ul class="simple">
-<li><p id="drivers/raster/gtiff-co-TFW"><strong>TFW=[YES/NO]: </strong>Force the generation of an associated ESRI world file
+<li><p id="drivers/raster/gtiff-co-TFW"><strong>TFW=[YES​/​NO]: </strong>Force the generation of an associated ESRI world file
 (.tfw). See the <a class="reference internal" href="wld.html#raster-wld"><span class="std std-ref">World Files</span></a> page for details.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-RPB"><strong>RPB=[YES/NO]: </strong>Force the generation of an associated .RPB file to
+<li><p id="drivers/raster/gtiff-co-RPB"><strong>RPB=[YES​/​NO]: </strong>Force the generation of an associated .RPB file to
 describe RPC (Rational Polynomial Coefficients), if RPC information
 is available. If not specified, this file is automatically generated
 if there's RPC information and that the PROFILE is not the default
 GDALGeoTIFF.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-RPCTXT"><strong>RPCTXT=[YES/NO]: </strong>Force the generation of an associated
+<li><p id="drivers/raster/gtiff-co-RPCTXT"><strong>RPCTXT=[YES​/​NO]: </strong>Force the generation of an associated
 _RPC.TXT file to describe RPC (Rational Polynomial Coefficients), if
 RPC information is available.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-INTERLEAVE"><strong>INTERLEAVE=[BAND/PIXEL]: </strong>By default TIFF files with pixel
+<li><p id="drivers/raster/gtiff-co-INTERLEAVE"><strong>INTERLEAVE=[BAND​/​PIXEL]: </strong>By default TIFF files with pixel
 interleaving (PLANARCONFIG_CONTIG in TIFF terminology) are created.
 These are slightly less efficient than BAND interleaving for some
 purposes, but some applications only support pixel interleaved TIFF
@@ -694,7 +696,7 @@ which advertises a INTERLEAVE metadata item, if the INTERLEAVE creation option
 is not specified, the source dataset INTERLEAVE will be automatically taken
 into account, unless the COMPRESS creation option is specified.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-TILED"><strong>TILED=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. By default striped TIFF files are created. This
+<li><p id="drivers/raster/gtiff-co-TILED"><strong>TILED=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. By default striped TIFF files are created. This
 option can be used to force creation of tiled TIFF files.</p>
 </li>
 <li><p id="drivers/raster/gtiff-co-BLOCKXSIZE"><strong>BLOCKXSIZE=&lt;integer&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">256</span></code>. Sets tile width. Must be divisible by 16.</p>
@@ -709,7 +711,7 @@ Values of n=9...15 (UInt16 type) and n=17...31
 (UInt32 type) are also accepted. From GDAL 2.2, n=16 is accepted for
 Float32 type to generate half-precision floating point values.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-COMPRESS"><strong>COMPRESS=[JPEG/LZW/PACKBITS/DEFLATE/CCITTRLE/CCITTFAX3/CCITTFAX4/LZMA/ZSTD/LERC/LERC_DEFLATE/LERC_ZSTD/WEBP/JXL/NONE]: </strong>Set the compression to use.<ul>
+<li><p id="drivers/raster/gtiff-co-COMPRESS"><strong>COMPRESS=[JPEG​/​LZW​/​PACKBITS​/​DEFLATE​/​CCITTRLE​/​CCITTFAX3​/​CCITTFAX4​/​LZMA​/​ZSTD​/​LERC​/​LERC_DEFLATE​/​LERC_ZSTD​/​WEBP​/​JXL​/​NONE]: </strong>Set the compression to use.<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">JPEG</span></code> should generally only be used with Byte data (8 bit per channel).
 Better compression for RGB images can be obtained by using the PHOTOMETRIC=YCBCR
 colorspace with a 4:2:2 subsampling of the Y,Cb,Cr components.</p>
@@ -730,29 +732,30 @@ Since GDAL 3.3.0, LERC compression is also available when building GDAL
 against external libtiff &gt;= 4.3.0, built itself against <a class="reference external" href="https://github.com/esri/lerc">https://github.com/esri/lerc</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">LERC_ZSTD</span></code> is available when <code class="docutils literal notranslate"><span class="pre">LERC</span></code> and <code class="docutils literal notranslate"><span class="pre">ZSTD</span></code> are available.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">JXL</span></code> is for JPEG-XL, and is only available when using internal libtiff and building GDAL against
-<a class="reference external" href="https://github.com/libjxl/libjxl">https://github.com/libjxl/libjxl</a> . Supported data types are <code class="docutils literal notranslate"><span class="pre">Byte</span></code>, <code class="docutils literal notranslate"><span class="pre">UInt16</span></code> and <code class="docutils literal notranslate"><span class="pre">Float32</span></code> only.
-For GDAL &lt; 3.6.0, JXL compression may only be used alongside <code class="docutils literal notranslate"><span class="pre">INTERLEAVE=PIXEL</span></code> (the default) on
-datasets with 4 bands or less.</p></li>
+<a class="reference external" href="https://github.com/libjxl/libjxl">https://github.com/libjxl/libjxl</a> . It is recommended to use JXL compression with the <code class="docutils literal notranslate"><span class="pre">TILED=YES</span></code> creation
+option and block size of 256x256, 512x512, or 1024x1024 pixels. Supported data types are <code class="docutils literal notranslate"><span class="pre">Byte</span></code>,
+<code class="docutils literal notranslate"><span class="pre">UInt16</span></code> and <code class="docutils literal notranslate"><span class="pre">Float32</span></code> only. For GDAL &lt; 3.6.0, JXL compression may only be used alongside
+<code class="docutils literal notranslate"><span class="pre">INTERLEAVE=PIXEL</span></code> (the default) on datasets with 4 bands or less.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NONE</span></code> is the default.</p></li>
 </ul>
 </p>
 </li>
-<li><p id="drivers/raster/gtiff-co-NUM_THREADS"><strong>NUM_THREADS=[&lt;integer&gt;/NUM_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Enable multi-threaded compression by specifying the number of worker
+<li><p id="drivers/raster/gtiff-co-NUM_THREADS"><strong>NUM_THREADS=[&lt;integer&gt;​/​NUM_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Enable multi-threaded compression by specifying the number of worker
 threads. Worthwhile for slow compression algorithms such as DEFLATE or LZMA.
 Will be ignored for JPEG. Default is compression in the main thread.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-PREDICTOR"><strong>PREDICTOR=[1/2/3]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Set the predictor for LZW, DEFLATE and ZSTD
+<li><p id="drivers/raster/gtiff-co-PREDICTOR"><strong>PREDICTOR=[1​/​2​/​3]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Set the predictor for LZW, DEFLATE and ZSTD
 compression. The default is 1 (no predictor), 2 is horizontal
 differencing and 3 is floating point prediction.
 PREDICTOR=2 is only supported for 8, 16, 32 and 64 bit samples (support
 for 64 bit was added in libtiff &gt; 4.3.0).
 PREDICTOR=3 is only supported for 16, 32 and 64 bit floating-point data.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-DISCARD_LSB"><strong>DISCARD_LSB=[&lt;nbits&gt;/nbits_band1,nbits_band2,...nbits_bandN]: </strong>Set the number of least-significant bits to clear,
+<li><p id="drivers/raster/gtiff-co-DISCARD_LSB"><strong>DISCARD_LSB=[&lt;nbits&gt;​/​nbits_band1,nbits_band2,...nbits_bandN]: </strong>Set the number of least-significant bits to clear,
 possibly different per band. Lossy compression scheme to be best used
 with PREDICTOR=2 and LZW/DEFLATE/ZSTD compression.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-SPARSE_OK"><strong>SPARSE_OK=[TRUE/FALSE]: </strong>Should newly created
+<li><p id="drivers/raster/gtiff-co-SPARSE_OK"><strong>SPARSE_OK=[TRUE​/​FALSE]: </strong>Should newly created
 files (through Create() interface) be allowed to be sparse? Sparse
 files have 0 tile/strip offsets for blocks never written and save
 space; however, most non-GDAL packages cannot read such files.
@@ -768,7 +771,7 @@ Values above 95 are not meaningfully better quality but can be
 substantially larger.</p>
 </p>
 </li>
-<li><p id="drivers/raster/gtiff-co-JPEGTABLESMODE"><strong>JPEGTABLESMODE=[0/1/2/3]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Configure how and where
+<li><p id="drivers/raster/gtiff-co-JPEGTABLESMODE"><strong>JPEGTABLESMODE=[0​/​1​/​2​/​3]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Configure how and where
 JPEG quantization and Huffman tables are written in the TIFF
 JpegTables tag and strip/tile.<ul>
 <li><p>0: JpegTables is not written. Each strip/tile contains its own
@@ -809,13 +812,13 @@ The default is the value of <a class="reference internal" href="#drivers/raster/
 compression. A value of 100 is best quality (least compression), and
 1 is worst quality (best compression).</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-WEBP_LOSSLESS"><strong>WEBP_LOSSLESS=[TRUE/FALSE]: </strong>Requires libwebp &gt;= 0.1.4.
+<li><p id="drivers/raster/gtiff-co-WEBP_LOSSLESS"><strong>WEBP_LOSSLESS=[TRUE​/​FALSE]: </strong>Requires libwebp &gt;= 0.1.4.
 By default, lossy compression is used. If set to True, lossless
 compression will be used. There is a significant time penalty for each
 tile/strip with lossless WebP compression, so you may want to increase the
 <a class="reference internal" href="#drivers/raster/gtiff-co-BLOCKYSIZE"><code class="docutils literal notranslate"><span class="pre">BLOCKYSIZE</span></code></a> value for strip layout.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-JXL_LOSSLESS"><strong>JXL_LOSSLESS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Set whether JPEG-XL compression should be lossless
+<li><p id="drivers/raster/gtiff-co-JXL_LOSSLESS"><strong>JXL_LOSSLESS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Set whether JPEG-XL compression should be lossless
 (YES) or lossy (NO). For lossy compression, the underlying data
 should be either gray, gray+alpha, rgb or rgb+alpha. For lossy compression,
 the pixel data should span the whole range of the underlying pixel type (i.e.
@@ -824,7 +827,7 @@ the pixel data should span the whole range of the underlying pixel type (i.e.
 <li><p id="drivers/raster/gtiff-co-JXL_EFFORT"><strong>JXL_EFFORT=[1-9]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>. Level of effort for JPEG-XL compression.
 The higher, the smaller file and slower compression time.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-JXL_DISTANCE"><strong>JXL_DISTANCE=[0.1-15]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Distance level for lossy JPEG-XL compression.
+<li><p id="drivers/raster/gtiff-co-JXL_DISTANCE"><strong>JXL_DISTANCE=[0.01-25]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Distance level for lossy JPEG-XL compression.
 It is specified in multiples of a just-noticeable difference.
 (cf <a class="reference external" href="https://github.com/google/butteraugli">butteraugli</a> for the definition
 of the distance)
@@ -832,7 +835,7 @@ That is, 0 is mathematically lossless, 1 should be visually lossless, and
 higher distances yield denser and denser files with lower and lower fidelity.
 The recommended range is [0.5,3].</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-JXL_ALPHA_DISTANCE"><strong>JXL_ALPHA_DISTANCE=[-1/0/[0.1-15]]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">-1</span></code>. Requires libjxl &gt; 0.8.1.
+<li><p id="drivers/raster/gtiff-co-JXL_ALPHA_DISTANCE"><strong>JXL_ALPHA_DISTANCE=[-1​/​0​/​[0.01-25]]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">-1</span></code>. Requires libjxl &gt; 0.8.1.
 Distance level for alpha channel for lossy JPEG-XL compression.
 It is specified in multiples of a just-noticeable difference.
 (cf <a class="reference external" href="https://github.com/google/butteraugli">butteraugli</a> for the definition
@@ -843,17 +846,17 @@ For lossy compression, the recommended range is [0.5,3].
 The default value is the special value -1.0, which means to use the same
 distance value as non-alpha channel (ie JXL_DISTANCE).</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-PHOTOMETRIC"><strong>PHOTOMETRIC=[MINISBLACK/MINISWHITE/RGB/CMYK/YCBCR/CIELAB/ICCLAB/ITULAB]: </strong>Set the photometric interpretation tag. Default is MINISBLACK, but if
+<li><p id="drivers/raster/gtiff-co-PHOTOMETRIC"><strong>PHOTOMETRIC=[MINISBLACK​/​MINISWHITE​/​RGB​/​CMYK​/​YCBCR​/​CIELAB​/​ICCLAB​/​ITULAB]: </strong>Set the photometric interpretation tag. Default is MINISBLACK, but if
 the input image has 3 or 4 bands of Byte type, then RGB will be
 selected. You can override default photometric using this option.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-ALPHA"><strong>ALPHA=[YES/NON-PREMULTIPLIED/PREMULTIPLIED/UNSPECIFIED]: </strong>The
+<li><p id="drivers/raster/gtiff-co-ALPHA"><strong>ALPHA=[YES​/​NON-PREMULTIPLIED​/​PREMULTIPLIED​/​UNSPECIFIED]: </strong>The
 first &quot;extrasample&quot; is marked as being alpha if there are any extra
 samples. This is necessary if you want to produce a greyscale TIFF
 file with an alpha band (for instance). YES is an alias
 for NON-PREMULTIPLIED alpha.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-PROFILE"><strong>PROFILE=[GDALGeoTIFF/GeoTIFF/BASELINE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GDALGeoTIFF</span></code>. Control what non-baseline tags are emitted by GDAL.<ul>
+<li><p id="drivers/raster/gtiff-co-PROFILE"><strong>PROFILE=[GDALGeoTIFF​/​GeoTIFF​/​BASELINE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GDALGeoTIFF</span></code>. Control what non-baseline tags are emitted by GDAL.<ul>
 <li><p>With <code class="docutils literal notranslate"><span class="pre">GDALGeoTIFF</span></code> (the default) various GDAL custom tags may be
 written.</p></li>
 <li><p>With <code class="docutils literal notranslate"><span class="pre">GeoTIFF</span></code> only GeoTIFF tags will be added to the baseline.</p></li>
@@ -863,7 +866,7 @@ applications intolerant of unrecognized tags.</p></li>
 </ul>
 </p>
 </li>
-<li><p id="drivers/raster/gtiff-co-BIGTIFF"><strong>BIGTIFF=[YES/NO/IF_NEEDED/IF_SAFER]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">IF_NEEDED</span></code>. Control whether the created file is a BigTIFF or a classic TIFF.<ul>
+<li><p id="drivers/raster/gtiff-co-BIGTIFF"><strong>BIGTIFF=[YES​/​NO​/​IF_NEEDED​/​IF_SAFER]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">IF_NEEDED</span></code>. Control whether the created file is a BigTIFF or a classic TIFF.<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">YES</span></code> forces BigTIFF.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NO</span></code> forces classic TIFF.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">IF_NEEDED</span></code> will only create a BigTIFF if it is clearly needed (in
@@ -890,12 +893,12 @@ TIFF, libtiff will fail with an error message like
 &quot;TIFFAppendToStrip:Maximum TIFF file size exceeded&quot;.</p>
 </p>
 </li>
-<li><p id="drivers/raster/gtiff-co-PIXELTYPE"><strong>PIXELTYPE=[DEFAULT/SIGNEDBYTE]: </strong>By setting this to <code class="docutils literal notranslate"><span class="pre">SIGNEDBYTE</span></code>, a
+<li><p id="drivers/raster/gtiff-co-PIXELTYPE"><strong>PIXELTYPE=[DEFAULT​/​SIGNEDBYTE]: </strong>By setting this to <code class="docutils literal notranslate"><span class="pre">SIGNEDBYTE</span></code>, a
 new Byte file can be forced to be written as signed byte.
 Starting with GDAL 3.7, this option is deprecated and Int8 should rather
 be used.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-COPY_SRC_OVERVIEWS"><strong>COPY_SRC_OVERVIEWS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by (<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">CreateCopy()</span></code> only)
+<li><p id="drivers/raster/gtiff-co-COPY_SRC_OVERVIEWS"><strong>COPY_SRC_OVERVIEWS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Used by (<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">CreateCopy()</span></code> only)
 By setting this to YES, the potential existing
 overviews of the source dataset will be copied to the target dataset
 without being recomputed. This option is typically used to generate
@@ -909,10 +912,10 @@ general options (i.e. options which are not creation options) of
 gdal_translate are used. Creation options related to compression are
 also applied to the output overviews.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-STREAMABLE_OUTPUT"><strong>STREAMABLE_OUTPUT=[YES/NO]: </strong>Generate a file with an Image File Directory and block order that allow
+<li><p id="drivers/raster/gtiff-co-STREAMABLE_OUTPUT"><strong>STREAMABLE_OUTPUT=[YES​/​NO]: </strong>Generate a file with an Image File Directory and block order that allow
 streaming. See <a class="reference internal" href="#streaming-operations">Streaming operations</a>.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-GEOTIFF_KEYS_FLAVOR"><strong>GEOTIFF_KEYS_FLAVOR=[STANDARD/ESRI_PE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">STANDARD</span></code>. Determine which &quot;flavor&quot; of GeoTIFF keys must be used to write the SRS
+<li><p id="drivers/raster/gtiff-co-GEOTIFF_KEYS_FLAVOR"><strong>GEOTIFF_KEYS_FLAVOR=[STANDARD​/​ESRI_PE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">STANDARD</span></code>. Determine which &quot;flavor&quot; of GeoTIFF keys must be used to write the SRS
 information. The STANDARD way (default choice) will use the general
 accepted formulations of GeoTIFF keys, including extensions of the
 values accepted for ProjectedCSTypeGeoKey to new EPSG codes. The
@@ -922,7 +925,7 @@ effect when writing the EPSG:3857 (Web Mercator) SRS. For other SRS,
 the standard way will be used, with the addition of a ESRI_PE WKT
 string as the value of PCSCitationGeoKey.</p>
 </li>
-<li><p id="drivers/raster/gtiff-co-GEOTIFF_VERSION"><strong>GEOTIFF_VERSION=[AUTO/1.0/1.1]: </strong> (GDAL &gt;= 3.1.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Select the version of
+<li><p id="drivers/raster/gtiff-co-GEOTIFF_VERSION"><strong>GEOTIFF_VERSION=[AUTO​/​1.0​/​1.1]: </strong> (GDAL &gt;= 3.1.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Select the version of
 the GeoTIFF standard used to encode georeferencing information. <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
 corresponds to the original
 <a class="reference external" href="http://geotiff.maptools.org/spec/geotiffhome.html">1995, GeoTIFF Revision 1.0, by Ritter &amp; Ruth</a>.
@@ -936,7 +939,7 @@ encode has a vertical component or is a 3D CRS, in which case 1.1 is used.<div c
 </div>
 </p>
 </li>
-<li><p id="drivers/raster/gtiff-co-COLOR_TABLE_MULTIPLIER"><strong>COLOR_TABLE_MULTIPLIER=[1/256/257]: </strong> (GDAL &gt;= 3.10.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">257</span></code>. Specifies the value by which to multiply GDAL color table entry values, usually
+<li><p id="drivers/raster/gtiff-co-COLOR_TABLE_MULTIPLIER"><strong>COLOR_TABLE_MULTIPLIER=[1​/​256​/​257]: </strong> (GDAL &gt;= 3.10.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">257</span></code>. Specifies the value by which to multiply GDAL color table entry values, usually
 in [0,255] range, to obtain a TIFF color map value. Since GDAL 2.3.0,
 GDAL consistently uses 257, but it might be necessary to use 256 for
 compatibility with files generated by other software.</p>
@@ -1063,10 +1066,10 @@ block order of the streamed input.</p>
 This paragraph lists the configuration options that can be set to alter
 the default behavior of the GTiff driver.</p>
 <ul class="simple">
-<li><p id="config-GTIFF_IGNORE_READ_ERRORS"><strong>GTIFF_IGNORE_READ_ERRORS=[TRUE/FALSE]: </strong>Can be set to TRUE to avoid turning libtiff errors into GDAL errors. Can
+<li><p id="config-GTIFF_IGNORE_READ_ERRORS"><strong>GTIFF_IGNORE_READ_ERRORS=[TRUE​/​FALSE]: </strong>Can be set to TRUE to avoid turning libtiff errors into GDAL errors. Can
 help reading partially corrupted TIFF files.</p>
 </li>
-<li><p id="config-ESRI_XML_PAM"><strong>ESRI_XML_PAM=[TRUE/FALSE]: </strong>Can be set to TRUE to force metadata in the xml:ESRI
+<li><p id="config-ESRI_XML_PAM"><strong>ESRI_XML_PAM=[TRUE​/​FALSE]: </strong>Can be set to TRUE to force metadata in the xml:ESRI
 domain to be written to PAM.</p>
 </li>
 <li><p id="config-BIGTIFF_OVERVIEW"><strong>BIGTIFF_OVERVIEW=value: </strong>Control whether BigTIFF should be used for overviews. Options are the same as <a class="reference internal" href="#drivers/raster/gtiff-co-BIGTIFF"><code class="docutils literal notranslate"><span class="pre">BIGTIFF</span></code></a> creation option.</p>
@@ -1074,17 +1077,17 @@ domain to be written to PAM.</p>
 <li><p id="config-COMPRESS_OVERVIEW"><strong>COMPRESS_OVERVIEW=value: </strong>See <a class="reference internal" href="#drivers/raster/gtiff-co-COMPRESS"><code class="docutils literal notranslate"><span class="pre">COMPRESS</span></code></a> creation option.
 Set the compression type to use for overviews. For internal overviews, only honoured since GDAL 3.6.</p>
 </li>
-<li><p id="config-INTERLEAVE_OVERVIEW"><strong>INTERLEAVE_OVERVIEW=[BAND/PIXEL]: </strong>Control whether pixel or band interleaving is used for overviews.</p>
+<li><p id="config-INTERLEAVE_OVERVIEW"><strong>INTERLEAVE_OVERVIEW=[BAND​/​PIXEL]: </strong>Control whether pixel or band interleaving is used for overviews.</p>
 </li>
 <li><p id="config-PHOTOMETRIC_OVERVIEW"><strong>PHOTOMETRIC_OVERVIEW=value: </strong>Set the photometric color space for overview creation</p>
 </li>
-<li><p id="config-PREDICTOR_OVERVIEW"><strong>PREDICTOR_OVERVIEW=[1/2/3]: </strong>Set the predictor to use for overviews with LZW, DEFLATE and ZSTD compression.</p>
+<li><p id="config-PREDICTOR_OVERVIEW"><strong>PREDICTOR_OVERVIEW=[1​/​2​/​3]: </strong>Set the predictor to use for overviews with LZW, DEFLATE and ZSTD compression.</p>
 </li>
 <li><p id="config-JPEG_QUALITY_OVERVIEW"><strong>JPEG_QUALITY_OVERVIEW=Integer between 0 and 100: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">75</span></code>. Quality of JPEG compressed overviews, either internal or external.</p>
 </li>
 <li><p id="config-WEBP_LEVEL_OVERVIEW"><strong>WEBP_LEVEL_OVERVIEW=Integer between 0 and 100: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">75</span></code>. WEBP quality level of overviews, either internal or external.</p>
 </li>
-<li><p id="config-WEBP_LOSSLESS_OVERVIEW"><strong>WEBP_LOSSLESS_OVERVIEW=[YES/NO]: </strong> (GDAL &gt;= 3.6)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether WEBP compression is lossless or not.</p>
+<li><p id="config-WEBP_LOSSLESS_OVERVIEW"><strong>WEBP_LOSSLESS_OVERVIEW=[YES​/​NO]: </strong> (GDAL &gt;= 3.6)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether WEBP compression is lossless or not.</p>
 </li>
 <li><p id="config-ZLEVEL_OVERVIEW"><strong>ZLEVEL_OVERVIEW=Integer between 1 and 9 (or 12 when libdeflate is used): </strong> (GDAL &gt;= 3.4.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">6</span></code>. Deflate compression level of overviews, for COMPRESS_OVERVIEW=DEFLATE or LERC_DEFLATE, either internal or external.</p>
 </li>
@@ -1092,29 +1095,29 @@ Set the compression type to use for overviews. For internal overviews, only hono
 </li>
 <li><p id="config-MAX_Z_ERROR_OVERVIEW"><strong>MAX_Z_ERROR_OVERVIEW=value: </strong> (GDAL &gt;= 3.4.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> (lossless). Maximum error threshold on values for LERC/LERC_DEFLATE/LERC_ZSTD compression of overviews, either internal or external.</p>
 </li>
-<li><p id="config-SPARSE_OK_OVERVIEW"><strong>SPARSE_OK_OVERVIEW=[ON/OFF]: </strong> (GDAL &gt;= 3.4.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>. When set to ON, blocks whose pixels are all at nodata (or 0 if no nodata is defined)</p>
+<li><p id="config-SPARSE_OK_OVERVIEW"><strong>SPARSE_OK_OVERVIEW=[ON​/​OFF]: </strong> (GDAL &gt;= 3.4.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>. When set to ON, blocks whose pixels are all at nodata (or 0 if no nodata is defined)</p>
 </li>
-<li><p id="config-GDAL_TIFF_INTERNAL_MASK"><strong>GDAL_TIFF_INTERNAL_MASK=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> (since GDAL 3.9), FALSE (GDAL 3.8 or earlier). See <a class="reference internal" href="#internal-nodata-masks">Internal nodata masks</a> section</p>
+<li><p id="config-GDAL_TIFF_INTERNAL_MASK"><strong>GDAL_TIFF_INTERNAL_MASK=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> (since GDAL 3.9), FALSE (GDAL 3.8 or earlier). See <a class="reference internal" href="#internal-nodata-masks">Internal nodata masks</a> section</p>
 </li>
-<li><p id="config-GDAL_TIFF_INTERNAL_MASK_TO_8BIT"><strong>GDAL_TIFF_INTERNAL_MASK_TO_8BIT=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. See <a class="reference internal" href="#internal-nodata-masks">Internal nodata masks</a> section.</p>
+<li><p id="config-GDAL_TIFF_INTERNAL_MASK_TO_8BIT"><strong>GDAL_TIFF_INTERNAL_MASK_TO_8BIT=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. See <a class="reference internal" href="#internal-nodata-masks">Internal nodata masks</a> section.</p>
 </li>
 <li><p><a class="reference internal" href="../../user/configoptions.html#config-USE_RRD"><code class="docutils literal notranslate"><span class="pre">USE_RRD</span></code></a>: Can be set to TRUE to force external overviews in the RRD
 format.</p></li>
-<li><p id="config-TIFF_USE_OVR"><strong>TIFF_USE_OVR=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Can be set to TRUE to force external overviews in the GeoTIFF (.ovr) format.</p>
+<li><p id="config-TIFF_USE_OVR"><strong>TIFF_USE_OVR=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Can be set to TRUE to force external overviews in the GeoTIFF (.ovr) format.</p>
 </li>
-<li><p id="config-TIFF_READ_STREAMING"><strong>TIFF_READ_STREAMING=[YES/NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, assume that Image File Directory is at the beginning of the file.
+<li><p id="config-TIFF_READ_STREAMING"><strong>TIFF_READ_STREAMING=[YES​/​NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, assume that Image File Directory is at the beginning of the file.
 See <a class="reference internal" href="#streaming-operations">Streaming operations</a>.</p>
 </li>
-<li><p id="config-GTIFF_POINT_GEO_IGNORE"><strong>GTIFF_POINT_GEO_IGNORE=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Can be set to TRUE to revert back to the
+<li><p id="config-GTIFF_POINT_GEO_IGNORE"><strong>GTIFF_POINT_GEO_IGNORE=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Can be set to TRUE to revert back to the
 behavior of ancient GDAL versions regarding how PixelIsPoint is interpreted
 w.r.t geotransform. See <a class="reference internal" href="../../development/rfc/rfc33_gtiff_pixelispoint.html#rfc-33"><span class="std std-ref">RFC 33: GTiff - Fixing PixelIsPoint Interpretation</span></a> for more details.</p>
 </li>
-<li><p id="config-GTIFF_REPORT_COMPD_CS"><strong>GTIFF_REPORT_COMPD_CS=[TRUE/FALSE]: </strong>Can be set to TRUE to avoid
+<li><p id="config-GTIFF_REPORT_COMPD_CS"><strong>GTIFF_REPORT_COMPD_CS=[TRUE​/​FALSE]: </strong>Can be set to TRUE to avoid
 stripping the vertical CRS of compound CRS when reading the SRS of a
 file. Does not affect the writing side. Default value : FALSE for GeoTIFF 1.0
 files, or TRUE (starting with GDAL 3.1) for GeoTIFF 1.1 files.</p>
 </li>
-<li><p id="config-GDAL_ENABLE_TIFF_SPLIT"><strong>GDAL_ENABLE_TIFF_SPLIT=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Can be set to FALSE to avoid
+<li><p id="config-GDAL_ENABLE_TIFF_SPLIT"><strong>GDAL_ENABLE_TIFF_SPLIT=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Can be set to FALSE to avoid
 all-in-one-strip files being presented as having.</p>
 </li>
 <li><p id="config-GDAL_TIFF_OVR_BLOCKSIZE"><strong>GDAL_TIFF_OVR_BLOCKSIZE=value: </strong>See <a class="reference internal" href="#overviews">Overviews</a> section.</p>
@@ -1124,17 +1127,17 @@ have false easting/northing improperly set in meters when it ought to
 be in coordinate system linear units. (<a class="reference external" href="http://trac.osgeo.org/gdal/ticket/3901">Ticket
 #3901</a>).</p>
 </li>
-<li><p id="config-TAB_APPROX_GEOTRANSFORM"><strong>TAB_APPROX_GEOTRANSFORM=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. To decide if an approximate geotransform is acceptable when reading a .tab
+<li><p id="config-TAB_APPROX_GEOTRANSFORM"><strong>TAB_APPROX_GEOTRANSFORM=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. To decide if an approximate geotransform is acceptable when reading a .tab
 file.</p>
 </li>
-<li><p id="config-GTIFF_DIRECT_IO"><strong>GTIFF_DIRECT_IO=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Can be set to YES to use
+<li><p id="config-GTIFF_DIRECT_IO"><strong>GTIFF_DIRECT_IO=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Can be set to YES to use
 specialized RasterIO() implementations when reading un-compressed
 TIFF files (un-tiled only in GDAL 2.0, both un-tiled and tiled in
 GDAL 2.1) to avoid using the block cache. Setting it to YES even when
 the optimized cases do not apply should be safe (generic
 implementation will be used).</p>
 </li>
-<li><p id="config-GTIFF_VIRTUAL_MEM_IO"><strong>GTIFF_VIRTUAL_MEM_IO=[YES/NO/IF_ENOUGH_RAM]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Can be set
+<li><p id="config-GTIFF_VIRTUAL_MEM_IO"><strong>GTIFF_VIRTUAL_MEM_IO=[YES​/​NO​/​IF_ENOUGH_RAM]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Can be set
 to YES to use specialized RasterIO() implementations when reading
 un-compressed TIFF files to avoid using the block cache. This
 implementation relies on memory-mapped file I/O, and is currently
@@ -1155,7 +1158,7 @@ thread. Note: this configuration option also apply to other parts to
 GDAL (warping, gridding, ...).
 Starting with GDAL 3.6, this option also enables multi-threaded decoding
 when RasterIO() requests intersect several tiles/strips.</p></li>
-<li><p id="config-GTIFF_WRITE_TOWGS84"><strong>GTIFF_WRITE_TOWGS84=[AUTO/YES/NO]: </strong> (GDAL &gt;= 3.0.3) When set to AUTO, a
+<li><p id="config-GTIFF_WRITE_TOWGS84"><strong>GTIFF_WRITE_TOWGS84=[AUTO​/​YES​/​NO]: </strong> (GDAL &gt;= 3.0.3) When set to AUTO, a
 GeogTOWGS84GeoKey geokey will be written with TOWGS84 3 or 7-parameter
 Helmert transformation, if the CRS has no EPSG code attached to it, or if
 the TOWGS84 transformation attached to the CRS doesn't match the one imported
@@ -1164,12 +1167,12 @@ If set to YES, then the TOWGS84 transformation attached to the CRS will be
 always written. If set to NO, then the transformation will not be written in
 any situation.</p>
 </li>
-<li><p id="config-CHECK_DISK_FREE_SPACE"><strong>CHECK_DISK_FREE_SPACE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, ensure that enough disk space is available before attempting to
+<li><p id="config-CHECK_DISK_FREE_SPACE"><strong>CHECK_DISK_FREE_SPACE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, ensure that enough disk space is available before attempting to
 write an uncompressed, non-sparse GeoTIFF. Disabling this check is not
 expected to be necessary, unless GDAL is incorrectly determining the disk
 space available on the destination file system.</p>
 </li>
-<li><p id="config-GTIFF_READ_ANGULAR_PARAMS_IN_DEGREE"><strong>GTIFF_READ_ANGULAR_PARAMS_IN_DEGREE=[YES/NO]: </strong> (GDAL &gt;= 3.9.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Conformant GeoTIFF files should have the values of angular projection
+<li><p id="config-GTIFF_READ_ANGULAR_PARAMS_IN_DEGREE"><strong>GTIFF_READ_ANGULAR_PARAMS_IN_DEGREE=[YES​/​NO]: </strong> (GDAL &gt;= 3.9.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Conformant GeoTIFF files should have the values of angular projection
 parameters written in the unit of the GeogAngularUnitsGeoKey. But some
 non-conformant implementations, such as GDAL &lt;= 3.9.0, always wrote them
 in degrees.
@@ -1178,7 +1181,7 @@ files (typically using grads), to instruct GDAL (&gt;= 3.9.1) that the projectio
 parameters are in degrees, instead of being expressed in the unit of the
 GeogAngularUnitsGeoKey.</p>
 </li>
-<li><p id="config-GTIFF_WRITE_ANGULAR_PARAMS_IN_DEGREE"><strong>GTIFF_WRITE_ANGULAR_PARAMS_IN_DEGREE=[YES/NO]: </strong> (GDAL &gt;= 3.9.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Conformant GeoTIFF files should have the values of angular projection
+<li><p id="config-GTIFF_WRITE_ANGULAR_PARAMS_IN_DEGREE"><strong>GTIFF_WRITE_ANGULAR_PARAMS_IN_DEGREE=[YES​/​NO]: </strong> (GDAL &gt;= 3.9.1)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Conformant GeoTIFF files should have the values of angular projection
 parameters written in the unit of the GeogAngularUnitsGeoKey. But some
 non-conformant implementations, such as GDAL &gt;= 3.0 and &lt;= 3.9.0, assumed
 those values to be in degree.

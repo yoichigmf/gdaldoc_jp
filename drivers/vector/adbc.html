@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADBC -- Arrow Database Connectivity &mdash; GDAL  ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://gdal.org/drivers/vector/adbc.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=c033477b"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="このドキュメントについて" href="../../about.html" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="AmigoCloud" href="amigocloud.html" />
+    <link rel="prev" title="ベクタードライバー" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/gdalicon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">ダウンロード</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ADBC -- Arrow Database Connectivity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#connection-string">Connection string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-open-options">Dataset open options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-list-special-layer">&quot;table_list&quot; special layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-driver-entry-point">Custom driver entry point</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avce00.html">Arc/Info E00 (ASCII) Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cad.html">CAD -- AutoCAD DWG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="carto.html">Carto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csv.html">Comma Separated Value (.csv)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="csw.html">CSW - OGC CSW (Catalog Service for the Web)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dgn.html">Microstation DGN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dgnv8.html">Microstation DGN v8</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dwg.html">AutoCAD DWG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dxf.html">AutoCAD DXF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="eeda.html">Google Earth Engine Data API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="edigeo.html">EDIGEO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="elasticsearch.html">Elasticsearch: Geographically Encoded Objects for Elasticsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="esrijson.html">ESRIJSON / FeatureService driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filegdb.html">ESRI File Geodatabase (FileGDB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flatgeobuf.html">FlatGeobuf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geoconcept.html">GeoConcept text export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geojson.html">GeoJSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geojsonseq.html">GeoJSONSeq: sequence of GeoJSON features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="georss.html">GeoRSS : Geographically Encoded Objects for RSS feeds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gml.html">GML - Geography Markup Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmlas.html">GMLAS - Geography Markup Language (GML) driven by application schemas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gmt.html">GMT ASCII Vectors (.gmt)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpkg.html">GPKG -- GeoPackage vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpsbabel.html">GPSBabel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gpx.html">GPX - GPS Exchange Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grass.html">GRASS Vector Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gtfs.html">GTFS - General Transit Feed Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hana.html">SAP HANA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idb.html">IDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="idrisi.html">Idrisi Vector (.VCT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ili.html">&quot;INTERLIS 1&quot; and &quot;INTERLIS 2&quot; drivers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jml.html">JML: OpenJUMP JML format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jsonfg.html">JSONFG -- OGC Features and Geometries JSON</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kml.html">KML - Keyhole Markup Language</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libkml.html">LIBKML Driver (.kml .kmz)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lvbag.html">Dutch Kadaster LV BAG 2.0 Extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapml.html">MapML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory.html">Memory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="miramon.html">MiraMon Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mitab.html">MapInfo TAB and MIF/MID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mongodbv3.html">MongoDBv3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mssqlspatial.html">MSSQLSpatial - Microsoft SQL Server Spatial Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mvt.html">MVT: Mapbox Vector Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mysql.html">MySQL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="nas.html">NAS - ALKIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html">NetCDF: Network Common Data Form - Vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ngw.html">NGW -- NextGIS Web</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ntf.html">UK .NTF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oapif.html">OGC API - Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oci.html">Oracle Spatial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="odbc.html">ODBC RDBMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ods.html">ODS - Open Document Spreadsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ogdi.html">OGDI Vectors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openfilegdb.html">ESRI File Geodatabase vector (OpenFileGDB)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="osm.html">OSM - OpenStreetMap XML and PBF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parquet.html">(Geo)Parquet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pdf.html">PDF -- Geospatial PDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pds.html">PDS - Planetary Data Systems TABLE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgdump.html">PostgreSQL SQL Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pgeo.html">ESRI Personal GeoDatabase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pg.html">PostgreSQL / PostGIS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plscenes.html">PLScenes (Planet Labs Scenes/Catalog API)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pmtiles.html">PMTiles -- ProtoMaps Tiles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="s57.html">IHO S-57 (ENC)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdts.html">SDTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selafin.html">Selafin files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shapefile.html">ESRI Shapefile / DBF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sosi.html">Norwegian SOSI Standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sqlite.html">SQLite / Spatialite RDBMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="svg.html">SVG - Scalable Vector Graphics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sxf.html">Storage and eXchange Format - SXF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tiger.html">U.S. Census TIGER/Line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tiledb.html">TileDB -- TileDB vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topojson.html">TopoJSON driver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vdv.html">VDV - VDV-451/VDV-452/INTREST Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vfk.html">VFK - Czech Cadastral Exchange Data Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vrt.html">VRT -- Virtual Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wasp.html">WAsP - WAsP .map format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wfs.html">WFS - OGC WFS service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xls.html">XLS - MS Excel format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xlsx.html">XLSX - MS Office Open XML spreadsheet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xodr.html">XODR -- OpenDRIVE Road Description Format</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">ユーザー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">チュートリアル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/index.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sponsors/index.html">スポンサー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDAL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html"> GDAL  ドキュメント </a> &raquo;</li>
+      
+          <li><a href="index.html">ベクタードライバー</a> &raquo;</li>
+      
+      <li>ADBC -- Arrow Database Connectivity</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSGeo/gdal/edit/master/doc/source/drivers/vector/adbc.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="amigocloud.html" class="btn btn-neutral float-right" title="AmigoCloud" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="ベクタードライバー" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adbc-arrow-database-connectivity">
+<span id="vector-adbc"></span><h1>ADBC -- Arrow Database Connectivity<a class="headerlink" href="#adbc-arrow-database-connectivity" title="Link to this heading"></a></h1>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.11.</span></p>
+</div>
+<div class="admonition shortname" id="shortname-0">
+<p class="admonition-title">Driver short name</p>
+<p>ADBC</p>
+</div>
+<p>ADBC is a set of APIs and libraries for Arrow-native access to database.</p>
+<p>This driver has 2 modes:</p>
+<ul class="simple">
+<li><p>either it has been built against the <code class="docutils literal notranslate"><span class="pre">adbc-driver-manager</span></code> library. In that
+case, it can directly be used to connect to available ADBC drivers, and expose
+content as classic OGR features, or as a ArrowArrayStream.
+In that mode the driver metadata exposes the <code class="docutils literal notranslate"><span class="pre">HAS_ADBC_DRIVER_MANAGER</span></code>
+metadata item.</p></li>
+<li><p>or it has not, in which case applications embedding GDAL must use
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALSetAdbcLoadDriverOverride()</span></code> as detailed in a below paragraph.
+Note that use of that function can also be done even if the driver has been built
+against the <code class="docutils literal notranslate"><span class="pre">adbc-driver-manager</span></code> library.</p></li>
+</ul>
+<p>Consult the <a class="reference external" href="https://arrow.apache.org/adbc/current/driver/installation.html">installation instruction</a>
+for the various ADBC drivers. At time of writing, there are drivers for
+SQLite3, PostgreSQL, Snowflake, BigQuery, DuckDB, Flight SQL, etc.</p>
+<p>The driver is read-only, and there is no support for spatial data currently.</p>
+<section id="connection-string">
+<h2>Connection string<a class="headerlink" href="#connection-string" title="Link to this heading"></a></h2>
+<p>Several connection strings are supported:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ADBC:{some_uri}</span></code>, together with the <code class="docutils literal notranslate"><span class="pre">ADBC_DRIVER</span></code> open option.</p></li>
+<li><p>a SQLite3 database filename, if the <code class="docutils literal notranslate"><span class="pre">adbc_driver_sqlite</span></code> is available.</p></li>
+<li><p>a DuckDB database filename, if the <code class="file docutils literal notranslate"><span class="pre">libduckdb.so</span></code>, <code class="file docutils literal notranslate"><span class="pre">libduckdb.dylib</span></code>
+or <code class="file docutils literal notranslate"><span class="pre">duckdb.dll</span></code> is available (and it is in a system location, or can be
+located through LD_LIBRARY_PATH on Linux, DYLD_LIBRARY_PATH on MacOSX or PATH on Windows).</p></li>
+<li><p>a Parquet database filename, if the <code class="file docutils literal notranslate"><span class="pre">libduckdb.so</span></code>, <code class="file docutils literal notranslate"><span class="pre">libduckdb.dylib</span></code>
+or <code class="file docutils literal notranslate"><span class="pre">duckdb.dll</span></code> is available (and it is in a system location, or can be
+located through LD_LIBRARY_PATH on Linux, DYLD_LIBRARY_PATH on MacOSX or PATH on Windows).</p></li>
+<li><p>a PostgreSQL URI starting with <code class="docutils literal notranslate"><span class="pre">postgresql://</span></code>, if the <code class="docutils literal notranslate"><span class="pre">adbc_driver_postgresql</span></code> is available.</p></li>
+</ul>
+<p>Note: if present, the <a class="reference internal" href="sqlite.html#vector-sqlite"><span class="std std-ref">SQLite / Spatialite RDBMS</span></a>, <a class="reference internal" href="gpkg.html#vector-gpkg"><span class="std std-ref">GPKG -- GeoPackage vector</span></a> or
+<a class="reference internal" href="parquet.html#vector-parquet"><span class="std std-ref">(Geo)Parquet</span></a> drivers are registered before the ADBC driver, so they will
+be used in priority when available. The <code class="docutils literal notranslate"><span class="pre">ADBC:</span></code> prefix or the <code class="docutils literal notranslate"><span class="pre">-if</span> <span class="pre">ADBC</span></code>
+switch of <strong class="program">ogrinfo</strong> or <strong class="program">ogr2ogr</strong> can be used to use the ADBC
+driver instead.</p>
+</section>
+<section id="dataset-open-options">
+<h2>Dataset open options<a class="headerlink" href="#dataset-open-options" title="Link to this heading"></a></h2>
+<p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
+The following open options are supported:</p>
+<ul class="simple">
+<li><p id="drivers/vector/adbc-oo-ADBC_DRIVER"><strong>ADBC_DRIVER=&lt;string&gt;: </strong>ADBC driver name. Examples: <code class="docutils literal notranslate"><span class="pre">adbc_driver_sqlite</span></code>, <code class="docutils literal notranslate"><span class="pre">adbc_driver_postgresql</span></code>,
+<code class="docutils literal notranslate"><span class="pre">adbc_driver_bigquery</span></code>, <code class="docutils literal notranslate"><span class="pre">adbc_driver_snowflake</span></code> or a path to the
+DuckDB shared library.</p>
+</li>
+<li><p id="drivers/vector/adbc-oo-SQL"><strong>SQL=&lt;string&gt;: </strong>A SQL-like statement recognized by the driver, used to create a result
+layer from the dataset.</p>
+</li>
+<li><p id="drivers/vector/adbc-oo-ADBC_OPTION_xxx"><strong>ADBC_OPTION_xxx=&lt;string&gt;: </strong>Custom ADBC option to pass to AdbcDatabaseSetOption(). Options are
+driver specific.
+For example <code class="docutils literal notranslate"><span class="pre">ADBC_OPTION_uri=some_value</span></code> to pass the <code class="docutils literal notranslate"><span class="pre">uri</span></code> option.</p>
+</li>
+</ul>
+</section>
+<section id="table-list-special-layer">
+<h2>&quot;table_list&quot; special layer<a class="headerlink" href="#table-list-special-layer" title="Link to this heading"></a></h2>
+<p>For PostgreSQL, SQLite3, DuckDB and Parquet datasets, the driver automatically
+instantiates OGR layers from available tables.
+For other databases, the user must explicit provide a SQL open option or issue
+a <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset10ExecuteSQLEPKcP11OGRGeometryPKc" title="GDALDataset::ExecuteSQL"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::ExecuteSQL()</span></code></a> request.
+To facilitate that process, a special OGR <code class="docutils literal notranslate"><span class="pre">table_list</span></code> layer can be queried
+through <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset14GetLayerByNameEPKc" title="GDALDataset::GetLayerByName"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetLayerByName()</span></code></a> (or as the layer name with
+<strong class="program">ogrinfo</strong>).
+It returns for each table a OGR feature with the following fields (some
+potentially unset or with an empty string): <code class="docutils literal notranslate"><span class="pre">catalog_name</span></code>, <code class="docutils literal notranslate"><span class="pre">schema_name</span></code>,
+<code class="docutils literal notranslate"><span class="pre">table_name</span></code>, <code class="docutils literal notranslate"><span class="pre">table_type</span></code>.</p>
+</section>
+<section id="custom-driver-entry-point">
+<h2>Custom driver entry point<a class="headerlink" href="#custom-driver-entry-point" title="Link to this heading"></a></h2>
+<p>A custom driver entry point can be specified by applications by calling
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALSetAdbcLoadDriverOverride()</span></code> (defined in header <code class="file docutils literal notranslate"><span class="pre">gdal_adbc.h</span></code>)
+before using the driver. The specified init function will be used by the
+GDAL ADBC driver as a way of locating and loading the ADBC driver if GDAL was
+not built with ADBC Driver Manager support or if an embedding application has
+an updated or augmented collection of drivers available.</p>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Assuming <code class="file docutils literal notranslate"><span class="pre">libduckdb.so</span></code>, <code class="file docutils literal notranslate"><span class="pre">libduckdb.dylib</span></code> or <code class="file docutils literal notranslate"><span class="pre">duckdb.dll</span></code>
+is available (and it is in a system location, or can be located through
+LD_LIBRARY_PATH on Linux, DYLD_LIBRARY_PATH on MacOSX or PATH on Windows).</p>
+<p>Convert a Parquet file to GeoPackage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ogr2ogr</span> <span class="n">out</span><span class="o">.</span><span class="n">gpkg</span> <span class="ow">in</span><span class="o">.</span><span class="n">parquet</span>
+</pre></div>
+</div>
+</li>
+<li><p>Assuming <code class="file docutils literal notranslate"><span class="pre">libduckdb.so</span></code>, <code class="file docutils literal notranslate"><span class="pre">libduckdb.dylib</span></code> or <code class="file docutils literal notranslate"><span class="pre">duckdb.dll</span></code>
+is available (and it is in a system location, or can be located through
+LD_LIBRARY_PATH on Linux, DYLD_LIBRARY_PATH on MacOSX or PATH on Windows).</p>
+<p>Convert a DuckDB database to GeoPackage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ogr2ogr</span> <span class="n">out</span><span class="o">.</span><span class="n">gpkg</span> <span class="ow">in</span><span class="o">.</span><span class="n">duckdb</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://arrow.apache.org/adbc/current/index.html">ADBC: Arrow Database Connectivity</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="amigocloud.html" class="btn btn-neutral float-right" title="AmigoCloud" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="ベクタードライバー" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <div class="info">
+      <a class="logo-link" href="https://osgeo.org">
+        <div class="osgeo-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
+      &copy; 1998-2024 <a href="https://github.com/warmerdam">Frank Warmerdam</a>,
+      <a href="https://github.com/rouault">Even Rouault</a>, and
+      <a href="https://github.com/OSGeo/gdal/graphs/contributors">others</a>
+
+
+      
+      </div>
+    </div>
+  </div>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

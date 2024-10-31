@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>S102 -- S-102 Bathymetric Surface Product &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -201,6 +204,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -234,6 +238,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -316,7 +321,7 @@
 <p><span class="versionmodified added">Added in version 3.8.</span></p>
 </div>
 <p>This driver provides read-only support for bathymetry data in the S-102 format,
-which is a specific product profile in an HDF5 file</p>
+which is a specific product profile in an HDF5 file.</p>
 <p>S-102 files have two image bands representing depth (band 1),
 uncertainty (band 2) values for each cell in a raster grid area.</p>
 <p>Note that positive values of depth mean values <em>below</em> the reference surface
@@ -325,6 +330,10 @@ to <code class="docutils literal notranslate"><span class="pre">ELEVATION</span>
 (i.e. positive values of elevation mean values above the reference surface)</p>
 <p>Georeferencing is reported.</p>
 <p>Nodata, minimum and maximum values for each band are also reported.</p>
+<p>Supported versions of the specification are S-102 v2.1, v2.2 and v3.0
+(support for v3.0 spatial metadata added in GDAL 3.10. Multiple grids per
+file, as permitted by S-102 v3.0, are not supported currently. Only the
+first one will be reported.)</p>
 <section id="driver-capabilities">
 <h2>Driver capabilities<a class="headerlink" href="#driver-capabilities" title="Link to this heading"></a></h2>
 <div class="admonition supports_georeferencing" id="supports_georeferencing-0">
@@ -341,13 +350,13 @@ to <code class="docutils literal notranslate"><span class="pre">ELEVATION</span>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/raster/s102-oo-DEPTH_OR_ELEVATION"><strong>DEPTH_OR_ELEVATION=[DEPTH/ELEVATION]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEPTH</span></code>. Whether to report depth or elevation.
+<li><p id="drivers/raster/s102-oo-DEPTH_OR_ELEVATION"><strong>DEPTH_OR_ELEVATION=[DEPTH​/​ELEVATION]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEPTH</span></code>. Whether to report depth or elevation.
 Positive values of depth mean values <em>below</em> the reference surface of the
 vertical datum.
 Positive values of elevation mean values <em>above</em> the reference surface of the
 vertical datum (which is the convention used by the <a class="reference internal" href="bag.html#raster-bag"><span class="std std-ref">BAG driver</span></a>)</p>
 </li>
-<li><p id="drivers/raster/s102-oo-NORTH_UP"><strong>NORTH_UP=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the top line of the dataset should be the northern-most one.<p>This is the default behavior of most GDAL formats, but the native
+<li><p id="drivers/raster/s102-oo-NORTH_UP"><strong>NORTH_UP=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the top line of the dataset should be the northern-most one.<p>This is the default behavior of most GDAL formats, but the native
 organization of the data in S-102 products is to have the first line of
 the grid being the southern-most one. This native organization can be
 exposed by the driver by setting this option to NO (in which case the
@@ -358,10 +367,14 @@ exposed by the driver by setting this option to NO (in which case the
 </section>
 <section id="spatial-metadata-support">
 <h2>Spatial metadata support<a class="headerlink" href="#spatial-metadata-support" title="Link to this heading"></a></h2>
-<p>Starting with GDAL 3.9, GDAL can handle QualityOfSurvey spatial metadata.</p>
+<p>Starting with GDAL 3.9, GDAL can handle QualityOfSurvey
+(or QualityOfBathymetryCoverage in S102 v3.0) spatial metadata.</p>
 <p>When such spatial metadata is present, the subdataset list will include
-a name of the form <code class="docutils literal notranslate"><span class="pre">S102:&quot;{filename}&quot;:QualityOfSurvey</span></code></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">/QualityOfSurvey/featureAttributeTable</span></code> dataset is exposed as a
+a name of the form <code class="docutils literal notranslate"><span class="pre">S102:&quot;{filename}&quot;:QualityOfSurvey</span></code> (
+or <code class="docutils literal notranslate"><span class="pre">S102:&quot;{filename}&quot;:QualityOfBathymetryCoverage</span></code> in S102 v3.0)</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">/QualityOfSurvey/featureAttributeTable</span></code>
+(<code class="docutils literal notranslate"><span class="pre">/QualityOfBathymetryCoverage/featureAttributeTable</span></code> in S102 v3.0)
+dataset is exposed as a
 GDAL Raster Attribute Table associated to the GDAL raster band. The pixel
 values of the raster match the <code class="docutils literal notranslate"><span class="pre">id</span></code> column of the Raster Attribute Table.</p>
 </section>

@@ -13,6 +13,11 @@
      - Creation
      - Geo-referencing
      - Build requirements
+   * - :ref:`ADBC <vector.adbc>`
+     - Arrow Database Connectivity
+     - No
+     - No
+     - ???
    * - :ref:`AmigoCloud <vector.amigocloud>`
      - AmigoCloud
      - **Yes**

@@ -58,6 +58,8 @@ This tutorial will cover the .vrt file format (suitable for users editing
 .vrt files), and how .vrt files may be created and manipulated programmatically
 for developers.
 
+.. _raster_vrt_creation_options:
+
 Creation options
 ----------------
 
@@ -1534,6 +1536,8 @@ to make sure the modules are accessible through the python path. Note that
 contrary to the Python interactive interpreter, the current path is not
 automatically added when used from GDAL. So you may need to define the
 **PYTHONPATH** environment variable if you get ModuleNotFoundError exceptions.
+
+.. _raster_vrt_security_implications:
 
 Security implications
 *********************

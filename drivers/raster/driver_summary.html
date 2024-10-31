@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>&lt;no title&gt; &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -61,6 +63,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -572,9 +575,9 @@
 <td><p>libhdf5</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="heif.html#raster-heif"><span class="std std-ref">HEIF</span></a></p></td>
-<td><p>ISO/IEC 23008-12:2017 High Efficiency Image File Format</p></td>
+<td><p>ISO/IEC 23008-12 High Efficiency Image File Format</p></td>
 <td><p>No</p></td>
-<td><p>No</p></td>
+<td><p><strong>Yes</strong></p></td>
 <td><p>No</p></td>
 <td><p>libheif (&gt;= 1.1), built against libde265</p></td>
 </tr>
@@ -1145,147 +1148,154 @@
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="snodas.html#raster-snodas"><span class="std std-ref">SNODAS</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="snap_tiff.html#raster-snap-tiff"><span class="std std-ref">SNAP_TIFF</span></a></p></td>
+<td><p>Sentinel Application Processing GeoTIFF</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+<td><p><strong>Yes</strong></p></td>
+<td><p>Built-in by default</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="snodas.html#raster-snodas"><span class="std std-ref">SNODAS</span></a></p></td>
 <td><p>Snow Data Assimilation System</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="srp.html#raster-srp"><span class="std std-ref">SRP</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="srp.html#raster-srp"><span class="std std-ref">SRP</span></a></p></td>
 <td><p>Standard Product Format (ASRP/USRP) (.gen)</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="srtmhgt.html#raster-srtmhgt"><span class="std std-ref">SRTMHGT</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="srtmhgt.html#raster-srtmhgt"><span class="std std-ref">SRTMHGT</span></a></p></td>
 <td><p>SRTM HGT Format</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="stacit.html#raster-stacit"><span class="std std-ref">STACIT</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="stacit.html#raster-stacit"><span class="std std-ref">STACIT</span></a></p></td>
 <td><p>Spatio-Temporal Asset Catalog Items</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="stacta.html#raster-stacta"><span class="std std-ref">STACTA</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="stacta.html#raster-stacta"><span class="std std-ref">STACTA</span></a></p></td>
 <td><p>Spatio-Temporal Asset Catalog Tiled Assets</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="terragen.html#raster-terragen"><span class="std std-ref">Terragen</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="terragen.html#raster-terragen"><span class="std std-ref">Terragen</span></a></p></td>
 <td><p>Terragen™ Terrain File</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tga.html#raster-tga"><span class="std std-ref">TGA</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tga.html#raster-tga"><span class="std std-ref">TGA</span></a></p></td>
 <td><p>TARGA Image File Format</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="til.html#raster-til"><span class="std std-ref">TIL</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="til.html#raster-til"><span class="std std-ref">TIL</span></a></p></td>
 <td><p>EarthWatch/DigitalGlobe .TIL</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tiledb.html#raster-tiledb"><span class="std std-ref">TileDB</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tiledb.html#raster-tiledb"><span class="std std-ref">TileDB</span></a></p></td>
 <td><p>TileDB raster</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>TileDB (&gt;= 2.7 starting with GDAL 3.7)</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tsx.html#raster-tsx"><span class="std std-ref">TSX</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tsx.html#raster-tsx"><span class="std std-ref">TSX</span></a></p></td>
 <td><p>TerraSAR-X Product</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="usgsdem.html#raster-usgsdem"><span class="std std-ref">USGSDEM</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="usgsdem.html#raster-usgsdem"><span class="std std-ref">USGSDEM</span></a></p></td>
 <td><p>USGS ASCII DEM (and CDED)</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="vicar.html#raster-vicar"><span class="std std-ref">VICAR</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="vicar.html#raster-vicar"><span class="std std-ref">VICAR</span></a></p></td>
 <td><p>VICAR</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="vrt.html#raster-vrt"><span class="std std-ref">VRT</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="vrt.html#raster-vrt"><span class="std std-ref">VRT</span></a></p></td>
 <td><p>GDAL Virtual Format</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="wcs.html#raster-wcs"><span class="std std-ref">WCS</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="wcs.html#raster-wcs"><span class="std std-ref">WCS</span></a></p></td>
 <td><p>OGC Web Coverage Service</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>libcurl</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="webp.html#raster-webp"><span class="std std-ref">WEBP</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="webp.html#raster-webp"><span class="std std-ref">WEBP</span></a></p></td>
 <td><p>WEBP</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>No</p></td>
 <td><p>libwebp</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="wms.html#raster-wms"><span class="std std-ref">WMS</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="wms.html#raster-wms"><span class="std std-ref">WMS</span></a></p></td>
 <td><p>Web Map Services</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>libcurl</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="wmts.html#raster-wmts"><span class="std std-ref">WMTS</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="wmts.html#raster-wmts"><span class="std std-ref">WMTS</span></a></p></td>
 <td><p>OGC Web Map Tile Service</p></td>
 <td><p>No</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>libcurl</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="xpm.html#raster-xpm"><span class="std std-ref">XPM</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="xpm.html#raster-xpm"><span class="std std-ref">XPM</span></a></p></td>
 <td><p>X11 Pixmap</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>No</p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="xyz.html#raster-xyz"><span class="std std-ref">XYZ</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="xyz.html#raster-xyz"><span class="std std-ref">XYZ</span></a></p></td>
 <td><p>ASCII Gridded XYZ</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="zarr.html#raster-zarr"><span class="std std-ref">Zarr</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="zarr.html#raster-zarr"><span class="std std-ref">Zarr</span></a></p></td>
 <td><p>Zarr</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>
 <td><p>Built-in by default, but liblz4, libxz (lzma), libzstd and libblosc</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="zmap.html#raster-zmap"><span class="std std-ref">ZMAP</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="zmap.html#raster-zmap"><span class="std std-ref">ZMAP</span></a></p></td>
 <td><p>ZMap Plus Grid</p></td>
 <td><p>No</p></td>
 <td><p><strong>Yes</strong></p></td>

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SQL SQLite方言 &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -74,6 +76,7 @@
 <li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">座標元期のサポート</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configoptions.html">設定オプション</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -84,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -212,8 +216,14 @@ and <a class="reference external" href="https://en.wikipedia.org/wiki/Greek_and_
 </section>
 <section id="geometry-field">
 <h3>ジオメトリフィールド<a class="headerlink" href="#geometry-field" title="Link to this heading"></a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">GEOMETRY</span></code> 特殊フィールドは, OGRFeature::GetGeometryRef() によって返される地物のジオメトリを表します. SELECTの結果列リストで明示的に指定することができ, * ワイルドカードが使用されると自動的に選択されます.</p>
-<p>一般的にRDBMSデータソースの場合, OGRLayer::GetGeometryColumn() によって返されるジオメトリ列名が空でないOGRレイヤーに対して, SQLステートメントのジオメトリ特殊フィールドの名前は, 基になるOGRレイヤーのジオメトリ列の名前になります. ソースレイヤーのジオメトリ列の名前が空の場合, shapefileなどの場合, SQLステートメントで使用する名前は常に &quot;geometry&quot; です. ここでは, 大文字小文字を区別せずに使用します(すべてのフィールド名がSELECTステートメントであるため):</p>
+<p>Geometry fields can be explicitly specified in the result column list of a SELECT,
+or automatically selected if the * wildcard is used.</p>
+<p>For OGR layers that have a non-empty geometry column name (generally for RDBMS datasources),
+as returned by OGRLayer::GetGeometryColumn(), the name of the geometry special field
+in the SQL statement must be the name of the geometry column of the underlying OGR layer.
+If the name of the geometry column in the source layer is empty, like with shapefiles etc.,
+the name to use in the SQL statement must be &quot;geometry&quot;. Here we'll use it case-insensitively
+(as all field names are in a SELECT statement):</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">EAS_ID</span><span class="p">,</span><span class="w"> </span><span class="n">GEOMETRY</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">poly</span>
 </pre></div>
 </div>
@@ -240,10 +250,6 @@ and <a class="reference external" href="https://en.wikipedia.org/wiki/Greek_and_
 <p>地物IDは地物の特別なプロパティであり, 地物の属性として扱われません. 場合によっては, 地物IDをクエリや結果セットで通常のフィールドとして利用できると便利です. その場合は <code class="docutils literal notranslate"><span class="pre">rowid</span></code> という名前を使用します.</p>
 <p>GDAL 3.8以降, レイヤーに名前付きFID列がある場合 (<a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer12GetFIDColumnEv" title="OGRLayer::GetFIDColumn"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::GetFIDColumn()</span></code></a> != &quot;&quot;), この名前も使用できます.</p>
 <p>フィールドワイルドカードの展開には地物IDは含まれませんが, 次のような構文を使用して明示的に含めることができます:</p>
-<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">ROWID</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nation</span>
-</pre></div>
-</div>
-<p>フィールドワイルドカードの展開には地物IDは含まれませんが, 次のような構文を使用して明示的に含めることができます:</p>
 <div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">rowid</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">nation</span>
 </pre></div>
 </div>
@@ -263,8 +269,18 @@ and <a class="reference external" href="https://en.wikipedia.org/wiki/Greek_and_
 <h3>統計関数<a class="headerlink" href="#statistics-functions" title="Link to this heading"></a></h3>
 <p>標準の COUNT(), SUM(), AVG(), MIN(), MAX() に加えて, 次の集計関数が利用可能です:</p>
 <ul class="simple">
-<li><p>STDDEV_POP: (GDAL &gt;= 3.10) 数値の母集団標準偏差.</p></li>
-<li><p>STDDEV_SAMP: (GDAL &gt;= 3.10) 数値の <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_deviation#Sample_standard_deviation">標本標準偏差</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STDDEV_POP(numeric_value)</span></code>: (GDAL &gt;= 3.10) numerical population standard deviation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STDDEV_SAMP(numeric_value)</span></code>: (GDAL &gt;= 3.10) numerical <a class="reference external" href="https://en.wikipedia.org/wiki/Standard_deviation#Sample_standard_deviation">sample standard deviation</a></p></li>
+</ul>
+</section>
+<section id="ordered-set-aggregate-functions">
+<h3>Ordered-set aggregate functions<a class="headerlink" href="#ordered-set-aggregate-functions" title="Link to this heading"></a></h3>
+<p>The following aggregate functions are available. Note that they require to allocate an amount of memory proportional to the number of selected rows (for <code class="docutils literal notranslate"><span class="pre">MEDIAN</span></code>, <code class="docutils literal notranslate"><span class="pre">PERCENTILE</span></code> and <code class="docutils literal notranslate"><span class="pre">PERCENTILE_CONT</span></code>) or to the number of values (for <code class="docutils literal notranslate"><span class="pre">MODE</span></code>).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MEDIAN(numeric_value)</span></code>: (GDAL &gt;= 3.10) (continuous) median (equivalent to <code class="docutils literal notranslate"><span class="pre">PERCENTILE(numeric_value,</span> <span class="pre">50)</span></code>). NULL values are ignored.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PERCENTILE(numeric_value,</span> <span class="pre">percentage)</span></code>: (GDAL &gt;= 3.10) (continuous) percentile, with percentage between 0 and 100 (equivalent to <code class="docutils literal notranslate"><span class="pre">PERCENTILE_CONT(numeric_value,</span> <span class="pre">percentage</span> <span class="pre">/</span> <span class="pre">100)</span></code>). NULL values are ignored.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PERCENTILE_CONT(numeric_value,</span> <span class="pre">fraction)</span></code>: (GDAL &gt;= 3.10) (continuous) percentile, with fraction between 0 and 1. NULL values are ignored.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MODE(value)</span></code>: (GDAL &gt;= 3.10): mode, i.e. most frequent input value (strings and numeric values are supported), arbitrarily choosing the first one if there are multiple equally-frequent results. NULL values are ignored.</p></li>
 </ul>
 </section>
 <section id="spatialite-sql-functions">

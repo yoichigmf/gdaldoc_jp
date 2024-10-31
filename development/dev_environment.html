@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>開発環境の設定 &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,11 +22,12 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Development practices" href="dev_practices.html" />
+    <link rel="next" title="開発プラクティス" href="dev_practices.html" />
     <link rel="prev" title="GDAL のソースからのビルド" href="building_from_source.html" /> 
 </head>
 
@@ -75,10 +77,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#setting-development-environment-variables">開発環境変数の設定</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="dev_practices.html">Development practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testing.html">Automated testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_practices.html">開発プラクティス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">自動テスト</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dev_documentation.html">文書のビルド</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake.html">Using GDAL in CMake projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake.html">Cmake プロジェクトでの GDAL の利用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rfc/index.html">RFC list</a></li>
 </ul>
 </li>
@@ -87,6 +89,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -143,7 +146,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="dev_practices.html" class="btn btn-neutral float-right" title="Development practices" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dev_practices.html" class="btn btn-neutral float-right" title="開発プラクティス" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="building_from_source.html" class="btn btn-neutral float-left" title="GDAL のソースからのビルド" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -284,7 +287,7 @@ mkdir<span class="w"> </span>build-asan
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dev_practices.html" class="btn btn-neutral float-right" title="Development practices" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dev_practices.html" class="btn btn-neutral float-right" title="開発プラクティス" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="building_from_source.html" class="btn btn-neutral float-left" title="GDAL のソースからのビルド" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

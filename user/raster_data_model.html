@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ラスターデータモデル &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -79,10 +81,11 @@
 <li class="toctree-l2"><a class="reference internal" href="multithreading.html">マルチスレッディング</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ogr_sql_sqlite_dialect.html">OGR SQL方言とSQLITE SQL方言</a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtual_file_systems.html">GDAL仮想ファイルシステム</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">Feature Style Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">Coordinate epoch support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configoptions.html">Configuration options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">地物スタイル仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">座標元期のサポート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configoptions.html">設定オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -93,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -318,6 +322,19 @@
 <li><p>CLOUDCOVER: 雲の覆い具合. 値は 0 - 100 の範囲でデータが利用できない場合は 999</p></li>
 <li><p>ACQUISITIONDATETIME: 画像の取得日時 (UTC)</p></li>
 </ul>
+<p>Starting with GDAL 3.10, there also exists a raster band level IMAGERY metadata domain with the following items:</p>
+<ul class="simple">
+<li><p>CENTRAL_WAVELENGTH_UM: Central Wavelength in micrometers.</p></li>
+<li><p>FWHM_UM: Full-width half-maximum (FWHM) in micrometers.</p></li>
+</ul>
+<p>Clients can get (resp. set) these metadata items with <a class="reference internal" href="../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand15GetMetadataItemEPKcPKc" title="GDALRasterBand::GetMetadataItem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetMetadataItem()</span></code></a>
+(resp. <a class="reference internal" href="../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand15SetMetadataItemEPKcPKcPKc" title="GDALRasterBand::SetMetadataItem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::SetMetadataItem()</span></code></a>).`</p>
+<p>They are specifically set by the <a class="reference internal" href="../drivers/raster/sentinel2.html#raster-sentinel2"><span class="std std-ref">SENTINEL2 -- Sentinel-2 Products</span></a> and
+<a class="reference internal" href="../drivers/raster/envi.html#raster-envi"><span class="std std-ref">ENVI -- ENVI .hdr Labelled Raster</span></a> drivers (if corresponding metadata items are found in the ENVI header),
+but may also be found in other drivers handling arbitrary GDAL metadata, such as
+the one using the GDAL Persistent Auxiliary Mechanism (PAM / .aux.xml side car files)
+or <a class="reference internal" href="../drivers/raster/vrt.html#raster-vrt"><span class="std std-ref">VRT -- GDAL 仮想形式</span></a> drivers. The <a class="reference internal" href="../drivers/raster/gtiff.html#raster-gtiff"><span class="std std-ref">GTiff -- GeoTIFF File Format</span></a> driver also supports serializing
+and deserializing the band IMAGERY metadata domain in the <code class="docutils literal notranslate"><span class="pre">GDAL_METADATA</span></code> TIFF tag.</p>
 </section>
 <section id="xml-domains">
 <h3>xml: ドメイン<a class="headerlink" href="#xml-domains" title="Link to this heading"></a></h3>
@@ -362,22 +379,50 @@
 <li><p>バンドの色解釈. 以下のいずれかです:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>GCI_Undefined: デフォルト, すべて不明.</p></li>
-<li><p>GCI_GrayIndex: これは独立したグレースケール画像です</p></li>
-<li><p>GCI_PaletteIndex: このラスターはカラーテーブルのインデクスとして機能します</p></li>
-<li><p>GCI_RedBand: このラスターはRGBまたはRGBA画像の赤の部分です</p></li>
-<li><p>GCI_GreenBand: このラスターはRGBまたはRGBA画像の緑の部分です</p></li>
-<li><p>GCI_BlueBand: このラスターはRGBまたはRGBA画像の青の部分です</p></li>
-<li><p>GCI_AlphaBand: このラスターはRGBA画像のアルファの部分です</p></li>
-<li><p>GCI_HueBand: このラスターはHLS画像の色相です</p></li>
-<li><p>GCI_SaturationBand: このラスターはHLS画像の彩度です</p></li>
-<li><p>GCI_LightnessBand: このラスターはHLS画像の輝度です</p></li>
-<li><p>GCI_CyanBand: このバンドはCMY または CMYK 画像のシアン部分です</p></li>
-<li><p>GCI_MagentaBand: このバンドはCMY または CMYK 画像のマゼンダ部分です</p></li>
-<li><p>GCI_YellowBand: このバンドはCMY または CMYK 画像のイエロー部分です</p></li>
-<li><p>GCI_BlackBand: このバンドはCMYK 画像のブラック部分です.</p></li>
+<li><p>GCI_Undefined / &quot;Undefined&quot;: default, nothing is known.</p></li>
+<li><p>GCI_GrayIndex / &quot;Gray&quot;: independent gray-scale image</p></li>
+<li><p>GCI_PaletteIndex / &quot;Palette&quot;: this raster acts as an index into a color table</p></li>
+<li><p>GCI_RedBand / &quot;Red&quot;: red portion of an RGB or RGBA image, or red spectral band [0.62 - 0.69 um]</p></li>
+<li><p>GCI_GreenBand/ &quot;Green&quot;: green portion of an RGB or RGBA image, or green spectral band [0.51 - 0.60 um]</p></li>
+<li><p>GCI_BlueBand / &quot;Blue&quot;: blue portion of an RGB or RGBA image, or blue spectral band [0.45 - 0.53 um]</p></li>
+<li><p>GCI_AlphaBand / &quot;Alpha&quot;: alpha portion of an RGBA image</p></li>
+<li><p>GCI_HueBand / &quot;Hue&quot;: hue of a HLS image</p></li>
+<li><p>GCI_SaturationBand / &quot;Saturation&quot;: saturation of a HLS image</p></li>
+<li><p>GCI_LightnessBand / &quot;Lightness&quot;: lightness of a HLS image</p></li>
+<li><p>GCI_CyanBand / &quot;Cyan&quot;: cyan portion of a CMY or CMYK image</p></li>
+<li><p>GCI_MagentaBand / &quot;Magenta&quot;: magenta portion of a CMY or CMYK image</p></li>
+<li><p>GCI_YellowBand / &quot;Yellow&quot;: yellow portion of a CMY or CMYK image, or yellow spectral band [0.58 - 0.62 um]</p></li>
+<li><p>GCI_BlackBand / &quot;Black&quot;: black portion of a CMYK image.</p></li>
 </ul>
 </div></blockquote>
+<p>Below values have been added in GDAL 3.10:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>GCI_PanBand / &quot;Pan&quot;: Panchromatic band [0.40 - 1.00 um]</p></li>
+<li><p>GCI_CoastalBand / &quot;Coastal&quot;: Coastal band [0.40 - 0.45 um]</p></li>
+<li><p>GCI_RedEdgeBand / &quot;RedEdge&quot;: Red-edge band [0.69 - 0.79 um]</p></li>
+<li><p>GCI_NIRBand / &quot;NIR&quot;: Near-InfraRed (NIR) band [0.75 - 1.40 um]</p></li>
+<li><p>GCI_SWIRBand / &quot;SWIR&quot;: Short-Wavelength InfraRed (SWIR) band [1.40 - 3.00 um]</p></li>
+<li><p>GCI_MWIRBand / &quot;MWIR&quot;: Mid-Wavelength InfraRed (MWIR) band [3.00 - 8.00 um]</p></li>
+<li><p>GCI_LWIRBand / &quot;LWIR&quot;: Long-Wavelength InfraRed (LWIR) band [8.00 - 15 um]</p></li>
+<li><p>GCI_TIRBand / &quot;TIR&quot;: Thermal InfraRed (TIR) band (MWIR or LWIR) [3 - 15 um]</p></li>
+<li><p>GCI_OtherIRBand / &quot;OtherIR&quot;: Other infrared band [0.75 - 1000 um]</p></li>
+<li><p>GCI_SAR_Ka_Band / &quot;SAR_Ka&quot;: Synthetic Aperture Radar (SAR) Ka band [0.8 - 1.1 cm / 27 - 40 GHz]</p></li>
+<li><p>GCI_SAR_K_Band / &quot;SAR_K&quot;: Synthetic Aperture Radar (SAR) K band [1.1 - 1.7 cm / 18 - 27 GHz]</p></li>
+<li><p>GCI_SAR_Ku_Band / &quot;SAR_Ku&quot;: Synthetic Aperture Radar (SAR) Ku band [1.7 - 2.4 cm / 12 - 18 GHz]</p></li>
+<li><p>GCI_SAR_X_Band / &quot;SAR_X&quot;: Synthetic Aperture Radar (SAR) X band [2.4 - 3.8 cm / 8 - 12 GHz]</p></li>
+<li><p>GCI_SAR_C_Band / &quot;SAR_C&quot;: Synthetic Aperture Radar (SAR) C band [3.8 - 7.5 cm / 4 - 8 GHz]</p></li>
+<li><p>GCI_SAR_S_Band / &quot;SAR_S&quot;: Synthetic Aperture Radar (SAR) S band [7.5 - 15 cm / 2 - 4 GHz]</p></li>
+<li><p>GCI_SAR_L_Band / &quot;SAR_L&quot;: Synthetic Aperture Radar (SAR) L band [15 - 30 cm / 1 - 2 GHz]</p></li>
+<li><p>GCI_SAR_P_Band / &quot;SAR_P&quot;: Synthetic Aperture Radar (SAR) P band [30 - 100 cm / 0.3 - 1 GHz]</p></li>
+</ul>
+</div></blockquote>
+<p>For spectral bands, the wavelength ranges are indicative only, and may vary
+depending on sensors. The <code class="docutils literal notranslate"><span class="pre">CENTRAL_WAVELENGTH_UM</span></code> and <code class="docutils literal notranslate"><span class="pre">FWHM_UM</span></code> metadata
+items in the band <code class="docutils literal notranslate"><span class="pre">IMAGERY</span></code> metadata domain of the raster band, when present, will
+give more accurate characteristics.</p>
+<p>Values belonging to the IR domain are in the [GCI_IR_Start, GCI_IR_End] range.
+Values belonging to the SAR domain are in the [GCI_SAR_Start, GCI_SAR_End] range.</p>
 </li>
 <li><p>カラーテーブル, 詳細は後に記述あります.</p></li>
 <li><p>解像度を下げたオーバービュー(ピラミッド)に関する情報（利用可能な場合）.</p></li>

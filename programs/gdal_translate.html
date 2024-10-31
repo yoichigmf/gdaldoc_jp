@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gdal_translate &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -22,6 +23,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -87,6 +89,7 @@
 <li class="toctree-l3"><a class="reference internal" href="gdalbuildvrt.html">gdalbuildvrt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalcompare.html">gdalcompare</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdaldem.html">gdaldem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalenhance.html">gdalenhance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalinfo.html">gdalinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdallocationinfo.html">gdallocationinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalmanage.html">gdalmanage</a></li>
@@ -117,6 +120,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -206,8 +210,8 @@
    <span class="p">[</span><span class="o">-</span><span class="n">a_gt</span> <span class="o">&lt;</span><span class="n">gt0</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">gt1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">gt2</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">gt3</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">gt4</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">gt5</span><span class="o">&gt;</span><span class="p">]</span>
    <span class="p">[</span><span class="o">-</span><span class="n">a_scale</span> <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">a_offset</span> <span class="o">&lt;</span><span class="n">value</span><span class="o">&gt;</span><span class="p">]</span>
    <span class="p">[</span><span class="o">-</span><span class="n">nogcp</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">gcp</span> <span class="o">&lt;</span><span class="n">pixel</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">line</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">easting</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">northing</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">elevation</span><span class="o">&gt;</span><span class="p">]]</span><span class="o">...</span>
-   <span class="o">|-</span><span class="n">colorinterp</span><span class="p">{</span><span class="n">_bn</span><span class="p">}</span> <span class="p">{</span><span class="n">red</span><span class="o">|</span><span class="n">green</span><span class="o">|</span><span class="n">blue</span><span class="o">|</span><span class="n">alpha</span><span class="o">|</span><span class="n">gray</span><span class="o">|</span><span class="n">undefined</span><span class="p">}]</span>
-   <span class="o">|-</span><span class="n">colorinterp</span> <span class="p">{</span><span class="n">red</span><span class="o">|</span><span class="n">green</span><span class="o">|</span><span class="n">blue</span><span class="o">|</span><span class="n">alpha</span><span class="o">|</span><span class="n">gray</span><span class="o">|</span><span class="n">undefined</span><span class="p">},</span><span class="o">...</span><span class="p">]</span>
+   <span class="o">|-</span><span class="n">colorinterp</span><span class="p">{</span><span class="n">_bn</span><span class="p">}</span> <span class="p">{</span><span class="n">red</span><span class="o">|</span><span class="n">green</span><span class="o">|</span><span class="n">blue</span><span class="o">|</span><span class="n">alpha</span><span class="o">|</span><span class="n">gray</span><span class="o">|</span><span class="n">undefined</span><span class="o">|</span><span class="n">pan</span><span class="o">|</span><span class="n">coastal</span><span class="o">|</span><span class="n">rededge</span><span class="o">|</span><span class="n">nir</span><span class="o">|</span><span class="n">swir</span><span class="o">|</span><span class="n">mwir</span><span class="o">|</span><span class="n">lwir</span><span class="o">|...</span><span class="p">}]</span>
+   <span class="o">|-</span><span class="n">colorinterp</span> <span class="p">{</span><span class="n">red</span><span class="o">|</span><span class="n">green</span><span class="o">|</span><span class="n">blue</span><span class="o">|</span><span class="n">alpha</span><span class="o">|</span><span class="n">gray</span><span class="o">|</span><span class="n">undefined</span><span class="o">|</span><span class="n">pan</span><span class="o">|</span><span class="n">coastal</span><span class="o">|</span><span class="n">rededge</span><span class="o">|</span><span class="n">nir</span><span class="o">|</span><span class="n">swir</span><span class="o">|</span><span class="n">mwir</span><span class="o">|</span><span class="n">lwir</span><span class="o">|...</span><span class="p">},</span><span class="o">...</span><span class="p">]</span>
    <span class="p">[</span><span class="o">-</span><span class="n">mo</span> <span class="o">&lt;</span><span class="n">META</span><span class="o">-</span><span class="n">TAG</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="o">-</span><span class="n">dmo</span> <span class="s2">&quot;DOMAIN:META-TAG=VALUE&quot;</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">sds</span><span class="p">]</span>
    <span class="p">[</span><span class="o">-</span><span class="n">co</span> <span class="o">&lt;</span><span class="n">NAME</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="o">-</span><span class="n">stats</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">norat</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">noxmp</span><span class="p">]</span>
    <span class="p">[</span><span class="o">-</span><span class="n">oo</span> <span class="o">&lt;</span><span class="n">NAME</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span>
@@ -320,13 +324,45 @@ of the full resolution source dataset.</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdal_translate-scale">
 <span class="sig-name descname"><span class="pre">-scale</span></span><span class="sig-prename descclassname"> <span class="pre">[&lt;src_min&gt;</span> <span class="pre">&lt;src_max&gt;</span> <span class="pre">[&lt;dst_min&gt;</span> <span class="pre">&lt;dst_max&gt;]]</span></span><a class="headerlink" href="#cmdoption-gdal_translate-scale" title="Link to this definition"></a></dt>
-<dd><p>入力ピクセル値を、範囲  <strong>src_min</strong>  から <strong>src_max</strong> から、範囲 <strong>dst_min</strong>  から <strong>dst_max</strong> にリスケールします。省略された場合、出力範囲は0から255です。省略された場合、入力範囲はソースデータセット全体から自動的に計算されます( <a class="reference internal" href="#cmdoption-gdal_translate-srcwin"><code class="xref std std-option docutils literal notranslate"><span class="pre">-srcwin</span></code></a> または <a class="reference internal" href="#cmdoption-gdal_translate-projwin"><code class="xref std std-option docutils literal notranslate"><span class="pre">-projwin</span></code></a> で指定された可能性のあるウィンドウだけではありません）。これは大規模なソースデータセットでは遅い操作になる可能性があり、複数回使用する場合、複数の gdal_translate 呼び出しに対して、事前に <code class="docutils literal notranslate"><span class="pre">gdalinfo</span> <span class="pre">-stats</span> <span class="pre">{source_dataset}</span></code> を呼び出して統計を事前計算することが有益な場合があります(統計計算のシリアル化をサポートする形式では(GeoTIFF、VRT...））。 <a class="reference internal" href="#cmdoption-gdal_translate-scale"><code class="xref std std-option docutils literal notranslate"><span class="pre">-scale</span></code></a> の後に指定された値は、入力ラスター値に適用するスケールとオフセットを計算するためだけに使用されることに注意してください。特に、<code class="docutils literal notranslate"><span class="pre">src_min</span></code> および <code class="docutils literal notranslate"><span class="pre">src_max</span></code> は入力値をクリップするために使用されません。  <a class="reference internal" href="#cmdoption-gdal_translate-scale"><code class="xref std std-option docutils literal notranslate"><span class="pre">-scale</span></code></a> は複数回繰り返すことができ(1回だけ指定された場合、出力データセットのすべてのバンドに適用されます)、バンドごとのパラメータを指定します。 &quot;-scale_bn&quot; 構文を使用して、特定のバンドのパラメータを指定することも可能です(例:出力データセットの2番目のバンドの場合、&quot;-scale_2&quot; ）。</p>
+<dd><p>Rescale the input pixels values from the range <strong>src_min</strong> to <strong>src_max</strong>
+to the range <strong>dst_min</strong> to <strong>dst_max</strong>.
+If omitted the output range is 0 to 255.
+If omitted the input range is automatically computed from the
+source dataset, in its whole (not just the window of interest potentially
+specified with <a class="reference internal" href="#cmdoption-gdal_translate-srcwin"><code class="xref std std-option docutils literal notranslate"><span class="pre">-srcwin</span></code></a> or <a class="reference internal" href="#cmdoption-gdal_translate-projwin"><code class="xref std std-option docutils literal notranslate"><span class="pre">-projwin</span></code></a>). This may be a
+slow operation on a large source dataset, and if using it multiple times
+for several gdal_translate invocation, it might be beneficial to call
+<code class="docutils literal notranslate"><span class="pre">gdalinfo</span> <span class="pre">-stats</span> <span class="pre">{source_dataset}</span></code> priorly to precompute statistics, for
+formats that support serializing statistics computations (GeoTIFF, VRT...)
+Note that the values specified after <a class="reference internal" href="#cmdoption-gdal_translate-scale"><code class="xref std std-option docutils literal notranslate"><span class="pre">-scale</span></code></a> are only used to compute a scale and
+offset to apply to the input raster values. In particular, <code class="docutils literal notranslate"><span class="pre">src_min</span></code> and
+<code class="docutils literal notranslate"><span class="pre">src_max</span></code> are not used to clip input values unless <a class="reference internal" href="#cmdoption-gdal_translate-exponent"><code class="xref std std-option docutils literal notranslate"><span class="pre">-exponent</span></code></a>
+is also specified.
+Instead of being clipped, source values that are outside the range of <code class="docutils literal notranslate"><span class="pre">src_min</span></code> and <code class="docutils literal notranslate"><span class="pre">src_max</span></code> will be scaled to values outside the range of <code class="docutils literal notranslate"><span class="pre">dst_min</span></code> and <code class="docutils literal notranslate"><span class="pre">dst_max</span></code>.
+If clipping without exponential scaling is desired,
+<code class="docutils literal notranslate"><span class="pre">-exponent</span> <span class="pre">1</span></code> can be used.
+<a class="reference internal" href="#cmdoption-gdal_translate-scale"><code class="xref std std-option docutils literal notranslate"><span class="pre">-scale</span></code></a> can be repeated several times (if specified only once,
+it also applies to all bands of the output dataset), so as to specify per
+band parameters. It is also possible to use the <code class="docutils literal notranslate"><span class="pre">-scale_bn</span></code> syntax where bn
+is a band number (e.g. <code class="docutils literal notranslate"><span class="pre">-scale_2</span></code> for the 2nd band of the output dataset)
+to specify the parameters of one or several specific bands.</p>
 </dd></dl>
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdal_translate-exponent">
 <span class="sig-name descname"><span class="pre">-exponent</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;exp_val&gt;</span></span><a class="headerlink" href="#cmdoption-gdal_translate-exponent" title="Link to this definition"></a></dt>
-<dd><p>べき関数による非線形スケーリングを適用します。exp_valはべき関数の指数です(正でなければなりません)。このオプションは、 -scale オプションと一緒に使用する必要があります。1回だけ指定された場合、-exponent は出力画像のすべてのバンドに適用されます。複数回繰り返して、バンドごとのパラメータを指定することができます。 &quot;-exponent_bn&quot; 構文を使用して、特定のバンドのパラメータを指定することも可能です(例:出力データセットの2番目のバンドの場合、&quot;-exponent_2&quot; ）。</p>
+<dd><p>Apply non-linear scaling with a power function. <code class="docutils literal notranslate"><span class="pre">exp_val</span></code> is the exponent
+of the power function (must be positive). This option must be used with the
+<a class="reference internal" href="#cmdoption-gdal_translate-scale"><code class="xref std std-option docutils literal notranslate"><span class="pre">-scale</span></code></a> option. If specified only once, <a class="reference internal" href="#cmdoption-gdal_translate-exponent"><code class="xref std std-option docutils literal notranslate"><span class="pre">-exponent</span></code></a> applies
+to all bands of
+the output image. It can be repeated several times so as to specify per
+band parameters. It is also possible to use the <code class="docutils literal notranslate"><span class="pre">-exponent_bn</span></code> syntax where
+bn is a band number (e.g. <code class="docutils literal notranslate"><span class="pre">-exponent_2</span></code> for the 2nd band of the output
+dataset) to specify the parameters of one or several specific bands.</p>
+<p>The scaled value <code class="docutils literal notranslate"><span class="pre">Dst</span></code> is calculated from the source value <code class="docutils literal notranslate"><span class="pre">Src</span></code> with the following
+formula:</p>
+<div class="math notranslate nohighlight">
+\[{Dst} = \left( {Dst}_{max} - {Dst}_{min} \right) \times \operatorname{max} \left( 0, \operatorname{min} \left( 1, \left( \frac{{Src} - {Src}_{min}}{{Src}_{max}-{Src}_{min}} \right)^{exp\_val} \right) \right) + {Dst}_{min}\]</div>
 </dd></dl>
 
 <dl class="std option">
@@ -424,7 +460,7 @@ complete WKT, PROJ.4, EPSG:n or a file containing the WKT.</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdal_translate-a_gt">
 <span class="sig-name descname"><span class="pre">-a_gt</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;gt(0)&gt;</span> <span class="pre">&lt;gt(1)&gt;</span> <span class="pre">&lt;gt(2)&gt;</span> <span class="pre">&lt;gt(3)&gt;</span> <span class="pre">&lt;gt(4)&gt;</span> <span class="pre">&lt;gt(5)&gt;</span></span><a class="headerlink" href="#cmdoption-gdal_translate-a_gt" title="Link to this definition"></a></dt>
-<dd><p>出力ファイルのジオトランスフォームを割り当て/オーバーライドします。これにより、ソースファイルから派生するはずのものを無視して、出力ファイルにジオトランスフォームが割り当てられます。したがって、指定されたSRSへの再投影は発生しません。<a class="reference internal" href="../tutorials/geotransforms_tut.html#geotransforms-tut"><span class="std std-ref">Geotransform Tutorial</span></a> を参照してください。これは <a class="reference internal" href="#cmdoption-gdal_translate-a_ullr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-a_ullr</span></code></a> と相互排他です。</p>
+<dd><p>出力ファイルのジオトランスフォームを割り当て/オーバーライドします。これにより、ソースファイルから派生するはずのものを無視して、出力ファイルにジオトランスフォームが割り当てられます。したがって、指定されたSRSへの再投影は発生しません。<a class="reference internal" href="../tutorials/geotransforms_tut.html#geotransforms-tut"><span class="std std-ref">地理変換チュートリアル</span></a> を参照してください。これは <a class="reference internal" href="#cmdoption-gdal_translate-a_ullr"><code class="xref std std-option docutils literal notranslate"><span class="pre">-a_ullr</span></code></a> と相互排他です。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 3.8.</span></p>
 </div>
@@ -438,7 +474,7 @@ complete WKT, PROJ.4, EPSG:n or a file containing the WKT.</p>
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdal_translate-colorinterp_X">
-<span class="sig-name descname"><span class="pre">-colorinterp_X</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;red|green|blue|alpha|gray|undefined&gt;</span></span><a class="headerlink" href="#cmdoption-gdal_translate-colorinterp_X" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">-colorinterp_X</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;red|green|blue|alpha|gray|undefined|pan|coastal|rededge|nir|swir|mwir|lwir|...&gt;</span></span><a class="headerlink" href="#cmdoption-gdal_translate-colorinterp_X" title="Link to this definition"></a></dt>
 <dd><p>バンドX(Xは1から始まる有効なバンド番号)のカラー解釈をオーバーライドします。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 2.3.</span></p>
@@ -447,7 +483,7 @@ complete WKT, PROJ.4, EPSG:n or a file containing the WKT.</p>
 
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-gdal_translate-colorinterp">
-<span class="sig-name descname"><span class="pre">-colorinterp</span></span><span class="sig-prename descclassname"> <span class="pre">{red|green|blue|alpha|gray|undefined},...</span></span><a class="headerlink" href="#cmdoption-gdal_translate-colorinterp" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">-colorinterp</span></span><span class="sig-prename descclassname"> <span class="pre">{red|green|blue|alpha|gray|undefined|pan|coastal|rededge|nir|swir|mwir|lwir|...},...</span></span><a class="headerlink" href="#cmdoption-gdal_translate-colorinterp" title="Link to this definition"></a></dt>
 <dd><p>すべての指定されたバンドのカラー解釈をオーバーライドします。たとえば、4バンド出力データセットの場合は-colorinterp red,green,blue,alphaです。</p>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 2.3.</span></p>
@@ -476,10 +512,10 @@ complete WKT, PROJ.4, EPSG:n or a file containing the WKT.</p>
 <p>利用可能な作成オプションは、形式ドライバによって異なり、一部の単純な形式には作成オプションがまったくありません。形式ごとにサポートされるオプションのリストは、<a class="reference internal" href="raster_common_options.html#raster-common-options-formats"><span class="std std-ref">--formats</span></a> コマンドラインオプションでリストできますが、形式のドキュメントはドライバ作成オプションに関する情報の最終的なソースです。形式ごとの法的な作成オプションについては、<a class="reference internal" href="../drivers/raster/index.html#raster-drivers"><span class="std std-ref">ラスタードライバー</span></a> 形式固有のドキュメントを参照してください。</p>
 <p>ドライバ固有の作成オプションに加えて、gdal_translate(および <a class="reference internal" href="../api/gdal_utils.html#_CPPv413GDALTranslatePKc12GDALDatasetHPK20GDALTranslateOptionsPi" title="GDALTranslate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALTranslate()</span></code></a> および <a class="reference internal" href="../api/raster_c_api.html#_CPPv414GDALCreateCopy11GDALDriverHPKc12GDALDatasetHi12CSLConstList16GDALProgressFuncPv" title="GDALCreateCopy"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreateCopy()</span></code></a> )は次のオプションを認識します：</p>
 <ul>
-<li><p id="programs/gdal_translate-co-APPEND_SUBDATASET"><strong>APPEND_SUBDATASET=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. </p>
+<li><p id="programs/gdal_translate-co-APPEND_SUBDATASET"><strong>APPEND_SUBDATASET=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. </p>
 <p>複数のサブデータセットの追加をサポートするドライバ(例:GTIFF、NITF)について、既存のデータセットの事前破壊を回避するためにYESに指定できます</p>
 </li>
-<li><p id="programs/gdal_translate-co-COPY_SRC_MDD"><strong>COPY_SRC_MDD=[AUTO/YES/NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. </p>
+<li><p id="programs/gdal_translate-co-COPY_SRC_MDD"><strong>COPY_SRC_MDD=[AUTO​/​YES​/​NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. </p>
 <p>ソースデータセットのメタデータドメインを宛先データセットにコピーするかどうかを定義します。デフォルトのAUTOモードでは、&quot;safe&quot; ドメインのみがコピーされます。これには、デフォルトのメタデータドメインが含まれます(一部のドライバにはIMD、RPC、GEOLOCATIONなどの他のドメインが含まれる場合があります)。YESに設定すると、すべてのドメインがコピーされます(ただし、IMAGE_STRUCTUREやDERIVED_SUBDATASETSなどのいくつかの予約されたものを除く)。現在、GTiff、COG、VRT、PNG、およびJPEGドライバでのみ認識されます。</p>
 <p>NOに設定すると、ソースメタデータはコピーされません。</p>
 </li>

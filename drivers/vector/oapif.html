@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OGC API - Features &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -160,6 +163,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -283,6 +287,8 @@ the server can be queried for equalities, potentially combined with a
 AND logical operator. More complex requests will be partly or completely
 evaluated on client-side.</p>
 <p>Rectangular spatial filtering is forward to the server as well.</p>
+<p>Starting with GDAL 3.10, the <code class="docutils literal notranslate"><span class="pre">DATETIME</span></code> open option can also be specified for
+temporal filtering.</p>
 </section>
 <section id="crs-support">
 <h2>CRS support<a class="headerlink" href="#crs-support" title="Link to this heading"></a></h2>
@@ -319,7 +325,7 @@ If not set the default (20) will be used.</p>
 <li><p id="drivers/vector/oapif-oo-USERPWD"><strong>USERPWD=value: </strong>May be supplied with <em>userid:password</em> to pass a userid
 and password to the remote server.</p>
 </li>
-<li><p id="drivers/vector/oapif-oo-IGNORE_SCHEMA"><strong>IGNORE_SCHEMA=[YES/NO]: </strong> (GDAL &gt;= 3.1) <p>Set to YES to ignore the XML
+<li><p id="drivers/vector/oapif-oo-IGNORE_SCHEMA"><strong>IGNORE_SCHEMA=[YES​/​NO]: </strong> (GDAL &gt;= 3.1) <p>Set to YES to ignore the XML
 Schema or JSON schema that may be offered by the server.</p>
 </p>
 </li>
@@ -333,11 +339,15 @@ that if a layer does not list the PREFERRED_CRS in its list of supported CRS,
 the default CRS (storageCRS when present, otherwise EPSG:4326) will be used.
 <a class="reference internal" href="#drivers/vector/oapif-oo-CRS"><code class="docutils literal notranslate"><span class="pre">CRS</span></code></a> and <a class="reference internal" href="#drivers/vector/oapif-oo-PREFERRED_CRS"><code class="docutils literal notranslate"><span class="pre">PREFERRED_CRS</span></code></a> option are mutually exclusive.</p>
 </li>
-<li><p id="drivers/vector/oapif-oo-SERVER_FEATURE_AXIS_ORDER"><strong>SERVER_FEATURE_AXIS_ORDER=[AUTHORITY_COMPLIANT/GIS_FRIENDLY]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTHORITY_COMPLIANT</span></code>. This option can be set to GIS_FRIENDLY if axis order issue are noticed in
+<li><p id="drivers/vector/oapif-oo-SERVER_FEATURE_AXIS_ORDER"><strong>SERVER_FEATURE_AXIS_ORDER=[AUTHORITY_COMPLIANT​/​GIS_FRIENDLY]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTHORITY_COMPLIANT</span></code>. This option can be set to GIS_FRIENDLY if axis order issue are noticed in
 features received from the server, indicating that the server does not return
 them in the axis order mandated by the CRS authority, but in a more traditional
 &quot;GIS friendly&quot; order, with longitude/easting first, latitude/northing second.
 Do not set this option unless actual problems arise.</p>
+</li>
+<li><p id="drivers/vector/oapif-oo-DATETIME"><strong>DATETIME=value: </strong> (GDAL &gt;= 3.10) <p>Temporal filter. Its value should match the ones mentioned at
+<a class="reference external" href="https://docs.ogc.org/is/17-069r3/17-069r3.html#_parameter_datetime">paragraph Parameter datetime of the OGC API Features specification</a></p>
+</p>
 </li>
 </ul>
 </section>

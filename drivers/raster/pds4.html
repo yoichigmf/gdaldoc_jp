@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PDS4 -- NASA Planetary Data System (Version 4) &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -178,7 +181,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#subdataset-multiple-image-support">Subdataset / multiple image support</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pds4-raster-examples">PDS4 raster examples</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pds4-vector-examples">PDS4 vector examples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#see-also">See Also:</a></li>
 </ul>
 </li>
@@ -207,6 +209,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -240,6 +243,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -379,7 +383,7 @@ Defaults to Altitude.</p>
 </li>
 <li><p id="drivers/raster/pds4-oo-WKT"><strong>WKT=value: </strong>Name of a field containing a WKT value.</p>
 </li>
-<li><p id="drivers/raster/pds4-oo-KEEP_GEOM_COLUMNS"><strong>KEEP_GEOM_COLUMNS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to expose original
+<li><p id="drivers/raster/pds4-oo-KEEP_GEOM_COLUMNS"><strong>KEEP_GEOM_COLUMNS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to expose original
 x/y/geometry columns as regular fields.</p>
 </li>
 </ul>
@@ -405,13 +409,13 @@ The following dataset creation options are available:</p>
 external image filename. The default is 'img' for <a class="reference internal" href="#drivers/raster/pds4-co-IMAGE_FORMAT"><code class="docutils literal notranslate"><span class="pre">IMAGE_FORMAT=RAW</span></code></a>
 or 'tif' for <a class="reference internal" href="#drivers/raster/pds4-co-IMAGE_FORMAT"><code class="docutils literal notranslate"><span class="pre">IMAGE_FORMAT=GEOTIFF</span></code></a>.</p>
 </li>
-<li><p id="drivers/raster/pds4-co-IMAGE_FORMAT"><strong>IMAGE_FORMAT=[RAW/GEOTIFF]: </strong>Format of the image file. If using
+<li><p id="drivers/raster/pds4-co-IMAGE_FORMAT"><strong>IMAGE_FORMAT=[RAW​/​GEOTIFF]: </strong>Format of the image file. If using
 RAW, the imagery is put in a raw file whose filename is the main
 filename with a .img extension. If using GEOTIFF, the imagery is
 put in a separate GeoTIFF file, whose filename is the main
 filename with a .tif extension. Defaults to RAW</p>
 </li>
-<li><p id="drivers/raster/pds4-co-INTERLEAVE"><strong>INTERLEAVE=[BSQ/BIP/BIL]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">BSQ</span></code>. Pixel organization in the image
+<li><p id="drivers/raster/pds4-co-INTERLEAVE"><strong>INTERLEAVE=[BSQ​/​BIP​/​BIL]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">BSQ</span></code>. Pixel organization in the image
 file. BSQ is Band SeQuential, BIP is Band Interleaved per Pixel
 and BIL is Band Interleave Per Line. BIL is not valid for <a class="reference internal" href="#drivers/raster/pds4-co-IMAGE_FORMAT"><code class="docutils literal notranslate"><span class="pre">IMAGE_FORMAT=GEOTIFF</span></code></a>.
 Starting with GDAL 3.5, when copying from a source dataset with multiple bands
@@ -419,9 +423,9 @@ which advertises a INTERLEAVE metadata item, if the INTERLEAVE creation option
 is not specified, the source dataset INTERLEAVE will be automatically taken
 into account.</p>
 </li>
-<li><p id="drivers/raster/pds4-co-USE_SRC_LABEL"><strong>USE_SRC_LABEL=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to use the source label in PDS4 to PDS4 conversions.</p>
+<li><p id="drivers/raster/pds4-co-USE_SRC_LABEL"><strong>USE_SRC_LABEL=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to use the source label in PDS4 to PDS4 conversions.</p>
 </li>
-<li><p id="drivers/raster/pds4-co-ARRAY_TYPE"><strong>ARRAY_TYPE=[Array/Array_2D/Array_2D_Image/Array_2D_Map/Array_2D_Spectrum/Array_3D/Array_3D_Image/Array_3D_Movie/Array_3D_Spectrum]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">Array_3D_Image</span></code>. To set the XML element that defines the type of array.
+<li><p id="drivers/raster/pds4-co-ARRAY_TYPE"><strong>ARRAY_TYPE=[Array​/​Array_2D​/​Array_2D_Image​/​Array_2D_Map​/​Array_2D_Spectrum​/​Array_3D​/​Array_3D_Image​/​Array_3D_Movie​/​Array_3D_Spectrum]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">Array_3D_Image</span></code>. To set the XML element that defines the type of array.
 Using a Array_2D* for a multiband image is not
 supported. When using a Array_2D* value, INTERLEAVE will be
 ignored.</p>
@@ -433,7 +437,7 @@ Element_Array.unit. If not provided, the unit of the source band
 in case of copying from another raster will be used (if present on
 the source band).</p>
 </li>
-<li><p id="drivers/raster/pds4-co-CREATE_LABEL_ONLY"><strong>CREATE_LABEL_ONLY=[YES/NO]: </strong> (GDAL &gt;= 3.1) If set to YES, and used
+<li><p id="drivers/raster/pds4-co-CREATE_LABEL_ONLY"><strong>CREATE_LABEL_ONLY=[YES​/​NO]: </strong> (GDAL &gt;= 3.1) If set to YES, and used
 in a gdal_translate / CreateCopy() context where the source dataset is
 a ENVI, GeoTIFF, ISIS3, VICAR, FITS or PDS3 dataset, whose layout is
 compatible of a raw binary format, as supported by PDS4, then only the
@@ -452,15 +456,12 @@ yyyy value.</p></li>
 and not creating from an existing PDS4 file, the
 data/pds4_template.xml file will be used. For GDAL utilities to
 find this default PDS4 template, GDAL's data directory should be
-defined in your environment (typically on Windows builds). Consult
-the
-<a class="reference external" href="https://trac.osgeo.org/gdal/wiki/FAQInstallationAndBuilding#HowtosetGDAL_DATAvariable">wiki</a>
-for more information.</p>
+defined in your environment (typically on Windows builds).</p>
 </p>
 </li>
-<li><p id="drivers/raster/pds4-co-LATITUDE_TYPE"><strong>LATITUDE_TYPE=[Planetocentric/Planetographic]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">Planetocentric</span></code>. Value of latitude_type.</p>
+<li><p id="drivers/raster/pds4-co-LATITUDE_TYPE"><strong>LATITUDE_TYPE=[Planetocentric​/​Planetographic]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">Planetocentric</span></code>. Value of latitude_type.</p>
 </li>
-<li><p id="drivers/raster/pds4-co-LONGITUDE_DIRECTION"><strong>LONGITUDE_DIRECTION=[Positive East/Positive West.]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">Positive</span></code> East. Value of longitude_direction.</p>
+<li><p id="drivers/raster/pds4-co-LONGITUDE_DIRECTION"><strong>LONGITUDE_DIRECTION=[Positive East​/​Positive West.]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">Positive</span></code> East. Value of longitude_direction.</p>
 </li>
 <li><p id="drivers/raster/pds4-co-RADII"><strong>RADII=semi_major_radius,semi_minor_radius&gt;: </strong>To override the
 ones of the SRS. Note that the first value (semi_major_radius)
@@ -482,7 +483,7 @@ element.</p>
 appending a new table to an existing table, the following layer creation
 options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/pds4-lco-TABLE_TYPE"><strong>TABLE_TYPE=[DELIMITED/CHARACTER/BINARY.]: </strong>Determines the type of
+<li><p id="drivers/raster/pds4-lco-TABLE_TYPE"><strong>TABLE_TYPE=[DELIMITED​/​CHARACTER​/​BINARY.]: </strong>Determines the type of
 the PDS4 table to create. DELIMITED is the default and corresponds to
 a CSV table file (with comma field separator). CHARACTER corresponds
 to a fixed-width ASCII table. BINARY corresponds to a fixed-width
@@ -492,10 +493,10 @@ field definition. Only DELIMITED supports arbitrary encoding of
 geometry as a WKT string. The two other table types only support
 points for geographic coordinates (LAT, LONG).</p>
 </li>
-<li><p id="drivers/raster/pds4-lco-LINE_ENDING"><strong>LINE_ENDING=[CRLF/LF]: </strong> (GDAL &gt;= 3.4)  Defaults to <code class="docutils literal notranslate"><span class="pre">CRLF</span></code>. Determines the line-ending character sequence.
+<li><p id="drivers/raster/pds4-lco-LINE_ENDING"><strong>LINE_ENDING=[CRLF​/​LF]: </strong> (GDAL &gt;= 3.4)  Defaults to <code class="docutils literal notranslate"><span class="pre">CRLF</span></code>. Determines the line-ending character sequence.
 Only applies if <a class="reference internal" href="#drivers/raster/pds4-lco-TABLE_TYPE"><code class="docutils literal notranslate"><span class="pre">TABLE_TYPE</span></code></a> is DELIMITED or CHARACTER.</p>
 </li>
-<li><p id="drivers/raster/pds4-lco-GEOM_COLUMNS"><strong>GEOM_COLUMNS=[AUTO/WKT/LONG_LAT]: </strong>Specify how the geometry is
+<li><p id="drivers/raster/pds4-lco-GEOM_COLUMNS"><strong>GEOM_COLUMNS=[AUTO​/​WKT​/​LONG_LAT]: </strong>Specify how the geometry is
 encoded. In AUTO mode, for DELIMITED tables, if the input geometry is
 Point with a geographic CRS attached to the laye, then a LONG and LAT
 columns will be created to store the point coordinates. For other
@@ -504,7 +505,7 @@ can also be used to force a WKT column to be created when a LONG and
 LAT columns would have been possible. For fixed-width table types,
 only AUTO and LONG_LAT are possible.</p>
 </li>
-<li><p id="drivers/raster/pds4-lco-CREATE_VRT"><strong>CREATE_VRT=[YES/NO]: </strong>Defaults to YES for a DELIMITED table. In
+<li><p id="drivers/raster/pds4-lco-CREATE_VRT"><strong>CREATE_VRT=[YES​/​NO]: </strong>Defaults to YES for a DELIMITED table. In
 that case, a OGR VRT (XML file) will be created along-side the .csv
 file.</p>
 </li>
@@ -522,7 +523,7 @@ layer with geographic CRS</p>
 </li>
 <li><p id="drivers/raster/pds4-lco-WKT"><strong>WKT=value: </strong>Name of a field containing a WKT value.</p>
 </li>
-<li><p id="drivers/raster/pds4-lco-SAME_DIRECTORY"><strong>SAME_DIRECTORY=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether table files should be created in
+<li><p id="drivers/raster/pds4-lco-SAME_DIRECTORY"><strong>SAME_DIRECTORY=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether table files should be created in
 the same directory, or in a subdirectory. Defaults to NO, that is
 that table files will be created in a subdirectory whose name is the
 basename of the XML file. For example if creating a &quot;foo.xml&quot; PDS4
@@ -720,11 +721,6 @@ columns that contain longitude and latitude:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ogr2ogr my_out_pds4.xml in.shp
 </pre></div>
 </div>
-</section>
-<section id="limitations">
-<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>As a new driver and new format, please report any issues to the bug
-tracker, as explained on the <a class="reference external" href="https://trac.osgeo.org/gdal/wiki">wiki</a></p>
 </section>
 <section id="see-also">
 <h2>See Also:<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>

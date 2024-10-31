@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ベクターデーターモデル &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -78,10 +80,11 @@
 <li class="toctree-l2"><a class="reference internal" href="multithreading.html">マルチスレッディング</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ogr_sql_sqlite_dialect.html">OGR SQL方言とSQLITE SQL方言</a></li>
 <li class="toctree-l2"><a class="reference internal" href="virtual_file_systems.html">GDAL仮想ファイルシステム</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">Feature Style Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">Coordinate epoch support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configoptions.html">Configuration options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">地物スタイル仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">座標元期のサポート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configoptions.html">設定オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -92,6 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -187,7 +191,7 @@
 <p>理論的には, 既存の <a class="reference internal" href="../api/ogrgeometry_cpp.html#_CPPv411OGRGeometry" title="OGRGeometry"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRGeometry</span></code></a> クラスから他のまたはより具体的なジオメトリクラスを派生させることが可能ですが, これは十分に考慮されていない側面です. 特に, <a class="reference internal" href="../api/ogrgeometry_cpp.html#_CPPv418OGRGeometryFactory" title="OGRGeometryFactory"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRGeometryFactory</span></code></a> を変更せずに, 専用のクラスを作成することが可能です.</p>
 <section id="compatibility-issues-with-non-linear-geometries">
 <h3>非線形ジオメトリとの互換性の問題<a class="headerlink" href="#compatibility-issues-with-non-linear-geometries" title="Link to this heading"></a></h3>
-<p>非線形ジオメトリを持つレイヤーのドライバーで非線形ジオメトリを持つ地物を作成または変更すると, そのジオメトリが最も近い一致する線形ジオメトリに変換されるように, 一般的なメカニズムが導入されました. この線形化は, <a class="reference internal" href="configoptions.html#configoptions-vector"><span class="std std-ref">Vector related options</span></a> を使用して制御できます.</p>
+<p>非線形ジオメトリを持つレイヤーのドライバーで非線形ジオメトリを持つ地物を作成または変更すると, そのジオメトリが最も近い一致する線形ジオメトリに変換されるように, 一般的なメカニズムが導入されました. この線形化は, <a class="reference internal" href="configoptions.html#configoptions-vector"><span class="std std-ref">ベクター関連オプション</span></a> を使用して制御できます.</p>
 <p>一方, OGR C API からデータを取得する場合, <a class="reference internal" href="../api/vector_c_api.html#_CPPv436OGRSetNonLinearGeometriesEnabledFlagi" title="OGRSetNonLinearGeometriesEnabledFlag"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRSetNonLinearGeometriesEnabledFlag()</span></code></a> 関数を使用して, 必要に応じてジオメトリとレイヤーのジオメトリタイプが線形近似に変換されるようにすることができます.</p>
 </section>
 </section>
@@ -226,8 +230,8 @@
 <h2>レイヤー<a class="headerlink" href="#layer" title="Link to this heading"></a></h2>
 <p><a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> は, データソース内の地物レイヤーを表します. <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> 内のすべての地物は共通のスキーマを共有し, 同じ <a class="reference internal" href="../api/ogrfeature_cpp.html#_CPPv414OGRFeatureDefn" title="OGRFeatureDefn"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRFeatureDefn</span></code></a> です. <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> クラスには, データソースから地物を読み取るためのメソッドも含まれています. <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> は, ディスク上のファイルやデータベースクエリの結果など, 下位のデータソースから地物を読み書きするためのゲートウェイと考えることができます.</p>
 <p><a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> には, 順次およびランダムな読み取りおよび書き込みのためのメソッドが含まれています. 読み取りアクセス (<a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer14GetNextFeatureEv" title="OGRLayer::GetNextFeature"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::GetNextFeature()</span></code></a> メソッドを介して) は通常, 1 回に 1 つずつすべての地物を順次読み取ります; ただし, <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> に空間フィルタを設定することで, 特定の地理的領域に交差する地物を返すように制限することができます (<a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer16SetSpatialFilterEP11OGRGeometry" title="OGRLayer::SetSpatialFilter"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::SetSpatialFilter()</span></code></a> メソッドを介して). 属性に対するフィルタは, <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer18SetAttributeFilterEPKc" title="OGRLayer::SetAttributeFilter"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::SetAttributeFilter()</span></code></a> メソッドでのみ設定できます. デフォルトでは, すべての利用可能な属性とジオメトリが読み取られますが, これはフィールドを無視するようにフラグを立てることで制御できます (<a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer16SetIgnoredFieldsE12CSLConstList" title="OGRLayer::SetIgnoredFields"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::SetIgnoredFields()</span></code></a>).</p>
-<p>GDAL 3.6 以降, <code class="docutils literal notranslate"><span class="pre">GetNextFeature</span></code> を介して地物を取得する代わりに, <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer14GetArrowStreamEP16ArrowArrayStream12CSLConstList" title="OGRLayer::GetArrowStream"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::GetArrowStream()</span></code></a> メソッドを使用して, バッチで地物を取得し, 列指向のメモリレイアウトで取得することができます (cf <a class="reference internal" href="../tutorials/vector_api_tut.html#vector-api-tut-arrow-stream"><span class="std std-ref">Reading From OGR using the Arrow C Stream data interface</span></a>).</p>
-<p><a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> には, レイヤー内の地物で使用できるスタイルセットを提供する <a class="reference internal" href="../api/ogrfeaturestyle_cpp.html#_CPPv413OGRStyleTable" title="OGRStyleTable"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRStyleTable</span></code></a> を格納することもできます. 地物スタイルの GDAL の処理に関する詳細は, <a class="reference internal" href="ogr_feature_style.html#ogr-feature-style"><span class="std std-ref">Feature Style Specification</span></a> にあります.</p>
+<p>GDAL 3.6 以降, <code class="docutils literal notranslate"><span class="pre">GetNextFeature</span></code> を介して地物を取得する代わりに, <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv4N8OGRLayer14GetArrowStreamEP16ArrowArrayStream12CSLConstList" title="OGRLayer::GetArrowStream"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRLayer::GetArrowStream()</span></code></a> メソッドを使用して, バッチで地物を取得し, 列指向のメモリレイアウトで取得することができます (cf <a class="reference internal" href="../tutorials/vector_api_tut.html#vector-api-tut-arrow-stream"><span class="std std-ref">Arrow C Streamデータインターフェースを使用してOGRから読み込む</span></a>).</p>
+<p><a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> には, レイヤー内の地物で使用できるスタイルセットを提供する <a class="reference internal" href="../api/ogrfeaturestyle_cpp.html#_CPPv413OGRStyleTable" title="OGRStyleTable"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRStyleTable</span></code></a> を格納することもできます. 地物スタイルの GDAL の処理に関する詳細は, <a class="reference internal" href="ogr_feature_style.html#ogr-feature-style"><span class="std std-ref">地物スタイル仕様</span></a> にあります.</p>
 <p>現在の OGR アーキテクチャの欠点の 1 つは, 空間フィルタと属性フィルタが, データソース内の特定のレイヤーの唯一の代表であることを意図している <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> に直接設定されていることです. これは, 各々に異なる空間フィルタが設定された複数の読み取り操作を同時にアクティブにすることができないことを意味します.</p>
 <p>もう 1 つの疑問は, なぜ <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> と <a class="reference internal" href="../api/ogrfeature_cpp.html#_CPPv414OGRFeatureDefn" title="OGRFeatureDefn"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRFeatureDefn</span></code></a> クラスが異なるのかということです. <a class="reference internal" href="../api/ogrlayer_cpp.html#_CPPv48OGRLayer" title="OGRLayer"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRLayer</span></code></a> は常に <a class="reference internal" href="../api/ogrfeature_cpp.html#_CPPv414OGRFeatureDefn" title="OGRFeatureDefn"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRFeatureDefn</span></code></a> との一対一の関係を持つため, なぜクラスを統合しないのでしょうか? その理由は 2 つあります:</p>
 <ul class="simple">

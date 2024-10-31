@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GDAL仮想ファイルシステム(圧縮、ネットワークホスト、など...): /vsimem, /vsizip, /vsitar, /vsicurl, ... &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,11 +22,12 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Feature Style Specification" href="ogr_feature_style.html" />
+    <link rel="next" title="地物スタイル仕様" href="ogr_feature_style.html" />
     <link rel="prev" title="SQL SQLite方言" href="sql_sqlite_dialect.html" /> 
 </head>
 
@@ -106,10 +108,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#vsicrypt-encrypted-files">/vsicrypt/ (暗号化ファイル)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">Feature Style Specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">Coordinate epoch support</a></li>
-<li class="toctree-l2"><a class="reference internal" href="configoptions.html">Configuration options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">地物スタイル仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">座標元期のサポート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configoptions.html">設定オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security considerations</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
@@ -120,6 +123,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -176,7 +180,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="ogr_feature_style.html" class="btn btn-neutral float-right" title="Feature Style Specification" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ogr_feature_style.html" class="btn btn-neutral float-right" title="地物スタイル仕様" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sql_sqlite_dialect.html" class="btn btn-neutral float-left" title="SQL SQLite方言" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -228,7 +232,7 @@
 <p>注: .zipファイルがそのルートにある単一のファイルを含む特定の場合には, <code class="file docutils literal notranslate"><span class="pre">/vsizip/path/to/the/file.zip</span></code> とだけ記述するだけで動作します.</p>
 <p>/zip/ ハンドラに固有の次の設定オプションがあります:</p>
 <ul class="simple">
-<li><p id="config-CPL_SOZIP_ENABLED"><strong>CPL_SOZIP_ENABLED=[YES/NO/AUTO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Determines whether the SOZip optimization should be enabled. If <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>,
+<li><p id="config-CPL_SOZIP_ENABLED"><strong>CPL_SOZIP_ENABLED=[YES​/​NO​/​AUTO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Determines whether the SOZip optimization should be enabled. If <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>,
 SOZip will be enabled for uncompressed files larger than
 <a class="reference internal" href="#config-CPL_SOZIP_MIN_FILE_SIZE"><code class="docutils literal notranslate"><span class="pre">CPL_SOZIP_MIN_FILE_SIZE</span></code></a>.</p>
 </li>
@@ -283,7 +287,7 @@ SOZip will be enabled for uncompressed files larger than
 <p>GDALによって解凍された形式でgzippedファイルを表示するには, <code class="file docutils literal notranslate"><span class="pre">/vsigzip/path/to/the/file.gz</span></code> 構文を使用する必要があります.ここで <code class="file docutils literal notranslate"><span class="pre">path/to/the/file.gz</span></code> は相対または絶対です.</p>
 <p>/vsigzip/ ハンドラに固有の次の設定オプションがあります:</p>
 <ul class="simple">
-<li><p id="config-CPL_VSIL_GZIP_WRITE_PROPERTIES"><strong>CPL_VSIL_GZIP_WRITE_PROPERTIES=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, when the file is located in a writable location, a file with
+<li><p id="config-CPL_VSIL_GZIP_WRITE_PROPERTIES"><strong>CPL_VSIL_GZIP_WRITE_PROPERTIES=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, when the file is located in a writable location, a file with
 extension .gz.properties is created with an indication of the
 uncompressed file size.</p>
 </li>
@@ -421,6 +425,10 @@ uncompressed file size.</p>
 <p>GDAL 2.1.3以降, <a class="reference internal" href="configoptions.html#config-CURL_CA_BUNDLE"><code class="docutils literal notranslate"><span class="pre">CURL_CA_BUNDLE</span></code></a> または <a class="reference internal" href="configoptions.html#config-SSL_CERT_FILE"><code class="docutils literal notranslate"><span class="pre">SSL_CERT_FILE</span></code></a> 設定オプションを使用して,認証局(CA)バンドルファイルのパスを設定できます(指定されていない場合, curl はシステムの場所にファイルを使用します).</p>
 <p>GDAL 2.3以降,追加のHTTPヘッダーを送信するために, <a class="reference internal" href="configoptions.html#config-GDAL_HTTP_HEADER_FILE"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_HEADER_FILE</span></code></a> 設定オプションを設定して,&quot;key: value&quot; HTTPヘッダーを含むテキストファイルのファイル名を指定できます.</p>
 <p>代替として,GDAL 3.6以降, <a class="reference internal" href="configoptions.html#config-GDAL_HTTP_HEADERS"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_HEADERS</span></code></a> 設定オプションを使用してヘッダーを指定することもできます. <a class="reference internal" href="configoptions.html#config-CPL_CURL_VERBOSE"><code class="docutils literal notranslate"><span class="pre">CPL_CURL_VERBOSE=YES</span></code></a> は, <code class="docutils literal notranslate"><span class="pre">--debug</span></code> と組み合わせて,それらを表示することができます.</p>
+<p>Starting with GDAL 3.10, the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header is no longer automatically
+forwarded when redirections are followed.
+That behavior can be configured by setting the
+<a class="reference internal" href="configoptions.html#config-CPL_VSIL_CURL_AUTHORIZATION_HEADER_ALLOWED_IF_REDIRECT"><code class="docutils literal notranslate"><span class="pre">CPL_VSIL_CURL_AUTHORIZATION_HEADER_ALLOWED_IF_REDIRECT</span></code></a> configuration option.</p>
 <p>GDAL 2.3以降, <a class="reference internal" href="configoptions.html#config-GDAL_HTTP_MAX_RETRY"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_MAX_RETRY</span></code></a> (試行回数) および <a class="reference internal" href="configoptions.html#config-GDAL_HTTP_RETRY_DELAY"><code class="docutils literal notranslate"><span class="pre">GDAL_HTTP_RETRY_DELAY</span></code></a> (秒単位) 設定オプションを設定することで,HTTPエラー429, 502, 503または504の場合にリクエストの再試行が行われます.</p>
 <p>GDAL 3.6以降,以下の設定オプションでTCP keep-alive機能を制御できます(詳細な説明については,https://daniel.haxx.se/blog/2020/02/10/curl-ootw-keepalive-time/ を参照してください):</p>
 <ul class="simple">
@@ -460,7 +468,7 @@ uncompressed file size.</p>
 <p><a class="reference internal" href="#vsicurl"><span class="std std-ref">/vsicurl/</span></a> の一般的な情報が適用されます.</p>
 <p>/vsis3/ ハンドラに固有の以下の設定オプションがあります:</p>
 <ul class="simple">
-<li><p id="config-AWS_NO_SIGN_REQUEST"><strong>AWS_NO_SIGN_REQUEST=[YES/NO]: </strong>Determines whether to disable request signing.</p>
+<li><p id="config-AWS_NO_SIGN_REQUEST"><strong>AWS_NO_SIGN_REQUEST=[YES​/​NO]: </strong>Determines whether to disable request signing.</p>
 </li>
 <li><p id="config-AWS_ACCESS_KEY_ID"><strong>AWS_ACCESS_KEY_ID=value: </strong>Access key ID used for authentication. If using temporary credentials,
 <a class="reference internal" href="#config-AWS_SESSION_TOKEN"><code class="docutils literal notranslate"><span class="pre">AWS_SESSION_TOKEN</span></code></a> must be set.</p>
@@ -499,25 +507,25 @@ associated charges.</p>
 <li><p id="config-AWS_S3_ENDPOINT"><strong>AWS_S3_ENDPOINT=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">s3.amazonaws.com</span></code>. Allows the use of /vsis3/ with non-AWS remote object stores that use the
 AWS S3 protocol.</p>
 </li>
-<li><p id="config-AWS_HTTPS"><strong>AWS_HTTPS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, AWS resources will be accessed using HTTPS. If <code class="docutils literal notranslate"><span class="pre">NO</span></code>, HTTP
+<li><p id="config-AWS_HTTPS"><strong>AWS_HTTPS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, AWS resources will be accessed using HTTPS. If <code class="docutils literal notranslate"><span class="pre">NO</span></code>, HTTP
 will be used.</p>
 </li>
-<li><p id="config-AWS_VIRTUAL_HOSTING"><strong>AWS_VIRTUAL_HOSTING=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Select the method of accessing a bucket.
+<li><p id="config-AWS_VIRTUAL_HOSTING"><strong>AWS_VIRTUAL_HOSTING=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Select the method of accessing a bucket.
 If <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, identifies the bucket via a virtual bucket host name, e.g.: mybucket.cname.domain.com.
 If <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, identifies the bucket as the top-level directory in the URI, e.g.: cname.domain.com/mybucket</p>
 </li>
 <li><p id="config-VSIS3_CHUNK_SIZE"><strong>VSIS3_CHUNK_SIZE=&lt;MB&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">50</span></code>. Set the chunk size for multipart uploads.</p>
 </li>
-<li><p id="config-CPL_VSIL_CURL_IGNORE_GLACIER_STORAGE"><strong>CPL_VSIL_CURL_IGNORE_GLACIER_STORAGE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. When listing a directory, ignore files with <code class="docutils literal notranslate"><span class="pre">GLACIER</span></code> storage class.
+<li><p id="config-CPL_VSIL_CURL_IGNORE_GLACIER_STORAGE"><strong>CPL_VSIL_CURL_IGNORE_GLACIER_STORAGE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. When listing a directory, ignore files with <code class="docutils literal notranslate"><span class="pre">GLACIER</span></code> storage class.
 Superseded by <a class="reference internal" href="#config-CPL_VSIL_CURL_IGNORE_STORAGE_CLASSES"><code class="docutils literal notranslate"><span class="pre">CPL_VSIL_CURL_IGNORE_STORAGE_CLASSES</span></code></a>.</p>
 </li>
 <li><p id="config-CPL_VSIL_CURL_IGNORE_STORAGE_CLASSES"><strong>CPL_VSIL_CURL_IGNORE_STORAGE_CLASSES=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GLACIER\,DEEP_ARCHIVE</span></code>. Comma-separated list of storage class names that should be ignored when
 listing a directory. If set to empty, objects of all storage classes are
 retrieved).</p>
 </li>
-<li><p id="config-CPL_VSIS3_USE_BASE_RMDIR_RECURSIVE"><strong>CPL_VSIS3_USE_BASE_RMDIR_RECURSIVE=[YES/NO]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, recursively delete objects to avoid using batch deletion.</p>
+<li><p id="config-CPL_VSIS3_USE_BASE_RMDIR_RECURSIVE"><strong>CPL_VSIS3_USE_BASE_RMDIR_RECURSIVE=[YES​/​NO]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, recursively delete objects to avoid using batch deletion.</p>
 </li>
-<li><p id="config-CPL_VSIS3_CREATE_DIR_OBJECT"><strong>CPL_VSIS3_CREATE_DIR_OBJECT=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether to allow <a class="reference internal" href="../api/cpl.html#_CPPv48VSIMkdirPKcl" title="VSIMkdir"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">VSIMkdir()</span></code></a> to create an empty object to model an empty directory.</p>
+<li><p id="config-CPL_VSIS3_CREATE_DIR_OBJECT"><strong>CPL_VSIS3_CREATE_DIR_OBJECT=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Determines whether to allow <a class="reference internal" href="../api/cpl.html#_CPPv48VSIMkdirPKcl" title="VSIMkdir"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">VSIMkdir()</span></code></a> to create an empty object to model an empty directory.</p>
 </li>
 </ul>
 <p>複数の認証方法が可能であり,以下の順序で試行されます:</p>
@@ -578,7 +586,7 @@ retrieved).</p>
 <p><a class="reference internal" href="#vsicurl"><span class="std std-ref">/vsicurl/</span></a> の一般的な情報が適用されます.</p>
 <p>/vsigs/ ハンドラに固有の以下の設定オプションがあります:</p>
 <ul class="simple">
-<li><p id="config-GS_NO_SIGN_REQUEST"><strong>GS_NO_SIGN_REQUEST=[YES/NO]: </strong> (GDAL &gt;= 3.4) If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, request signing is disabled.</p>
+<li><p id="config-GS_NO_SIGN_REQUEST"><strong>GS_NO_SIGN_REQUEST=[YES​/​NO]: </strong> (GDAL &gt;= 3.4) If <code class="docutils literal notranslate"><span class="pre">YES</span></code>, request signing is disabled.</p>
 </li>
 <li><p id="config-GS_SECRET_ACCESS_KEY"><strong>GS_SECRET_ACCESS_KEY=value: </strong>Secret for AWS-style authentication (HMAC keys).</p>
 </li>
@@ -648,7 +656,7 @@ to charge for requests against Requester Pays buckets.</p>
 <p><a class="reference internal" href="#vsicurl"><span class="std std-ref">/vsicurl/</span></a> の一般的な情報が適用されます.</p>
 <p>/vsiaz/ ハンドラに固有の以下の設定オプションがあります:</p>
 <ul class="simple">
-<li><p id="config-AZURE_NO_SIGN_REQUEST"><strong>AZURE_NO_SIGN_REQUEST=[YES/NO]: </strong> (GDAL &gt;= 3.2) Controls whether requests are signed.</p>
+<li><p id="config-AZURE_NO_SIGN_REQUEST"><strong>AZURE_NO_SIGN_REQUEST=[YES​/​NO]: </strong> (GDAL &gt;= 3.2) Controls whether requests are signed.</p>
 </li>
 <li><p id="config-AZURE_STORAGE_CONNECTION_STRING"><strong>AZURE_STORAGE_CONNECTION_STRING=value: </strong>Credential string provided in the Access Key section of the administrative interface,
 containing both the account name and a secret key.</p>
@@ -990,7 +998,7 @@ CLASSPATH=$HADOOP_HOME/etc/hadoop:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOM
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ogr_feature_style.html" class="btn btn-neutral float-right" title="Feature Style Specification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ogr_feature_style.html" class="btn btn-neutral float-right" title="地物スタイル仕様" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="sql_sqlite_dialect.html" class="btn btn-neutral float-left" title="SQL SQLite方言" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

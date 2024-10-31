@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GDALグリッドチュートリアル &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -22,11 +23,12 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
         <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Geotransform Tutorial" href="geotransforms_tut.html" />
+    <link rel="next" title="地理変換チュートリアル" href="geotransforms_tut.html" />
     <link rel="prev" title="GDAL Warp API チュートリアル (再投影、...)" href="warp_tut.html" /> 
 </head>
 
@@ -69,13 +71,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#search-ellipse">検索楕円</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="geotransforms_tut.html">Geotransform Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geotransforms_tut.html">地理変換チュートリアル</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#multidimensional-raster">多次元ラスター</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#vector">ベクター</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#geographic-network-model">ジオグラフィックネットワークモデル</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#projections-and-spatial-reference-systems-tutorial-osr-ogrspatialreference">投影と空間参照システムチュートリアル (OSR - OGRSpatialReference)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#workshops">Workshops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#external-tutorials">External tutorials</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">開発</a></li>
@@ -84,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -140,7 +145,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="geotransforms_tut.html" class="btn btn-neutral float-right" title="Geotransform Tutorial" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="geotransforms_tut.html" class="btn btn-neutral float-right" title="地理変換チュートリアル" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="warp_tut.html" class="btn btn-neutral float-left" title="GDAL Warp API チュートリアル (再投影、...)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -184,7 +189,7 @@
 <p>このメソッドでは,重み付け係数 <span class="math notranslate nohighlight">\(w\)</span> は</p>
 <div class="math notranslate nohighlight">
 \[w=\frac{1}{r^p}\]</div>
-<p><a class="reference internal" href="../api/gdal_alg.html#_CPPv414GDALGridCreate17GDALGridAlgorithmPKv7GUInt32PKdPKdPKddddd7GUInt327GUInt3212GDALDataTypePv16GDALProgressFuncPv" title="GDALGridCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALGridCreate()</span></code></a> パラメータのリストについては <a class="reference internal" href="../api/gdal_alg.html#_CPPv438GDALGridInverseDistanceToAPowerOptions" title="GDALGridInverseDistanceToAPowerOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALGridInverseDistanceToAPowerOptions</span></code></a> を参照し, <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid-invdist"><span class="std std-ref">invdist</span></a> については <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid"><span class="std std-ref">gdal_grid</span></a> オプションのリストを参照してください.</p>
+<p><a class="reference internal" href="../api/gdal_alg.html#_CPPv414GDALGridCreate17GDALGridAlgorithmPKv7GUInt32PKdPKdPKddddd7GUInt327GUInt3212GDALDataTypePv16GDALProgressFuncPv" title="GDALGridCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALGridCreate()</span></code></a> パラメータのリストについては <a class="reference internal" href="../api/gdal_alg.html#_CPPv438GDALGridInverseDistanceToAPowerOptions" title="GDALGridInverseDistanceToAPowerOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALGridInverseDistanceToAPowerOptions</span></code></a> を参照し, <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid-invdist"><span class="std std-ref">不一致</span></a> については <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid"><span class="std std-ref">gdal_grid</span></a> オプションのリストを参照してください.</p>
 </section>
 <section id="moving-average">
 <h3>移動平均<a class="headerlink" href="#moving-average" title="Link to this heading"></a></h3>
@@ -198,12 +203,12 @@
 <li><p><span class="math notranslate nohighlight">\(Z_i\)</span> is a known value at point <span class="math notranslate nohighlight">\(i\)</span>,</p></li>
 <li><p><span class="math notranslate nohighlight">\(n\)</span> is a number of points in search <a class="reference internal" href="#search-ellipse">Search Ellipse</a>.</p></li>
 </ul>
-<p><a class="reference internal" href="../api/gdal_alg.html#_CPPv414GDALGridCreate17GDALGridAlgorithmPKv7GUInt32PKdPKdPKddddd7GUInt327GUInt3212GDALDataTypePv16GDALProgressFuncPv" title="GDALGridCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALGridCreate()</span></code></a> パラメータのリストについては <a class="reference internal" href="../api/gdal_alg.html#_CPPv428GDALGridMovingAverageOptions" title="GDALGridMovingAverageOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALGridMovingAverageOptions</span></code></a> を参照し, <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid-average"><span class="std std-ref">average</span></a> については <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid"><span class="std std-ref">gdal_grid</span></a> オプションのリストを参照してください.</p>
+<p><a class="reference internal" href="../api/gdal_alg.html#_CPPv414GDALGridCreate17GDALGridAlgorithmPKv7GUInt32PKdPKdPKddddd7GUInt327GUInt3212GDALDataTypePv16GDALProgressFuncPv" title="GDALGridCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALGridCreate()</span></code></a> パラメータのリストについては <a class="reference internal" href="../api/gdal_alg.html#_CPPv428GDALGridMovingAverageOptions" title="GDALGridMovingAverageOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALGridMovingAverageOptions</span></code></a> を参照し, <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid-average"><span class="std std-ref">平均</span></a> については <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid"><span class="std std-ref">gdal_grid</span></a> オプションのリストを参照してください.</p>
 </section>
 <section id="nearest-neighbor">
 <h3>最近傍<a class="headerlink" href="#nearest-neighbor" title="Link to this heading"></a></h3>
 <p>最近傍法は,補間や平滑化を行いません.単に,グリッドノード検索楕円内で見つかった最も近い点の値を取得し,結果として返します.点が見つからない場合,指定されたNODATA値が返されます.</p>
-<p><a class="reference internal" href="../api/gdal_alg.html#_CPPv414GDALGridCreate17GDALGridAlgorithmPKv7GUInt32PKdPKdPKddddd7GUInt327GUInt3212GDALDataTypePv16GDALProgressFuncPv" title="GDALGridCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALGridCreate()</span></code></a> パラメータのリストについては <a class="reference internal" href="../api/gdal_alg.html#_CPPv430GDALGridNearestNeighborOptions" title="GDALGridNearestNeighborOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALGridNearestNeighborOptions</span></code></a> を参照し, <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid-nearest"><span class="std std-ref">nearest</span></a> については <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid"><span class="std std-ref">gdal_grid</span></a> オプションのリストを参照してください.</p>
+<p><a class="reference internal" href="../api/gdal_alg.html#_CPPv414GDALGridCreate17GDALGridAlgorithmPKv7GUInt32PKdPKdPKddddd7GUInt327GUInt3212GDALDataTypePv16GDALProgressFuncPv" title="GDALGridCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALGridCreate()</span></code></a> パラメータのリストについては <a class="reference internal" href="../api/gdal_alg.html#_CPPv430GDALGridNearestNeighborOptions" title="GDALGridNearestNeighborOptions"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALGridNearestNeighborOptions</span></code></a> を参照し, <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid-nearest"><span class="std std-ref">最近傍</span></a> については <a class="reference internal" href="../programs/gdal_grid.html#gdal-grid"><span class="std std-ref">gdal_grid</span></a> オプションのリストを参照してください.</p>
 </section>
 </section>
 <section id="data-metrics-computation">
@@ -266,7 +271,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="geotransforms_tut.html" class="btn btn-neutral float-right" title="Geotransform Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="geotransforms_tut.html" class="btn btn-neutral float-right" title="地理変換チュートリアル" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="warp_tut.html" class="btn btn-neutral float-left" title="GDAL Warp API チュートリアル (再投影、...)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

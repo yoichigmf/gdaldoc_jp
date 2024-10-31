@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MSG -- Meteosat Second Generation &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -151,11 +154,7 @@
 <li class="toctree-l2"><a class="reference internal" href="mrsid.html">MrSID -- Multi-resolution Seamless Image Database</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">MSG -- Meteosat Second Generation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#driver-capabilities">Driver capabilities</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#build-instructions">Build Instructions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#cmake-builds">CMake builds</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#other-build-systems">Other build systems</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#build-instructions">Build Instructions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#specification-of-source-dataset">Specification of Source Dataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#georeference-and-projection">Georeference and Projection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#see-also">See Also</a></li>
@@ -206,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -239,6 +239,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -344,30 +345,7 @@ driver in your GDAL library.</div>
 </section>
 <section id="build-instructions">
 <h2>Build Instructions<a class="headerlink" href="#build-instructions" title="Link to this heading"></a></h2>
-<section id="cmake-builds">
-<h3>CMake builds<a class="headerlink" href="#cmake-builds" title="Link to this heading"></a></h3>
-<p>See the <code class="docutils literal notranslate"><span class="pre">GDAL_USE_PUBLICDECOMPWT</span></code> option of <a class="reference internal" href="../../development/building_from_source.html#building-from-source"><span class="std std-ref">Building GDAL from source</span></a>.</p>
-</section>
-<section id="other-build-systems">
-<h3>Other build systems<a class="headerlink" href="#other-build-systems" title="Link to this heading"></a></h3>
-<p>Clone the EUMETSAT library for wavelet decompression into <code class="docutils literal notranslate"><span class="pre">frmts/msg</span></code>.</p>
-<p>If you are building with Visual Studio 6.0, extract the .vc makefiles
-for the PublicDecompWT from the file <cite>PublicDecompWTMakefiles.zip</cite>
-stored in that directory.</p>
-<p>If you build using the GNUMakefile, use <em>--with-msg</em> option to enable
-MSG driver:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">msg</span>
-</pre></div>
-</div>
-<p>If you find that some adjustments are needed in the makefile and/or the msg
-source files, please &quot;commit&quot; them. The EUMETSAT library promises to be
-&quot;platform independent&quot;, but as we are working with Microsoft Windows and
-Visual Studio 6.0, we did not have the facilities to check if the rest
-of the msg driver is. Furthermore, apply steps 4 to 7 from the <a class="reference internal" href="../../tutorials/raster_driver_tut.html#raster-driver-tut"><span class="std std-ref">Raster driver implementation tutorial</span></a>, section &quot;Adding
-Driver to GDAL Tree&quot;.</p>
-<p>MSG Wiki page is available at <a class="reference external" href="http://trac.osgeo.org/gdal/wiki/MSG">http://trac.osgeo.org/gdal/wiki/MSG</a>. It's
-dedicated to document building and usage hints</p>
-</section>
+<p>See the <code class="docutils literal notranslate"><span class="pre">GDAL_USE_PUBLICDECOMPWT</span></code> option of <a class="reference internal" href="../../development/building_from_source.html#building-from-source"><span class="std std-ref">GDAL のソースからのビルド</span></a>.</p>
 </section>
 <section id="specification-of-source-dataset">
 <h2>Specification of Source Dataset<a class="headerlink" href="#specification-of-source-dataset" title="Link to this heading"></a></h2>

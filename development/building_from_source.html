@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GDAL のソースからのビルド &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,11 +22,12 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Setting up a development environment" href="dev_environment.html" />
+    <link rel="next" title="開発環境の設定" href="dev_environment.html" />
     <link rel="prev" title="開発" href="index.html" /> 
 </head>
 
@@ -64,6 +66,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#building-on-windows">Windows でのビルド</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#building-on-macos">MacOS でのビルド</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cmake-general-configure-options">CMake 一般的な設定オプション</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#resource-files-embedding">Resource files embedding</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cmake-package-dependent-options">CMake パッケージ依存オプション</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#selection-of-drivers">ドライバーの選択</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-drivers-as-plugins">ドライバをプラグインとしてビルドする</a></li>
@@ -80,11 +83,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#autoconf-nmake-gdal-versions-3-5-0">Autoconf/nmake (GDAL バージョン &lt; 3.5.0)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="dev_environment.html">Setting up a development environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dev_practices.html">Development practices</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testing.html">Automated testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_environment.html">開発環境の設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dev_practices.html">開発プラクティス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">自動テスト</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dev_documentation.html">文書のビルド</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cmake.html">Using GDAL in CMake projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cmake.html">Cmake プロジェクトでの GDAL の利用</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rfc/index.html">RFC list</a></li>
 </ul>
 </li>
@@ -93,6 +96,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -149,7 +153,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="dev_environment.html" class="btn btn-neutral float-right" title="Setting up a development environment" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dev_environment.html" class="btn btn-neutral float-right" title="開発環境の設定" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="開発" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -226,7 +230,7 @@ cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </
 <p class="admonition-title">警告</p>
 <p>依存関係を追加/変更/削除するために GDAL を設定する際に反復する場合, 一部のキャッシュ変数は前回の実行から CMakeCache.txt に残り, 新しい設定と競合する可能性があります. cmake 実行中に奇妙なエラーが発生した場合, CMakeCache.txt を削除してクリーンな状態から開始することができます.</p>
 </div>
-<p>CMake プロジェクトで GDAL を使用する方法については, <a class="reference internal" href="cmake.html#using-gdal-in-cmake"><span class="std std-ref">Using GDAL in CMake projects</span></a> を参照してください.</p>
+<p>CMake プロジェクトで GDAL を使用する方法については, <a class="reference internal" href="cmake.html#using-gdal-in-cmake"><span class="std std-ref">Cmake プロジェクトでの GDAL の利用</span></a> を参照してください.</p>
 <section id="building-on-windows">
 <h3>Windows でのビルド<a class="headerlink" href="#building-on-windows" title="Link to this heading"></a></h3>
 <p>Windows では, ジェネレータを指定する必要があるかもしれません:</p>
@@ -327,6 +331,40 @@ cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </
 <dt class="sig sig-object std" id="cmdoption-arg-GDAL_SET_INSTALL_RELATIVE_RPATH">
 <span class="sig-name descname"><span class="pre">GDAL_SET_INSTALL_RELATIVE_RPATH</span></span><span class="sig-prename descclassname"><span class="pre">=OFF</span></span><a class="headerlink" href="#cmdoption-arg-GDAL_SET_INSTALL_RELATIVE_RPATH" title="Link to this definition"></a></dt>
 <dd><p>インストールされたバイナリの rpath がライブラリへの相対パスとして書き込まれるように設定します. このオプションは <a class="reference external" href="https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_RPATH.html">CMAKE_INSTALL_RPATH</a> 変数をオーバーライドし, <a class="reference external" href="https://cmake.org/cmake/help/latest/variable/CMAKE_SKIP_INSTALL_RPATH.html">CMAKE_SKIP_INSTALL_RPATH</a> 変数が設定されていないことを前提としています.</p>
+</dd></dl>
+
+</section>
+<section id="resource-files-embedding">
+<h3>Resource files embedding<a class="headerlink" href="#resource-files-embedding" title="Link to this heading"></a></h3>
+<p>Starting with GDAL 3.11, if a C23-compatible compiler is used, such as
+clang &gt;= 19 or GCC &gt;= 15, it is possible to embed resource files inside
+the GDAL library, without relying on resource files to be available on the file
+system (such resource files are located through an hard-coded
+path at build time in <code class="docutils literal notranslate"><span class="pre">${CMAKE_INSTALL_PREFIX}/share/gdal</span></code>, or at run-time
+through the <a class="reference internal" href="../user/configoptions.html#config-GDAL_DATA"><code class="docutils literal notranslate"><span class="pre">GDAL_DATA</span></code></a> configuration option).</p>
+<p>The following CMake options control that behavior:</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-EMBED_RESOURCE_FILES">
+<span class="sig-name descname"><span class="pre">EMBED_RESOURCE_FILES</span></span><span class="sig-prename descclassname"><span class="pre">=ON/OFF</span></span><a class="headerlink" href="#cmdoption-arg-EMBED_RESOURCE_FILES" title="Link to this definition"></a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.11.</span></p>
+</div>
+<p>Default is OFF for shared library builds (BUILD_SHARED_LIBS=ON), and ON
+for static library builds (BUILD_SHARED_LIBS=OFF).
+When ON, resource files needed by GDAL will be embedded into the GDAL library
+and/or relevant plugins.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-arg-USE_ONLY_EMBEDDED_RESOURCE_FILES">
+<span class="sig-name descname"><span class="pre">USE_ONLY_EMBEDDED_RESOURCE_FILES</span></span><span class="sig-prename descclassname"><span class="pre">=ON/OFF</span></span><a class="headerlink" href="#cmdoption-arg-USE_ONLY_EMBEDDED_RESOURCE_FILES" title="Link to this definition"></a></dt>
+<dd><div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.11.</span></p>
+</div>
+<p>Even if EMBED_RESOURCE_FILES=ON, GDAL will still try to locate resource
+files on the file system by default , and fallback to the embedded version if
+not found. By setting USE_ONLY_EMBEDDED_RESOURCE_FILES=ON, no attempt
+at locating resource files on the file system is made. Default is OFF.</p>
 </dd></dl>
 
 </section>
@@ -857,7 +895,7 @@ cmake<span class="w"> </span>--build<span class="w"> </span>.<span class="w"> </
 </section>
 <section id="heif">
 <h4>HEIF<a class="headerlink" href="#heif" title="Link to this heading"></a></h4>
-<p><a class="reference external" href="https://github.com/strukturag/libheif">HEIF</a> (&gt;= 1.1) ライブラリは, <a class="reference internal" href="../drivers/raster/heif.html#raster-heif"><span class="std std-ref">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</span></a> ドライバで使用されます. pkg-config で検出できます.</p>
+<p><a class="reference external" href="https://github.com/strukturag/libheif">HEIF</a> (&gt;= 1.1) ライブラリは, <a class="reference internal" href="../drivers/raster/heif.html#raster-heif"><span class="std std-ref">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</span></a> ドライバで使用されます. pkg-config で検出できます.</p>
 <dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-arg-HEIF_INCLUDE_DIR">
 <span class="sig-name descname"><span class="pre">HEIF_INCLUDE_DIR</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-arg-HEIF_INCLUDE_DIR" title="Link to this definition"></a></dt>
@@ -2581,7 +2619,8 @@ ERROR 4: `poly.parquet&#39; not recognized as a supported file format. It could 
 </section>
 <section id="autoconf-nmake-gdal-versions-3-5-0">
 <h2>Autoconf/nmake (GDAL バージョン &lt; 3.5.0)<a class="headerlink" href="#autoconf-nmake-gdal-versions-3-5-0" title="Link to this heading"></a></h2>
-<p>GDAL &lt; 3.5 の autoconf および nmake ビルドシステムのヒントについては, <a class="reference external" href="https://trac.osgeo.org/gdal/wiki/BuildHints">https://trac.osgeo.org/gdal/wiki/BuildHints</a> を参照してください.</p>
+<p>See <a class="reference external" href="http://web.archive.org/https://trac.osgeo.org/gdal/wiki/BuildHints">http://web.archive.org/https://trac.osgeo.org/gdal/wiki/BuildHints</a> for hints for GDAL &lt; 3.5
+autoconf and nmake build systems.</p>
 </section>
 </section>
 
@@ -2592,7 +2631,7 @@ ERROR 4: `poly.parquet&#39; not recognized as a supported file format. It could 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dev_environment.html" class="btn btn-neutral float-right" title="Setting up a development environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="dev_environment.html" class="btn btn-neutral float-right" title="開発環境の設定" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="開発" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

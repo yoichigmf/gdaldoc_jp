@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Python General API &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,11 +22,12 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
     <link rel="search" title="検索" href="../../search.html" />
-    <link rel="next" title="Miscellaneous Python API" href="osgeo.html" />
+    <link rel="next" title="Python Gotchas in the GDAL and OGR Python Bindings" href="../python_gotchas.html" />
     <link rel="prev" title="Python Utilities" href="utilities.html" /> 
 </head>
 
@@ -63,6 +65,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -119,7 +122,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="osgeo.html" class="btn btn-neutral float-right" title="Miscellaneous Python API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../python_gotchas.html" class="btn btn-neutral float-right" title="Python Gotchas in the GDAL and OGR Python Bindings" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="utilities.html" class="btn btn-neutral float-left" title="Python Utilities" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -262,6 +265,14 @@
 </section>
 <section id="file-management">
 <h2>File Management<a class="headerlink" href="#file-management" title="Link to this heading"></a></h2>
+<section id="osgeo-gdal-fsspec-module">
+<h3>osgeo.gdal_fsspec module<a class="headerlink" href="#osgeo-gdal-fsspec-module" title="Link to this heading"></a></h3>
+</section>
+<section id="osgeo-gdal-vsifile-class">
+<h3>osgeo.gdal.VSIFile class<a class="headerlink" href="#osgeo-gdal-vsifile-class" title="Link to this heading"></a></h3>
+</section>
+<section id="low-level-functions">
+<h3>Low level functions<a class="headerlink" href="#low-level-functions" title="Link to this heading"></a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="osgeo.gdal.CloseDir">
 <span class="sig-prename descclassname"><span class="pre">osgeo.gdal.</span></span><span class="sig-name descname"><span class="pre">CloseDir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">VSIDIR</span> <span class="pre">*</span> <span class="pre">dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#osgeo.gdal.CloseDir" title="Link to this definition"></a></dt>
@@ -454,6 +465,7 @@
 
 </section>
 </section>
+</section>
 
 
            </div>
@@ -462,7 +474,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="osgeo.html" class="btn btn-neutral float-right" title="Miscellaneous Python API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../python_gotchas.html" class="btn btn-neutral float-right" title="Python Gotchas in the GDAL and OGR Python Bindings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="utilities.html" class="btn btn-neutral float-left" title="Python Utilities" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

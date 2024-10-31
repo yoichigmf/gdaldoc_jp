@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>gdalenhance &mdash; GDAL  ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="canonical" href="https://gdal.org/programs/gdalenhance.html"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c033477b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="gdalinfo" href="gdalinfo.html" />
+    <link rel="prev" title="gdaldem" href="gdaldem.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/gdalicon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../download.html">ダウンロード</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">プログラム</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#general">一般情報</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#raster-programs">ラスタープログラム</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="raster_common_options.html">共通オプション</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal-config.html">gdal-config (Unix)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal2tiles.html">gdal2tiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal2xyz.html">gdal2xyz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_calc.html">gdal_calc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_contour.html">gdal_contour</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_create.html">gdal_create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_edit.html">gdal_edit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_fillnodata.html">gdal_fillnodata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_footprint.html">gdal_footprint</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_grid.html">gdal_grid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_merge.html">gdal_merge</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_pansharpen.html">gdal_pansharpen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_polygonize.html">gdal_polygonize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_proximity.html">gdal_proximity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_rasterize.html">gdal_rasterize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_retile.html">gdal_retile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_sieve.html">gdal_sieve</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_translate.html">gdal_translate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_viewshed.html">gdal_viewshed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdaladdo.html">gdaladdo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalattachpct.html">gdalattachpct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalbuildvrt.html">gdalbuildvrt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalcompare.html">gdalcompare</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdaldem.html">gdaldem</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">gdalenhance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gdalinfo.html">gdalinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdallocationinfo.html">gdallocationinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalmanage.html">gdalmanage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalmove.html">gdalmove</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalsrsinfo.html">gdalsrsinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdaltindex.html">gdaltindex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdaltransform.html">gdaltransform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalwarp.html">gdalwarp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nearblack.html">nearblack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pct2rgb.html">pct2rgb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rgb2pct.html">rgb2pct</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#multidimensional-raster-programs">多次元ラスタープログラム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#vector-programs">ベクタープログラム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#geographic-network-programs">地理ネットワークプログラム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#other-utilities">その他のユーティリティ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers/raster/index.html">ラスタードライバー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers/vector/index.html">ベクタードライバー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user/index.html">ユーザー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">チュートリアル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sponsors/index.html">スポンサー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GDAL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html"> GDAL  ドキュメント </a> &raquo;</li>
+      
+          <li><a href="index.html">プログラム</a> &raquo;</li>
+      
+      <li>gdalenhance</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSGeo/gdal/edit/master/doc/source/programs/gdalenhance.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="gdalinfo.html" class="btn btn-neutral float-right" title="gdalinfo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gdaldem.html" class="btn btn-neutral float-left" title="gdaldem" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="gdalenhance">
+<span id="id1"></span><h1>gdalenhance<a class="headerlink" href="#gdalenhance" title="Link to this heading"></a></h1>
+<p>Enhance the contrast of raster images using histogram equalization.</p>
+<section id="synopsis">
+<span id="index-0"></span><h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdalenhance</span> <span class="p">[</span><span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">general</span><span class="p">]</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">of</span> <span class="nb">format</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">co</span> <span class="s2">&quot;NAME=VALUE&quot;</span><span class="p">]</span><span class="o">*</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">ot</span> <span class="p">{</span><span class="n">Byte</span><span class="o">/</span><span class="n">Int16</span><span class="o">/</span><span class="n">UInt16</span><span class="o">/</span><span class="n">UInt32</span><span class="o">/</span><span class="n">Int32</span><span class="o">/</span><span class="n">Float32</span><span class="o">/</span><span class="n">Float64</span><span class="o">/</span>
+                    <span class="n">CInt16</span><span class="o">/</span><span class="n">CInt32</span><span class="o">/</span><span class="n">CFloat32</span><span class="o">/</span><span class="n">CFloat64</span><span class="p">}]</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">equalize</span><span class="p">]</span>
+            <span class="p">[</span><span class="o">-</span><span class="n">config</span> <span class="n">filename</span><span class="p">]</span>
+            <span class="o">&lt;</span><span class="n">src_raster</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">dst_raster</span><span class="o">&gt;</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>The <strong class="program">gdalenhance</strong> utility enhances the contrast of raster images using
+histogram equalization. It can either generate a LUT (look-up-table) that can
+later be applied to enhance contrast, or it can write the enhanced image
+directly.</p>
+<figure class="align-default" id="id2">
+<img alt="../_images/gdalenhance_little_spruce.jpg" src="../_images/gdalenhance_little_spruce.jpg" />
+<figcaption>
+<p><span class="caption-text">Original image.</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id3">
+<img alt="../_images/gdalenhance_little_spruce_enhanced.jpg" src="../_images/gdalenhance_little_spruce_enhanced.jpg" />
+<figcaption>
+<p><span class="caption-text">Image after histogram equalization using <strong class="program">gdalenhance</strong>.</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-help">
+<span class="sig-name descname"><span class="pre">--help</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-gdalenhance-help" title="Link to this definition"></a></dt>
+<dd><p>Show this help message and exit</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-help-general">
+<span class="sig-name descname"><span class="pre">--help-general</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-gdalenhance-help-general" title="Link to this definition"></a></dt>
+<dd><p>Gives a brief usage message for the generic GDAL commandline options and exit.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-of">
+<span class="sig-name descname"><span class="pre">-of</span></span><span class="sig-prename descclassname"> <span class="pre">format</span></span><a class="headerlink" href="#cmdoption-gdalenhance-of" title="Link to this definition"></a></dt>
+<dd><p>Select the output format. The default is GeoTIFF (GTiff).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-co">
+<span class="sig-name descname"><span class="pre">-co</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></span><a class="headerlink" href="#cmdoption-gdalenhance-co" title="Link to this definition"></a></dt>
+<dd><p>Many formats have one or more optional creation options that can be
+used to control particulars about the file created. For instance,
+the GeoTIFF driver supports creation options to control compression,
+and whether the file should be tiled.</p>
+<p>The creation options available vary by format driver, and some
+simple formats have no creation options at all. A list of options
+supported for a format can be listed with the
+<a class="reference internal" href="raster_common_options.html#raster-common-options-formats"><span class="std std-ref">--formats</span></a>
+command line option but the documentation for the format is the
+definitive source of information on driver creation options.
+See <a class="reference internal" href="../drivers/raster/index.html#raster-drivers"><span class="std std-ref">ラスタードライバー</span></a> format
+specific documentation for legal creation options for each format.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-ot">
+<span class="sig-name descname"><span class="pre">-ot</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;type&gt;</span></span><a class="headerlink" href="#cmdoption-gdalenhance-ot" title="Link to this definition"></a></dt>
+<dd><p>Force the output image bands to have a specific data type supported by the
+driver, which may be one of the following: <code class="docutils literal notranslate"><span class="pre">Byte</span></code>, <code class="docutils literal notranslate"><span class="pre">Int8</span></code>, <code class="docutils literal notranslate"><span class="pre">UInt16</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Int16</span></code>, <code class="docutils literal notranslate"><span class="pre">UInt32</span></code>, <code class="docutils literal notranslate"><span class="pre">Int32</span></code>, <code class="docutils literal notranslate"><span class="pre">UInt64</span></code>, <code class="docutils literal notranslate"><span class="pre">Int64</span></code>, <code class="docutils literal notranslate"><span class="pre">Float32</span></code>, <code class="docutils literal notranslate"><span class="pre">Float64</span></code>, <code class="docutils literal notranslate"><span class="pre">CInt16</span></code>,
+<code class="docutils literal notranslate"><span class="pre">CInt32</span></code>, <code class="docutils literal notranslate"><span class="pre">CFloat32</span></code> or <code class="docutils literal notranslate"><span class="pre">CFloat64</span></code>.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-equalize">
+<span class="sig-name descname"><span class="pre">-equalize</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-gdalenhance-equalize" title="Link to this definition"></a></dt>
+<dd><p>Get source image histogram and compute equalization LUTs from
+it.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalenhance-config">
+<span class="sig-name descname"><span class="pre">-config</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;filename&gt;</span></span><a class="headerlink" href="#cmdoption-gdalenhance-config" title="Link to this definition"></a></dt>
+<dd><p>Apply a specified LUT to enhance the contrast of the image.
+The number of lines in the LUT file should be equal to the number of bands
+of the images.
+Example of LUT file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">:</span><span class="n">Band</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">:</span><span class="n">ScaleMin</span> <span class="mf">255.5</span><span class="p">:</span><span class="n">ScaleMax</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">8</span> <span class="mi">16</span> <span class="mi">16</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">23</span> <span class="mi">23</span> <span class="mi">24</span> <span class="mi">24</span> <span class="mi">25</span> <span class="mi">25</span> <span class="mi">26</span> <span class="mi">27</span> <span class="mi">27</span> <span class="mi">28</span> <span class="mi">29</span> <span class="mi">30</span> <span class="mi">30</span> <span class="mi">31</span> <span class="mi">32</span> <span class="mi">33</span> <span class="mi">34</span> <span class="mi">35</span> <span class="mi">36</span> <span class="mi">37</span> <span class="mi">38</span> <span class="mi">39</span> <span class="mi">40</span> <span class="mi">42</span> <span class="mi">43</span> <span class="mi">44</span> <span class="mi">46</span> <span class="mi">47</span> <span class="mi">48</span> <span class="mi">50</span> <span class="mi">51</span> <span class="mi">53</span> <span class="mi">55</span> <span class="mi">56</span> <span class="mi">58</span> <span class="mi">60</span> <span class="mi">62</span> <span class="mi">63</span> <span class="mi">65</span> <span class="mi">67</span> <span class="mi">69</span> <span class="mi">71</span> <span class="mi">73</span> <span class="mi">75</span> <span class="mi">77</span> <span class="mi">79</span> <span class="mi">81</span> <span class="mi">83</span> <span class="mi">85</span> <span class="mi">87</span> <span class="mi">89</span> <span class="mi">91</span> <span class="mi">93</span> <span class="mi">95</span> <span class="mi">97</span> <span class="mi">99</span> <span class="mi">101</span> <span class="mi">103</span> <span class="mi">105</span> <span class="mi">107</span> <span class="mi">109</span> <span class="mi">111</span> <span class="mi">113</span> <span class="mi">115</span> <span class="mi">117</span> <span class="mi">119</span> <span class="mi">121</span> <span class="mi">123</span> <span class="mi">125</span> <span class="mi">127</span> <span class="mi">129</span> <span class="mi">131</span> <span class="mi">133</span> <span class="mi">135</span> <span class="mi">137</span> <span class="mi">138</span> <span class="mi">140</span> <span class="mi">142</span> <span class="mi">144</span> <span class="mi">146</span> <span class="mi">148</span> <span class="mi">150</span> <span class="mi">152</span> <span class="mi">153</span> <span class="mi">155</span> <span class="mi">157</span> <span class="mi">159</span> <span class="mi">161</span> <span class="mi">162</span> <span class="mi">164</span> <span class="mi">166</span> <span class="mi">168</span> <span class="mi">169</span> <span class="mi">171</span> <span class="mi">173</span> <span class="mi">174</span> <span class="mi">176</span> <span class="mi">178</span> <span class="mi">179</span> <span class="mi">181</span> <span class="mi">182</span> <span class="mi">184</span> <span class="mi">186</span> <span class="mi">187</span> <span class="mi">189</span> <span class="mi">190</span> <span class="mi">192</span> <span class="mi">193</span> <span class="mi">195</span> <span class="mi">196</span> <span class="mi">198</span> <span class="mi">199</span> <span class="mi">200</span> <span class="mi">202</span> <span class="mi">203</span> <span class="mi">205</span> <span class="mi">206</span> <span class="mi">207</span> <span class="mi">208</span> <span class="mi">210</span> <span class="mi">211</span> <span class="mi">212</span> <span class="mi">213</span> <span class="mi">214</span> <span class="mi">216</span> <span class="mi">217</span> <span class="mi">218</span> <span class="mi">219</span> <span class="mi">220</span> <span class="mi">221</span> <span class="mi">222</span> <span class="mi">223</span> <span class="mi">224</span> <span class="mi">225</span> <span class="mi">226</span> <span class="mi">227</span> <span class="mi">228</span> <span class="mi">229</span> <span class="mi">230</span> <span class="mi">231</span> <span class="mi">232</span> <span class="mi">233</span> <span class="mi">234</span> <span class="mi">234</span> <span class="mi">235</span> <span class="mi">236</span> <span class="mi">237</span> <span class="mi">238</span> <span class="mi">239</span> <span class="mi">239</span> <span class="mi">240</span> <span class="mi">241</span> <span class="mi">241</span> <span class="mi">242</span> <span class="mi">243</span> <span class="mi">244</span> <span class="mi">244</span> <span class="mi">245</span> <span class="mi">245</span> <span class="mi">246</span> <span class="mi">246</span> <span class="mi">247</span> <span class="mi">247</span> <span class="mi">248</span> <span class="mi">248</span> <span class="mi">249</span> <span class="mi">249</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span>
+<span class="mi">2</span><span class="p">:</span><span class="n">Band</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">:</span><span class="n">ScaleMin</span> <span class="mf">255.5</span><span class="p">:</span><span class="n">ScaleMax</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">8</span> <span class="mi">16</span> <span class="mi">16</span> <span class="mi">16</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">23</span> <span class="mi">23</span> <span class="mi">24</span> <span class="mi">24</span> <span class="mi">25</span> <span class="mi">26</span> <span class="mi">27</span> <span class="mi">27</span> <span class="mi">28</span> <span class="mi">29</span> <span class="mi">30</span> <span class="mi">31</span> <span class="mi">32</span> <span class="mi">33</span> <span class="mi">34</span> <span class="mi">35</span> <span class="mi">36</span> <span class="mi">37</span> <span class="mi">38</span> <span class="mi">39</span> <span class="mi">41</span> <span class="mi">42</span> <span class="mi">43</span> <span class="mi">45</span> <span class="mi">46</span> <span class="mi">47</span> <span class="mi">49</span> <span class="mi">51</span> <span class="mi">52</span> <span class="mi">54</span> <span class="mi">55</span> <span class="mi">57</span> <span class="mi">59</span> <span class="mi">60</span> <span class="mi">62</span> <span class="mi">64</span> <span class="mi">66</span> <span class="mi">67</span> <span class="mi">69</span> <span class="mi">71</span> <span class="mi">73</span> <span class="mi">75</span> <span class="mi">77</span> <span class="mi">79</span> <span class="mi">81</span> <span class="mi">83</span> <span class="mi">85</span> <span class="mi">87</span> <span class="mi">89</span> <span class="mi">91</span> <span class="mi">93</span> <span class="mi">95</span> <span class="mi">97</span> <span class="mi">99</span> <span class="mi">101</span> <span class="mi">103</span> <span class="mi">105</span> <span class="mi">108</span> <span class="mi">110</span> <span class="mi">112</span> <span class="mi">114</span> <span class="mi">116</span> <span class="mi">118</span> <span class="mi">120</span> <span class="mi">122</span> <span class="mi">124</span> <span class="mi">126</span> <span class="mi">128</span> <span class="mi">130</span> <span class="mi">132</span> <span class="mi">134</span> <span class="mi">136</span> <span class="mi">138</span> <span class="mi">140</span> <span class="mi">142</span> <span class="mi">144</span> <span class="mi">146</span> <span class="mi">148</span> <span class="mi">150</span> <span class="mi">152</span> <span class="mi">154</span> <span class="mi">156</span> <span class="mi">157</span> <span class="mi">159</span> <span class="mi">161</span> <span class="mi">163</span> <span class="mi">165</span> <span class="mi">166</span> <span class="mi">168</span> <span class="mi">170</span> <span class="mi">172</span> <span class="mi">173</span> <span class="mi">175</span> <span class="mi">177</span> <span class="mi">179</span> <span class="mi">180</span> <span class="mi">182</span> <span class="mi">183</span> <span class="mi">185</span> <span class="mi">187</span> <span class="mi">188</span> <span class="mi">190</span> <span class="mi">191</span> <span class="mi">193</span> <span class="mi">194</span> <span class="mi">196</span> <span class="mi">197</span> <span class="mi">199</span> <span class="mi">200</span> <span class="mi">202</span> <span class="mi">203</span> <span class="mi">204</span> <span class="mi">206</span> <span class="mi">207</span> <span class="mi">208</span> <span class="mi">209</span> <span class="mi">211</span> <span class="mi">212</span> <span class="mi">213</span> <span class="mi">214</span> <span class="mi">215</span> <span class="mi">216</span> <span class="mi">217</span> <span class="mi">218</span> <span class="mi">219</span> <span class="mi">220</span> <span class="mi">221</span> <span class="mi">222</span> <span class="mi">223</span> <span class="mi">224</span> <span class="mi">225</span> <span class="mi">226</span> <span class="mi">227</span> <span class="mi">228</span> <span class="mi">229</span> <span class="mi">230</span> <span class="mi">230</span> <span class="mi">231</span> <span class="mi">232</span> <span class="mi">233</span> <span class="mi">234</span> <span class="mi">235</span> <span class="mi">235</span> <span class="mi">236</span> <span class="mi">237</span> <span class="mi">238</span> <span class="mi">239</span> <span class="mi">239</span> <span class="mi">240</span> <span class="mi">241</span> <span class="mi">241</span> <span class="mi">242</span> <span class="mi">243</span> <span class="mi">243</span> <span class="mi">244</span> <span class="mi">245</span> <span class="mi">245</span> <span class="mi">246</span> <span class="mi">246</span> <span class="mi">247</span> <span class="mi">247</span> <span class="mi">248</span> <span class="mi">248</span> <span class="mi">248</span> <span class="mi">249</span> <span class="mi">249</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span>
+<span class="mi">3</span><span class="p">:</span><span class="n">Band</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">:</span><span class="n">ScaleMin</span> <span class="mf">255.5</span><span class="p">:</span><span class="n">ScaleMax</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">9</span> <span class="mi">17</span> <span class="mi">17</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">18</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">19</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">20</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">21</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">22</span> <span class="mi">23</span> <span class="mi">23</span> <span class="mi">23</span> <span class="mi">24</span> <span class="mi">24</span> <span class="mi">24</span> <span class="mi">25</span> <span class="mi">25</span> <span class="mi">26</span> <span class="mi">26</span> <span class="mi">27</span> <span class="mi">28</span> <span class="mi">28</span> <span class="mi">29</span> <span class="mi">30</span> <span class="mi">31</span> <span class="mi">32</span> <span class="mi">33</span> <span class="mi">34</span> <span class="mi">35</span> <span class="mi">36</span> <span class="mi">37</span> <span class="mi">38</span> <span class="mi">39</span> <span class="mi">40</span> <span class="mi">41</span> <span class="mi">42</span> <span class="mi">44</span> <span class="mi">45</span> <span class="mi">46</span> <span class="mi">47</span> <span class="mi">48</span> <span class="mi">50</span> <span class="mi">51</span> <span class="mi">53</span> <span class="mi">54</span> <span class="mi">56</span> <span class="mi">57</span> <span class="mi">59</span> <span class="mi">60</span> <span class="mi">62</span> <span class="mi">63</span> <span class="mi">65</span> <span class="mi">67</span> <span class="mi">69</span> <span class="mi">70</span> <span class="mi">72</span> <span class="mi">74</span> <span class="mi">76</span> <span class="mi">78</span> <span class="mi">80</span> <span class="mi">82</span> <span class="mi">84</span> <span class="mi">86</span> <span class="mi">88</span> <span class="mi">90</span> <span class="mi">92</span> <span class="mi">94</span> <span class="mi">97</span> <span class="mi">99</span> <span class="mi">101</span> <span class="mi">103</span> <span class="mi">105</span> <span class="mi">107</span> <span class="mi">109</span> <span class="mi">111</span> <span class="mi">113</span> <span class="mi">115</span> <span class="mi">116</span> <span class="mi">118</span> <span class="mi">120</span> <span class="mi">122</span> <span class="mi">124</span> <span class="mi">126</span> <span class="mi">127</span> <span class="mi">129</span> <span class="mi">131</span> <span class="mi">133</span> <span class="mi">134</span> <span class="mi">136</span> <span class="mi">138</span> <span class="mi">139</span> <span class="mi">141</span> <span class="mi">143</span> <span class="mi">144</span> <span class="mi">146</span> <span class="mi">147</span> <span class="mi">149</span> <span class="mi">151</span> <span class="mi">152</span> <span class="mi">154</span> <span class="mi">155</span> <span class="mi">157</span> <span class="mi">159</span> <span class="mi">160</span> <span class="mi">162</span> <span class="mi">163</span> <span class="mi">165</span> <span class="mi">167</span> <span class="mi">168</span> <span class="mi">170</span> <span class="mi">171</span> <span class="mi">173</span> <span class="mi">175</span> <span class="mi">176</span> <span class="mi">178</span> <span class="mi">179</span> <span class="mi">181</span> <span class="mi">182</span> <span class="mi">184</span> <span class="mi">186</span> <span class="mi">187</span> <span class="mi">189</span> <span class="mi">190</span> <span class="mi">192</span> <span class="mi">193</span> <span class="mi">195</span> <span class="mi">197</span> <span class="mi">198</span> <span class="mi">200</span> <span class="mi">201</span> <span class="mi">203</span> <span class="mi">204</span> <span class="mi">206</span> <span class="mi">207</span> <span class="mi">209</span> <span class="mi">210</span> <span class="mi">212</span> <span class="mi">213</span> <span class="mi">214</span> <span class="mi">216</span> <span class="mi">217</span> <span class="mi">218</span> <span class="mi">219</span> <span class="mi">220</span> <span class="mi">222</span> <span class="mi">223</span> <span class="mi">224</span> <span class="mi">225</span> <span class="mi">226</span> <span class="mi">227</span> <span class="mi">228</span> <span class="mi">229</span> <span class="mi">230</span> <span class="mi">231</span> <span class="mi">232</span> <span class="mi">233</span> <span class="mi">233</span> <span class="mi">234</span> <span class="mi">235</span> <span class="mi">236</span> <span class="mi">237</span> <span class="mi">238</span> <span class="mi">239</span> <span class="mi">239</span> <span class="mi">240</span> <span class="mi">241</span> <span class="mi">242</span> <span class="mi">243</span> <span class="mi">243</span> <span class="mi">244</span> <span class="mi">245</span> <span class="mi">246</span> <span class="mi">246</span> <span class="mi">247</span> <span class="mi">247</span> <span class="mi">248</span> <span class="mi">248</span> <span class="mi">249</span> <span class="mi">249</span> <span class="mi">250</span> <span class="mi">250</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">251</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">252</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">253</span> <span class="mi">254</span> <span class="mi">254</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">255</span> <span class="mi">2550</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdalenhance</span> <span class="o">-</span><span class="n">equalize</span> <span class="n">rgb</span><span class="o">.</span><span class="n">tif</span> <span class="n">rgb_equalize_enhance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Apply equalization histogram to enhance the contrast of the image.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdalenhance</span> <span class="o">-</span><span class="n">equalize</span> <span class="n">rgb</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Write an equalization LUT to the console.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gdalenhance</span> <span class="o">-</span><span class="n">config</span> <span class="n">enhance_config</span> <span class="n">rgb</span><span class="o">.</span><span class="n">tif</span> <span class="n">rgb_custom_enhance</span><span class="o">.</span><span class="n">tif</span>
+</pre></div>
+</div>
+<p>Apply a custom LUT (look up-table) to enhance the contrast of the image.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="gdalinfo.html" class="btn btn-neutral float-right" title="gdalinfo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gdaldem.html" class="btn btn-neutral float-left" title="gdaldem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <div class="info">
+      <a class="logo-link" href="https://osgeo.org">
+        <div class="osgeo-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
+      &copy; 1998-2024 <a href="https://github.com/warmerdam">Frank Warmerdam</a>,
+      <a href="https://github.com/rouault">Even Rouault</a>, and
+      <a href="https://github.com/OSGeo/gdal/graphs/contributors">others</a>
+
+
+      
+      </div>
+    </div>
+  </div>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

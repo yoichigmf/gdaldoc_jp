@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Security considerations &mdash; GDAL  ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="canonical" href="https://gdal.org/user/security.html"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c033477b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="API" href="../api/index.html" />
+    <link rel="prev" title="GDAL Python ユーティリティ" href="gdal_python_utilities.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/gdalicon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../download.html">ダウンロード</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../programs/index.html">プログラム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers/raster/index.html">ラスタードライバー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../drivers/vector/index.html">ベクタードライバー</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">ユーザー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="raster_data_model.html">ラスターデータモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multidim_raster_data_model.html">多次元ラスターデータモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vector_data_model.html">ベクターデーターモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gnm_data_model.html">地理ネットワークデータモデル</a></li>
+<li class="toctree-l2"><a class="reference internal" href="multithreading.html">マルチスレッディング</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ogr_sql_sqlite_dialect.html">OGR SQL方言とSQLITE SQL方言</a></li>
+<li class="toctree-l2"><a class="reference internal" href="virtual_file_systems.html">GDAL仮想ファイルシステム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ogr_feature_style.html">地物スタイル仕様</a></li>
+<li class="toctree-l2"><a class="reference internal" href="coordinate_epoch.html">座標元期のサポート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configoptions.html">設定オプション</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gdal_python_utilities.html">GDAL Python ユーティリティ</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Security considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#classes-of-potential-vulnerabilities">Classes of potential vulnerabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#causes">Causes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#situations-at-risk">Situations at risk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mitigation">Mitigation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#credential-related-issues">Credential related issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues-in-api">Known issues in API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues-in-drivers">Known issues in drivers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#general-issues">General issues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gdal-mem-driver">​GDAL MEM driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gdal-pdf-driver">​GDAL PDF driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gdal-vrt-driver">​GDAL VRT driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gdal-gti-driver">​GDAL GTI driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ogr-vrt-driver">​OGR VRT driver</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index.html">チュートリアル</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../community/index.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sponsors/index.html">スポンサー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GDAL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html"> GDAL  ドキュメント </a> &raquo;</li>
+      
+          <li><a href="index.html">ユーザー向けドキュメント</a> &raquo;</li>
+      
+      <li>Security considerations</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSGeo/gdal/edit/master/doc/source/user/security.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="../api/index.html" class="btn btn-neutral float-right" title="API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gdal_python_utilities.html" class="btn btn-neutral float-left" title="GDAL Python ユーティリティ" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="security-considerations">
+<span id="security"></span><h1>Security considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h1>
+<p>This page discusses some security issues that users or developers may face while
+using GDAL. It can also serve as a check-list of items to take care of, for
+developers coding new drivers.</p>
+<p>While GDAL maintainers take a number of steps to limit the risk of software
+vulnerabilities, GDAL has a large attack surface, because it deals with data in
+a variety of file formats.</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>This page is not intended to be a comprehensive cook-book for being &quot;safe&quot; in all
+circumstances, and should be considered as work-in-progress
+that can benefit from continued feedback of people deploying GDAL.
+Although they are specialists of the GDAL code base, GDAL maintainers are not
+security experts.</p>
+</div>
+<section id="classes-of-potential-vulnerabilities">
+<h2>Classes of potential vulnerabilities<a class="headerlink" href="#classes-of-potential-vulnerabilities" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Arbitrary code execution with the privileges of the user running the GDAL
+process.</p></li>
+<li><p>Theft, tampering or destruction of data.</p></li>
+<li><p>Denial of Service : abortion of a process, high consumption of CPU, memory,
+I/O resource.</p></li>
+<li><p>Unwanted network access.</p></li>
+</ul>
+</section>
+<section id="causes">
+<h2>Causes<a class="headerlink" href="#causes" title="Link to this heading"></a></h2>
+<ul>
+<li><p>Software bugs - in GDAL code itself, or in third-party dependencies - related
+to code that processes user data. Common defects can be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>stack or heap buffer overflows, potentially leading to arbitrary code
+execution.</p></li>
+<li><p>excessive memory allocation</p></li>
+<li><p>infinite, or very long, loops in code</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Software functionalities themselves, depending on the context of use, can
+be a source of vulnerabilities. Consult <a class="reference internal" href="#security-known-issues"><span class="std std-ref">Credential related issues</span></a> below.</p></li>
+</ul>
+</section>
+<section id="situations-at-risk">
+<h2>Situations at risk<a class="headerlink" href="#situations-at-risk" title="Link to this heading"></a></h2>
+<p>The following are examples of situations where a user may process untrusted data
+that has been crafted to trigger a vulnerability:</p>
+<ul class="simple">
+<li><p>web services accepting input files provided by a client,</p></li>
+<li><p>desktop use of GDAL where an hostile party manages to convince the victim
+user to process hostile data.</p></li>
+</ul>
+</section>
+<section id="mitigation">
+<h2>Mitigation<a class="headerlink" href="#mitigation" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Upgrade to the latest versions of GDAL and its dependencies that might contain
+bug fixes for some vulnerabilities.</p></li>
+<li><p>Build GDAL with the hardening options of compilers, e.g. with -D_FORTIFY_SOURCE=2
+(some Linux distributions turn on it by default), to minimize the effect of
+buffer overflows.</p></li>
+<li><p>Restrict access to the part of the file system that are only needed. The <code class="docutils literal notranslate"><span class="pre">​chroot</span></code>
+mechanism, or other sand-boxing solutions, might be a technical solution for this.</p></li>
+<li><p>Compile only the subset of drivers needed. The <code class="docutils literal notranslate"><span class="pre">GDAL_ENABLE_DRIVER_{name}</span></code>
+or <code class="docutils literal notranslate"><span class="pre">OGR_ENABLE_DRIVER_{name}</span></code> CMake build options can be used for that purpose.</p></li>
+<li><p>Disable unneeded drivers at run-time by setting the <a class="reference internal" href="configoptions.html#config-GDAL_SKIP"><code class="docutils literal notranslate"><span class="pre">GDAL_SKIP</span></code></a>
+configuration option.</p></li>
+<li><p>When network access is not needed, disable Curl at build time with the
+<code class="docutils literal notranslate"><span class="pre">GDAL_USE_CURL=OFF</span></code> CMake option.</p></li>
+<li><p>Process untrusted data in a dedicated user account with no access to other
+local sensitive data (data files, passwords, encryption/signing keys, etc...).
+Note that the mere act of opening a dataset with the GDAL/OGR API or utilities
+is a form of processing.</p></li>
+<li><p>For automatic services, place restrictions on the CPU time and memory
+consumption allowed to the process using GDAL. Check the options of your
+HTTP server.</p></li>
+<li><p>Check the raster dimensions and number of bands just after opening a GDAL
+driver and before processing it. Several GDAL drivers use the
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCheckDatasetDimensions()</span></code> and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCheckBandCount()</span></code>
+functions to do early sanity checks, but user checks can also be useful.
+For example, a dataset with huge raster dimensions but with a very small file
+size might be suspicious (but not always, for example a VRT file, or highly
+compressed data...)</p></li>
+<li><p>Do not allow arbitrary arguments to be passed to command line utilities.
+In particular <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">GDAL_DRIVER_PATH</span> <span class="pre">xxx</span></code> or <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">OGR_DRIVER_PATH</span> <span class="pre">xxx</span></code>
+could be used to trigger arbitrary code execution for someone with write
+access to some parts of the file system. Similarly, <a class="reference internal" href="../drivers/raster/vrt.html#config-GDAL_VRT_ENABLE_PYTHON"><code class="docutils literal notranslate"><span class="pre">GDAL_VRT_ENABLE_PYTHON</span></code></a>
+or <a class="reference internal" href="../drivers/raster/vrt.html#config-GDAL_VRT_PYTHON_TRUSTED_MODULES"><code class="docutils literal notranslate"><span class="pre">GDAL_VRT_PYTHON_TRUSTED_MODULES</span></code></a> could be used to trigger hostile
+Python code execution.</p></li>
+<li><p>When possible, avoid using closed-source dependency libraries that cannot be
+audited for vulnerabilities.</p></li>
+</ul>
+</section>
+<section id="credential-related-issues">
+<span id="security-known-issues"></span><h2>Credential related issues<a class="headerlink" href="#credential-related-issues" title="Link to this heading"></a></h2>
+<p>GDAL network virtual file systems can access credentials needed to grant access
+to remote resources, from the environment or local files. Those secrets are
+stored in RAM using normal mechanisms. Consequently they could potentially be
+recovered by untrusted code that would run in the same process as GDAL code.</p>
+<p>The same applies for connection strings to some drivers such as PostgreSQL, MySQL, etc.
+which may include passwords.</p>
+</section>
+<section id="known-issues-in-api">
+<h2>Known issues in API<a class="headerlink" href="#known-issues-in-api" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api/ogrspatialref.html#_CPPv4N19OGRSpatialReference16SetFromUserInputEPKc" title="OGRSpatialReference::SetFromUserInput"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">OGRSpatialReference::SetFromUserInput()</span></code></a> accepts URLs by default</p></li>
+</ul>
+</section>
+<section id="known-issues-in-drivers">
+<h2>Known issues in drivers<a class="headerlink" href="#known-issues-in-drivers" title="Link to this heading"></a></h2>
+<section id="general-issues">
+<h3>General issues<a class="headerlink" href="#general-issues" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Drivers do not always use file extensions to determine which file must be
+handled by which driver (this is a feature in most situations). But,
+for example, a VRT file might be disguised as a .tif, .png, or .jpg file.
+So you cannot know which driver will handle a file by just looking at its
+extension. Using <code class="docutils literal notranslate"><span class="pre">gdalmanage</span> <span class="pre">identify</span> <span class="pre">the.file</span></code>
+(or <a class="reference internal" href="../api/raster_c_api.html#_CPPv418GDALIdentifyDriverPKc12CSLConstList" title="GDALIdentifyDriver"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALIdentifyDriver()</span></code></a>) can be a way to know the
+driver without attempting a full open of the file, but, drivers not having a
+specialized implementation of the Identify() method will fall back to the Open()
+method.</p></li>
+<li><p>Drivers depending on third-party libraries whose code has been embedded in GDAL.
+Binary builds might rely on the internal version, or the external version.
+If using the internal version, they might use an obsolete version of the
+third-party library that might contain known vulnerabilities. Potentially
+concerned drivers are GTiff (libtiff, libgeotiff), PNG (libpng), GIF (giflib),
+JPEG (libjpeg), PCRaster (libcsf), GeoJSON (libjson-c), MRF (liblerc).
+An internal version of ZLib is also contained in GDAL sources.
+Packagers of GDAL are recommended to use the external version of the libraries
+when possible, so that security upgrades of those dependencies benefit to GDAL.</p></li>
+<li><p>Drivers using GDALOpen()/GDALOpenEx()/OGROpen() internally cause other drivers
+to be used (and their possible flaws exploited), without it being obvious at
+first sight. VRT, MBTiles, KMLSuperOverlay, RasterLite, PCIDSK, PDF, RPFTOC,
+RS2, WMS, WCS, WFS, OAPIF, OGCAPI and GTI are examples of drivers with this
+behavior.</p></li>
+<li><p>Drivers depending on downloaded data (HTTP, WMS, WCS, WFS, OAPIF, OGCAPI,
+STACIT, STACTA, etc.).</p></li>
+<li><p>XML based drivers: they might be subject to denial of service by
+<a class="reference external" href="https://en.wikipedia.org/wiki/Billion_laughs_attack">​billion laugh-like</a>
+attacks. Existing GDAL XML based drivers are thought to take defensive measures
+against such patterns (starting with GDAL 3.9.3 for LVBAG and GMLAS drivers)</p></li>
+<li><p>SQL injections: services that would accept untrusted SQL requests could trigger
+SQL injection vulnerabilities in database-based drivers.</p></li>
+</ul>
+</section>
+<section id="gdal-mem-driver">
+<h3>​GDAL MEM driver<a class="headerlink" href="#gdal-mem-driver" title="Link to this heading"></a></h3>
+<p>The opening syntax <code class="docutils literal notranslate"><span class="pre">MEM:::DATAPOINTER=&lt;memory_address&gt;,PIXELS=&lt;number&gt;,LINES=&lt;number&gt;</span></code>
+can access any memory of the process. Feeding it with a random access can cause
+a crash, or a read of unwanted virtual memory. The MEM driver is used by various algorithms
+and drivers in creation mode (which is not vulnerable to the DATAPOINTER issue),
+so completely disabling the driver might be detrimental to other areas of GDAL.
+It is possible to define the GDAL_NO_OPEN_FOR_MEM_DRIVER <em>compilation</em> flag to
+disable the <code class="docutils literal notranslate"><span class="pre">MEM:::DATAPOINTER`</span></code> syntax only.</p>
+</section>
+<section id="gdal-pdf-driver">
+<h3>​GDAL PDF driver<a class="headerlink" href="#gdal-pdf-driver" title="Link to this heading"></a></h3>
+<p>The OGR_DATASOURCE creation option accepts a file name. So any OGR datasource,
+and potentially any file (see OGR VRT) could be read through this option, and
+its content embedded in the generated PDF.
+Similarly for the COMPOSITION_FILE creation option.</p>
+</section>
+<section id="gdal-vrt-driver">
+<h3>​GDAL VRT driver<a class="headerlink" href="#gdal-vrt-driver" title="Link to this heading"></a></h3>
+<p>It can be used to access any valid GDAL dataset. If a hostile party, with
+knowledge of the location on the filesystem of a valid GDAL dataset, convinces
+a user to run gdal_translate a VRT file and give it back the result,
+it might be able to steal data. That could potentially be able for a web service
+accepting data from the user, converting it, and sending back the result.</p>
+<p>The VRTRawRasterBand mechanism can read any file (not necessarily a
+valid GDAL dataset) accessible, which can extend the scope of the above
+mentioned issue.</p>
+<p>The VRTDerivedRasterBand mechanism can use Pixel functions written in Python,
+directly embedded in a VRT file, or pointing to external Python code. By
+default this mechanism is disabled, to avoid arbitrary code execution.
+Consult <a class="reference internal" href="../drivers/raster/vrt.html#raster-vrt-security-implications"><span class="std std-ref">Security implications</span></a> for more details.</p>
+<p>/vsicurl/ (and associated network-capable virtual file systems) filenames can be
+used, thus causing remote data to be downloaded.</p>
+</section>
+<section id="gdal-gti-driver">
+<h3>​GDAL GTI driver<a class="headerlink" href="#gdal-gti-driver" title="Link to this heading"></a></h3>
+<p>Same issues as the GDAL VRT driver.</p>
+</section>
+<section id="ogr-vrt-driver">
+<h3>​OGR VRT driver<a class="headerlink" href="#ogr-vrt-driver" title="Link to this heading"></a></h3>
+<p>Similar issues as the GDAL VRT driver. <code class="docutils literal notranslate"><span class="pre">&lt;SrcSQL&gt;</span></code> could be used to modify data.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api/index.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gdal_python_utilities.html" class="btn btn-neutral float-left" title="GDAL Python ユーティリティ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <div class="info">
+      <a class="logo-link" href="https://osgeo.org">
+        <div class="osgeo-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
+      &copy; 1998-2024 <a href="https://github.com/warmerdam">Frank Warmerdam</a>,
+      <a href="https://github.com/rouault">Even Rouault</a>, and
+      <a href="https://github.com/OSGeo/gdal/graphs/contributors">others</a>
+
+
+      
+      </div>
+    </div>
+  </div>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

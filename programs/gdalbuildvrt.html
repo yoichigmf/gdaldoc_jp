@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>gdalbuildvrt &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -85,6 +87,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="gdalcompare.html">gdalcompare</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdaldem.html">gdaldem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdalenhance.html">gdalenhance</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalinfo.html">gdalinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdallocationinfo.html">gdallocationinfo</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gdalmanage.html">gdalmanage</a></li>
@@ -115,6 +118,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -201,6 +205,7 @@
              <span class="p">[</span><span class="o">-</span><span class="n">a_srs</span> <span class="o">&lt;</span><span class="n">srs_def</span><span class="o">&gt;</span><span class="p">]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">r</span> <span class="p">{</span><span class="n">nearest</span><span class="o">|</span><span class="n">bilinear</span><span class="o">|</span><span class="n">cubic</span><span class="o">|</span><span class="n">cubicspline</span><span class="o">|</span><span class="n">lanczos</span><span class="o">|</span><span class="n">average</span><span class="o">|</span><span class="n">mode</span><span class="p">}]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">oo</span> <span class="o">&lt;</span><span class="n">NAME</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span>
+             <span class="p">[</span><span class="o">-</span><span class="n">co</span> <span class="o">&lt;</span><span class="n">NAME</span><span class="o">&gt;=&lt;</span><span class="n">VALUE</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span>
              <span class="p">[</span><span class="o">-</span><span class="n">input_file_list</span> <span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">overwrite</span><span class="p">]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">strict</span> <span class="o">|</span> <span class="o">-</span><span class="n">non_strict</span><span class="p">]</span>
              <span class="o">&lt;</span><span class="n">output_filename</span><span class="o">.</span><span class="n">vrt</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">input_raster</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">input_raster</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span>
@@ -415,6 +420,15 @@ complete WKT, PROJ.4, EPSG:n or a file containing the WKT. No reprojection is do
 <dd><p>Dataset open option (format specific)</p>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 2.2.</span></p>
+</div>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-gdalbuildvrt-co">
+<span class="sig-name descname"><span class="pre">-co</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></span><a class="headerlink" href="#cmdoption-gdalbuildvrt-co" title="Link to this definition"></a></dt>
+<dd><p>Specify a <a class="reference internal" href="../drivers/raster/vrt.html#raster-vrt-creation-options"><span class="std std-ref">VRT driver creation option</span></a>.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 3.10.</span></p>
 </div>
 </dd></dl>
 

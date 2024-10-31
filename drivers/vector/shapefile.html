@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ESRI Shapefile / DBF &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -166,6 +169,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -385,9 +389,7 @@ terminated with an error.</p>
 <p>Note that this can make it very difficult to translate a mixed geometry
 layer from another format into Shapefile format using ogr2ogr, since
 ogr2ogr has no support for separating out geometries from a source
-layer. See the
-<a class="reference external" href="http://trac.osgeo.org/gdal/wiki/FAQVector#HowdoItranslateamixedgeometryfiletoshapefileformat">FAQ</a>
-for a solution.</p>
+layer.</p>
 <p>Shapefile feature attributes are stored in an associated .dbf file, and
 so attributes suffer a number of limitations:</p>
 <ul>
@@ -480,7 +482,7 @@ layers). Creation and editing involves the creation of temporary files.</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/shapefile-oo-ENCODING"><strong>ENCODING=[&lt;encoding_name&gt;/&quot;&quot;]: </strong>Override the encoding interpretation
+<li><p id="drivers/vector/shapefile-oo-ENCODING"><strong>ENCODING=[&lt;encoding_name&gt;​/​&quot;&quot;]: </strong>Override the encoding interpretation
 of the shapefile with any encoding supported by CPLRecode or to &quot;&quot; to
 avoid any recoding.</p>
 </li>
@@ -488,7 +490,7 @@ avoid any recoding.</p>
 in DBF header with year-month-day format. If not specified, current
 date is used.</p>
 </li>
-<li><p id="drivers/vector/shapefile-oo-ADJUST_TYPE"><strong>ADJUST_TYPE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to read the
+<li><p id="drivers/vector/shapefile-oo-ADJUST_TYPE"><strong>ADJUST_TYPE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to read the
 whole .dbf to adjust Real-&gt;Integer/Integer64 or Integer64-&gt;Integer
 field types when possible. This can be used when field widths are
 ambiguous and that by default OGR would select the larger data type.
@@ -496,7 +498,7 @@ For example, a numeric column with 0 decimal figures and with width
 of 10/11 character may hold Integer or Integer64, and with width
 19/20 may hold Integer64 or larger integer (hold as Real)</p>
 </li>
-<li><p id="drivers/vector/shapefile-oo-ADJUST_GEOM_TYPE"><strong>ADJUST_GEOM_TYPE=[NO/FIRST_SHAPE/ALL_SHAPES]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FIRST_SHAPE</span></code>. Defines how layer geometry type is computed, in particular to
+<li><p id="drivers/vector/shapefile-oo-ADJUST_GEOM_TYPE"><strong>ADJUST_GEOM_TYPE=[NO​/​FIRST_SHAPE​/​ALL_SHAPES]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FIRST_SHAPE</span></code>. Defines how layer geometry type is computed, in particular to
 distinguish shapefiles that have shapes with significant values in
 the M dimension from the ones where the M values are set to the
 nodata value. By default (FIRST_SHAPE), the driver will look at the
@@ -505,10 +507,10 @@ a M dimension. By specifying ALL_SHAPES, the driver will iterate over
 features until a shape with a valid M value is found to decide the
 appropriate layer type.</p>
 </li>
-<li><p id="drivers/vector/shapefile-oo-AUTO_REPACK"><strong>AUTO_REPACK=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the shapefile should be automatically repacked when needed,
+<li><p id="drivers/vector/shapefile-oo-AUTO_REPACK"><strong>AUTO_REPACK=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the shapefile should be automatically repacked when needed,
 at dataset closing or at FlushCache()/SyncToDisk() time.</p>
 </li>
-<li><p id="drivers/vector/shapefile-oo-DBF_EOF_CHAR"><strong>DBF_EOF_CHAR=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the .DBF should be terminated by a 0x1A end-of-file
+<li><p id="drivers/vector/shapefile-oo-DBF_EOF_CHAR"><strong>DBF_EOF_CHAR=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the .DBF should be terminated by a 0x1A end-of-file
 character, as in the DBF spec and done by other software vendors.
 Previous GDAL versions did not write one.</p>
 </li>
@@ -535,21 +537,21 @@ MULTIPATCH files are supported since GDAL 2.2.</p>
 default value is &quot;LDID/87&quot;. It is not clear what other values may be
 appropriate.</p>
 </li>
-<li><p id="drivers/vector/shapefile-lco-RESIZE"><strong>RESIZE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to resize fields to their optimal size. See above &quot;Field sizes&quot; section.</p>
+<li><p id="drivers/vector/shapefile-lco-RESIZE"><strong>RESIZE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to resize fields to their optimal size. See above &quot;Field sizes&quot; section.</p>
 </li>
-<li><p id="drivers/vector/shapefile-lco-2GB_LIMIT"><strong>2GB_LIMIT=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to enforce the 2GB file size for .SHP or .DBF files.</p>
+<li><p id="drivers/vector/shapefile-lco-2GB_LIMIT"><strong>2GB_LIMIT=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to enforce the 2GB file size for .SHP or .DBF files.</p>
 </li>
-<li><p id="drivers/vector/shapefile-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to create a spatial index (.qix).</p>
+<li><p id="drivers/vector/shapefile-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set to YES to create a spatial index (.qix).</p>
 </li>
 <li><p id="drivers/vector/shapefile-lco-DBF_DATE_LAST_UPDATE"><strong>DBF_DATE_LAST_UPDATE=&lt;YYYY-MM-DD&gt;: </strong>Modification
 date to write in DBF header with year-month-day format. If not
 specified, current date is used. Note: behavior of past GDAL
 releases was to write 1995-07-26</p>
 </li>
-<li><p id="drivers/vector/shapefile-lco-AUTO_REPACK"><strong>AUTO_REPACK=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the shapefile should be automatically repacked when needed,
+<li><p id="drivers/vector/shapefile-lco-AUTO_REPACK"><strong>AUTO_REPACK=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the shapefile should be automatically repacked when needed,
 at dataset closing or at FlushCache()/SyncToDisk() time.</p>
 </li>
-<li><p id="drivers/vector/shapefile-lco-DBF_EOF_CHAR"><strong>DBF_EOF_CHAR=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the .DBF should be terminated by a 0x1A end-of-file
+<li><p id="drivers/vector/shapefile-lco-DBF_EOF_CHAR"><strong>DBF_EOF_CHAR=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the .DBF should be terminated by a 0x1A end-of-file
 character, as in the DBF spec and done by other software vendors.
 Previous GDAL versions did not write one.</p>
 </li>
@@ -560,7 +562,7 @@ Previous GDAL versions did not write one.</p>
 <p><a class="reference internal" href="../../user/configoptions.html#configoptions"><span class="std std-ref">Configuration options</span></a> can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">--config</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or using functions such as <a class="reference internal" href="../../api/cpl.html#_CPPv418CPLSetConfigOptionPKcPKc" title="CPLSetConfigOption"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">CPLSetConfigOption()</span></code></a> (C) or <code class="xref py py-func docutils literal notranslate"><span class="pre">gdal.config_options</span></code> (Python).
 The following configuration options are available:</p>
 <ul class="simple">
-<li><p id="config-SHAPE_REWIND_ON_WRITE"><strong>SHAPE_REWIND_ON_WRITE=[YES/NO]: </strong>can be set to NO to prevent the
+<li><p id="config-SHAPE_REWIND_ON_WRITE"><strong>SHAPE_REWIND_ON_WRITE=[YES​/​NO]: </strong>can be set to NO to prevent the
 shapefile writer to correct the winding order of exterior/interior rings to
 be conformant with the one mandated by the Shapefile specification. This can
 be useful in some situations where a MultiPolygon passed to the shapefile
@@ -572,7 +574,7 @@ topological analysis like done in previous GDAL versions, which could cause
 troubles for non-planar 3D geometries.</p>
 </p>
 </li>
-<li><p id="config-SHAPE_RESTORE_SHX"><strong>SHAPE_RESTORE_SHX=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. can be set to YES to restore broken or absent .shx file from associated .shp file
+<li><p id="config-SHAPE_RESTORE_SHX"><strong>SHAPE_RESTORE_SHX=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. can be set to YES to restore broken or absent .shx file from associated .shp file
 during opening.</p>
 </li>
 <li><p id="config-SHAPE_2GB_LIMIT"><strong>SHAPE_2GB_LIMIT=YES: </strong>can be set to YES to strictly enforce
@@ -615,8 +617,6 @@ trying to find existing layers and append the features being copied.</p>
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://shapelib.maptools.org/">Shapelib Page</a></p></li>
-<li><p><a class="reference external" href="http://trac.osgeo.org/gdal/wiki/UserDocs/Shapefiles">User Notes on OGR Shapefile
-Driver</a></p></li>
 </ul>
 </section>
 </section>

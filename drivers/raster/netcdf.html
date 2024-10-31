@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NetCDF: Network Common Data Form &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -216,6 +219,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -249,6 +253,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -574,26 +579,26 @@ behavior.</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/netcdf-oo-HONOUR_VALID_RANGE"><strong>HONOUR_VALID_RANGE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to set to
+<li><p id="drivers/raster/netcdf-oo-HONOUR_VALID_RANGE"><strong>HONOUR_VALID_RANGE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to set to
 nodata pixel values outside of the validity range indicated by
 valid_min, valid_max or valid_range attributes.</p>
 </li>
-<li><p id="drivers/raster/netcdf-oo-IGNORE_XY_AXIS_NAME_CHECKS"><strong>IGNORE_XY_AXIS_NAME_CHECKS=[YES/NOA]: </strong> (GDAL &gt;= 3.4.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether X/Y dimensions
+<li><p id="drivers/raster/netcdf-oo-IGNORE_XY_AXIS_NAME_CHECKS"><strong>IGNORE_XY_AXIS_NAME_CHECKS=[YES​/​NO]: </strong> (GDAL &gt;= 3.4.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether X/Y dimensions
 should be always considered as geospatial axis, even if the lack
 conventional attributes confirming it.</p>
 </li>
-<li><p id="drivers/raster/netcdf-oo-VARIABLES_AS_BANDS"><strong>VARIABLES_AS_BANDS=[YES/NO]: </strong> (GDAL &gt;= 3.5)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to YES, and if the
+<li><p id="drivers/raster/netcdf-oo-VARIABLES_AS_BANDS"><strong>VARIABLES_AS_BANDS=[YES​/​NO]: </strong> (GDAL &gt;= 3.5)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to YES, and if the
 netCDF file only contains 2D variables of the same type and indexed by the
 same dimensions, then they should be reported as multiple bands of a same dataset.
 Default is NO (that is each variable will be reported as a separate
 subdataset)</p>
 </li>
-<li><p id="drivers/raster/netcdf-oo-ASSUME_LONGLAT"><strong>ASSUME_LONGLAT=[YES/NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether a Geographic CRS should
+<li><p id="drivers/raster/netcdf-oo-ASSUME_LONGLAT"><strong>ASSUME_LONGLAT=[YES​/​NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether a Geographic CRS should
 be assumed and applied when, none has otherwise been found, a meaningful
 geotransform has been found, and that geotransform is within the bounds
 -180,360 -90,90, if YES assume OGC:CRS84.</p>
 </li>
-<li><p id="drivers/raster/netcdf-oo-PRESERVE_AXIS_UNIT_IN_CRS"><strong>PRESERVE_AXIS_UNIT_IN_CRS=[YES/NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether unusual linear axis unit (km) should be kept as such, instead of
+<li><p id="drivers/raster/netcdf-oo-PRESERVE_AXIS_UNIT_IN_CRS"><strong>PRESERVE_AXIS_UNIT_IN_CRS=[YES​/​NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether unusual linear axis unit (km) should be kept as such, instead of
 being normalized to metre. The default is NO, ie that are being normalized
 to metre (previous GDAL versions kept the original unit)</p>
 </li>
@@ -689,14 +694,14 @@ metadata domains.</p>
 <p>Creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-co</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALCreate11GDALDriverHPKciii12GDALDataType12CSLConstList" title="GDALCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreate()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Driver.Create" title="osgeo.gdal.Driver.Create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Driver.Create</span></code></a> (Python).
 The following creation options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/netcdf-co-FORMAT"><strong>FORMAT=[NC/NC2/NC4/NC4C]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NC</span></code>. Set the NetCDF file format to use.
+<li><p id="drivers/raster/netcdf-co-FORMAT"><strong>FORMAT=[NC​/​NC2​/​NC4​/​NC4C]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NC</span></code>. Set the NetCDF file format to use.
 NC2 is normally supported by recent NetCDF
 installations, but NC4 and NC4C are available if NetCDF was compiled
 with NetCDF-4 (and HDF5) support.</p>
 </li>
 <li><p id="drivers/raster/netcdf-co-BAND_NAMES"><strong>BAND_NAMES=value: </strong> (GDAL &gt;= 3.9.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">Band1,Band2,...</span></code>. A comma-separated list of band names.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-COMPRESS"><strong>COMPRESS=[NONE/DEFLATE]: </strong>Set the compression to use. DEFLATE is
+<li><p id="drivers/raster/netcdf-co-COMPRESS"><strong>COMPRESS=[NONE​/​DEFLATE]: </strong>Set the compression to use. DEFLATE is
 only available if NetCDF has been compiled with NetCDF-4 support.
 NC4C format is the default if DEFLATE compression is used.</p>
 </li>
@@ -704,7 +709,7 @@ NC4C format is the default if DEFLATE compression is used.</p>
 compression. A value of 9 is best, and 1 is least compression. The
 default is 1, which offers the best time/compression ratio.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-WRITE_BOTTOMUP"><strong>WRITE_BOTTOMUP=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Set the y-axis order for export,
+<li><p id="drivers/raster/netcdf-co-WRITE_BOTTOMUP"><strong>WRITE_BOTTOMUP=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Set the y-axis order for export,
 overriding the order detected by the driver. NetCDF files are usually
 assumed &quot;bottom-up&quot;, contrary to GDAL's model which is &quot;north up&quot;.
 This normally does not create a problem in the y-axis order, unless
@@ -712,7 +717,7 @@ there is no y axis geo-referencing. The default for this setting is
 YES, so files will be exported in the NetCDF default &quot;bottom-up&quot;
 order. For import see <a class="reference internal" href="#config-GDAL_NETCDF_BOTTOMUP"><code class="docutils literal notranslate"><span class="pre">GDAL_NETCDF_BOTTOMUP</span></code></a> below.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-WRITE_GDAL_TAGS"><strong>WRITE_GDAL_TAGS=[YES/NO]: </strong>Define if GDAL tags used for
+<li><p id="drivers/raster/netcdf-co-WRITE_GDAL_TAGS"><strong>WRITE_GDAL_TAGS=[YES​/​NO]: </strong>Define if GDAL tags used for
 georeferencing (spatial_ref and GeoTransform) should be exported, in
 addition to CF tags. Not all information is stored in the CF tags
 (such as named datums and EPSG codes), therefore the driver exports
@@ -721,29 +726,29 @@ takes precedence and the GDAL tags are used if they do not conflict
 with CF metadata. In GDAL 4, spatial_ref will not be exported. The
 crs_wkt CF metadata attribute will be used instead.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-WRITE_LONLAT"><strong>WRITE_LONLAT=[YES/NO/IF_NEEDED]: </strong>Define if CF lon/lat variables
+<li><p id="drivers/raster/netcdf-co-WRITE_LONLAT"><strong>WRITE_LONLAT=[YES​/​NO​/​IF_NEEDED]: </strong>Define if CF lon/lat variables
 are written to file. Default is YES for geographic SRS and NO for
 projected SRS. This is normally not necessary for projected SRS as
 GDAL and many applications use the X/Y dimension variables and CF
 projection information. Use of IF_NEEDED option creates lon/lat
 variables if the projection is not part of the CF-1.5 standard.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-TYPE_LONLAT"><strong>TYPE_LONLAT=[float/double]: </strong>Set the variable type to use for
+<li><p id="drivers/raster/netcdf-co-TYPE_LONLAT"><strong>TYPE_LONLAT=[float​/​double]: </strong>Set the variable type to use for
 lon/lat variables. Default is double for geographic SRS and float for
 projected SRS. If lon/lat variables are written for a projected SRS,
 the file is considerably large (each variable uses X*Y space),
 therefore <a class="reference internal" href="#drivers/raster/netcdf-co-TYPE_LONLAT"><code class="docutils literal notranslate"><span class="pre">TYPE_LONLAT=float</span></code></a> and <a class="reference internal" href="#drivers/raster/netcdf-co-COMPRESS"><code class="docutils literal notranslate"><span class="pre">COMPRESS=DEFLATE</span></code></a> are advisable in
 order to save space.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-PIXELTYPE"><strong>PIXELTYPE=[DEFAULT/SIGNEDBYTE]: </strong>By setting this to SIGNEDBYTE, a
+<li><p id="drivers/raster/netcdf-co-PIXELTYPE"><strong>PIXELTYPE=[DEFAULT​/​SIGNEDBYTE]: </strong>By setting this to SIGNEDBYTE, a
 new Byte file can be forced to be written as signed byte.
 Starting with GDAL 3.7, this option is deprecated and Int8 should rather
 be used.</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-WRITE_GDAL_VERSION"><strong>WRITE_GDAL_VERSION=[YES/NO]: </strong> (GDAL &gt;= 3.5.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Define if a &quot;GDAL&quot; text global attribute should be added on file creation
+<li><p id="drivers/raster/netcdf-co-WRITE_GDAL_VERSION"><strong>WRITE_GDAL_VERSION=[YES​/​NO]: </strong> (GDAL &gt;= 3.5.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Define if a &quot;GDAL&quot; text global attribute should be added on file creation
 with the GDAL version</p>
 </li>
-<li><p id="drivers/raster/netcdf-co-WRITE_GDAL_HISTORY"><strong>WRITE_GDAL_HISTORY=[YES/NO]: </strong> (GDAL &gt;= 3.5.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Define if the &quot;history&quot; global attribute should be prepended with a date/time
+<li><p id="drivers/raster/netcdf-co-WRITE_GDAL_HISTORY"><strong>WRITE_GDAL_HISTORY=[YES​/​NO]: </strong> (GDAL &gt;= 3.5.0)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Define if the &quot;history&quot; global attribute should be prepended with a date/time
 and GDAL information.</p>
 </li>
 </ul>
@@ -796,20 +801,20 @@ of the indexing variable of the dimension.</p>
 <section id="configuration-options">
 <h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p id="config-GDAL_NETCDF_BOTTOMUP"><strong>GDAL_NETCDF_BOTTOMUP=[YES/NO]: </strong>Set the y-axis order for import,
+<li><p id="config-GDAL_NETCDF_BOTTOMUP"><strong>GDAL_NETCDF_BOTTOMUP=[YES​/​NO]: </strong>Set the y-axis order for import,
 overriding the order detected by the driver. This option is usually
 not needed unless a specific dataset is causing problems (which
 should be reported on <a class="reference external" href="https://github.com/osgeo/GDAL/issues">GitHub</a>).</p>
 </li>
-<li><p id="config-GDAL_NETCDF_VERIFY_DIMS"><strong>GDAL_NETCDF_VERIFY_DIMS=[YES/STRICT]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Try to guess which dimensions
+<li><p id="config-GDAL_NETCDF_VERIFY_DIMS"><strong>GDAL_NETCDF_VERIFY_DIMS=[YES​/​STRICT]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Try to guess which dimensions
 represent the latitude and longitude only by their attributes (STRICT)
 or also by guessing the name (YES).</p>
 </li>
-<li><p id="config-GDAL_NETCDF_IGNORE_XY_AXIS_NAME_CHECKS"><strong>GDAL_NETCDF_IGNORE_XY_AXIS_NAME_CHECKS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether X/Y dimensions
+<li><p id="config-GDAL_NETCDF_IGNORE_XY_AXIS_NAME_CHECKS"><strong>GDAL_NETCDF_IGNORE_XY_AXIS_NAME_CHECKS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether X/Y dimensions
 should be always considered as geospatial axis, even if the lack
 conventional attributes confirming it.</p>
 </li>
-<li><p id="config-GDAL_NETCDF_ASSUME_LONGLAT"><strong>GDAL_NETCDF_ASSUME_LONGLAT=[YES/NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether a Geographic CRS should
+<li><p id="config-GDAL_NETCDF_ASSUME_LONGLAT"><strong>GDAL_NETCDF_ASSUME_LONGLAT=[YES​/​NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether a Geographic CRS should
 be assumed and applied when, none has otherwise been found, a meaningful
 geotransform has been found, and that geotransform is within the bounds
 -180,360 -90,90, if YES assume OGC:CRS84.</p>
@@ -936,8 +941,6 @@ values are per-filter parameters. More details about netCDF-4 filter support at
 <p>This driver is compiled with the UNIDATA NetCDF library.</p>
 <p>You need to download or compile the NetCDF library before configuring
 GDAL with NetCDF support.</p>
-<p>See <a class="reference external" href="http://trac.osgeo.org/gdal/wiki/NetCDF">NetCDF GDAL wiki</a> for
-build instructions and information regarding HDF4, NetCDF-4 and HDF5.</p>
 </section>
 <section id="see-also">
 <h2>See Also:<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RFC 101: Raster dataset read-only thread-safety &mdash; GDAL  ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://gdal.org/development/rfc/rfc101_raster_dataset_threadsafety.html"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=c033477b"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="author" title="このドキュメントについて" href="../../about.html" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" />
+    <link rel="next" title="RFC 102: Embedding resource files into libgdal" href="rfc102_embedded_resources.html" />
+    <link rel="prev" title="RFC 99: Geometry coordinate precision" href="rfc99_geometry_coordinate_precision.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/gdalicon.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../download.html">ダウンロード</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/raster/index.html">ラスタードライバー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../drivers/vector/index.html">ベクタードライバー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/index.html">ユーザー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">チュートリアル</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">開発</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../building_from_source.html">GDAL のソースからのビルド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_environment.html">開発環境の設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_practices.html">開発プラクティス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../testing.html">自動テスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dev_documentation.html">文書のビルド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cmake.html">Cmake プロジェクトでの GDAL の利用</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">RFC list</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="rfc1_pmc.html">RFC 1: Project Management Committee Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc2_svn.html">RFC 2: Migration to OSGeo Subversion Repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc3_commiters.html">RFC 3: GDAL Committer Guildlines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc4_geolocate.html">RFC 4: Geolocation Arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc5_unicode.html">RFC 5: Unicode support in GDAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc6_sqlgeom.html">RFC 6: Geometry and Feature Style as OGR Special Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc7_vsilapi.html">RFC 7: Use VSILFILE for VSI*L Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc8_devguide.html">RFC 8: Developer Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc9_maintainer.html">RFC 9: GDAL Paid Maintainer Guidelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc10_ogropen.html">RFC 10: OGR Open Parameters (not implemented)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc11_fastidentify.html">RFC 11: Fast Format Identification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc12_filemanagement.html">RFC 12: Improved File Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc13_createfeatures.html">RFC 13: Improved Feature Insertion/Update/Delete Performance in Batch Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc14_imagestructure.html">RFC 14: Image Structure Metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc15_nodatabitmask.html">RFC 15: Band Masks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc16_ogr_reentrancy.html">RFC 16: OGR Thread Safety</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc17_python_namespaces.html">RFC 17: Python Namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc18_ogr_styles_c_api.html">RFC 18: OGR Style Support in C API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc19_safememalloc.html">RFC 19: Safer memory allocation in GDAL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc20_srs_axes.html">RFC 20: OGRSpatialReference Axis Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc21_ogrsqlcast.html">RFC 21: OGR SQL type cast and field name alias</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc22_rpc.html">RFC 22: RPC Georeferencing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc23_ogr_unicode.html">RFC 23.1: Unicode support in OGR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc24_progressive_data_support.html">RFC 24: GDAL Progressive Data Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc25_fast_open.html">RFC 25: Fast Open (withdrawn)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc26_blockcache.html">RFC 26: GDAL Block Cache Improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc27_supportdata.html">RFC 27: Improved Supporting Data File Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc28_sqlfunc.html">RFC 28: OGR SQL Generalized Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc29_desired_fields.html">RFC 29: OGR Set Ignored Fields</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc30_utf8_filenames.html">RFC 30: Unicode Filenames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc31_ogr_64.html">RFC 31: OGR 64bit Integer Fields and FIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc32_gdallocationinfo.html">RFC 32: gdallocationinfo utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc33_gtiff_pixelispoint.html">RFC 33: GTiff - Fixing PixelIsPoint Interpretation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc34_license_policy.html">RFC 34: License Policy Enforcement (not implemented)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc35_deletereorderalterfielddefn.html">RFC 35: Delete, reorder and alter field definitions of OGR layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc36_open_by_drivername.html">RFC 36: Allow specification of intended driver on GDALOpen (withdrawn)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc37_cplerror_userdata.html">RFC 37: User data callbacks in CPLError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc38_ogr_faster_open.html">RFC 38: OGR Faster Open (withdrawn)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc39_ogr_layer_algebra.html">RFC 39: OGR Layer Algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc40_enhanced_rat_support.html">RFC 40: Improving performance of Raster Attribute Table implementation for large tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc41_multiple_geometry_fields.html">RFC 41 : Support for multiple geometry fields in OGR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc42_find_laundered_fields.html">RFC 42: OGR Layer laundered field lookup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc43_getmetadatadomainlist.html">RFC 43: GDALMajorObject::GetMetadataDomainList</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc44_gdalinfoxml.html">RFC 44: Add Parseable Output Formats for ogrinfo and gdalinfo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc45_virtualmem.html">RFC 45: GDAL datasets and raster bands as virtual memory mappings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc46_gdal_ogr_unification.html">RFC 46: GDAL/OGR unification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc47_dataset_caching.html">RFC 47: Per Dataset Caching and GDALRasterBand Multithreading (not implemented)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc48_geographical_networks_support.html">RFC 48: Geographical networks support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc49_curve_geometries.html">RFC 49: Curve geometries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc50_ogr_field_subtype.html">RFC 50: OGR field subtypes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc51_rasterio_resampling_progress.html">RFC 51: RasterIO() improvements : resampling and progress callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc52_strict_sql_quoting.html">RFC 52: Strict OGR SQL quoting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc53_ogr_notnull_default.html">RFC 53: OGR not-null constraints and default values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc54_dataset_transactions.html">RFC 54: Dataset transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc55_refined_setfeature_deletefeature_semantics.html">RFC 55: Refined SetFeature() and DeleteFeature() semantics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc56_millisecond_precision.html">RFC 56: OFTTime/OFTDateTime millisecond accuracy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc57_histogram_64bit_count.html">RFC 57: 64-bit bucket counts for histograms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc58_removing_dataset_nodata_value.html">RFC 58: Removing Dataset Nodata Value</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc59.1_utilities_as_a_library.html">RFC 59.1 : GDAL/OGR utilities as a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc59_utilities_as_a_library.html">RFC 59 : GDAL/OGR utilities as a library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc60_improved_roundtripping_in_ogr.html">RFC 60 : Improved round-tripping in OGR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc61_support_for_measured_geometries.html">RFC 61 : Support for measured geometries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc62_raster_algebra.html">RFC 62 : Raster algebra</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc63_sparse_datasets_improvements.html">RFC 63 : Sparse datasets improvements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc64_triangle_polyhedralsurface_tin.html">RFC 64: Triangle, Polyhedral surface and TIN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc65_rfc7946_geojson.html">RFC 65: RFC 7946 GeoJSON</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc66_randomlayerreadwrite.html">RFC 66 : OGR random layer read/write capabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc67_nullfieldvalues.html">RFC 67 : Null values in OGR</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc68_cplusplus11.html">RFC 68: C++11 Compilation Mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc69_cplusplus_formatting.html">RFC 69: C/C++ Code Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc70_output_format_guess.html">RFC 70: Guessing output format from output file name extension for utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc71_github_migration.html">RFC 71: Migration to GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc72_pytest.html">RFC 72: Update autotest suite to use pytest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc73_proj6_wkt2_srsbarn.html">RFC 73: Integration of PROJ6 for WKT2, late binding capabilities, time-support and unified CRS database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc74_sphinx.html">RFC 74: Migrate gdal.org to RTD-style Sphinx infrastructure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc75_multidimensional_arrays.html">RFC 75: Multidimensional arrays</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc76_ogrpythondrivers.html">RFC 76: OGR Python drivers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc77_drop_python2_support.html">RFC 77: Drop Python 2 support in favour of Python 3.6</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc78_gdal_utils_package.html">RFC 78: gdal-utils package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc79_listing_service_providers.html">RFC 79: Listing of Service Providers on GDAL website</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc80_numfocus_relationship.html">RFC 80: NumFOCUS relationship and sponsorship program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc81_coordinate_epoch.html">RFC 81: Support for coordinate epochs in geospatial formats</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc83_use_of_project_sponsorship.html">RFC 83: guidelines for the use of GDAL project sponsorship</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc84_cmake.html">RFC 84: Migrating build systems to CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc85_policy_code_additions.html">RFC 85: Policy regarding substantial code additions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc86_column_oriented_api.html">RFC 86: Column-oriented read API for vector layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc87_signed_int8.html">RFC 87: Signed int8 data type for raster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc88_googletest.html">RFC 88: Use GoogleTest framework for C/C++ unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc89_sql_logging_callback.html">RFC 89: SQL logging callback</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc90_read_compressed_data.html">RFC 90: Direct access to compressed raster data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc91_dataset_close.html">RFC 91: GDALDataset::Close() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc92_wkb_only_geometries.html">RFC 92: WKB Only geometries (on hold)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc93_update_feature.html">RFC 93: OGRLayer::UpdateFeature() method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc94_field_precision_width_metadata.html">RFC 94: Numeric fields width/precision metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc95_standard_int_types.html">RFC 95: Use standard C/C++ integer types (proposed, <em>NOT</em> adopted)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc96_deferred_plugin_loading.html">RFC 96: Deferred C++ plugin loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc97_feature_and_fielddefn_sealing.html">RFC 97: OGRFeatureDefn, OGRFieldDefn and OGRGeomFieldDefn &quot;sealing&quot;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc98_build_requirements_gdal_3_9.html">RFC 98: Build requirements for GDAL 3.9</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rfc99_geometry_coordinate_precision.html">RFC 99: Geometry coordinate precision</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">RFC 101: Raster dataset read-only thread-safety</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#summary">Summary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#c-and-c-api-extensions">C and C++ API extensions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage-examples">Usage examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#swig-bindings">SWIG bindings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#usage-and-design-limitations">Usage and design limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementation-details">Implementation details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performance">Performance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#backward-compatibility">Backward compatibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#risks">Risks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#design-discussion">Design discussion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#related-issues-and-prs">Related issues and PRs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#voting-history">Voting history</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rfc102_embedded_resources.html">RFC 102: Embedding resource files into libgdal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../community/index.html">コミュニティ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sponsors/index.html">スポンサー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GDAL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html"> GDAL  ドキュメント </a> &raquo;</li>
+      
+          <li><a href="../index.html">開発</a> &raquo;</li>
+      
+          <li><a href="index.html">RFC list</a> &raquo;</li>
+      
+      <li>RFC 101: Raster dataset read-only thread-safety</li>
+    
+
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            
+              <a href="https://github.com/OSGeo/gdal/edit/master/doc/source/development/rfc/rfc101_raster_dataset_threadsafety.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="rfc102_embedded_resources.html" class="btn btn-neutral float-right" title="RFC 102: Embedding resource files into libgdal" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc99_geometry_coordinate_precision.html" class="btn btn-neutral float-left" title="RFC 99: Geometry coordinate precision" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rfc-101-raster-dataset-read-only-thread-safety">
+<span id="rfc-101"></span><h1>RFC 101: Raster dataset read-only thread-safety<a class="headerlink" href="#rfc-101-raster-dataset-read-only-thread-safety" title="Link to this heading"></a></h1>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Author:</p></td>
+<td><p>Even Rouault</p></td>
+</tr>
+<tr class="row-even"><td><p>Contact:</p></td>
+<td><p>even.rouault &#64; spatialys.com</p></td>
+</tr>
+<tr class="row-odd"><td><p>Started:</p></td>
+<td><p>2024-Aug-29</p></td>
+</tr>
+<tr class="row-even"><td><p>Status:</p></td>
+<td><p>Adopted, implemented</p></td>
+</tr>
+<tr class="row-odd"><td><p>Target:</p></td>
+<td><p>GDAL 3.10</p></td>
+</tr>
+</tbody>
+</table>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>This RFC enables users to get instances of <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv411GDALDataset" title="GDALDataset"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALDataset</span></code></a>
+(and their related objects such as <a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv414GDALRasterBand" title="GDALRasterBand"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALRasterBand</span></code></a>) that are
+thread-safe for read-only raster operations, that is such instances can
+be safely used from multiple threads without locking.</p>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Link to this heading"></a></h2>
+<p>The exact meaning of the terms <code class="docutils literal notranslate"><span class="pre">thread-safe</span></code> or <code class="docutils literal notranslate"><span class="pre">re-entrant</span></code> is not fully
+standardized. We will use here the <a class="reference external" href="https://doc.qt.io/qt-5/threads-reentrancy.html">QT definitions</a>.
+In particular, a C function or C++ method is said to be re-entrant if it can
+be called simultaneously from multiple threads, <em>but</em> only if each invocation
+uses its own data/instance. On the contrary, it is thread-safe is if can be
+called on the same data/instance (so thread-safe is stronger than re-entrant)</p>
+</section>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading"></a></h2>
+<p>A number of raster algorithms can be designed to read chunks of a raster in
+an independent and concurrent way, with resulting speed-ups when using
+multi-threading. Currently, given a GDALDataset instance is not thread-safe,
+this requires either to deal with I/O in a single thread, or through a mutex
+to protect against concurrent use, or one needs to open a separate GDALDataset
+for each worker thread. Both approaches can complicate the writing of such
+algorithms. The enhancement of this RFC aims at providing a special GDALDataset
+instance that can be used safely from multiple threads. Internally, it does use
+one GDALDataset per thread, but hides this implementation detail to the user.</p>
+</section>
+<section id="c-and-c-api-extensions">
+<h2>C and C++ API extensions<a class="headerlink" href="#c-and-c-api-extensions" title="Link to this heading"></a></h2>
+<p>A new <code class="docutils literal notranslate"><span class="pre">GDAL_OF_THREAD_SAFE</span></code> opening flag is added to be specified to
+<a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> / <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset4OpenEPKcjPPCKcPPCKcPPCKc" title="GDALDataset::Open"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::Open()</span></code></a>. This flag is for now
+mutually exclusive with <code class="docutils literal notranslate"><span class="pre">GDAL_OF_VECTOR</span></code>, <code class="docutils literal notranslate"><span class="pre">GDAL_OF_MULTIDIM_RASTER</span></code> and
+<code class="docutils literal notranslate"><span class="pre">GDAL_OF_UPDATE</span></code>. That is this flag is only meant for read-only raster
+operations (<code class="docutils literal notranslate"><span class="pre">GDAL_OF_RASTER</span> <span class="pre">|</span> <span class="pre">GDAL_OF_THREAD_SAFE</span></code>).</p>
+<p>To know if a given dataset can be used in a thread-safe way, the following
+C++ method is added to the GDALDataset class:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/** Return whether this dataset, and its related objects (typically raster</span>
+<span class="cm"> * bands), can be called for the intended scope.</span>
+<span class="cm"> *</span>
+<span class="cm"> * Note that in the current implementation, nScopeFlags should be set to</span>
+<span class="cm"> * GDAL_OF_RASTER, as thread-safety is limited to read-only operations and</span>
+<span class="cm"> * excludes operations on vector layers (OGRLayer) or multidimensional API</span>
+<span class="cm"> * (GDALGroup, GDALMDArray, etc.)</span>
+<span class="cm"> *</span>
+<span class="cm"> * This is the same as the C function GDALDatasetIsThreadSafe().</span>
+<span class="cm"> *</span>
+<span class="cm"> * @since 3.10</span>
+<span class="cm"> */</span>
+<span class="kt">bool</span><span class="w"> </span><span class="nf">IsThreadSafe</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nScopeFlags</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The corresponding C function is added:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span><span class="w"> </span><span class="nf">GDALDatasetIsThreadSafe</span><span class="p">(</span><span class="n">GDALDatasetH</span><span class="w"> </span><span class="n">hDS</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nScopeFlags</span><span class="p">,</span>
+<span class="w">                             </span><span class="n">CSLConstList</span><span class="w"> </span><span class="n">papszOptions</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A new C++ function, GDALGetThreadSafeDataset, is added with two forms:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">GDALDataset</span><span class="o">&gt;</span><span class="w"> </span><span class="n">GDALGetThreadSafeDataset</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">GDALDataset</span><span class="o">&gt;</span><span class="w"> </span><span class="n">poDS</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nScopeFlags</span><span class="p">);</span>
+
+<span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="nf">GDALGetThreadSafeDataset</span><span class="p">(</span><span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="n">poDS</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nScopeFlags</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This function accepts a (generally non thread-safe) source dataset and return
+a new dataset that is a thread-safe wrapper around it, or the source dataset if
+it is already thread-safe.
+The nScopeFlags argument must be compulsory set to GDAL_OF_RASTER to express that
+the intended scope is read-only raster operations (other values will result in
+an error and a NULL returned dataset).
+This function is used internally by GDALOpenEx() when the GDAL_OF_THREAD_SAFE
+flag is passed to wrap the dataset returned by the driver.
+The first form takes ownership of the source dataset. The second form does not,
+but references it internally, and assumes that its lifetime will be longer than
+the lifetime of the returned thread-safe dataset. Note that the second form does
+increase the reference count on the passed dataset while it is being used, so
+patterns like the following one are valid:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">auto</span><span class="w"> </span><span class="n">poDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GDALDataset</span><span class="o">::</span><span class="n">Open</span><span class="p">(...);</span>
+<span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GDALGetThreadSafeDataset</span><span class="p">(</span><span class="n">poDS</span><span class="p">,</span><span class="w"> </span><span class="n">GDAL_OF_RASTER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">GDAL_OF_THREAD_SAFE</span><span class="p">);</span>
+<span class="n">poDS</span><span class="o">-&gt;</span><span class="n">ReleaseRef</span><span class="p">();</span><span class="w"> </span><span class="c1">// can be done here, or any time later</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// ... do something with poThreadSafeDS ...</span>
+<span class="w">    </span><span class="n">poThreadSafeDS</span><span class="o">-&gt;</span><span class="n">ReleaseRef</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For proper working both when a new dataset is returned or the passed one if it
+is already thread-safe, <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset10ReleaseRefEv" title="GDALDataset::ReleaseRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::ReleaseRef()</span></code></a> (and not delete or
+GDALClose()) must be called on the returned dataset.</p>
+<p>The corresponding C function for the second form is added:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">GDALDatasetH</span><span class="w"> </span><span class="nf">GDALGetThreadSafeDataset</span><span class="p">(</span><span class="n">GDALDatasetH</span><span class="w"> </span><span class="n">hDS</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nScopeFlags</span><span class="p">,</span><span class="w"> </span><span class="n">CSLConstList</span><span class="w"> </span><span class="n">papszOptions</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="usage-examples">
+<h2>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h2>
+<p>Example of a function processing a whole dataset passed as a filename:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">pszFilename</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">poDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">GDALDataset</span><span class="o">&gt;</span><span class="p">(</span><span class="n">GDALDataset</span><span class="o">::</span><span class="n">Open</span><span class="p">(</span>
+<span class="w">        </span><span class="n">pszFilename</span><span class="p">,</span><span class="w"> </span><span class="n">GDAL_OF_RASTER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">GDAL_OF_THREAD_SAFE</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">GDAL_OF_VERBOSE_ERROR</span><span class="p">));</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="o">!</span><span class="n">poDS</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// TODO: spawn threads using poDS</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of a function processing a whole dataset passed as an object:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="n">poDS</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GDALGetThreadSafeDataset</span><span class="p">(</span><span class="n">poDS</span><span class="p">,</span><span class="w"> </span><span class="n">GDAL_OF_RASTER</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// TODO: spawn threads using poThreadSafeDS</span>
+
+<span class="w">        </span><span class="n">poThreadSafeDS</span><span class="o">-&gt;</span><span class="n">ReleaseRef</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// TODO: Serial version of the algorithm. It can happen if</span>
+<span class="w">        </span><span class="c1">// poDS is a on-the-fly dataset.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Example of a function processing a single band passed as an object:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">foo</span><span class="p">(</span><span class="n">GDALRasterBand</span><span class="o">*</span><span class="w"> </span><span class="n">poBand</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">GDALRasterBand</span><span class="o">*</span><span class="w"> </span><span class="n">poThreadSafeBand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">GDALDataset</span><span class="o">*</span><span class="w"> </span><span class="n">poDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poBand</span><span class="o">-&gt;</span><span class="n">GetDataset</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// Check that poBand has a matching owing dataset</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">poDS</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">poDS</span><span class="o">-&gt;</span><span class="n">GetRasterBand</span><span class="p">(</span><span class="n">poBand</span><span class="o">-&gt;</span><span class="n">GetBand</span><span class="p">())</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">poBand</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GDALGetThreadSafeDataset</span><span class="p">(</span><span class="n">poDS</span><span class="p">,</span><span class="w"> </span><span class="n">GDAL_OF_RASTER</span><span class="p">);</span>
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">poThreadSafeDS</span><span class="w"> </span><span class="p">)</span>
+<span class="w">            </span><span class="n">poThreadSafeBand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poThreadSafeDS</span><span class="o">-&gt;</span><span class="n">GetBand</span><span class="p">(</span><span class="n">poBand</span><span class="o">-&gt;</span><span class="n">GetBand</span><span class="p">());</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="w"> </span><span class="n">poThreadSafeBand</span><span class="w"> </span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// TODO: spawn threads using poThreadSafeBand</span>
+
+<span class="w">        </span><span class="n">poThreadSafeDS</span><span class="o">-&gt;</span><span class="n">ReleaseRef</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// TODO: Serial version of the algorithm. It can happen if</span>
+<span class="w">        </span><span class="c1">// poBand is a on-the-fly band, or a &quot;detached&quot; band, such as a</span>
+<span class="w">        </span><span class="c1">// mask band, or an overview band as returned by some drivers.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="swig-bindings">
+<h2>SWIG bindings<a class="headerlink" href="#swig-bindings" title="Link to this heading"></a></h2>
+<p>The new C macro and functions are bound to SWIG as:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">gdal.OF_THREAD_SAFE</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">Dataset.IsThreadSafe(nScopeFlags)()</span></code></p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">Dataset.GetThreadSafeDataset(nScopeFlags)()</span></code>. The Python
+implementation of this method takes care of keeping a reference on the source
+dataset in the returned thread-safe dataset, so the user does not have to
+care about their respective lifetimes.</p></li>
+</ul>
+</section>
+<section id="usage-and-design-limitations">
+<h2>Usage and design limitations<a class="headerlink" href="#usage-and-design-limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>As implied by the RFC title, the scope of thread-safety is restricted to
+<strong>raster</strong> and <strong>read-only</strong> operations.</p></li>
+<li><p>For GDALDataset instances pointing to a file on the regular filesystem, the
+limitation of the maximum number of file descriptor opened by a process
+(1024 on most Linux systems) could be hit if working with a sufficiently large
+number of worker threads and/or instances of GDALThreadSafeDataset.</p></li>
+<li><p>The generic implementation of GDALGetThreadSafeDataset assumes that the
+source dataset can be re-opened by its name (GetDescription()), which is the
+case for datasets opened by GDALOpenEx(). A special implementation is also
+made for dataset instances of the MEM driver. But, there is currently no
+support for creating a thread-safe dataset wrapper on on-the-fly datasets
+returned by some algorithms (e.g GDALTranslate() or GDALWarp() with VRT as
+the output driver and with an empty filename, or custom GDALDataset
+implementation by external code).</p></li>
+<li><p>Inherent to the selected approach, there is a band block cache per thread, and
+thus no sharing of cached blocks between threads.
+However, this should not be a too severe limitation for algorithms where
+threads process independent regions of the raster, hence reuse of cached blocks
+would be non-existent or low. Optimal algorithms will make sure to work on
+regions of interest aligned on the block size (this advice also applies for
+the current approach of manually opening a dataset for each worker thread).</p></li>
+<li><p>Due to implementation limitations, <a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand13GetDefaultRATEv" title="GDALRasterBand::GetDefaultRAT"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetDefaultRAT()</span></code></a>
+on a GDALThreadSafeDataset instance only works if the RAT is an instance of
+<code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALDefaultRasterAttributeTable</span></code>. An error is emitted if
+this is not the case. This could potentially be extended to work with any
+subclass of <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALRasterAttributeTable</span></code> but with significant
+additional coding to create a thread-safe wrapper. (GDALDefaultRasterAttributeTable
+is intrinsically thread-safe for read-only operations). This is not perceived
+as a limitation for the intended use cases of this RFC (reading pixel values
+in parallel).</p></li>
+<li><p>Some drivers, like netCDF, and HDF5 in some builds, use a global lock around
+each call to their APIs, due to the underlying libraries not being re-entrant.
+Obviously scalability of GDALThreadSafeDataset will be limited by such global
+lock.
+But this is no different than the approach of opening as many dataset as
+worker threads.</p></li>
+</ul>
+</section>
+<section id="implementation-details">
+<h2>Implementation details<a class="headerlink" href="#implementation-details" title="Link to this heading"></a></h2>
+<p>(This section is mostly of interest for developers familiar with GDAL internals
+and may be skipped by users of the GDAL API)</p>
+<p>The gist of the implementation lies in a new file <code class="docutils literal notranslate"><span class="pre">gcore/gdalthreadsafedataset.cpp</span></code>
+which defines several classes (internal details):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GDALThreadSafeDataset</span></code> extending <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALProxyDataset</span></code>.
+Instances of that class are returned by GDALGetThreadSafeDataset().
+On instantiation, it creates as many GDALThreadSafeRasterBand instances as
+the number of bands of the source dataset.
+All virtual methods of GDALDataset are redefined by GDALProxyDataset.
+GDALThreadSafeDataset overloads its ReferenceUnderlyingDataset method, so that
+a thread-local dataset is opened the first-time a thread calls a method on
+the GDALThreadSafeDataset instance, cached for later use, and method call is
+generally forwarded to it. There are exceptions for methods like
+<a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4NK11GDALDataset13GetSpatialRefEv" title="GDALDataset::GetSpatialRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetSpatialRef()</span></code></a>, <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4NK11GDALDataset16GetGCPSpatialRefEv" title="GDALDataset::GetGCPSpatialRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetGCPSpatialRef()</span></code></a>,
+<a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset7GetGCPsEv" title="GDALDataset::GetGCPs"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetGCPs()</span></code></a>, <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset11GetMetadataEPKc" title="GDALDataset::GetMetadata"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetMetadata()</span></code></a>,
+<code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetMetadataItem()</span></code> that return non-primitive types
+where the calls are forwarded to the dataset used to construct GDALThreadSafeDataset,
+with a mutex being taken around them. If the call was otherwise forwarded to
+a thread-local instance, there would be a risk of use-after-free situations
+when the returned value is used by different threads.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDALThreadSafeRasterBand</span></code> extending <code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALProxyRasterBand</span></code>.
+On instantiation, it creates child GDALThreadSafeRasterBand instances for
+band mask and overviews.
+Its ReferenceUnderlyingRasterBand method calls ReferenceUnderlyingDataset
+on the GDALThreadSafeDataset instance to get a thread-local dataset, fetches
+the appropriate thread-local band and generally forwards its the method call.
+There are exceptions for methods like
+<a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand11GetUnitTypeEv" title="GDALRasterBand::GetUnitType"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetUnitType()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetMetadata()</span></code>,
+<a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand15GetMetadataItemEPKcPKc" title="GDALRasterBand::GetMetadataItem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetMetadataItem()</span></code></a> that return non-primitive types where
+the calls are forwarded to the band used to construct GDALThreadSafeRasterBand,
+with a mutex being taken around them, and the returned value being .</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GDALThreadLocalDatasetCache</span></code>. Instances of that class use thread-local
+storage. The main member of such instances is a LRU cache that maps
+GDALThreadSafeDataset* instances to a thread specific GDALDataset smart pointer.
+On GDALThreadSafeDataset destruction, there's code to iterate over all
+alive GDALThreadLocalDatasetCache instances and evict no-longer needed entries
+in them, within a per-GDALThreadLocalDatasetCache instance mutex, to avoid
+issues when dealing with several instances of GDALThreadLocalDatasetCache...
+Note that the existence of this mutex should not cause performance issues, since
+contention on it, should be very low in real-world use cases (it could become
+a bottleneck if GDALThreadSafeDataset were created and destroyed at a very
+high pace)</p></li>
+</ul>
+<p>Two protected virtual methods are added to GDALDataset for GDALThreadSafeDataset
+implementation, and may be overloaded by drivers if needed (but it is not
+anticipated that drivers but the MEM driver need to do that)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">CanBeCloned(int</span> <span class="pre">nScopeFlags,</span> <span class="pre">bool</span> <span class="pre">bCanShareState)</span> <span class="pre">const</span></code>.
+This method determines if a source dataset can be &quot;cloned&quot; (or re-opened).
+It returns true for instances returned by GDALOpenEx, for instances of the MEM
+driver if <code class="docutils literal notranslate"><span class="pre">nScopeFlags</span></code> == <code class="docutils literal notranslate"><span class="pre">GDAL_OF_RASTER</span></code> (and <code class="docutils literal notranslate"><span class="pre">bCanShareState</span></code> is
+true for instances of the MEM driver)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std::unique_ptr&lt;GDALDataset&gt;</span> <span class="pre">Clone(int</span> <span class="pre">nScopeFlags,</span> <span class="pre">bool</span> <span class="pre">bCanShareState)</span> <span class="pre">const</span></code>.
+This method returns a &quot;clone&quot; of the dataset on which it is called, and is used
+by GDALThreadSafeDataset::ReferenceUnderlyingDataset() when a thread-local
+dataset is needed.
+Implementation of that method must be thread-safe.
+The base implementation calls GDALOpenEx() reusing the dataset name, open flags
+and open option. It is overloaded in the MEM driver to return a new instance
+of MEMDataset, but sharing the memory buffers with the source dataset.</p></li>
+</ul>
+<p>No code in drivers, but the MEM driver, is modified by the candidate
+implementation.</p>
+<p>A few existing non-virtual methods of GDALDataset and GDALRasterBand have been
+made virtual (and overloaded by GDALProxyDataset and GDALProxyRasterBand),
+to avoid modifying state on the GDALThreadSafeRasterBand instance, which
+wouldn't be thread-safe.</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::BlockBasedRasterIO()</span></code>:
+it interacts with the block cache</p></li>
+<li><p><a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand17GetLockedBlockRefEiii" title="GDALRasterBand::GetLockedBlockRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::GetLockedBlockRef()</span></code></a>:
+it interacts with the block cache</p></li>
+<li><p><a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand20TryGetLockedBlockRefEii" title="GDALRasterBand::TryGetLockedBlockRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::TryGetLockedBlockRef()</span></code></a>:
+it interacts with the block cache</p></li>
+<li><p><a class="reference internal" href="../../api/gdalrasterband_cpp.html#_CPPv4N14GDALRasterBand10FlushBlockEiii" title="GDALRasterBand::FlushBlock"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::FlushBlock()</span></code></a>:
+it interacts with the block cache</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::InterpolateAtPoint()</span></code>:
+it uses a per-band cache</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALRasterBand::EnablePixelTypeSignedByteWarning()</span></code>: it should
+already have been made virtual for GDALProxyRasterBand needs.</p></li>
+</ul>
+<p>Non-virtual methods <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4NK11GDALDataset16GetProjectionRefEv" title="GDALDataset::GetProjectionRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetProjectionRef()</span></code></a> and
+<a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4N11GDALDataset16GetGCPProjectionEv" title="GDALDataset::GetGCPProjection"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetGCPProjection()</span></code></a>, which cache the return value, have
+been modify to apply a mutex when run on a dataset that IsThreadSafe() to be
+effectively thread-safe.</p>
+<p>A SetThreadSafe() method has been added to <a class="reference internal" href="../../api/ogrspatialref.html#_CPPv419OGRSpatialReference" title="OGRSpatialReference"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">OGRSpatialReference</span></code></a>.
+When it is called, all methods of that class run under a per-instance (recursive)
+mutex. This is used by GDALThreadSafeDataset for its implementation of the
+<a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4NK11GDALDataset13GetSpatialRefEv" title="GDALDataset::GetSpatialRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetSpatialRef()</span></code></a> and <a class="reference internal" href="../../api/gdaldataset_cpp.html#_CPPv4NK11GDALDataset16GetGCPSpatialRefEv" title="GDALDataset::GetGCPSpatialRef"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDataset::GetGCPSpatialRef()</span></code></a>
+methods, such that the returned OGRSpatialReference instances are thread-safe.</p>
+</section>
+<section id="performance">
+<h2>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h2>
+<p>The existing multireadtest utility that reads a dataset from multiple threads
+has been extended with a -thread_safe flag to asks to use GDAL_OF_THREAD_SAFE
+when opening the dataset in the main thread and use it in the worker threads,
+instead of the default behavior of opening explicitly a dataset in each thread.
+The thread-safe mode shows similar scalability as the default mode, sometimes
+with a slightly decreased efficiency, but not in a too problematic way.</p>
+<p>For example on a 20x20 raster:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">time</span><span class="w"> </span>multireadtest<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span><span class="w"> </span>-i<span class="w"> </span><span class="m">1000000</span><span class="w"> </span>20x20.tif
+real<span class="w">    </span>0m2.084s
+user<span class="w">    </span>0m8.155s
+sys<span class="w">     </span>0m0.020s
+
+vs
+
+$<span class="w"> </span><span class="nb">time</span><span class="w"> </span>multireadtest<span class="w"> </span>-thread_safe<span class="w"> </span>-t<span class="w"> </span><span class="m">4</span><span class="w"> </span>-i<span class="w"> </span><span class="m">1000000</span><span class="w"> </span>20x20.tif
+real<span class="w">    </span>0m2.387s
+user<span class="w">    </span>0m9.334s
+sys<span class="w">     </span>0m0.029s
+</pre></div>
+</div>
+<p>But on a 4096x4096 raster with a number of iterations reduced to 100, the
+timings between the default and thread_safe modes are very similar.</p>
+<p>A Python equivalent of multireadtest has been written. Scalability depends
+on how much Python code is executed. If relatively few long-enough calls to
+GDAL are done, scalability tends to be good due to the Python Global Interpreter
+Lock (GIL) being dropped around them. If many short calls are done, the GIL
+itself, or its repeated acquisition and release, becomes the bottleneck. This is
+no different than using a GDALDataset per thread.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading"></a></h2>
+<p>Documentation for the new constant and functions will be added. The
+<a class="reference internal" href="../../user/multithreading.html#multithreading"><span class="std std-ref">マルチスレッディング</span></a> page will be updated to reflect the new capability
+introduced by this RFC.</p>
+</section>
+<section id="backward-compatibility">
+<h2>Backward compatibility<a class="headerlink" href="#backward-compatibility" title="Link to this heading"></a></h2>
+<p>No issue anticipated: the C and C++ API are extended.
+The C++ ABI is modified due to additions of new virtual methods.</p>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>Tests will be added for the new functionality, including stress tests to have
+sufficiently high confidence in the correctness of the implementation for common
+use cases.</p>
+</section>
+<section id="risks">
+<h2>Risks<a class="headerlink" href="#risks" title="Link to this heading"></a></h2>
+<p>Like all code related to multi-threading, the C++ language and tooling offers
+hardly any safety belt against thread-safety programming errors. So it cannot
+be excluded that the implementation suffers from  bugs in some edge scenarios,
+or in the usage of some methods of GDALDataset, GDALRasterBand and related objects
+(particularly existing non-virtual methods of those classes that could happen
+to have a non thread-safe implementation)</p>
+</section>
+<section id="design-discussion">
+<h2>Design discussion<a class="headerlink" href="#design-discussion" title="Link to this heading"></a></h2>
+<p>This paragraph discusses a number of thoughts that arose during the writing of
+this RFC.</p>
+<ol class="arabic">
+<li><p>A significantly different alternative could have consisted in adding native
+thread-safety in each driver. But this is not realistic for the following reasons:</p>
+<ul class="simple">
+<li><p>if that was feasible, it would require considerable development effort to
+rework each drivers. So realistically, only a few select drivers would be updated.</p></li>
+<li><p>Even updating a reduced number of drivers would be extremely difficult, in
+particular the GeoTIFF one, due to the underlying library not being reentrant,
+and deferred loading strategies and many state variables being modified even
+by read-only APIs. And this applies to most typical drivers.</p></li>
+<li><p>Due to the inevitable locks, there would be a (small) cost bore by callers
+even on single-thread uses of thread-safe native drivers.</p></li>
+<li><p>Some core mechanisms, particularly around the per-band block cache structures,
+are not currently thread-safe.</p></li>
+</ul>
+</li>
+<li><p>A variant of the proposed implementation that did not use thread-local storage
+has been initially attempted. It stored instead a
+<code class="docutils literal notranslate"><span class="pre">std::map&lt;thread_id,</span> <span class="pre">std::unique_ptr&lt;GDALDataset&gt;&gt;</span></code> on each GDALThreadSafeDataset
+instance. This implementation was simpler, but unfortunately suffered from high
+lock contention since a mutex had to be taken around each access to this map,
+with the contention increasing with the number of concurrent threads.</p></li>
+<li><p>For the unusual situations where a dataset cannot be reopened and thus
+GDALGetThreadSafeDataset() fails, should we provide an additional <code class="docutils literal notranslate"><span class="pre">bForce</span></code>
+argument to force it to still return a dataset, where calls to the wrapped
+dataset are protected by a mutex? This would enable to always write multi-thread
+safe code, even if the access to the dataset is serialized.
+Similarly we could have a
+<code class="docutils literal notranslate"><span class="pre">std::unique_ptr&lt;GDALRasterBand&gt;</span> <span class="pre">GDALGetThreadSafeRasterBand(GDALRasterBand*</span> <span class="pre">poBand,</span> <span class="pre">int</span> <span class="pre">nOpenFlags,</span> <span class="pre">bool</span> <span class="pre">bForce)</span></code>
+function that would try to use GDALGetThreadSafeDataset() internally if it
+manages to identify the dataset to which the band belongs to, and otherwise would
+fallback to protecting calls to the wrapped band with a mutex.</p>
+<p>Given the absence of evidence that such option is necessary, this has been excluded
+from the scope of this RFC.</p>
+</li>
+</ol>
+</section>
+<section id="related-issues-and-prs">
+<h2>Related issues and PRs<a class="headerlink" href="#related-issues-and-prs" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Candidate implementation: <a class="reference external" href="https://github.com/OSGeo/gdal/pull/10746">https://github.com/OSGeo/gdal/pull/10746</a></p></li>
+<li><p><a class="reference external" href="https://github.com/OSGeo/gdal/issues/8448">https://github.com/OSGeo/gdal/issues/8448</a>: GTiff: Allow concurrent reading of single blocks</p></li>
+</ul>
+</section>
+<section id="voting-history">
+<h2>Voting history<a class="headerlink" href="#voting-history" title="Link to this heading"></a></h2>
+<p>+1 from PSC members KurtS, JukkaR, JavierJS and EvenR</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="rfc102_embedded_resources.html" class="btn btn-neutral float-right" title="RFC 102: Embedding resource files into libgdal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rfc99_geometry_coordinate_precision.html" class="btn btn-neutral float-left" title="RFC 99: Geometry coordinate precision" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <div class="info">
+      <a class="logo-link" href="https://osgeo.org">
+        <div class="osgeo-logo"></div>
+      </a>
+      <div class="copyright">
+      
+
+      &copy; 1998-2024 <a href="https://github.com/warmerdam">Frank Warmerdam</a>,
+      <a href="https://github.com/rouault">Even Rouault</a>, and
+      <a href="https://github.com/OSGeo/gdal/graphs/contributors">others</a>
+
+
+      
+      </div>
+    </div>
+  </div>
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

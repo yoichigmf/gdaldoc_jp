@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GPKG -- GeoPackage vector &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -106,6 +109,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#geometry-coordinate-precision">Geometry coordinate precision</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#performance-hints">Performance hints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#secure-deletion">Secure deletion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#see-also">See Also</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="geopackage_aspatial.html">GeoPackage aspatial extension</a></li>
 <li class="toctree-l4"><a class="reference internal" href="gpkg_spatialite_computed_geom_column.html">GeoPackage Spatialite computed geometry column extension</a></li>
@@ -183,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -439,7 +444,7 @@ in some other applications (e.g. ESRI software).</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are available:</p>
 <ul class="simple">
-<li><p id="drivers/vector/gpkg-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[AUTO/YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether all tables,
+<li><p id="drivers/vector/gpkg-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[AUTO​/​YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether all tables,
 including those not listed in gpkg_contents, should be listed.
 If AUTO, all tables including those not listed in
 gpkg_contents will be listed, except if the aspatial extension is
@@ -460,13 +465,13 @@ that its geometry blobs are properly recognized (so typically not a Spatialite o
 </div>
 </p>
 </li>
-<li><p id="drivers/vector/gpkg-oo-NOLOCK"><strong>NOLOCK=[YES/NO]: </strong> (GDAL &gt;= 3.4.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether the database should be used without doing any file locking. Setting
+<li><p id="drivers/vector/gpkg-oo-NOLOCK"><strong>NOLOCK=[YES​/​NO]: </strong> (GDAL &gt;= 3.4.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether the database should be used without doing any file locking. Setting
 it to YES will only be honoured when opening in read-only mode and if the
 journal mode is not WAL.
 This corresponds to the nolock=1 query parameter described at
 <a class="reference external" href="https://www.sqlite.org/uri.html">https://www.sqlite.org/uri.html</a></p>
 </li>
-<li><p id="drivers/vector/gpkg-oo-IMMUTABLE"><strong>IMMUTABLE=[YES/NO]: </strong> (GDAL &gt;= 3.5.3) Whether the database should be opened by assuming that the file cannot be
+<li><p id="drivers/vector/gpkg-oo-IMMUTABLE"><strong>IMMUTABLE=[YES​/​NO]: </strong> (GDAL &gt;= 3.5.3) Whether the database should be opened by assuming that the file cannot be
 modified by another process. This will skip any checks for change detection.
 This can be useful for WAL enabled files on read-only storage.
 GDAL will automatically try to turn it on when not being able to open
@@ -500,24 +505,24 @@ e.g. <a class="reference external" href="https://www.geopackage.org/spec120/#r15
 The following creation options (specific to vector, or common with
 raster) are available:</p>
 <ul class="simple">
-<li><p id="drivers/vector/gpkg-dsco-VERSION"><strong>VERSION=[AUTO/1.0/1.1/1.2/1.3/1.4]: </strong>Set GeoPackage version
+<li><p id="drivers/vector/gpkg-dsco-VERSION"><strong>VERSION=[AUTO​/​1.0​/​1.1​/​1.2​/​1.3​/​1.4]: </strong>Set GeoPackage version
 (for application_id and user_version fields). In AUTO mode, this will
 be equivalent to 1.2 starting with GDAL 2.3.
 1.3 is available starting with GDAL 3.3
 1.4 is available starting with GDAL 3.7.1</p>
 </li>
-<li><p id="drivers/vector/gpkg-dsco-ADD_GPKG_OGR_CONTENTS"><strong>ADD_GPKG_OGR_CONTENTS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Defines whether to
+<li><p id="drivers/vector/gpkg-dsco-ADD_GPKG_OGR_CONTENTS"><strong>ADD_GPKG_OGR_CONTENTS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Defines whether to
 add a gpkg_ogr_contents table to keep feature count, and associated
 triggers.</p>
 </li>
-<li><p id="drivers/vector/gpkg-dsco-DATETIME_FORMAT"><strong>DATETIME_FORMAT=[WITH_TZ/UTC]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">WITH_TZ</span></code>. Defines whether to keep the
+<li><p id="drivers/vector/gpkg-dsco-DATETIME_FORMAT"><strong>DATETIME_FORMAT=[WITH_TZ​/​UTC]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">WITH_TZ</span></code>. Defines whether to keep the
 DateTime values in the time zones as used in the data source (WITH_TZ),
 or to convert the date and time expressions to UTC (Coordinated Universal Time).
 Pedantically, non-UTC time zones are not currently supported
 by GeoPackage v1.3 (see <a class="reference external" href="https://github.com/opengeospatial/geopackage/issues/530">https://github.com/opengeospatial/geopackage/issues/530</a>).
 When using UTC format, with a unspecified timezone, UTC will be assumed.</p>
 </li>
-<li><p id="drivers/vector/gpkg-dsco-CRS_WKT_EXTENSION"><strong>CRS_WKT_EXTENSION=[YES/NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Defines whether to add the <code class="docutils literal notranslate"><span class="pre">definition_12_063</span></code> column to the
+<li><p id="drivers/vector/gpkg-dsco-CRS_WKT_EXTENSION"><strong>CRS_WKT_EXTENSION=[YES​/​NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Defines whether to add the <code class="docutils literal notranslate"><span class="pre">definition_12_063</span></code> column to the
 <code class="docutils literal notranslate"><span class="pre">gpkg_spatial_ref_sys</span></code> system table, according to
 <a class="reference external" href="http://www.geopackage.org/spec/#extension_crs_wkt">http://www.geopackage.org/spec/#extension_crs_wkt</a> . The default is NO,
 unless the tile gridded coverage extension is used.
@@ -532,7 +537,7 @@ automatically update the <code class="docutils literal notranslate"><span class=
 it may be useful to create GeoPackage datasets matching the exceptions of
 other software or profiles (such as the DGIWG-GPKG profile).</p>
 </li>
-<li><p id="drivers/vector/gpkg-co-METADATA_TABLES"><strong>METADATA_TABLES=[YES/NO]: </strong> (GDAL &gt;= 3.8) Defines whether to add the metadata system tables.
+<li><p id="drivers/vector/gpkg-co-METADATA_TABLES"><strong>METADATA_TABLES=[YES​/​NO]: </strong> (GDAL &gt;= 3.8) Defines whether to add the metadata system tables.
 By default, they are created on demand.
 If NO is specified, they are not created, even if metadata is set.
 If YES is specified, they are always created.</p>
@@ -546,7 +551,7 @@ documentation page.</p>
 <p>Layer creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-lco</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv422GDALDatasetCreateLayer12GDALDatasetHPKc20OGRSpatialReferenceH18OGRwkbGeometryType12CSLConstList" title="GDALDatasetCreateLayer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDatasetCreateLayer()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Dataset.CreateLayer" title="osgeo.gdal.Dataset.CreateLayer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dataset.CreateLayer</span></code></a> (Python).
 The following layer creation options are available:</p>
 <ul class="simple">
-<li><p id="drivers/vector/gpkg-lco-LAUNDER"><strong>LAUNDER=[YES/NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether layer and field names will be laundered. Laundering makes sure
+<li><p id="drivers/vector/gpkg-lco-LAUNDER"><strong>LAUNDER=[YES​/​NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether layer and field names will be laundered. Laundering makes sure
 that the recommendation of <a class="reference external" href="https://www.geopackage.org/guidance/getting-started.html">https://www.geopackage.org/guidance/getting-started.html</a>
 is followed: an identifier should start with a lowercase character and
 only use lowercase characters, numbers 0-9, and underscores (_). UTF-8
@@ -560,7 +565,7 @@ Consequently this option is not appropriate for non-Latin languages.</p>
 &quot;geom&quot;. Note: This option was called GEOMETRY_COLUMN in releases before
 GDAL 2</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-GEOMETRY_NULLABLE"><strong>GEOMETRY_NULLABLE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the values of the
+<li><p id="drivers/vector/gpkg-lco-GEOMETRY_NULLABLE"><strong>GEOMETRY_NULLABLE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the values of the
 geometry column can be NULL. Can be set to NO so that geometry is
 required.</p>
 </li>
@@ -570,25 +575,25 @@ This may be -1 (&quot;Undefined Cartesian SRS&quot;), 0 (&quot;Undefined geograp
 <code class="docutils literal notranslate"><span class="pre">gpkg_spatial_ref_sys</span></code> table. If pointing to a non-existing entry, only a warning
 will be emitted.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-DISCARD_COORD_LSB"><strong>DISCARD_COORD_LSB=[YES/NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether the geometry coordinate precision should be used to set to zero non-significant least-significant bits of geometries. Helps when further compression is used. See <a class="reference internal" href="#ogr-gpkg-geometry-coordinate-precision"><span class="std std-ref">Geometry coordinate precision</span></a> for more details.</p>
+<li><p id="drivers/vector/gpkg-lco-DISCARD_COORD_LSB"><strong>DISCARD_COORD_LSB=[YES​/​NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether the geometry coordinate precision should be used to set to zero non-significant least-significant bits of geometries. Helps when further compression is used. See <a class="reference internal" href="#ogr-gpkg-geometry-coordinate-precision"><span class="std std-ref">Geometry coordinate precision</span></a> for more details.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-UNDO_DISCARD_COORD_LSB_ON_READING"><strong>UNDO_DISCARD_COORD_LSB_ON_READING=[YES/NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to ask GDAL to take into coordinate precision to undo the effects of DISCARD_COORD_LSB. See <a class="reference internal" href="#ogr-gpkg-geometry-coordinate-precision"><span class="std std-ref">Geometry coordinate precision</span></a> for more details.</p>
+<li><p id="drivers/vector/gpkg-lco-UNDO_DISCARD_COORD_LSB_ON_READING"><strong>UNDO_DISCARD_COORD_LSB_ON_READING=[YES​/​NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to ask GDAL to take into coordinate precision to undo the effects of DISCARD_COORD_LSB. See <a class="reference internal" href="#ogr-gpkg-geometry-coordinate-precision"><span class="std std-ref">Geometry coordinate precision</span></a> for more details.</p>
 </li>
 <li><p id="drivers/vector/gpkg-lco-FID"><strong>FID=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">fid</span></code>. Column name to use for the OGR FID (primary key in the
 SQLite database).</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-OVERWRITE"><strong>OVERWRITE=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to &quot;YES&quot; will delete any existing layers that
+<li><p id="drivers/vector/gpkg-lco-OVERWRITE"><strong>OVERWRITE=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to &quot;YES&quot; will delete any existing layers that
 have the same name as the layer being created.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If set to &quot;YES&quot; will create a spatial
+<li><p id="drivers/vector/gpkg-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If set to &quot;YES&quot; will create a spatial
 index for this layer.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-PRECISION"><strong>PRECISION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This may be &quot;YES&quot; to force new fields
+<li><p id="drivers/vector/gpkg-lco-PRECISION"><strong>PRECISION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This may be &quot;YES&quot; to force new fields
 created on this layer to try and represent the width of text fields
 (in terms of UTF-8 characters, not bytes), if available using
 TEXT(width) types. If &quot;NO&quot; then the type TEXT will be used instead.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-TRUNCATE_FIELDS"><strong>TRUNCATE_FIELDS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. This may be &quot;YES&quot; to force
+<li><p id="drivers/vector/gpkg-lco-TRUNCATE_FIELDS"><strong>TRUNCATE_FIELDS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. This may be &quot;YES&quot; to force
 truncated of field values that exceed the maximum allowed width of
 text fields, and also to &quot;fix&quot; the passed string if needed to make it
 a valid UTF-8 string. If &quot;NO&quot; then the value is not truncated nor
@@ -600,7 +605,7 @@ in the contents table.</p>
 <li><p id="drivers/vector/gpkg-lco-DESCRIPTION"><strong>DESCRIPTION=value: </strong>Description of the layer, as
 put in the contents table.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-ASPATIAL_VARIANT"><strong>ASPATIAL_VARIANT=[GPKG_ATTRIBUTES/NOT_REGISTERED]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GPKG_ATTRIBUTES</span></code>. How to register non spatial tables. Defaults to
+<li><p id="drivers/vector/gpkg-lco-ASPATIAL_VARIANT"><strong>ASPATIAL_VARIANT=[GPKG_ATTRIBUTES​/​NOT_REGISTERED]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GPKG_ATTRIBUTES</span></code>. How to register non spatial tables. Defaults to
 GPKG_ATTRIBUTES in GDAL 2.2 or later (behavior in previous version
 was equivalent to OGR_ASPATIAL). Starting with GeoPackage 1.2, non
 spatial tables are part of the specification. They are recorded with
@@ -615,7 +620,7 @@ recorded with data_type=&quot;aspatial&quot; and the &quot;aspatial&quot; extens
 gpkg_extensions table. Starting with GDAL 3.3, OGR_ASPATIAL is no longer
 available on creation.</p>
 </li>
-<li><p id="drivers/vector/gpkg-lco-DATETIME_PRECISION"><strong>DATETIME_PRECISION=[AUTO/MILLISECOND/SECOND/MINUTE]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Determines the level of detail for datetime fields.
+<li><p id="drivers/vector/gpkg-lco-DATETIME_PRECISION"><strong>DATETIME_PRECISION=[AUTO​/​MILLISECOND​/​SECOND​/​MINUTE]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Determines the level of detail for datetime fields.
 Starting with GeoPackage 1.4, three variants of datetime formats are supported:
 truncated at minute (<code class="docutils literal notranslate"><span class="pre">MINUTE</span></code>), truncated at second (<code class="docutils literal notranslate"><span class="pre">SECOND</span></code>) or
 including milliseconds (<code class="docutils literal notranslate"><span class="pre">MILLISECOND</span></code>).
@@ -637,7 +642,7 @@ The following configuration options are available:</p>
 </p></li>
 <li><p><p id="config-OGR_SQLITE_SYNCHRONOUS"><strong>OGR_SQLITE_SYNCHRONOUS=value: </strong>see <a class="reference internal" href="#target-drivers-vector-sqlite-performance-hints"><span class="std std-ref">Performance hints</span></a>.</p>
 </p></li>
-<li><p><p id="config-OGR_SQLITE_LOAD_EXTENSIONS"><strong>OGR_SQLITE_LOAD_EXTENSIONS=[&lt;extension1,...,extensionN&gt;/ENABLE_SQL_LOAD_EXTENSION]: </strong> (GDAL &gt;= 3.5.0) Comma separated list of names of shared libraries containing
+<li><p><p id="config-OGR_SQLITE_LOAD_EXTENSIONS"><strong>OGR_SQLITE_LOAD_EXTENSIONS=[&lt;extension1,...,extensionN&gt;​/​ENABLE_SQL_LOAD_EXTENSION]: </strong> (GDAL &gt;= 3.5.0) Comma separated list of names of shared libraries containing
 extensions to load at database opening.
 If a file cannot be loaded directly, attempts are made to load with various
 operating-system specific extensions added. So
@@ -660,7 +665,7 @@ When setting the option, take care to meet the specific time format
 requirement of the GeoPackage standard,
 e.g. <a class="reference external" href="https://www.geopackage.org/spec120/#r15">for version 1.2</a>.</p>
 </li>
-<li><p><p id="config-SQLITE_USE_OGR_VFS"><strong>SQLITE_USE_OGR_VFS=[YES/NO]: </strong>YES enables extra buffering/caching
+<li><p><p id="config-SQLITE_USE_OGR_VFS"><strong>SQLITE_USE_OGR_VFS=[YES​/​NO]: </strong>YES enables extra buffering/caching
 by the GDAL/OGR I/O layer and can speed up I/O. More information
 <a class="reference internal" href="../../user/virtual_file_systems.html#vsicached"><span class="std std-ref">here</span></a>.
 Be aware that no file locking will occur if this option is activated, so
@@ -938,6 +943,17 @@ the database will end up as a table in the GPKG file. The file
 </div></blockquote>
 </li>
 </ul>
+</section>
+<section id="secure-deletion">
+<h2>Secure deletion<a class="headerlink" href="#secure-deletion" title="Link to this heading"></a></h2>
+<p>Depending on how SQLite3 is built, <a class="reference external" href="https://www.sqlite.org/pragma.html#pragma_secure_delete">secure deletion</a>
+might or might not be enabled.
+Starting with GDAL 3.10, secure deletion is always enabled, unless
+<code class="docutils literal notranslate"><span class="pre">SECURE_DELETE</span></code> is specified through the <a class="reference internal" href="sqlite.html#config-OGR_SQLITE_PRAGMA"><code class="docutils literal notranslate"><span class="pre">OGR_SQLITE_PRAGMA</span></code></a>
+configuration option.
+Note that secure deletion does not recover potential lost space, so running
+a <a class="reference external" href="https://sqlite.org/lang_vacuum.html">VACUUM</a> query is recommended to fully
+optimized a database that has been subject to updates or deletions.</p>
 </section>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ogrmerge &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -62,8 +64,8 @@
 <li class="toctree-l3"><a class="reference internal" href="ogrtindex.html">ogrtindex</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ogrlineref.html">ogrlineref</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">ogrmerge</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#synopsis">Synopsis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#synopsis">概要</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description">説明</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
@@ -85,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -155,9 +158,9 @@
              
   <section id="ogrmerge">
 <span id="id1"></span><h1>ogrmerge<a class="headerlink" href="#ogrmerge" title="Link to this heading"></a></h1>
-<p>Merge several vector datasets into a single one.</p>
+<p>いくつかのベクターデータセットを1つにマージします.</p>
 <section id="synopsis">
-<span id="index-0"></span><h2>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
+<span id="index-0"></span><h2>概要<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ogrmerge</span> <span class="p">[</span><span class="o">--</span><span class="n">help</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">general</span><span class="p">]</span>
             <span class="o">-</span><span class="n">o</span> <span class="o">&lt;</span><span class="n">out_dsname</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">src_dsname</span><span class="o">&gt;</span> <span class="p">[</span><span class="o">&lt;</span><span class="n">src_dsname</span><span class="o">&gt;</span><span class="p">]</span><span class="o">...</span>
             <span class="p">[</span><span class="o">-</span><span class="n">f</span> <span class="nb">format</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">single</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">nln</span> <span class="o">&lt;</span><span class="n">layer_name_template</span><span class="o">&gt;</span><span class="p">]</span>
@@ -168,7 +171,7 @@
             <span class="p">[</span><span class="o">-</span><span class="n">progress</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">skipfailures</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">general</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>Options specific to the <a class="reference internal" href="#ogrmerge-single-option"><span class="std std-ref">-single</span></a> option:</p>
+<p>オプション <a class="reference internal" href="#ogrmerge-single-option"><span class="std std-ref">-single</span></a> に特有のオプション:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="n">field_strategy</span> <span class="n">FirstLayer</span><span class="o">|</span><span class="n">Union</span><span class="o">|</span><span class="n">Intersection</span><span class="p">]</span>
 <span class="p">[</span><span class="o">-</span><span class="n">src_layer_field_name</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="p">]</span>
 <span class="p">[</span><span class="o">-</span><span class="n">src_layer_field_content</span> <span class="o">&lt;</span><span class="n">layer_name_template</span><span class="o">&gt;</span><span class="p">]</span>
@@ -176,17 +179,14 @@
 </div>
 </section>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<h2>説明<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 2.2.</span></p>
 </div>
-<p><strong class="program">ogrmerge</strong> takes as input several vector datasets,
-each of them having one or several vector layers, and copies them into
-a target dataset.</p>
-<p>There are essentially two modes:</p>
+<p><strong class="program">ogrmerge</strong> は複数のベクターデータセットを入力として受け取り,それぞれが1つ以上のベクターレイヤーを持ち,それらをターゲットデータセットにコピーします.</p>
+<p>基本的に2つのモードがあります:</p>
 <ul class="simple">
-<li><p>the default one, where each input vector layer, is copied as a
-separate layer into the target dataset</p></li>
+<li><p>デフォルトのモードでは,各入力ベクターレイヤーが別々のレイヤーとしてターゲットデータセットにコピーされます.</p></li>
 <li><p>another one, activated with the -single switch, where the content of
 all input vector layers is appended into a single target layer. This
 assumes that the schema of those vector layers is more or less the

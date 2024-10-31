@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LIBKML Driver (.kml .kmz) &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -172,6 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -295,7 +299,7 @@ to each layer file in the datasource. This feature can be turned off by
 setting the configuration option <a class="reference internal" href="#config-LIBKML_USE_DOC.KML"><code class="docutils literal notranslate"><span class="pre">LIBKML_USE_DOC.KML</span></code></a>
 to &quot;NO&quot;:</p>
 <ul class="simple">
-<li><p id="config-LIBKML_USE_DOC.KML"><strong>LIBKML_USE_DOC.KML=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Use a <code class="docutils literal notranslate"><span class="pre">doc.kml</span></code> index file.</p>
+<li><p id="config-LIBKML_USE_DOC.KML"><strong>LIBKML_USE_DOC.KML=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Use a <code class="docutils literal notranslate"><span class="pre">doc.kml</span></code> index file.</p>
 </li>
 </ul>
 <section id="styletable">
@@ -305,7 +309,7 @@ to &quot;NO&quot;:</p>
 in a .kml, style/style.kml in a kmz file, or style.kml in a directory,
 as one or more
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#style">&lt;Style&gt;</a>
-elements. Not all of <a class="reference internal" href="../../user/ogr_feature_style.html#ogr-feature-style"><span class="std std-ref">Feature Style Specification</span></a> can translate into
+elements. Not all of <a class="reference internal" href="../../user/ogr_feature_style.html#ogr-feature-style"><span class="std std-ref">地物スタイル仕様</span></a> can translate into
 KML.</p>
 </section>
 <section id="dataset-creation-options">
@@ -369,7 +373,7 @@ browser, trough a
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#liststyle">&lt;ListStyle&gt;</a>
 element:</p>
 <ul class="simple">
-<li><p id="drivers/vector/libkml-dsco-LISTSTYLE_TYPE"><strong>LISTSTYLE_TYPE=[check/radioFolder/checkOffOnly/checkHideChildren]: </strong>Sets the
+<li><p id="drivers/vector/libkml-dsco-LISTSTYLE_TYPE"><strong>LISTSTYLE_TYPE=[check​/​radioFolder​/​checkOffOnly​/​checkHideChildren]: </strong>Sets the
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#listItemType">&lt;listItemType&gt;</a>
 element.</p>
 </li>
@@ -519,7 +523,7 @@ visible or not. If <a class="reference internal" href="#drivers/vector/libkml-lc
 <a class="reference internal" href="#drivers/vector/libkml-lco-REGION_YMAX"><code class="docutils literal notranslate"><span class="pre">REGION_YMAX</span></code></a>, the region coordinates are determined from the spatial
 extent of the features being written in the layer.</p>
 <ul class="simple">
-<li><p id="drivers/vector/libkml-lco-ADD_REGION"><strong>ADD_REGION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. </p>
+<li><p id="drivers/vector/libkml-lco-ADD_REGION"><strong>ADD_REGION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. </p>
 </li>
 <li><p id="drivers/vector/libkml-lco-REGION_XMIN"><strong>REGION_XMIN=value: </strong>defines the west coordinate of the region.</p>
 </li>
@@ -578,7 +582,7 @@ element can be added to display a logo, a legend, etc...</p>
 </ul>
 <p>The following option controls whether layers are written as a Document or a Folder:</p>
 <ul class="simple">
-<li><p id="drivers/vector/libkml-lco-FOLDER"><strong>FOLDER=[YES/NO]: </strong>By default, layers are written as
+<li><p id="drivers/vector/libkml-lco-FOLDER"><strong>FOLDER=[YES​/​NO]: </strong>By default, layers are written as
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#document">&lt;Document&gt;</a>
 elements. By setting this option to YES, it is
 also possible to write them as
@@ -613,7 +617,7 @@ trough a
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#liststyle">&lt;ListStyle&gt;</a>
 element:</p>
 <ul class="simple">
-<li><p id="drivers/vector/libkml-lco-LISTSTYLE_TYPE"><strong>LISTSTYLE_TYPE=[check/radioFolder/checkOffOnly/checkHideChildren]: </strong>Sets the
+<li><p id="drivers/vector/libkml-lco-LISTSTYLE_TYPE"><strong>LISTSTYLE_TYPE=[check​/​radioFolder​/​checkOffOnly​/​checkHideChildren]: </strong>Sets the
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#listItemType">&lt;listItemType&gt;</a>
 element.</p>
 </li>
@@ -660,7 +664,7 @@ elements are supported for reading (unless the
 such elements, there are icon and drawOrder fields.</p>
 <p>The following configuration options affect reading of features:</p>
 <ul class="simple">
-<li><p id="config-LIBKML_READ_GROUND_OVERLAY"><strong>LIBKML_READ_GROUND_OVERLAY=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. If <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, skip reading GroundOverlay elements.</p>
+<li><p id="config-LIBKML_READ_GROUND_OVERLAY"><strong>LIBKML_READ_GROUND_OVERLAY=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. If <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, skip reading GroundOverlay elements.</p>
 </li>
 </ul>
 <section id="style-1">
@@ -673,13 +677,13 @@ in each
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#placemark">&lt;Placemark&gt;</a>.</p>
 <p>The following configuration options affect handling of styles:</p>
 <ul class="simple">
-<li><p id="config-LIBKML_RESOLVE_STYLE"><strong>LIBKML_RESOLVE_STYLE=[YES/NO]: </strong>When reading a kml feature and this option
+<li><p id="config-LIBKML_RESOLVE_STYLE"><strong>LIBKML_RESOLVE_STYLE=[YES​/​NO]: </strong>When reading a kml feature and this option
 is set to yes, styleurls are looked up in the style
 tables and the features style string is set to the style from the table.
 This is to allow reading of shared styles by applications, like
 MapServer, that do not read style tables.</p>
 </li>
-<li><p id="config-LIBKML_EXTERNAL_STYLE"><strong>LIBKML_EXTERNAL_STYLE=[YES/NO]: </strong>When reading a kml feature and this option
+<li><p id="config-LIBKML_EXTERNAL_STYLE"><strong>LIBKML_EXTERNAL_STYLE=[YES​/​NO]: </strong>When reading a kml feature and this option
 is set to yes, a styleurl that is external to the
 datasource is read from disk or fetched from the server and parsed into
 the datasource style table. If the style kml can not be read or
@@ -711,7 +715,7 @@ except for some special fields as noted below.</p>
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#data">&lt;Data&gt;</a>
 elements using the following configuration option:</p>
 </div></blockquote>
-<p id="config-LIBKML_USE_SIMPLEFIELD"><strong>LIBKML_USE_SIMPLEFIELD=[YES/NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">NO</span></code>, export fields as &lt;Data&gt;.</p>
+<p id="config-LIBKML_USE_SIMPLEFIELD"><strong>LIBKML_USE_SIMPLEFIELD=[YES​/​NO]: </strong>If <code class="docutils literal notranslate"><span class="pre">NO</span></code>, export fields as &lt;Data&gt;.</p>
 </div>
 <p>A rich set of <a class="reference internal" href="../../user/configoptions.html#configoptions"><span class="std std-ref">configuration options</span></a> are
 available to define how fields in input and output, map to a KML
@@ -721,6 +725,9 @@ For example, if you want a field called 'Cities' to map to the
 tag in KML, you can set a configuration option. Note these are independent of layer
 creation and dataset creation options' <cite>&lt;name&gt;</cite>.</p>
 <ul class="simple">
+<li><p id="config-LIBKML_ID_FIELD"><strong>LIBKML_ID_FIELD=value: </strong> (GDAL &gt;= 3.10)  Defaults to <code class="docutils literal notranslate"><span class="pre">id</span></code>. Name of the string field that maps to the kml attribute
+<a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#object">&lt;id&gt;</a>.</p>
+</li>
 <li><p id="config-LIBKML_NAME_FIELD"><strong>LIBKML_NAME_FIELD=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">name</span></code>. Name of the string field that maps to the kml tag
 <a class="reference external" href="https://developers.google.com/kml/documentation/kmlreference#name">&lt;name&gt;</a>.</p>
 </li>
@@ -930,7 +937,7 @@ MultiPolygon), and default to GeometryCollection in case of mixed
 content.</p>
 <p>The following configuration options control geometry translation:</p>
 <ul class="simple">
-<li><p id="config-LIBKML_WRAPDATELINE"><strong>LIBKML_WRAPDATELINE=[YES/NO]: </strong>Sometimes kml geometry will span the dateline, In applications like QGIS
+<li><p id="config-LIBKML_WRAPDATELINE"><strong>LIBKML_WRAPDATELINE=[YES​/​NO]: </strong>Sometimes kml geometry will span the dateline, In applications like QGIS
 or MapServer this will create horizontal lines all the way around the
 globe. Setting this
 to &quot;yes&quot; will cause the libkml driver to split the geometry at the dateline when

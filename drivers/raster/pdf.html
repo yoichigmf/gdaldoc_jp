@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PDF -- Geospatial PDF &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -115,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -222,6 +224,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -255,6 +258,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -394,12 +398,12 @@ not found, the neatline that covers the largest area.</p>
 </li>
 <li><p id="config-PDF_USER_PWD"><strong>PDF_USER_PWD=value: </strong>User password for protected PDFs.</p>
 </li>
-<li><p id="config-GDAL_PDF_RENDERING_OPTIONS"><strong>GDAL_PDF_RENDERING_OPTIONS=[RASTER,VECTOR,TEXT/RASTER,VECTOR/RASTER,TEXT/RASTER/VECTOR,TEXT/VECTOR/TEXT]: </strong>a combination of VECTOR, RASTER and
+<li><p id="config-GDAL_PDF_RENDERING_OPTIONS"><strong>GDAL_PDF_RENDERING_OPTIONS=[RASTER,VECTOR,TEXT​/​RASTER,VECTOR​/​RASTER,TEXT​/​RASTER​/​VECTOR,TEXT​/​VECTOR​/​TEXT]: </strong>a combination of VECTOR, RASTER and
 TEXT separated by comma, to select whether vector, raster or text
 features should be rendered. If the option is not specified, all
 features are rendered (Poppler and PDFium).</p>
 </li>
-<li><p id="config-GDAL_PDF_BANDS"><strong>GDAL_PDF_BANDS=[3/4]: </strong>whether the PDF should be rendered as a
+<li><p id="config-GDAL_PDF_BANDS"><strong>GDAL_PDF_BANDS=[3​/​4]: </strong>whether the PDF should be rendered as a
 RGB (3) or RGBA (4) image. The default value will depend on the PDF rendering
 used (Poppler vs PDFium) and on the content found in the PDF file (if an
 image with transparency is recognized, then 4 will be used). When 3 bands
@@ -414,7 +418,7 @@ layers not explicitly listed will be turned off (Poppler and PDFium).</p>
 The layer names can be obtained by querying the LAYERS metadata
 domain (Poppler and PDFium).</p>
 </li>
-<li><p id="config-GDAL_PDF_LAUNDER_LAYER_NAMES"><strong>GDAL_PDF_LAUNDER_LAYER_NAMES=[YES/NO]: </strong> (GDAL &gt;= 3.1) Can be set to NO
+<li><p id="config-GDAL_PDF_LAUNDER_LAYER_NAMES"><strong>GDAL_PDF_LAUNDER_LAYER_NAMES=[YES​/​NO]: </strong> (GDAL &gt;= 3.1) Can be set to NO
 to avoid the layer names reported in the LAYERS metadata domain or as OGR
 layers for the vector part to be &quot;laundered&quot;.</p>
 </li>
@@ -424,13 +428,13 @@ layers for the vector part to be &quot;laundered&quot;.</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 Above configuration options are also available as open options.</p>
 <ul class="simple">
-<li><p id="drivers/raster/pdf-oo-RENDERING_OPTIONS"><strong>RENDERING_OPTIONS=[RASTER,VECTOR,TEXT/RASTER,VECTOR/RASTER,TEXT/RASTER/VECTOR,TEXT/VECTOR/TEXT]: </strong>Equivalent of <a class="reference internal" href="#config-GDAL_PDF_RENDERING_OPTIONS"><code class="docutils literal notranslate"><span class="pre">GDAL_PDF_RENDERING_OPTIONS</span></code></a> configuration option.</p>
+<li><p id="drivers/raster/pdf-oo-RENDERING_OPTIONS"><strong>RENDERING_OPTIONS=[RASTER,VECTOR,TEXT​/​RASTER,VECTOR​/​RASTER,TEXT​/​RASTER​/​VECTOR,TEXT​/​VECTOR​/​TEXT]: </strong>Equivalent of <a class="reference internal" href="#config-GDAL_PDF_RENDERING_OPTIONS"><code class="docutils literal notranslate"><span class="pre">GDAL_PDF_RENDERING_OPTIONS</span></code></a> configuration option.</p>
 </li>
 <li><p id="drivers/raster/pdf-oo-DPI"><strong>DPI=value: </strong>Equivalent of <a class="reference internal" href="#config-GDAL_PDF_DPI"><code class="docutils literal notranslate"><span class="pre">GDAL_PDF_DPI</span></code></a> configuration option</p>
 </li>
 <li><p id="drivers/raster/pdf-oo-USER_PWD"><strong>USER_PWD=value: </strong>Equivalent of <a class="reference internal" href="#config-PDF_USER_PWD"><code class="docutils literal notranslate"><span class="pre">PDF_USER_PWD</span></code></a> configuration option</p>
 </li>
-<li><p id="drivers/raster/pdf-oo-PDF_LIB"><strong>PDF_LIB=[POPPLER/PODOFO/PDFIUM]: </strong>only available for builds with multiple backends.</p>
+<li><p id="drivers/raster/pdf-oo-PDF_LIB"><strong>PDF_LIB=[POPPLER​/​PODOFO​/​PDFIUM]: </strong>only available for builds with multiple backends.</p>
 </li>
 <li><p id="drivers/raster/pdf-oo-LAYERS"><strong>LAYERS=value: </strong>Equivalent of <a class="reference internal" href="#config-GDAL_PDF_LAYERS"><code class="docutils literal notranslate"><span class="pre">GDAL_PDF_LAYERS</span></code></a> configuration option</p>
 </li>
@@ -474,7 +478,7 @@ $ gdal_translate ../autotest/gdrivers/data/adobe_style_geospatial.pdf out.tif --
 at the first access to a raster block, the whole page will be rasterized
 (with Poppler), which can be a slow operation.</p>
 <p>Note: some raster-only PDF files (such as some
-USGS GeoPDF files), that are regularly tiled are exposed as tiled
+USGS PDF files), that are regularly tiled are exposed as tiled
 dataset by the GDAL PDF driver, and can be rendered with any backends.</p>
 <p>Only a few of the possible Datums available in the OGC best practice
 spec have been currently mapped in the driver. Unrecognized datums will
@@ -497,9 +501,9 @@ types).</p>
 <p>Creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-co</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALCreate11GDALDriverHPKciii12GDALDataType12CSLConstList" title="GDALCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreate()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Driver.Create" title="osgeo.gdal.Driver.Create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Driver.Create</span></code></a> (Python).
 The following creation options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/pdf-co-COMPRESS"><strong>COMPRESS=[NONE/DEFLATE/JPEG/JPEG2000]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEFLATE</span></code>. Set the compression to use for raster data.</p>
+<li><p id="drivers/raster/pdf-co-COMPRESS"><strong>COMPRESS=[NONE​/​DEFLATE​/​JPEG​/​JPEG2000]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEFLATE</span></code>. Set the compression to use for raster data.</p>
 </li>
-<li><p id="drivers/raster/pdf-co-STREAM_COMPRESS"><strong>STREAM_COMPRESS=[NONE/DEFLATE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEFLATE</span></code>. Set the compression to use for
+<li><p id="drivers/raster/pdf-co-STREAM_COMPRESS"><strong>STREAM_COMPRESS=[NONE​/​DEFLATE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">DEFLATE</span></code>. Set the compression to use for
 stream objects (vector geometries, JavaScript content).</p>
 </li>
 <li><p id="drivers/raster/pdf-co-DPI"><strong>DPI=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">72</span></code>. Set the DPI to use. May be
@@ -507,7 +511,7 @@ automatically adjusted to higher value so that page dimension does
 not exceed the 14400 maximum value (in user units) allowed by
 Acrobat.</p>
 </li>
-<li><p id="drivers/raster/pdf-co-WRITE_USERUNIT"><strong>WRITE_USERUNIT=[YES/NO]: </strong>Whether the UserUnit setting
+<li><p id="drivers/raster/pdf-co-WRITE_USERUNIT"><strong>WRITE_USERUNIT=[YES​/​NO]: </strong>Whether the UserUnit setting
 computed from the DPI (UserUnit = DPI / 72.0) should be recorded in
 the file. When UserUnit is recorded, the raster size in pixels
 recognized by GDAL on reading remains identical to the source raster.
@@ -518,7 +522,7 @@ value). If this parameter is not set and DPI is not specified, then
 UserUnit will be recorded (so that the raster size in pixels
 recognized by GDAL on reading remain identical to the source raster).</p>
 </li>
-<li><p id="drivers/raster/pdf-co-PREDICTOR"><strong>PREDICTOR=[1/2]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Only for DEFLATE compression. Might be set to 2
+<li><p id="drivers/raster/pdf-co-PREDICTOR"><strong>PREDICTOR=[1​/​2]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>. Only for DEFLATE compression. Might be set to 2
 to use horizontal predictor that can make files smaller (but not
 always!).</p>
 </li>
@@ -526,11 +530,11 @@ always!).</p>
 compression. A value of 100 is best quality (least compression), and
 1 is worst quality (best compression).</p>
 </li>
-<li><p id="drivers/raster/pdf-co-JPEG2000_DRIVER"><strong>JPEG2000_DRIVER=[JP2KAK/JP2ECW/JP2OpenJPEG/JPEG2000]: </strong>Set the
+<li><p id="drivers/raster/pdf-co-JPEG2000_DRIVER"><strong>JPEG2000_DRIVER=[JP2KAK​/​JP2ECW​/​JP2OpenJPEG​/​JPEG2000]: </strong>Set the
 JPEG2000 driver to use. If not specified, it will be searched in the
 previous list.</p>
 </li>
-<li><p id="drivers/raster/pdf-co-TILED"><strong>TILED=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. By default monoblock files are created. This option
+<li><p id="drivers/raster/pdf-co-TILED"><strong>TILED=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. By default monoblock files are created. This option
 can be used to force creation of tiled PDF files.</p>
 </li>
 <li><p id="drivers/raster/pdf-co-BLOCKXSIZE"><strong>BLOCKXSIZE=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">256</span></code>. Sets tile width.</p>
@@ -589,16 +593,16 @@ toggled/un-toggled in the &quot;Layer tree&quot; of the PDF reader.</p>
 </li>
 <li><p id="drivers/raster/pdf-co-BOTTOM_MARGIN"><strong>BOTTOM_MARGIN=value: </strong>Margin below image in user units.</p>
 </li>
-<li><p id="drivers/raster/pdf-co-GEO_ENCODING"><strong>GEO_ENCODING=[NONE/ISO32000/OGC_BP/BOTH]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ISO32000</span></code>. Set the Geo encoding method to use.</p>
+<li><p id="drivers/raster/pdf-co-GEO_ENCODING"><strong>GEO_ENCODING=[NONE​/​ISO32000​/​OGC_BP​/​BOTH]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ISO32000</span></code>. Set the Geo encoding method to use.</p>
 </li>
 <li><p id="drivers/raster/pdf-co-NEATLINE"><strong>NEATLINE=&lt;polygon_definition_in_wkt&gt;: </strong>Set the NEATLINE to use.</p>
 </li>
-<li><p id="drivers/raster/pdf-co-XMP"><strong>XMP=[NONE/&lt;xml_xmp_content&gt;]: </strong>By default, if the source dataset has
+<li><p id="drivers/raster/pdf-co-XMP"><strong>XMP=[NONE​/​&lt;xml_xmp_content&gt;]: </strong>By default, if the source dataset has
 data in the 'xml:XMP' metadata domain, this data will be copied to
 the output PDF, unless this option is set to NONE. The XMP xml string
 can also be directly set to this option.</p>
 </li>
-<li><p id="drivers/raster/pdf-co-WRITE_INFO"><strong>WRITE_INFO=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. By default, the AUTHOR, CREATOR,
+<li><p id="drivers/raster/pdf-co-WRITE_INFO"><strong>WRITE_INFO=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. By default, the AUTHOR, CREATOR,
 CREATION_DATE, KEYWORDS, PRODUCER, SUBJECT and TITLE information will
 be written into the PDF Info block from the corresponding metadata
 item from the source dataset, or if not set, from the corresponding
@@ -643,7 +647,7 @@ this option is not specified. When specified, the number of names
 should be the same as the number of OGR layers in the datasource (and
 in the order they appear when listed by ogrinfo for example).</p>
 </li>
-<li><p id="drivers/raster/pdf-co-OGR_WRITE_ATTRIBUTES"><strong>OGR_WRITE_ATTRIBUTES=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to write attributes of OGR features.</p>
+<li><p id="drivers/raster/pdf-co-OGR_WRITE_ATTRIBUTES"><strong>OGR_WRITE_ATTRIBUTES=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to write attributes of OGR features.</p>
 </li>
 <li><p id="drivers/raster/pdf-co-OGR_LINK_FIELD"><strong>OGR_LINK_FIELD=value: </strong>Name of the field (matching the name of a
 field from the OGR layer definition) to use to cause clicks on OGR
@@ -939,7 +943,7 @@ displayed :</p>
 <p><a class="reference internal" href="../vector/pdf.html#vector-pdf"><span class="std std-ref">PDF vector</span></a> documentation page</p>
 <p>Specifications :</p>
 <ul class="simple">
-<li><p><a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=40537">OGC GeoPDF Encoding Best Practice Version 2.2
+<li><p><a class="reference external" href="http://portal.opengeospatial.org/files/?artifact_id=40537">OGC PDF Georegistration Encoding Best Practice Version 2.2
 (08-139r3)</a></p></li>
 <li><p><a class="reference external" href="http://www.adobe.com/devnet/acrobat/pdfs/adobe_supplement_iso32000.pdf">Adobe Supplement to ISO
 32000</a></p></li>

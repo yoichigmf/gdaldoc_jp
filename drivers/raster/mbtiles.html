@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MBTiles &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -212,6 +215,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -245,6 +249,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -396,7 +401,7 @@ filled in the <em>tiles</em> table. By default, the driver will select
 the maximum zoom level, such as at least one tile at that zoom
 level is found in the 'tiles' table.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-oo-USE_BOUNDS"><strong>USE_BOUNDS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to use the 'bounds' metadata,
+<li><p id="drivers/raster/mbtiles-oo-USE_BOUNDS"><strong>USE_BOUNDS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to use the 'bounds' metadata,
 when available, to determine the AOI.</p>
 </li>
 <li><p id="drivers/raster/mbtiles-oo-MINX"><strong>MINX=value: </strong>Minimum easting (in EPSG:3857) of the area of interest.</p>
@@ -411,12 +416,12 @@ when available, to determine the AOI.</p>
 </li>
 <li><p>Raster only:</p>
 <ul>
-<li><p id="drivers/raster/mbtiles-oo-BAND_COUNT"><strong>BAND_COUNT=[AUTO/1/2/3/4]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Number of bands of the dataset
+<li><p id="drivers/raster/mbtiles-oo-BAND_COUNT"><strong>BAND_COUNT=[AUTO​/​1​/​2​/​3​/​4]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Number of bands of the dataset
 exposed after opening. Some conversions will be done when possible
 and implemented, but this might fail in some cases, depending on
 the BAND_COUNT value and the number of bands of the tile.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-oo-TILE_FORMAT"><strong>TILE_FORMAT=[PNG/PNG8/JPEG/WEBP]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">PNG</span></code>. Format used to store tiles. See
+<li><p id="drivers/raster/mbtiles-oo-TILE_FORMAT"><strong>TILE_FORMAT=[PNG​/​PNG8​/​JPEG​/​WEBP]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">PNG</span></code>. Format used to store tiles. See
 <a class="reference external" href="#tile_formats">Tile formats</a> section. Only used in update
 mode.</p>
 </li>
@@ -426,17 +431,17 @@ used in update mode.</p>
 <li><p id="drivers/raster/mbtiles-oo-ZLEVEL"><strong>ZLEVEL=1-9: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">6</span></code>. DEFLATE compression level for PNG tiles. Only
 used in update mode.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-oo-DITHER"><strong>DITHER=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use Floyd-Steinberg dithering (for
+<li><p id="drivers/raster/mbtiles-oo-DITHER"><strong>DITHER=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use Floyd-Steinberg dithering (for
 <a class="reference internal" href="#drivers/raster/mbtiles-oo-TILE_FORMAT"><code class="docutils literal notranslate"><span class="pre">TILE_FORMAT=PNG8</span></code></a>). Only used in update mode.</p>
 </li>
 </ul>
 </li>
 <li><p>Vector only:</p>
 <ul>
-<li><p id="drivers/raster/mbtiles-oo-CLIP"><strong>CLIP=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to clip geometries of vector features
+<li><p id="drivers/raster/mbtiles-oo-CLIP"><strong>CLIP=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to clip geometries of vector features
 to tile extent.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-oo-ZOOM_LEVEL_AUTO"><strong>ZOOM_LEVEL_AUTO=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to auto-select the zoom
+<li><p id="drivers/raster/mbtiles-oo-ZOOM_LEVEL_AUTO"><strong>ZOOM_LEVEL_AUTO=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to auto-select the zoom
 level for vector layers according to the spatial filter extent.
 Only for display purpose.</p>
 </li>
@@ -478,7 +483,7 @@ transparent to the user of GDAL API/utilities</p>
 <h3>Tile formats<a class="headerlink" href="#tile-formats" title="Link to this heading"></a></h3>
 <p>MBTiles can store tiles in PNG, JPEG or WEBP (since 3.8). Support for
 those tile formats depend if the underlying drivers are available
-in GDAL. By default, GDAL will PNG tiles.</p>
+in GDAL. By default, GDAL will produce PNG tiles.</p>
 <p>It is possible to select the tile format by setting the creation/open
 option TILE_FORMAT to one of PNG, PNG8, JPEG or WEBP. When using JPEG,
 the alpha channel will not be stored.</p>
@@ -523,7 +528,7 @@ item. If not specified, the basename of the filename will be used.</p>
 the 'description' metadata item. If not specified, the basename of
 the filename will be used.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-TYPE"><strong>TYPE=[overlay/baselayer]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">overlay</span></code>. The layer type, used to set the 'type' metadata item.</p>
+<li><p id="drivers/raster/mbtiles-co-TYPE"><strong>TYPE=[overlay​/​baselayer]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">overlay</span></code>. The layer type, used to set the 'type' metadata item.</p>
 </li>
 </ul>
 </li>
@@ -535,26 +540,26 @@ number, used to set the 'version' metadata item.</p>
 <li><p id="drivers/raster/mbtiles-co-BLOCKSIZE"><strong>BLOCKSIZE=&lt;integer&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">256</span></code>. Block/tile size in width
 and height in pixels. Maximum supported is 4096.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-TILE_FORMAT"><strong>TILE_FORMAT=[PNG/PNG8/JPEG/WEBP]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">PNG</span></code>. Format used to store tiles. See
+<li><p id="drivers/raster/mbtiles-co-TILE_FORMAT"><strong>TILE_FORMAT=[PNG​/​PNG8​/​JPEG​/​WEBP]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">PNG</span></code>. Format used to store tiles. See
 <a class="reference external" href="#tile_formats">Tile formats</a> section.</p>
 </li>
 <li><p id="drivers/raster/mbtiles-co-QUALITY"><strong>QUALITY=1-100: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">75</span></code>. Quality setting for JPEG/WEBP compression.</p>
 </li>
 <li><p id="drivers/raster/mbtiles-co-ZLEVEL"><strong>ZLEVEL=1-9: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">6</span></code>. DEFLATE compression level for PNG tiles.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-DITHER"><strong>DITHER=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use Floyd-Steinberg dithering (for
+<li><p id="drivers/raster/mbtiles-co-DITHER"><strong>DITHER=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use Floyd-Steinberg dithering (for
 <a class="reference internal" href="#drivers/raster/mbtiles-co-TILE_FORMAT"><code class="docutils literal notranslate"><span class="pre">TILE_FORMAT=PNG8</span></code></a>).</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-ZOOM_LEVEL_STRATEGY"><strong>ZOOM_LEVEL_STRATEGY=[AUTO/LOWER/UPPER]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Strategy to determine
+<li><p id="drivers/raster/mbtiles-co-ZOOM_LEVEL_STRATEGY"><strong>ZOOM_LEVEL_STRATEGY=[AUTO​/​LOWER​/​UPPER]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Strategy to determine
 zoom level. LOWER will select the zoom level immediately below the
 theoretical computed non-integral zoom level, leading to
 subsampling. On the contrary, UPPER will select the immediately
 above zoom level, leading to oversampling. Defaults to AUTO which
 selects the closest zoom level.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-RESAMPLING"><strong>RESAMPLING=[NEAREST/BILINEAR/CUBIC/CUBICSPLINE/LANCZOS/MODE/AVERAGE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">BILINEAR</span></code>. Resampling algorithm.</p>
+<li><p id="drivers/raster/mbtiles-co-RESAMPLING"><strong>RESAMPLING=[NEAREST​/​BILINEAR​/​CUBIC​/​CUBICSPLINE​/​LANCZOS​/​MODE​/​AVERAGE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">BILINEAR</span></code>. Resampling algorithm.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-WRITE_BOUNDS"><strong>WRITE_BOUNDS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to write the bounds 'metadata' item.</p>
+<li><p id="drivers/raster/mbtiles-co-WRITE_BOUNDS"><strong>WRITE_BOUNDS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to write the bounds 'metadata' item.</p>
 </li>
 </ul>
 </li>
@@ -588,7 +593,7 @@ for proper rendering of geometries that spread over tile
 boundaries by some rendering clients. Defaults to 80 if
 <a class="reference internal" href="#drivers/raster/mbtiles-co-EXTENT"><code class="docutils literal notranslate"><span class="pre">EXTENT=4096</span></code></a>.</p>
 </li>
-<li><p id="drivers/raster/mbtiles-co-COMPRESS"><strong>COMPRESS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to compress tiles with the
+<li><p id="drivers/raster/mbtiles-co-COMPRESS"><strong>COMPRESS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether to compress tiles with the
 Deflate/GZip algorithm. Defaults to YES. Should be left to YES for
 FORMAT=MBTILES.</p>
 </li>

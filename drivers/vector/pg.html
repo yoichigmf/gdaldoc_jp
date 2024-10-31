@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PostgreSQL / PostGIS &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -54,6 +56,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../programs/index.html">プログラム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../raster/index.html">ラスタードライバー</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ベクタードライバー</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="adbc.html">ADBC -- Arrow Database Connectivity</a></li>
 <li class="toctree-l2"><a class="reference internal" href="amigocloud.html">AmigoCloud</a></li>
 <li class="toctree-l2"><a class="reference internal" href="arrow.html">(Geo)Arrow IPC File Format / Stream</a></li>
 <li class="toctree-l2"><a class="reference internal" href="avcbin.html">Arc/Info Binary Coverage</a></li>
@@ -170,6 +173,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -395,10 +399,10 @@ The following open options are supported:</p>
 </li>
 <li><p id="drivers/vector/pg-oo-TABLES"><strong>TABLES=value: </strong>Restricted set of tables to list (comma separated).</p>
 </li>
-<li><p id="drivers/vector/pg-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[YES/NO]: </strong>This may be &quot;YES&quot; to force all tables,
+<li><p id="drivers/vector/pg-oo-LIST_ALL_TABLES"><strong>LIST_ALL_TABLES=[YES​/​NO]: </strong>This may be &quot;YES&quot; to force all tables,
 including non-spatial ones, to be listed.</p>
 </li>
-<li><p id="drivers/vector/pg-oo-SKIP_VIEWS"><strong>SKIP_VIEWS=[YES/NO]: </strong> (GDAL &gt;= 3.7) This may be &quot;YES&quot; to prevent views from being listed.</p>
+<li><p id="drivers/vector/pg-oo-SKIP_VIEWS"><strong>SKIP_VIEWS=[YES​/​NO]: </strong> (GDAL &gt;= 3.7) This may be &quot;YES&quot; to prevent views from being listed.</p>
 </li>
 <li><p id="drivers/vector/pg-oo-PRELUDE_STATEMENTS"><strong>PRELUDE_STATEMENTS=value: </strong>SQL statement(s) to
 send on the PostgreSQL client connection before any other ones. In
@@ -427,7 +431,7 @@ semi-column (;) sign. With the above example value for
 <p>Layer creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-lco</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv422GDALDatasetCreateLayer12GDALDatasetHPKc20OGRSpatialReferenceH18OGRwkbGeometryType12CSLConstList" title="GDALDatasetCreateLayer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDatasetCreateLayer()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Dataset.CreateLayer" title="osgeo.gdal.Dataset.CreateLayer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Dataset.CreateLayer</span></code></a> (Python).
 The following layer creation options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/vector/pg-lco-GEOM_TYPE"><strong>GEOM_TYPE=[geometry/geography/BYTEA/OID]: </strong>The GEOM_TYPE layer creation option can be set to one
+<li><p id="drivers/vector/pg-lco-GEOM_TYPE"><strong>GEOM_TYPE=[geometry​/​geography​/​BYTEA​/​OID]: </strong>The GEOM_TYPE layer creation option can be set to one
 of &quot;geometry&quot;, &quot;geography&quot;, &quot;BYTEA&quot; or &quot;OID&quot; to
 force the type of geometry used for a table. For a PostGIS database,
 &quot;geometry&quot; is the default value. PostGIS &quot;geography&quot; assumes a geographic
@@ -437,28 +441,28 @@ safest to use always <cite>-t_srs EPSG:4326</cite> (or the canonical geographic 
 corresponding to the projected CRS of interest to avoid datum transformations)
 with <a class="reference internal" href="#drivers/vector/pg-lco-GEOM_TYPE"><code class="docutils literal notranslate"><span class="pre">GEOM_TYPE=geography</span></code></a>.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-OVERWRITE"><strong>OVERWRITE=[YES/NO]: </strong>This may be &quot;YES&quot; to force an existing layer of the
+<li><p id="drivers/vector/pg-lco-OVERWRITE"><strong>OVERWRITE=[YES​/​NO]: </strong>This may be &quot;YES&quot; to force an existing layer of the
 desired name to be destroyed before creating the requested layer.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-LAUNDER"><strong>LAUNDER=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This may be &quot;YES&quot; to force new fields created on this
+<li><p id="drivers/vector/pg-lco-LAUNDER"><strong>LAUNDER=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This may be &quot;YES&quot; to force new fields created on this
 layer to have their field names &quot;laundered&quot; into a form more
 compatible with PostgreSQL. This converts to lower case and converts
 some special characters like &quot;-&quot; and &quot;#&quot; to &quot;_&quot;. If &quot;NO&quot; exact names
 are preserved. If enabled the table (layer) name will also be laundered.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-LAUNDER_ASCII"><strong>LAUNDER_ASCII=[YES/NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Implies LAUNDER=YES, with the extra substitution of UTF-8 accented
+<li><p id="drivers/vector/pg-lco-LAUNDER_ASCII"><strong>LAUNDER_ASCII=[YES​/​NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Implies LAUNDER=YES, with the extra substitution of UTF-8 accented
 characters in the <a class="reference external" href="https://en.wikipedia.org/wiki/Latin-1_Supplement">Latin-1 Supplement</a>
 and <a class="reference external" href="https://en.wikipedia.org/wiki/Latin_Extended-A">Latin Extented-A</a>
 sets with the closest ASCII letter. Other non-ASCII characters are
 replaced with underscore.
 Consequently this option is not appropriate for non-Latin languages.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-PRECISION"><strong>PRECISION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This may be &quot;YES&quot; to force new fields created on this
+<li><p id="drivers/vector/pg-lco-PRECISION"><strong>PRECISION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. This may be &quot;YES&quot; to force new fields created on this
 layer to try and represent the width and precision information, if
 available using NUMERIC(width,precision) or CHAR(width) types. If
 &quot;NO&quot; then the types FLOAT8, INTEGER and VARCHAR will be used instead.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-DIM"><strong>DIM=[2/3/XYM/XYZM]: </strong>Control the dimension of the layer. Important
+<li><p id="drivers/vector/pg-lco-DIM"><strong>DIM=[2​/​3​/​XYM​/​XYZM]: </strong>Control the dimension of the layer. Important
 to set to 2 for 2D layers as it has constraints on
 the geometry dimension during loading.</p>
 </li>
@@ -474,22 +478,22 @@ will not understand that the existing layer must be destroyed in the
 specified schema. Use the -nln option of ogr2ogr instead, or better
 the active_schema connection string. See below example.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[NONE/GIST/SPGIST/BRIN]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GIST</span></code>. Creates a
+<li><p id="drivers/vector/pg-lco-SPATIAL_INDEX"><strong>SPATIAL_INDEX=[NONE​/​GIST​/​SPGIST​/​BRIN]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">GIST</span></code>. Creates a
 spatial index (GiST) on the geometry column to speed up queries (Has
 effect only when PostGIS is available). Set to NONE (GDAL &gt;= 2.4, or
 FALSE for earlier versions) to disable. BRIN is only available with
 PostgreSQL &gt;= 9.4 and PostGIS &gt;= 2.3. SPGIST is only available with
 PostgreSQL &gt;= 11 and PostGIS &gt;= 2.5</p>
 </li>
-<li><p id="drivers/vector/pg-lco-TEMPORARY"><strong>TEMPORARY=[ON/OFF]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>. Set to OFF by default. Creates a
+<li><p id="drivers/vector/pg-lco-TEMPORARY"><strong>TEMPORARY=[ON​/​OFF]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>. Set to OFF by default. Creates a
 temporary table instead of a permanent one.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-UNLOGGED"><strong>UNLOGGED=[ON/OFF]: </strong>Set to OFF by default. Whether to
+<li><p id="drivers/vector/pg-lco-UNLOGGED"><strong>UNLOGGED=[ON​/​OFF]: </strong>Set to OFF by default. Whether to
 create the table as a unlogged one. Unlogged tables are only
 supported since PostgreSQL 9.1, and GiST indexes used for spatial
 indexing since PostgreSQL 9.3.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-NONE_AS_UNKNOWN"><strong>NONE_AS_UNKNOWN=[YES/NO]: </strong>Can bet set to YES to force
+<li><p id="drivers/vector/pg-lco-NONE_AS_UNKNOWN"><strong>NONE_AS_UNKNOWN=[YES​/​NO]: </strong>Can bet set to YES to force
 non-spatial layers (wkbNone) to be created as spatial tables of type
 GEOMETRY (wkbUnknown).
 Defaults to NO, in which case a regular table is created and not
@@ -497,10 +501,10 @@ recorded in the PostGIS geometry_columns table.</p>
 </li>
 <li><p id="drivers/vector/pg-lco-FID"><strong>FID=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ogc_fid</span></code>. Name of the FID column to create.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-FID64"><strong>FID64=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This may be &quot;TRUE&quot; to create a FID column
+<li><p id="drivers/vector/pg-lco-FID64"><strong>FID64=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This may be &quot;TRUE&quot; to create a FID column
 that can support 64 bit identifiers.</p>
 </li>
-<li><p id="drivers/vector/pg-lco-EXTRACT_SCHEMA_FROM_LAYER_NAME"><strong>EXTRACT_SCHEMA_FROM_LAYER_NAME=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Can be set to
+<li><p id="drivers/vector/pg-lco-EXTRACT_SCHEMA_FROM_LAYER_NAME"><strong>EXTRACT_SCHEMA_FROM_LAYER_NAME=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Can be set to
 NO to avoid considering the dot character as the separator between
 the schema and the table name.</p>
 </li>
@@ -539,9 +543,9 @@ force PG_USE_COPY=NO when using PgPoolII.</p>
 used when opening a layer whose primary key cannot be autodetected.
 Ignored by CreateLayer() that uses the FID creation option.</p>
 </li>
-<li><p id="config-PG_LIST_ALL_TABLES"><strong>PG_LIST_ALL_TABLES=[YES/NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/pg-oo-LIST_ALL_TABLES"><code class="docutils literal notranslate"><span class="pre">LIST_ALL_TABLES</span></code></a>.</p>
+<li><p id="config-PG_LIST_ALL_TABLES"><strong>PG_LIST_ALL_TABLES=[YES​/​NO]: </strong>Equivalent of <a class="reference internal" href="#drivers/vector/pg-oo-LIST_ALL_TABLES"><code class="docutils literal notranslate"><span class="pre">LIST_ALL_TABLES</span></code></a>.</p>
 </li>
-<li><p id="config-PG_USE_BASE64"><strong>PG_USE_BASE64=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to &quot;YES&quot;, geometries will
+<li><p id="config-PG_USE_BASE64"><strong>PG_USE_BASE64=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to &quot;YES&quot;, geometries will
 be fetched as BASE64 encoded EWKB instead of canonical HEX encoded
 EWKB. This reduces the amount of data to be transferred from 2 N to
 1.333 N, where N is the size of EWKB data. However, it might be a bit
@@ -552,7 +556,7 @@ are on the same machine, so the default is NO.</p>
 number of features that are fetched from the database and held in memory
 at a single time.</p>
 </li>
-<li><p id="config-OGR_PG_RETRIEVE_FID"><strong>OGR_PG_RETRIEVE_FID=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If set to &quot;YES&quot; (the default),
+<li><p id="config-OGR_PG_RETRIEVE_FID"><strong>OGR_PG_RETRIEVE_FID=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If set to &quot;YES&quot; (the default),
 writing an OGRFeature will cause its FID to be set to the value assigned by
 the database. If a single feature is to be inserted multiple times,
 this option can be set to &quot;NO&quot; to allow the database to assign a new FID
@@ -565,11 +569,15 @@ inserting the first feature. This is an alternative to using the
 be destroyed. Typical use case: <code class="docutils literal notranslate"><span class="pre">ogr2ogr</span> <span class="pre">-append</span> <span class="pre">PG:dbname=foo</span>
 <span class="pre">abc.shp</span> <span class="pre">--config</span> <span class="pre">OGR_TRUNCATE</span> <span class="pre">YES</span></code>.</p>
 </li>
-<li><p id="config-OGR_PG_ENABLE_METADATA"><strong>OGR_PG_ENABLE_METADATA=[YES/NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If set to &quot;YES&quot; (the default), the driver will try to use (and potentially
-create) the <code class="docutils literal notranslate"><span class="pre">ogr_system_tables.metadata</span></code> table to retrieve and store
-layer metadata.</p>
+<li><p id="config-OGR_PG_ENABLE_METADATA"><strong>OGR_PG_ENABLE_METADATA=[YES​/​NO]: </strong> (GDAL &gt;= 3.9)  Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. If set to &quot;YES&quot; (the default), the driver will try to use the
+<code class="docutils literal notranslate"><span class="pre">ogr_system_tables.metadata</span></code> table to retrieve and store
+layer metadata. To be able to store metadata, the schema <code class="docutils literal notranslate"><span class="pre">ogr_system_tables</span></code>
+and the event trigger <code class="docutils literal notranslate"><span class="pre">ogr_system_tables_event_trigger_for_metadata</span></code> must
+already exist in the database, or the current user must have sufficient rights
+(super-user rights for the event trigger) to be able to create them. If not,
+a warning will be raised.</p>
 </li>
-<li><p id="config-OGR_PG_SKIP_CONFLICTS"><strong>OGR_PG_SKIP_CONFLICTS=[YES/NO]: </strong> (GDAL &gt;= 3.10)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to &quot;YES&quot; (not the default),
+<li><p id="config-OGR_PG_SKIP_CONFLICTS"><strong>OGR_PG_SKIP_CONFLICTS=[YES​/​NO]: </strong> (GDAL &gt;= 3.10)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to &quot;YES&quot; (not the default),
 conflicts when inserting features will be skipped
 (requires OGR_PG_RETRIEVE_FID to be off and only applies when PG_USE_COPY
 is off).</p>

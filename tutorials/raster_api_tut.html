@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ラスターAPIチュートリアル &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,11 +22,12 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="Raster driver implementation tutorial" href="raster_driver_tut.html" />
+    <link rel="next" title="ラスタードライバー実装チュートリアル" href="raster_driver_tut.html" />
     <link rel="prev" title="チュートリアル" href="index.html" /> 
 </head>
 
@@ -69,16 +71,18 @@
 <li class="toctree-l4"><a class="reference internal" href="#using-create">Create()の使用</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="raster_driver_tut.html">Raster driver implementation tutorial</a></li>
-<li class="toctree-l3"><a class="reference internal" href="warp_tut.html">GDAL Warp API tutorial (Reprojection, ...)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="gdal_grid_tut.html">GDAL Grid Tutorial</a></li>
-<li class="toctree-l3"><a class="reference internal" href="geotransforms_tut.html">Geotransform Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="raster_driver_tut.html">ラスタードライバー実装チュートリアル</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warp_tut.html">GDAL Warp API チュートリアル (再投影、...)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gdal_grid_tut.html">GDALグリッドチュートリアル</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geotransforms_tut.html">地理変換チュートリアル</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#multidimensional-raster">多次元ラスター</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#vector">ベクター</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#geographic-network-model">ジオグラフィックネットワークモデル</a></li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#projections-and-spatial-reference-systems-tutorial-osr-ogrspatialreference">投影と空間参照システムチュートリアル (OSR - OGRSpatialReference)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#workshops">Workshops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#external-tutorials">External tutorials</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../development/index.html">開発</a></li>
@@ -87,6 +91,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -143,7 +148,7 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="raster_driver_tut.html" class="btn btn-neutral float-right" title="Raster driver implementation tutorial" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="raster_driver_tut.html" class="btn btn-neutral float-right" title="ラスタードライバー実装チュートリアル" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="チュートリアル" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -222,7 +227,7 @@
 <section id="getting-dataset-information">
 <h2>データセット情報の取得<a class="headerlink" href="#getting-dataset-information" title="Link to this heading"></a></h2>
 <p>As described in the <a class="reference internal" href="../user/raster_data_model.html#raster-data-model"><span class="std std-ref">ラスターデータモデル</span></a>, a <a class="reference internal" href="../api/gdaldataset_cpp.html#_CPPv411GDALDataset" title="GDALDataset"><code class="xref cpp cpp-class docutils literal notranslate"><span class="pre">GDALDataset</span></code></a> contains a list of raster bands, all pertaining to the same area, and having the same resolution. It also has metadata, a coordinate system, a georeferencing transform, size of raster and various other information.</p>
-<p>特に,一般的な&quot;北向き&quot;画像で回転やシアリングがない場合,ジオリファレンス変換 <a class="reference internal" href="geotransforms_tut.html#geotransforms-tut"><span class="std std-ref">Geotransform Tutorial</span></a> は以下の形式を取ります:</p>
+<p>特に,一般的な&quot;北向き&quot;画像で回転やシアリングがない場合,ジオリファレンス変換 <a class="reference internal" href="geotransforms_tut.html#geotransforms-tut"><span class="std std-ref">地理変換チュートリアル</span></a> は以下の形式を取ります:</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">adfGeoTransform</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="cm">/* top left x */</span>
 <span class="n">adfGeoTransform</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="cm">/* w-e pixel resolution */</span>
 <span class="n">adfGeoTransform</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="cm">/* 0 */</span>
@@ -620,7 +625,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="raster_driver_tut.html" class="btn btn-neutral float-right" title="Raster driver implementation tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="raster_driver_tut.html" class="btn btn-neutral float-right" title="ラスタードライバー実装チュートリアル" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="チュートリアル" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

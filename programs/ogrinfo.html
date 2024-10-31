@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ogrinfo &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=91613774"></script>
+        <script src="../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
@@ -86,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -160,7 +163,7 @@
 <section id="synopsis">
 <span id="index-0"></span><h2>概要<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ogrinfo</span> <span class="p">[</span><span class="o">--</span><span class="n">help</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">help</span><span class="o">-</span><span class="n">general</span><span class="p">]</span>
-        <span class="p">[</span><span class="o">-</span><span class="k">if</span> <span class="o">&lt;</span><span class="n">driver_name</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">json</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">ro</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">where</span> <span class="o">&lt;</span><span class="n">restricted_where</span><span class="o">&gt;|</span><span class="nd">@f</span><span class="o">&lt;</span><span class="n">ilename</span><span class="o">&gt;</span><span class="p">]</span>
+        <span class="p">[</span><span class="o">-</span><span class="k">if</span> <span class="o">&lt;</span><span class="n">driver_name</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">json</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">ro</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">q</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">where</span> <span class="o">&lt;</span><span class="n">restricted_where</span><span class="o">&gt;|@&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="p">]</span>
         <span class="p">[</span><span class="o">-</span><span class="n">spat</span> <span class="o">&lt;</span><span class="n">xmin</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">ymin</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">xmax</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">ymax</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">geomfield</span> <span class="o">&lt;</span><span class="n">field</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">fid</span> <span class="o">&lt;</span><span class="n">fid</span><span class="o">&gt;</span><span class="p">]</span>
         <span class="p">[</span><span class="o">-</span><span class="n">sql</span> <span class="o">&lt;</span><span class="n">statement</span><span class="o">&gt;|@&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">dialect</span> <span class="o">&lt;</span><span class="n">sql_dialect</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">al</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">rl</span><span class="p">]</span>
         <span class="p">[</span><span class="o">-</span><span class="n">so</span><span class="o">|-</span><span class="n">features</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">limit</span> <span class="o">&lt;</span><span class="n">nb_features</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">fields</span><span class="o">=</span><span class="p">{</span><span class="n">YES</span><span class="o">|</span><span class="n">NO</span><span class="p">}]]</span>

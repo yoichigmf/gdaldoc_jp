@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JPEGXL -- JPEG-XL File Format &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -202,6 +205,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -235,6 +239,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -363,7 +368,7 @@ metadata in the COLOR_PROFILE domain:</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/jpegxl-oo-APPLY_ORIENTATION"><strong>APPLY_ORIENTATION=[YES/NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use EXIF_Orientation
+<li><p id="drivers/raster/jpegxl-oo-APPLY_ORIENTATION"><strong>APPLY_ORIENTATION=[YES​/​NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Whether to use EXIF_Orientation
 metadata item to rotate/flip the image to apply scene orientation.
 Defaults to NO (that is the image will be returned in sensor orientation).</p>
 </li>
@@ -381,21 +386,23 @@ data that enables to recreate a JPEG file from the JPEGXL codestream.</p>
 <p>Creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-co</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALCreate11GDALDriverHPKciii12GDALDataType12CSLConstList" title="GDALCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreate()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Driver.Create" title="osgeo.gdal.Driver.Create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Driver.Create</span></code></a> (Python).
 The following creation options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/jpegxl-co-LOSSLESS"><strong>LOSSLESS=[YES/NO]: </strong>Whether JPEGXL compression should be lossless.
+<li><p id="drivers/raster/jpegxl-co-LOSSLESS"><strong>LOSSLESS=[YES​/​NO]: </strong>Whether JPEGXL compression should be lossless.
 Defaults to YES (unless DISTANCE or QUALITY are specified)</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-LOSSLESS_COPY"><strong>LOSSLESS_COPY=[AUTO/YES/NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether conversion should be lossless.
+<li><p id="drivers/raster/jpegxl-co-LOSSLESS_COPY"><strong>LOSSLESS_COPY=[AUTO​/​YES​/​NO]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether conversion should be lossless.
 In AUTO or YES mode, if LOSSLESS=YES and the source dataset uses JPEG
 compression, lossless recoding of it to JPEGXL is done, and a JPEG
 reconstruction box is added so that reverse conversion to JPEG is possible.
 If set to NO, or in AUTO mode if the source dataset does not use JPEG
 compression, the regular conversion code path is taken, resulting in a
-lossless or lossy copy depending on the LOSSLESS setting.</p>
+lossless or lossy copy depending on the LOSSLESS setting.
+AUTO mode defaults to NO, if EFFORT, DISTANCE, ALPHA_DISTANCE or QUALITY
+options are used.</p>
 </li>
 <li><p id="drivers/raster/jpegxl-co-EFFORT"><strong>EFFORT=1-9: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>. Level of effort.
 The higher, the smaller file and slower compression time.</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-DISTANCE"><strong>DISTANCE=0.1-15: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Distance level for lossy JPEG-XL compression.
+<li><p id="drivers/raster/jpegxl-co-DISTANCE"><strong>DISTANCE=0.01-25: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Distance level for lossy JPEG-XL compression.
 It is specified in multiples of a just-noticeable difference.
 (cf <a class="reference external" href="https://github.com/google/butteraugli">butteraugli</a> for the definition
 of the distance)
@@ -403,7 +410,7 @@ That is, 0 is mathematically lossless, 1 should be visually lossless, and
 higher distances yield denser and denser files with lower and lower fidelity.
 The recommended range is [0.5,3].</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-ALPHA_DISTANCE"><strong>ALPHA_DISTANCE=[-1/0/0.1-15]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>. (libjxl &gt; 0.8.1)
+<li><p id="drivers/raster/jpegxl-co-ALPHA_DISTANCE"><strong>ALPHA_DISTANCE=[-1​/​0​/​0.01-25]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">-1.0</span></code>. (libjxl &gt; 0.8.1)
 Distance level for alpha channel for lossy JPEG-XL compression.
 It is specified in multiples of a just-noticeable difference.
 (cf <a class="reference external" href="https://github.com/google/butteraugli">butteraugli</a> for the definition
@@ -421,7 +428,7 @@ compression, roughly matching libjpeg quality setting in the [0,100] range.</p>
 passing a value from 1 to 7 for a Byte type, or a value from 9 to 15 for
 a UInt16 type.</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-NUM_THREADS"><strong>NUM_THREADS=[&lt;number_of_threads&gt;/ALL_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL_CPUS</span></code>. Set the number of worker threads
+<li><p id="drivers/raster/jpegxl-co-NUM_THREADS"><strong>NUM_THREADS=[&lt;number_of_threads&gt;​/​ALL_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL_CPUS</span></code>. Set the number of worker threads
 for multi-threaded compression.
 If not set, can also be controlled with the
 <a class="reference internal" href="../../user/configoptions.html#config-GDAL_NUM_THREADS"><code class="docutils literal notranslate"><span class="pre">GDAL_NUM_THREADS</span></code></a> configuration option.</p>
@@ -429,16 +436,16 @@ If not set, can also be controlled with the
 <li><p id="drivers/raster/jpegxl-co-SOURCE_ICC_PROFILE"><strong>SOURCE_ICC_PROFILE=value: </strong>ICC profile encoded in Base64. Can also be
 set to empty string to avoid the ICC profile from the source dataset to be used.</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-WRITE_EXIF_METADATA"><strong>WRITE_EXIF_METADATA=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (libjxl &gt; 0.6.1) Whether to write EXIF metadata from the
+<li><p id="drivers/raster/jpegxl-co-WRITE_EXIF_METADATA"><strong>WRITE_EXIF_METADATA=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (libjxl &gt; 0.6.1) Whether to write EXIF metadata from the
 EXIF metadata domain of the source dataset in a Exif box.</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-WRITE_XMP"><strong>WRITE_XMP=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (libjxl &gt; 0.6.1) Whether to write XMP metadata from the
+<li><p id="drivers/raster/jpegxl-co-WRITE_XMP"><strong>WRITE_XMP=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (libjxl &gt; 0.6.1) Whether to write XMP metadata from the
 xml:XMP metadata domain of the source dataset in a xml box.</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-WRITE_GEOJP2"><strong>WRITE_GEOJP2=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (libjxl &gt; 0.6.1) Whether to write georeferencing in a JUMBF UUID box
+<li><p id="drivers/raster/jpegxl-co-WRITE_GEOJP2"><strong>WRITE_GEOJP2=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. (libjxl &gt; 0.6.1) Whether to write georeferencing in a JUMBF UUID box
 using GeoJP2 encoding.</p>
 </li>
-<li><p id="drivers/raster/jpegxl-co-COMPRESS_BOXES"><strong>COMPRESS_BOXES=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (libjxl &gt; 0.6.1) Whether to to decompress Exif/XMP/GeoJP2 boxes
+<li><p id="drivers/raster/jpegxl-co-COMPRESS_BOXES"><strong>COMPRESS_BOXES=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (libjxl &gt; 0.6.1) Whether to to decompress Exif/XMP/GeoJP2 boxes
 using Brotli compression.</p>
 </li>
 </ul>

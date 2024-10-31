@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>COG -- Cloud Optimized GeoTIFF generator &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -132,7 +135,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -213,6 +216,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -246,6 +250,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -358,14 +363,12 @@ converted to a RGB+mask dataset when selecting JPEG compression)</p>
 <ul class="simple">
 <li><p id="drivers/raster/cog-co-BLOCKSIZE"><strong>BLOCKSIZE=&lt;integer&gt;: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">512</span></code>. Sets the tile width and height in pixels. Must be divisible by 16.</p>
 </li>
-<li><p id="drivers/raster/cog-co-COMPRESS"><strong>COMPRESS=[NONE/LZW/JPEG/DEFLATE/ZSTD/WEBP/LERC/LERC_DEFLATE/LERC_ZSTD/LZMA]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">LZW</span></code>. Set the compression to use.
+<li><p id="drivers/raster/cog-co-COMPRESS"><strong>COMPRESS=[NONE​/​LZW​/​JPEG​/​DEFLATE​/​ZSTD​/​WEBP​/​LERC​/​LERC_DEFLATE​/​LERC_ZSTD​/​LZMA]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">LZW</span></code>. Set the compression to use.
 Defaults to <code class="docutils literal notranslate"><span class="pre">LZW</span></code> starting with GDAL 3.4 (default in previous version is <code class="docutils literal notranslate"><span class="pre">NONE</span></code>).<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">JPEG</span></code> should generally only be used with
 Byte data (8 bit per channel). But if GDAL is built with internal libtiff and
 libjpeg, it is    possible to read and write TIFF files with 12bit JPEG compressed TIFF
-files (seen as UInt16 bands with NBITS=12). See the <a class="reference external" href="http://trac.osgeo.org/gdal/wiki/TIFF12BitJPEG">&quot;8 and 12 bit
-JPEG in TIFF&quot;</a> wiki
-page for more details.
+files (seen as UInt16 bands with NBITS=12).
 For the COG driver, JPEG compression for 3 or 4-band images automatically
 selects the PHOTOMETRIC=YCBCR colorspace with a 4:2:2 subsampling of the Y,Cb,Cr
 components.
@@ -404,14 +407,14 @@ The default is the value of <a class="reference internal" href="#drivers/raster/
 quality (least compression), and 1 is worst quality (best compression).
 For WEBP, QUALITY=100 automatically turns on lossless mode.</p>
 </li>
-<li><p id="drivers/raster/cog-co-JXL_LOSSLESS"><strong>JXL_LOSSLESS=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Set whether JPEG-XL compression should be lossless
+<li><p id="drivers/raster/cog-co-JXL_LOSSLESS"><strong>JXL_LOSSLESS=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Set whether JPEG-XL compression should be lossless
 (YES) or lossy (NO). For lossy compression, the underlying data
 should be either gray, gray+alpha, rgb or rgb+alpha.</p>
 </li>
 <li><p id="drivers/raster/cog-co-JXL_EFFORT"><strong>JXL_EFFORT=1-9: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">5</span></code>. Level of effort for JPEG-XL compression.
 The higher, the smaller file and slower compression time.</p>
 </li>
-<li><p id="drivers/raster/cog-co-JXL_DISTANCE"><strong>JXL_DISTANCE=0.1-15: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Distance level for lossy JPEG-XL compression.
+<li><p id="drivers/raster/cog-co-JXL_DISTANCE"><strong>JXL_DISTANCE=0.01-25: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>. Distance level for lossy JPEG-XL compression.
 It is specified in multiples of a just-noticeable difference
 (cf <a class="reference external" href="https://github.com/google/butteraugli">butteraugli</a> for the definition
 of the distance)
@@ -419,7 +422,7 @@ That is, 0 is mathematically lossless, 1 should be visually lossless, and
 higher distances yield denser and denser files with lower and lower fidelity.
 The recommended range is [0.5,3].</p>
 </li>
-<li><p id="drivers/raster/cog-co-JXL_ALPHA_DISTANCE"><strong>JXL_ALPHA_DISTANCE=[-1/0/0.1-15]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">-1</span></code>. (libjxl &gt; 0.8.1)
+<li><p id="drivers/raster/cog-co-JXL_ALPHA_DISTANCE"><strong>JXL_ALPHA_DISTANCE=[-1​/​0​/​0.01-25]: </strong> (GDAL &gt;= 3.7)  Defaults to <code class="docutils literal notranslate"><span class="pre">-1</span></code>. (libjxl &gt; 0.8.1)
 Distance level for alpha channel for lossy JPEG-XL compression.
 It is specified in multiples of a just-noticeable difference.
 (cf <a class="reference external" href="https://github.com/google/butteraugli">butteraugli</a> for the definition
@@ -430,7 +433,7 @@ For lossy compression, the recommended range is [0.5,3].
 The default value is the special value -1.0, which means to use the same
 distance value as non-alpha channel (ie <a class="reference internal" href="#drivers/raster/cog-co-JXL_DISTANCE"><code class="docutils literal notranslate"><span class="pre">JXL_DISTANCE</span></code></a>).</p>
 </li>
-<li><p id="drivers/raster/cog-co-NUM_THREADS"><strong>NUM_THREADS=[&lt;number_of_threads&gt;/ALL_CPUS]: </strong>Enable multi-threaded compression by specifying the number of worker
+<li><p id="drivers/raster/cog-co-NUM_THREADS"><strong>NUM_THREADS=[&lt;number_of_threads&gt;​/​ALL_CPUS]: </strong>Enable multi-threaded compression by specifying the number of worker
 threads. Default is compression in the main thread. This also determines
 the number of threads used when reprojection is done with the <a class="reference internal" href="#drivers/raster/cog-co-TILING_SCHEME"><code class="docutils literal notranslate"><span class="pre">TILING_SCHEME</span></code></a>
 or <a class="reference internal" href="#drivers/raster/cog-co-TARGET_SRS"><code class="docutils literal notranslate"><span class="pre">TARGET_SRS</span></code></a> creation options. (Overview generation is also multithreaded since
@@ -442,7 +445,7 @@ Values of n=9...15 (UInt16 type) and n=17...31
 (UInt32 type) are also accepted. From GDAL 2.2, n=16 is accepted for
 Float32 type to generate half-precision floating point values.</p>
 </li>
-<li><p id="drivers/raster/cog-co-PREDICTOR"><strong>PREDICTOR=[YES/NO/STANDARD/FLOATING_POINT]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set the predictor for LZW,
+<li><p id="drivers/raster/cog-co-PREDICTOR"><strong>PREDICTOR=[YES​/​NO​/​STANDARD​/​FLOATING_POINT]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. Set the predictor for LZW,
 DEFLATE and ZSTD compression. If YES is specified, then
 standard predictor (Predictor=2) is used for integer data type,
 and floating-point predictor (Predictor=3) for floating point data type (in
@@ -450,7 +453,7 @@ some circumstances, the standard predictor might perform better than the
 floating-point one on floating-point data). STANDARD or FLOATING_POINT can
 also be used to select the precise algorithm wished.</p>
 </li>
-<li><p id="drivers/raster/cog-co-BIGTIFF"><strong>BIGTIFF=[YES/NO/IF_NEEDED/IF_SAFER]: </strong>Control whether the created
+<li><p id="drivers/raster/cog-co-BIGTIFF"><strong>BIGTIFF=[YES​/​NO​/​IF_NEEDED​/​IF_SAFER]: </strong>Control whether the created
 file is a BigTIFF or a classic TIFF.<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">YES</span></code> forces BigTIFF.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NO</span></code> forces classic TIFF.</p></li>
@@ -478,19 +481,19 @@ TIFF, libtiff will fail with an error message like
 &quot;TIFFAppendToStrip:Maximum TIFF file size exceeded&quot;.</p>
 </p>
 </li>
-<li><p id="drivers/raster/cog-co-RESAMPLING"><strong>RESAMPLING=[NEAREST/AVERAGE/BILINEAR/CUBIC/CUBICSPLINE/LANCZOS/MODE/RMS]: </strong>Resampling method used for overview generation or reprojection.
+<li><p id="drivers/raster/cog-co-RESAMPLING"><strong>RESAMPLING=[NEAREST​/​AVERAGE​/​BILINEAR​/​CUBIC​/​CUBICSPLINE​/​LANCZOS​/​MODE​/​RMS]: </strong>Resampling method used for overview generation or reprojection.
 For paletted images,
 NEAREST is used by default, otherwise it is CUBIC.</p>
 </li>
-<li><p id="drivers/raster/cog-co-OVERVIEW_RESAMPLING"><strong>OVERVIEW_RESAMPLING=[NEAREST/AVERAGE/BILINEAR/CUBIC/CUBICSPLINE/LANCZOS/MODE/RMS]: </strong> (GDAL &gt;= 3.2) Resampling method used for overview generation.
+<li><p id="drivers/raster/cog-co-OVERVIEW_RESAMPLING"><strong>OVERVIEW_RESAMPLING=[NEAREST​/​AVERAGE​/​BILINEAR​/​CUBIC​/​CUBICSPLINE​/​LANCZOS​/​MODE​/​RMS]: </strong> (GDAL &gt;= 3.2) Resampling method used for overview generation.
 For paletted images, NEAREST is used by default, otherwise it is CUBIC.
 This overrides, for overview generation, the value of <a class="reference internal" href="#drivers/raster/cog-co-RESAMPLING"><code class="docutils literal notranslate"><span class="pre">RESAMPLING</span></code></a> if it specified.</p>
 </li>
-<li><p id="drivers/raster/cog-co-WARP_RESAMPLING"><strong>WARP_RESAMPLING=[NEAREST/AVERAGE/BILINEAR/CUBIC/CUBICSPLINE/LANCZOS/MODE/RMS/MIN/MAX/MED/Q1/Q3]: </strong> (GDAL &gt;= 3.2) Resampling method used for reprojection.
+<li><p id="drivers/raster/cog-co-WARP_RESAMPLING"><strong>WARP_RESAMPLING=[NEAREST​/​AVERAGE​/​BILINEAR​/​CUBIC​/​CUBICSPLINE​/​LANCZOS​/​MODE​/​RMS​/​MIN​/​MAX​/​MED​/​Q1​/​Q3]: </strong> (GDAL &gt;= 3.2) Resampling method used for reprojection.
 For paletted images, NEAREST is used by default, otherwise it is CUBIC.
 This overrides, for reprojection, the value of <a class="reference internal" href="#drivers/raster/cog-co-RESAMPLING"><code class="docutils literal notranslate"><span class="pre">RESAMPLING</span></code></a> if it specified.</p>
 </li>
-<li><p id="drivers/raster/cog-co-OVERVIEWS"><strong>OVERVIEWS=[AUTO/IGNORE_EXISTING/FORCE_USE_EXISTING/NONE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Describe the behavior
+<li><p id="drivers/raster/cog-co-OVERVIEWS"><strong>OVERVIEWS=[AUTO​/​IGNORE_EXISTING​/​FORCE_USE_EXISTING​/​NONE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Describe the behavior
 regarding overview generation and use of source overviews.<ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">AUTO</span></code> (default): source overviews will be used if present.
 If not present, overviews will be automatically generated in the
@@ -523,7 +526,7 @@ overviews, the default number of overview levels is such that the dimensions of
 the smallest overview are smaller or equal to the <a class="reference internal" href="#drivers/raster/cog-co-BLOCKSIZE"><code class="docutils literal notranslate"><span class="pre">BLOCKSIZE</span></code></a> value.</p>
 </p>
 </li>
-<li><p id="drivers/raster/cog-co-OVERVIEW_COMPRESS"><strong>OVERVIEW_COMPRESS=[AUTO/NONE/LZW/JPEG/DEFLATE/ZSTD/WEBP/LERC/LERC_DEFLATE/LERC_ZSTD/LZMA]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Set the compression method (see <code class="docutils literal notranslate"><span class="pre">COMPRESS</span></code>) to use when storing the overviews in the COG.<p>By default (<code class="docutils literal notranslate"><span class="pre">AUTO</span></code>) the overviews will be created with the same compression method as the COG.</p>
+<li><p id="drivers/raster/cog-co-OVERVIEW_COMPRESS"><strong>OVERVIEW_COMPRESS=[AUTO​/​NONE​/​LZW​/​JPEG​/​DEFLATE​/​ZSTD​/​WEBP​/​LERC​/​LERC_DEFLATE​/​LERC_ZSTD​/​LZMA]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Set the compression method (see <code class="docutils literal notranslate"><span class="pre">COMPRESS</span></code>) to use when storing the overviews in the COG.<p>By default (<code class="docutils literal notranslate"><span class="pre">AUTO</span></code>) the overviews will be created with the same compression method as the COG.</p>
 </p>
 </li>
 <li><p id="drivers/raster/cog-co-OVERVIEW_QUALITY"><strong>OVERVIEW_QUALITY=&lt;integer&gt;: </strong>JPEG/WEBP quality setting. A value of 100 is best
@@ -531,12 +534,12 @@ quality (least compression), and 1 is worst quality (best compression).
 By default the overviews will be created with the same quality as the COG, unless
 the compression type is different then the default is 75.</p>
 </li>
-<li><p id="drivers/raster/cog-co-OVERVIEW_PREDICTOR"><strong>OVERVIEW_PREDICTOR=[YES/NO/STANDARD/FLOATING_POINT]: </strong>Set the predictor for LZW,
+<li><p id="drivers/raster/cog-co-OVERVIEW_PREDICTOR"><strong>OVERVIEW_PREDICTOR=[YES​/​NO​/​STANDARD​/​FLOATING_POINT]: </strong>Set the predictor for LZW,
 DEFLATE and ZSTD overview compression. By default the overviews will be created with the
 same predictor as the COG, unless the compression type of the overview is different,
 then the default is NO.</p>
 </li>
-<li><p id="drivers/raster/cog-co-GEOTIFF_VERSION"><strong>GEOTIFF_VERSION=[AUTO/1.0/1.1]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Select the version of
+<li><p id="drivers/raster/cog-co-GEOTIFF_VERSION"><strong>GEOTIFF_VERSION=[AUTO​/​1.0​/​1.1]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Select the version of
 the GeoTIFF standard used to encode georeferencing information. <code class="docutils literal notranslate"><span class="pre">1.0</span></code>
 corresponds to the original
 <a class="reference external" href="http://geotiff.maptools.org/spec/geotiffhome.html">1995, GeoTIFF Revision 1.0, by Ritter &amp; Ruth</a>.
@@ -550,7 +553,7 @@ encode has a vertical component or is a 3D CRS, in which case 1.1 is used.<div c
 </div>
 </p>
 </li>
-<li><p id="drivers/raster/cog-co-SPARSE_OK"><strong>SPARSE_OK=[TRUE/FALSE]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Should empty blocks be
+<li><p id="drivers/raster/cog-co-SPARSE_OK"><strong>SPARSE_OK=[TRUE​/​FALSE]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. Should empty blocks be
 omitted on disk? When this option is set, any attempt of writing a
 block whose all pixels are 0 or the nodata value will cause it not to
 be written at all (unless there is a corresponding block already
@@ -561,7 +564,7 @@ On the reading side, the presence of a omitted tile after a non-empty one
 may cause optimized readers to have to issue an extra GET request to the
 TileByteCounts array.</p>
 </li>
-<li><p id="drivers/raster/cog-co-STATISTICS"><strong>STATISTICS=[AUTO/YES/NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether band statistics should be included in the output file.
+<li><p id="drivers/raster/cog-co-STATISTICS"><strong>STATISTICS=[AUTO​/​YES​/​NO]: </strong> (GDAL &gt;= 3.8)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Whether band statistics should be included in the output file.
 In <code class="docutils literal notranslate"><span class="pre">AUTO</span></code> mode, they will be included only if available in the source
 dataset.
 If setting to <code class="docutils literal notranslate"><span class="pre">YES</span></code>, they will always be included.
@@ -572,7 +575,7 @@ If setting to <code class="docutils literal notranslate"><span class="pre">NO</s
 <section id="reprojection-related-creation-options">
 <h3>Reprojection related creation options<a class="headerlink" href="#reprojection-related-creation-options" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p id="drivers/raster/cog-co-TILING_SCHEME"><strong>TILING_SCHEME=[CUSTOM/GoogleMapsCompatible/...]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">CUSTOM</span></code>. If set to a value different than CUSTOM, the definition of the specified tiling
+<li><p id="drivers/raster/cog-co-TILING_SCHEME"><strong>TILING_SCHEME=[CUSTOM​/​GoogleMapsCompatible​/​...]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">CUSTOM</span></code>. If set to a value different than CUSTOM, the definition of the specified tiling
 scheme will be used to reproject the dataset to its CRS, select the resolution
 corresponding to the closest zoom level and align on tile boundaries at this
 resolution (the actual resolution can be controlled with the <a class="reference internal" href="#drivers/raster/cog-co-ZOOM_LEVEL"><code class="docutils literal notranslate"><span class="pre">ZOOM_LEVEL</span></code></a> or
@@ -594,7 +597,7 @@ the TILING_SCHEME option reported by <code class="docutils literal notranslate">
 coarsest zoom level). Only used for <a class="reference internal" href="#drivers/raster/cog-co-TILING_SCHEME"><code class="docutils literal notranslate"><span class="pre">TILING_SCHEME</span></code></a> different from CUSTOM.
 If this option is specified, <a class="reference internal" href="#drivers/raster/cog-co-ZOOM_LEVEL_STRATEGY"><code class="docutils literal notranslate"><span class="pre">ZOOM_LEVEL_STRATEGY</span></code></a> is ignored.</p>
 </li>
-<li><p id="drivers/raster/cog-co-ZOOM_LEVEL_STRATEGY"><strong>ZOOM_LEVEL_STRATEGY=[AUTO/LOWER/UPPER]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Strategy to determine
+<li><p id="drivers/raster/cog-co-ZOOM_LEVEL_STRATEGY"><strong>ZOOM_LEVEL_STRATEGY=[AUTO​/​LOWER​/​UPPER]: </strong> (GDAL &gt;= 3.2)  Defaults to <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>. Strategy to determine
 zoom level. Only used for <a class="reference internal" href="#drivers/raster/cog-co-TILING_SCHEME"><code class="docutils literal notranslate"><span class="pre">TILING_SCHEME</span></code></a> different from CUSTOM.
 LOWER will select the zoom level immediately below the
 theoretical computed non-integral zoom level, leading to subsampling.
@@ -623,7 +626,7 @@ factor of 2, care must be taken in setting this value to a high number of
 levels, as up to 2^(ALIGNED_LEVELS-1) tiles can be added in each dimension.
 The driver enforces a hard limit of 10.</p>
 </li>
-<li><p id="drivers/raster/cog-co-ADD_ALPHA"><strong>ADD_ALPHA=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether an alpha band is added in case of reprojection.</p>
+<li><p id="drivers/raster/cog-co-ADD_ALPHA"><strong>ADD_ALPHA=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether an alpha band is added in case of reprojection.</p>
 </li>
 </ul>
 </section>
@@ -793,8 +796,6 @@ TileOffsets[i] + TileByteCounts[i].</p>
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="gtiff.html#raster-gtiff"><span class="std std-ref">GTiff -- GeoTIFF File Format</span></a> driver</p></li>
-<li><p><a class="reference external" href="https://trac.osgeo.org/gdal/wiki/CloudOptimizedGeoTIFF">How to generate and read cloud optimized GeoTIFF
-files</a> (before GDAL 3.1)</p></li>
 <li><p>If your source dataset is an internally tiled geotiff with the desired georeferencing and compression,
 using <a class="reference external" href="https://github.com/airbusgeo/cogger">cogger</a> (possibly along with gdaladdo to create overviews) will
 be much faster than the COG driver.</p></li>

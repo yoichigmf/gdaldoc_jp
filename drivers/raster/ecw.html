@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ECW -- Enhanced Compressed Wavelets (.ecw) &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -130,7 +133,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -211,6 +214,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -244,6 +248,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -386,7 +391,7 @@ is already considered to be optimized for &quot;arbitrary overviews&quot;.</p>
 <p>Creation options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-co</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALCreate11GDALDriverHPKciii12GDALDataType12CSLConstList" title="GDALCreate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALCreate()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.Driver.Create" title="osgeo.gdal.Driver.Create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Driver.Create</span></code></a> (Python).
 The following creation options are supported:</p>
 <ul class="simple">
-<li><p id="drivers/raster/ecw-co-LARGE_OK"><strong>LARGE_OK=[YES/NO]: </strong><em>(v3.x SDK only)</em> Allow compressing files larger
+<li><p id="drivers/raster/ecw-co-LARGE_OK"><strong>LARGE_OK=[YES​/​NO]: </strong><em>(v3.x SDK only)</em> Allow compressing files larger
 than 500MB in accordance with EULA terms. Deprecated since v4.x and
 replaced by <a class="reference internal" href="#drivers/raster/ecw-co-ECW_ENCODE_KEY"><code class="docutils literal notranslate"><span class="pre">ECW_ENCODE_KEY</span></code></a> &amp; <a class="reference internal" href="#drivers/raster/ecw-co-ECW_ENCODE_COMPANY"><code class="docutils literal notranslate"><span class="pre">ECW_ENCODE_COMPANY</span></code></a>.</p>
 </li>
@@ -413,9 +418,9 @@ examples are NUTM11, or GEODETIC.</p>
 <li><p id="drivers/raster/ecw-co-DATUM"><strong>DATUM=value: </strong>Name of the ECW datum string to use. Common examples
 are WGS84 or NAD83.</p>
 </li>
-<li><p id="drivers/raster/ecw-co-UNITS"><strong>UNITS=[METERS/FEET]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">METERS</span></code>. Name of the ECW projection units to use : METERS (default) or FEET (us-foot).</p>
+<li><p id="drivers/raster/ecw-co-UNITS"><strong>UNITS=[METERS​/​FEET]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">METERS</span></code>. Name of the ECW projection units to use : METERS (default) or FEET (us-foot).</p>
 </li>
-<li><p id="drivers/raster/ecw-co-ECW_FORMAT_VERSION"><strong>ECW_FORMAT_VERSION=[2/3]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">2</span></code>. When building with the ECW
+<li><p id="drivers/raster/ecw-co-ECW_FORMAT_VERSION"><strong>ECW_FORMAT_VERSION=[2​/​3]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">2</span></code>. When building with the ECW
 5.x SDK this option can be set to allow ECW Version 3 files to be
 created. Default, 2 to retain widest compatibility.</p>
 </li>
@@ -447,16 +452,16 @@ ecwp connection for which the final result has not yet been returned.
 If set small then RasterIO() requests will often produce low
 resolution results.</p>
 </li>
-<li><p id="config-ECW_TEXTURE_DITHER"><strong>ECW_TEXTURE_DITHER=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. This may be set to FALSE to
+<li><p id="config-ECW_TEXTURE_DITHER"><strong>ECW_TEXTURE_DITHER=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. This may be set to FALSE to
 disable dithering when decompressing ECW files.</p>
 </li>
-<li><p id="config-ECW_FORCE_FILE_REOPEN"><strong>ECW_FORCE_FILE_REOPEN=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This may be set to TRUE to
+<li><p id="config-ECW_FORCE_FILE_REOPEN"><strong>ECW_FORCE_FILE_REOPEN=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This may be set to TRUE to
 force open a file handle for each file for each connection made.</p>
 </li>
 <li><p id="config-ECW_CACHE_MAXOPEN"><strong>ECW_CACHE_MAXOPEN=&lt;integer&gt;: </strong>The maximum number of files to keep
 open for ECW file handle caching. Defaults to unlimited.</p>
 </li>
-<li><p id="config-ECW_RESILIENT_DECODING"><strong>ECW_RESILIENT_DECODING=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Controls whether the reader
+<li><p id="config-ECW_RESILIENT_DECODING"><strong>ECW_RESILIENT_DECODING=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Controls whether the reader
 should be forgiving of errors in a file, trying to return as much
 data as is available. If set to FALSE an invalid
 file will result in an error.</p>
@@ -464,7 +469,7 @@ file will result in an error.</p>
 </ul>
 <p>The GDAL-specific options:</p>
 <ul class="simple">
-<li><p id="config-ECW_ALWAYS_UPWARD"><strong>ECW_ALWAYS_UPWARD=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. If TRUE, the driver sets negative
+<li><p id="config-ECW_ALWAYS_UPWARD"><strong>ECW_ALWAYS_UPWARD=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. If TRUE, the driver sets negative
 Y-resolution and assumes an image always has the &quot;Upward&quot; orientation
 (Y coordinates increase upward). This may be set to FALSE to let the
 driver rely on the actual image orientation, using Y-resolution value
@@ -576,7 +581,6 @@ Guide</a></p></li>
 <a class="reference external" href="https://supportsi.hexagon.com/help/s/erdas-apollo">Hexagon Geospatial public
 forum</a></p></li>
 <li><p>Community contributed <a class="reference external" href="https://github.com/rouault/libecwj2-3.3-builds/blob/main/libecwj2-3.3.patch">patches</a> to apply to ECW SDK 3.3 sources</p></li>
-<li><p><a class="reference external" href="http://trac.osgeo.org/gdal/wiki/ECW">GDAL ECW Build Hints</a></p></li>
 </ul>
 </section>
 </section>

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GTI -- GDAL Raster Tile Index &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -125,7 +127,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -206,6 +208,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -239,6 +242,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -381,7 +385,7 @@ the virtual mosaic.</p>
 <p><span class="versionmodified added">Added in version 3.10.</span></p>
 </div>
 <p>The driver can support <a class="reference external" href="https://stac-utils.github.io/stac-geoparquet/latest/spec/stac-geoparquet-spec">STAC GeoParquet catalogs</a>,
-provided GDAL is build with <a class="reference internal" href="../vector/parquet.html#vector-parquet"><span class="std std-ref">(Geo)Parquet</span></a> support.
+provided GDAL is built with <a class="reference internal" href="../vector/parquet.html#vector-parquet"><span class="std std-ref">(Geo)Parquet</span></a> support.
 It can make use of fields <code class="docutils literal notranslate"><span class="pre">proj:epsg</span></code> and <code class="docutils literal notranslate"><span class="pre">proj:transform</span></code> from the
 <a class="reference external" href="https://github.com/stac-extensions/projection/">Projection Extension Specification</a>,
 to correctly infer the appropriate projection and resolution.</p>
@@ -664,7 +668,7 @@ type String, Integer, Integer64, Date or DateTime. By default, the higher the
 value in that field, the last the corresponding tile will be rendered in the
 virtual mosaic (unless SORT_FIELD_ASC=NO is set)</p>
 </li>
-<li><p id="drivers/raster/gti-oo-SORT_FIELD_ASC"><strong>SORT_FIELD_ASC=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the values in SORT_FIELD should be sorted in ascending or descending order</p>
+<li><p id="drivers/raster/gti-oo-SORT_FIELD_ASC"><strong>SORT_FIELD_ASC=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether the values in SORT_FIELD should be sorted in ascending or descending order</p>
 </li>
 <li><p id="drivers/raster/gti-oo-FILTER"><strong>FILTER=&lt;string&gt;: </strong>Value of a SQL WHERE clause, used to select a subset of the features of the index.</p>
 </li>
@@ -691,14 +695,14 @@ or <a class="reference internal" href="#config-GTI_NUM_THREADS"><code class="doc
 RasterIO(), if more than 1 million pixels are requested and if the mosaic is
 made of only non-overlapping tiles.</p>
 <ul class="simple">
-<li><p id="drivers/raster/gti-oo-NUM_THREADS"><strong>NUM_THREADS=[integer/ALL_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL_CPUS</span></code>. Determines the number of threads used when an operation reads from
+<li><p id="drivers/raster/gti-oo-NUM_THREADS"><strong>NUM_THREADS=[integer​/​ALL_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL_CPUS</span></code>. Determines the number of threads used when an operation reads from
 multiple sources.</p>
 </li>
 </ul>
 <p>This can also be specified globally with the <a class="reference internal" href="#config-GTI_NUM_THREADS"><code class="docutils literal notranslate"><span class="pre">GTI_NUM_THREADS</span></code></a>
 configuration option.</p>
 <ul class="simple">
-<li><p id="config-GTI_NUM_THREADS"><strong>GTI_NUM_THREADS=[integer/ALL_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL_CPUS</span></code>. Determines the number of threads used when an operation reads from
+<li><p id="config-GTI_NUM_THREADS"><strong>GTI_NUM_THREADS=[integer​/​ALL_CPUS]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">ALL_CPUS</span></code>. Determines the number of threads used when an operation reads from
 multiple sources.</p>
 </li>
 </ul>

@@ -4,9 +4,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format &mdash; GDAL  ドキュメント</title>
+  <title>HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=75499f83" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -115,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#avif-support">AVIF support</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#driver-capabilities">Driver capabilities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#built-hints-on-windows">Built hints on Windows</a></li>
@@ -201,6 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -234,6 +237,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -271,7 +275,7 @@
       
           <li><a href="index.html">ラスタードライバー</a> &raquo;</li>
       
-      <li>HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</li>
+      <li>HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</li>
     
 
     
@@ -302,8 +306,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="heif-heic-iso-iec-23008-12-2017-high-efficiency-image-file-format">
-<span id="raster-heif"></span><h1>HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format<a class="headerlink" href="#heif-heic-iso-iec-23008-12-2017-high-efficiency-image-file-format" title="Link to this heading"></a></h1>
+  <section id="heif-heic-iso-iec-23008-12-high-efficiency-image-file-format">
+<span id="raster-heif"></span><h1>HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format<a class="headerlink" href="#heif-heic-iso-iec-23008-12-high-efficiency-image-file-format" title="Link to this heading"></a></h1>
 <div class="versionadded">
 <p><span class="versionmodified added">Added in version 3.2.</span></p>
 </div>
@@ -321,10 +325,12 @@ the High Efficiency Video Coding (HEVC, ITU-T H.265) codec. Such images are
 usually called HEIC (HEVC in HEIF) files, and have the .heic extension.
 iOS 11 can generate such files.</p>
 <p>libheif 1.4 or later is needed to support images with more than 8-bits per channel.</p>
+<p>Later versions of libheif may also support one or more of AVIF (AV1 in HEIF), JPEG, JPEG 2000 and
+uncompressed images depending on compile-time options.</p>
 <p>The driver can read EXIF metadata (exposed in the <code class="docutils literal notranslate"><span class="pre">EXIF</span></code> metadata domain)
 and XMP metadata (exposed in the <code class="docutils literal notranslate"><span class="pre">xml:XMP</span></code> metadata domain)</p>
 <p>The driver will expose the thumbnail as an overview (when its number of bands
-matches the one of the full resolution image)</p>
+matches the number of bands in the full resolution image).</p>
 <p>If a file contains several top-level images, they will be exposed as GDAL subdatasets.</p>
 <section id="avif-support">
 <h2>AVIF support<a class="headerlink" href="#avif-support" title="Link to this heading"></a></h2>
@@ -339,6 +345,10 @@ support for one of the libraries it support that are able of AV1 decoding
 <div class="admonition supports_virtualio" id="supports_virtualio-0">
 <p class="admonition-title">Supports VirtualIO</p>
 <p>if libheif &gt;= 1.4</p>
+</div>
+<div class="admonition supports_createcopy" id="supports_createcopy-0">
+<p class="admonition-title">Supports CreateCopy()</p>
+<p>This driver supports the <a class="reference internal" href="../../api/gdaldriver_cpp.html#_CPPv4N10GDALDriver10CreateCopyEPKcP11GDALDataseti12CSLConstList16GDALProgressFuncPv" title="GDALDriver::CreateCopy"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALDriver::CreateCopy()</span></code></a> operation</p>
 </div>
 </section>
 <section id="built-hints-on-windows">

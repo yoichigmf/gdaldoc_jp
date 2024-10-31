@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JP2ECW -- ERDAS JPEG2000 (.jp2) &mdash; GDAL  ドキュメント</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d10597a4" />
-      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=e152ac3b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/gdal.css?v=b9fa0a98" />
+      <link rel="stylesheet" type="text/css" href="../../_static/announcement.css?v=0642f2f4" />
 
   
     <link rel="shortcut icon" href="../../_static/favicon.png"/>
@@ -21,6 +22,7 @@
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../../_static/translations.js?v=91613774"></script>
+        <script src="../../_static/announcement.js?v=b6f31f9f"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="author" title="このドキュメントについて" href="../../about.html" />
     <link rel="index" title="索引" href="../../genindex.html" />
@@ -58,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="adrg.html">ADRG -- ADRG/ARC Digitized Raster Graphics (.gen/.thf)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="aig.html">AIG -- Arc/Info Binary Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="airsar.html">AIRSAR -- AIRSAR Polarimetric Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="avif.html">AVIF -- AV1 Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bag.html">BAG -- Bathymetry Attributed Grid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="basisu.html">BASISU -- Basis Universal</a></li>
 <li class="toctree-l2"><a class="reference internal" href="blx.html">BLX -- Magellan BLX Topo File Format</a></li>
@@ -114,7 +117,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gxf.html">GXF -- Grid eXchange File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf4.html">HDF4 -- Hierarchical Data Format Release 4 (HDF4)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdf5.html">HDF5 -- Hierarchical Data Format Release 5 (HDF5)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12:2017 High Efficiency Image File Format</a></li>
+<li class="toctree-l2"><a class="reference internal" href="heif.html">HEIF / HEIC -- ISO/IEC 23008-12 High Efficiency Image File Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hf2.html">HF2 -- HF2/HFZ heightfield raster</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hfa.html">HFA -- Erdas Imagine .img</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Idrisi.html">RST -- Idrisi Raster Format</a></li>
@@ -207,6 +210,7 @@
 <li class="toctree-l2"><a class="reference internal" href="sentinel2.html">SENTINEL2 -- Sentinel-2 Products</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sgi.html">SGI -- SGI Image Format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sigdem.html">SIGDEM -- Scaled Integer Gridded DEM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="snap_tiff.html">SNAP_TIFF -- Sentinel Application Processing GeoTIFF</a></li>
 <li class="toctree-l2"><a class="reference internal" href="snodas.html">SNODAS -- Snow Data Assimilation System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srp.html">SRP -- Standard Product Format (ASRP/USRP) (.gen)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="srtmhgt.html">SRTMHGT -- SRTM HGT Format</a></li>
@@ -240,6 +244,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../contributing/index.html">どのように貢献できますか?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">ライセンス</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../thanks.html">Thanks</a></li>
 </ul>
 
         </div>
@@ -384,7 +389,7 @@ mentioned sources and ignore GMLJP2 boxes.</p>
 <p>Open options can be specified in command-line tools using the syntax <code class="docutils literal notranslate"><span class="pre">-oo</span> <span class="pre">&lt;NAME&gt;=&lt;VALUE&gt;</span></code> or by providing the appropriate arguments to <a class="reference internal" href="../../api/raster_c_api.html#_CPPv410GDALOpenExPKcjPPCKcPPCKcPPCKc" title="GDALOpenEx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">GDALOpenEx()</span></code></a> (C) or <a class="reference internal" href="../../api/python/raster_api.html#osgeo.gdal.OpenEx" title="osgeo.gdal.OpenEx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">gdal.OpenEx</span></code></a> (Python).
 The following open options are available:</p>
 <ul class="simple">
-<li><p id="drivers/raster/jp2ecw-oo-1BIT_ALPHA_PROMOTION"><strong>1BIT_ALPHA_PROMOTION=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether a 1-bit alpha channel should be promoted to 8-bit.</p>
+<li><p id="drivers/raster/jp2ecw-oo-1BIT_ALPHA_PROMOTION"><strong>1BIT_ALPHA_PROMOTION=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Whether a 1-bit alpha channel should be promoted to 8-bit.</p>
 </li>
 <li><p id="drivers/raster/jp2ecw-oo-GEOREF_SOURCES"><strong>GEOREF_SOURCES=value: </strong>Define which georeferencing
 sources are allowed and their priority order. See
@@ -428,12 +433,12 @@ examples are NUTM11, or GEODETIC.</p>
 <li><p id="drivers/raster/jp2ecw-co-DATUM"><strong>DATUM=value: </strong>Name of the ECW datum string to use. Common examples
 are WGS84 or NAD83.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-GMLJP2"><strong>GMLJP2=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Indicates whether a GML box conforming to the OGC
+<li><p id="drivers/raster/jp2ecw-co-GMLJP2"><strong>GMLJP2=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Indicates whether a GML box conforming to the OGC
 GML in JPEG2000 specification should be included in the file. Unless
 GMLJP2V2_DEF is used, the version of the GMLJP2 box will be version
 1.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-GMLJP2V2_DEF"><strong>GMLJP2V2_DEF=[&lt;filename&gt;/&lt;json&gt;/YES]: </strong>Indicates whether
+<li><p id="drivers/raster/jp2ecw-co-GMLJP2V2_DEF"><strong>GMLJP2V2_DEF=[&lt;filename&gt;​/​&lt;json&gt;​/​YES]: </strong>Indicates whether
 a GML box conforming to the <a class="reference external" href="http://docs.opengeospatial.org/is/08-085r4/08-085r4.html">OGC GML in JPEG2000, version
 2</a>
 specification should be included in the file. <em>filename</em> must point
@@ -445,16 +450,16 @@ It is also possible to directly pass the JSON content inlined as a
 string. If filename is just set to YES, a minimal instance will be
 built.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-GeoJP2"><strong>GeoJP2=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Indicates whether a UUID/GeoTIFF box conforming to
+<li><p id="drivers/raster/jp2ecw-co-GeoJP2"><strong>GeoJP2=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">YES</span></code>. Indicates whether a UUID/GeoTIFF box conforming to
 the GeoJP2 (GeoTIFF in JPEG2000) specification should be included in
 the file.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-PROFILE"><strong>PROFILE=[BASELINE_0/BASELINE_1/BASELINE_2/NPJE/EPJE]: </strong>Review the ECW SDK documentation for details on profile meanings.</p>
+<li><p id="drivers/raster/jp2ecw-co-PROFILE"><strong>PROFILE=[BASELINE_0​/​BASELINE_1​/​BASELINE_2​/​NPJE​/​EPJE]: </strong>Review the ECW SDK documentation for details on profile meanings.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-PROGRESSION"><strong>PROGRESSION=[LRCP/RLCP/RPCL]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">RPCL</span></code>. Set the progression order with which
+<li><p id="drivers/raster/jp2ecw-co-PROGRESSION"><strong>PROGRESSION=[LRCP​/​RLCP​/​RPCL]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">RPCL</span></code>. Set the progression order with which
 the JPEG2000 codestream is written.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-CODESTREAM_ONLY"><strong>CODESTREAM_ONLY=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to YES, only the compressed
+<li><p id="drivers/raster/jp2ecw-co-CODESTREAM_ONLY"><strong>CODESTREAM_ONLY=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. If set to YES, only the compressed
 imagery code stream will be written. If NO a JP2 package will be
 written around the code stream including a variety of meta
 information.</p>
@@ -475,15 +480,15 @@ precincts are used. The minimum tile size allowed by the standard is
 </li>
 <li><p id="drivers/raster/jp2ecw-co-TILE_HEIGHT"><strong>TILE_HEIGHT=value: </strong>Tile Height (default, image height eg. 1 tile)</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-INCLUDE_SOP"><strong>INCLUDE_SOP=[YES/NO]: </strong>Output Start of Packet Marker (default false)</p>
+<li><p id="drivers/raster/jp2ecw-co-INCLUDE_SOP"><strong>INCLUDE_SOP=[YES​/​NO]: </strong>Output Start of Packet Marker (default false)</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-INCLUDE_EPH"><strong>INCLUDE_EPH=[YES/NO]: </strong>Output End of Packet Header Marker (default true)</p>
+<li><p id="drivers/raster/jp2ecw-co-INCLUDE_EPH"><strong>INCLUDE_EPH=[YES​/​NO]: </strong>Output End of Packet Header Marker (default true)</p>
 </li>
 <li><p id="drivers/raster/jp2ecw-co-DECOMPRESS_LAYERS"><strong>DECOMPRESS_LAYERS=value: </strong>The number of quality layers to decode</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-DECOMPRESS_RECONSTRUCTION_PARAMETER"><strong>DECOMPRESS_RECONSTRUCTION_PARAMETER=[IRREVERSIBLE_9x7/REVERSIBLE_5x3]: </strong></p>
+<li><p id="drivers/raster/jp2ecw-co-DECOMPRESS_RECONSTRUCTION_PARAMETER"><strong>DECOMPRESS_RECONSTRUCTION_PARAMETER=[IRREVERSIBLE_9x7​/​REVERSIBLE_5x3]: </strong></p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-WRITE_METADATA"><strong>WRITE_METADATA=[YES/NO]: </strong>Whether metadata should be
+<li><p id="drivers/raster/jp2ecw-co-WRITE_METADATA"><strong>WRITE_METADATA=[YES​/​NO]: </strong>Whether metadata should be
 written, in a dedicated JP2 XML box. Defaults to NO. The content of
 the XML box will be like:<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">GDALMultiDomainMetadata</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="n">Metadata</span><span class="o">&gt;</span>
@@ -505,7 +510,7 @@ will be written each as separate JP2 XML box.</p>
 will be written as a JP2 UUID XMP box.</p>
 </p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-MAIN_MD_DOMAIN_ONLY"><strong>MAIN_MD_DOMAIN_ONLY=[YES/NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (Only if <a class="reference internal" href="#drivers/raster/jp2ecw-co-WRITE_METADATA"><code class="docutils literal notranslate"><span class="pre">WRITE_METADATA=YES</span></code></a>)
+<li><p id="drivers/raster/jp2ecw-co-MAIN_MD_DOMAIN_ONLY"><strong>MAIN_MD_DOMAIN_ONLY=[YES​/​NO]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">NO</span></code>. (Only if <a class="reference internal" href="#drivers/raster/jp2ecw-co-WRITE_METADATA"><code class="docutils literal notranslate"><span class="pre">WRITE_METADATA=YES</span></code></a>)
 Whether only metadata from the main domain should
 be written.</p>
 </li>
@@ -535,19 +540,19 @@ the meaning of these options.</p>
 caching. If not set, up to one quarter of physical RAM will be used
 by the SDK for in-memory caching.</p>
 </p></li>
-<li><p><p id="config-ECW_TEXTURE_DITHER"><strong>ECW_TEXTURE_DITHER=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. This may be set to FALSE to
+<li><p><p id="config-ECW_TEXTURE_DITHER"><strong>ECW_TEXTURE_DITHER=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. This may be set to FALSE to
 disable dithering when decompressing ECW files.</p>
 </p></li>
-<li><p id="drivers/raster/jp2ecw-co-ECW_FORCE_FILE_REOPEN"><strong>ECW_FORCE_FILE_REOPEN=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This may be set to TRUE to
+<li><p id="drivers/raster/jp2ecw-co-ECW_FORCE_FILE_REOPEN"><strong>ECW_FORCE_FILE_REOPEN=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. This may be set to TRUE to
 force open a file handle for each file for each connection made.</p>
 </li>
 <li><p id="drivers/raster/jp2ecw-co-ECW_CACHE_MAXOPEN"><strong>ECW_CACHE_MAXOPEN=value: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">unlimited</span></code>. The maximum number of files to keep
 open for ECW file handle caching.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-ECW_AUTOGEN_J2I"><strong>ECW_AUTOGEN_J2I=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Controls whether .j2i index files
+<li><p id="drivers/raster/jp2ecw-co-ECW_AUTOGEN_J2I"><strong>ECW_AUTOGEN_J2I=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Controls whether .j2i index files
 should be created when opening jpeg2000 files.</p>
 </li>
-<li><p id="drivers/raster/jp2ecw-co-ECW_RESILIENT_DECODING"><strong>ECW_RESILIENT_DECODING=[TRUE/FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Controls whether the reader
+<li><p id="drivers/raster/jp2ecw-co-ECW_RESILIENT_DECODING"><strong>ECW_RESILIENT_DECODING=[TRUE​/​FALSE]: </strong> Defaults to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>. Controls whether the reader
 should be forgiving of errors in a file, trying to return as much
 data as is available. If set to FALSE an invalid
 file will result in an error.</p>
@@ -598,7 +603,6 @@ Guide</a></p></li>
 <li><p>Support for non-GDAL specific issues should be directed to the
 <a class="reference external" href="https://sgisupport.intergraph.com/infocenter/index?page=forums&amp;forum=507301383c17ef4e013d8dfa30c2007ef1">Hexagon Geospatial public
 forum</a></p></li>
-<li><p><a class="reference external" href="http://trac.osgeo.org/gdal/wiki/ECW">GDAL ECW Build Hints</a></p></li>
 </ul>
 </section>
 </section>
